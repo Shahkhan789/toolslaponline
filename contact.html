@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact ToolSlap - Get in touch with our team. Email us at contact@toolslap.com or support@toolslap.com for questions, feedback, or support.">
+    <meta name="keywords" content="contact toolslap, support, feedback, questions, customer service, help">
+    <meta name="author" content="ToolSlap">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Contact ToolSlap - Get in Touch">
+    <meta property="og:description" content="Contact ToolSlap for support, feedback, or questions. We're here to help with our free online tools.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolslap.com/contact.html">
+    <meta property="og:image" content="https://toolslap.com/og-image.jpg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Contact ToolSlap">
+    <meta name="twitter:description" content="Get in touch with ToolSlap for support, feedback, or questions.">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://toolslap.com/contact.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <title>Contact ToolSlap - Get in Touch | Support & Feedback</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1E1E2F 0%, #2B2D42 100%);
+            color: #EAEAEA;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2B2D42 0%, #3A3D5B 100%);
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 2px 20px rgba(255, 215, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 28px !important;
+            font-weight: bold !important;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 5px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .tagline {
+            font-size: 14px !important;
+            color: #EAEAEA;
+            opacity: 0.9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .page-title {
+            font-size: 3rem !important;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem !important;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .contact-info-section {
+            background: linear-gradient(135deg, #3A3D5B 0%, #2B2D42 100%);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .contact-form-section {
+            background: linear-gradient(135deg, #3A3D5B 0%, #2B2D42 100%);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .section-title {
+            font-size: 2rem !important;
+            color: #FFD700;
+            margin-bottom: 30px;
+            font-weight: bold !important;
+            text-align: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .contact-method {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .contact-method:hover {
+            background: rgba(255, 215, 0, 0.15);
+            border-color: rgba(255, 215, 0, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .method-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .method-title {
+            font-size: 1.3rem !important;
+            font-weight: bold !important;
+            color: #FFD700;
+            margin-bottom: 10px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .method-email {
+            font-size: 1.1rem !important;
+            color: #20c997;
+            text-decoration: none;
+            font-family: 'Courier New', monospace !important;
+        }
+
+        .method-email:hover {
+            text-decoration: underline;
+            color: #17a2b8;
+        }
+
+        .method-description {
+            margin-top: 10px;
+            font-size: 0.95rem !important;
+            opacity: 0.9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .response-time {
+            background: rgba(40, 167, 69, 0.1);
+            border: 1px solid rgba(40, 167, 69, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .response-title {
+            color: #28a745;
+            font-weight: bold !important;
+            margin-bottom: 10px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .response-text {
+            color: #20c997;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #FFD700;
+            margin-bottom: 8px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .form-control {
+            padding: 15px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #EAEAEA;
+            font-size: 16px !important;
+            transition: all 0.3s ease;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #FFD700;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+        }
+
+        .form-control::placeholder {
+            color: rgba(234, 234, 234, 0.6);
+        }
+
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-select {
+            padding: 15px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #EAEAEA;
+            font-size: 16px !important;
+            transition: all 0.3s ease;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .form-select option {
+            background: #2B2D42;
+            color: #EAEAEA;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #1E1E2F;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px !important;
+            font-weight: bold !important;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            align-self: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .form-note {
+            font-size: 0.9rem !important;
+            opacity: 0.8;
+            text-align: center;
+            font-style: italic;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .back-btn {
+            background: linear-gradient(45deg, #6c757d, #495057);
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: bold !important;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 117, 125, 0.4);
+        }
+
+        .social-section {
+            background: linear-gradient(135deg, #3A3D5B 0%, #2B2D42 100%);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .social-title {
+            font-size: 1.5rem !important;
+            color: #FFD700;
+            margin-bottom: 20px;
+            font-weight: bold !important;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .social-text {
+            margin-bottom: 25px;
+            opacity: 0.9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            background: rgba(255, 215, 0, 0.1);
+            color: #FFD700;
+            padding: 15px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .social-link:hover {
+            background: rgba(255, 215, 0, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 10px;
+            }
+
+            .page-title {
+                font-size: 2.5rem !important;
+            }
+
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .contact-info-section, .contact-form-section {
+                padding: 25px;
+            }
+
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 class="logo">ToolSlap</h1>
+        <p class="tagline">Contact Us</p>
+    </header>
+
+    <div class="container">
+        <a href="index.html" class="back-btn">← Back to Tools</a>
+        
+        <div class="page-header">
+            <h1 class="page-title">Contact Us</h1>
+            <p class="page-subtitle">We'd love to hear from you! Get in touch with questions, feedback, or suggestions.</p>
+        </div>
+
+        <div class="main-content">
+            <div class="contact-info-section">
+                <h2 class="section-title">📧 Get in Touch</h2>
+                
+                <div class="contact-methods">
+                    <div class="contact-method">
+                        <span class="method-icon">📧</span>
+                        <h3 class="method-title">General Contact</h3>
+                        <a href="mailto:contact@toolslap.com" class="method-email">contact@toolslap.com</a>
+                        <p class="method-description">For general inquiries, feedback, partnership opportunities, and questions about our tools.</p>
+                    </div>
+
+                    <div class="contact-method">
+                        <span class="method-icon">🛠️</span>
+                        <h3 class="method-title">Technical Support</h3>
+                        <a href="mailto:support@toolslap.com" class="method-email">support@toolslap.com</a>
+                        <p class="method-description">For technical issues, bug reports, feature requests, and tool-specific help.</p>
+                    </div>
+
+                    <div class="contact-method">
+                        <span class="method-icon">⚖️</span>
+                        <h3 class="method-title">Legal & Privacy</h3>
+                        <a href="mailto:legal@toolslap.com" class="method-email">legal@toolslap.com</a>
+                        <p class="method-description">For legal matters, privacy concerns, DMCA requests, and terms of service questions.</p>
+                    </div>
+
+                    <div class="contact-method">
+                        <span class="method-icon">🔒</span>
+                        <h3 class="method-title">Privacy Questions</h3>
+                        <a href="mailto:privacy@toolslap.com" class="method-email">privacy@toolslap.com</a>
+                        <p class="method-description">For privacy-related questions and data protection inquiries.</p>
+                    </div>
+                </div>
+
+                <div class="response-time">
+                    <div class="response-title">⏱️ Response Time</div>
+                    <div class="response-text">We typically respond within 24-48 hours during business days</div>
+                </div>
+            </div>
+
+            <div class="contact-form-section">
+                <h2 class="section-title">💬 Send us a Message</h2>
+                
+                <form class="contact-form" id="contactForm" onsubmit="submitForm(event)">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Name *</label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Your name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email Address *</label>
+                        <input type="email" id="email" name="email" class="form-control" placeholder="your@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject" class="form-label">Subject *</label>
+                        <select id="subject" name="subject" class="form-select" required>
+                            <option value="">Please select a subject</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="support">Technical Support</option>
+                            <option value="bug">Bug Report</option>
+                            <option value="feature">Feature Request</option>
+                            <option value="feedback">Feedback</option>
+                            <option value="partnership">Partnership Opportunity</option>
+                            <option value="legal">Legal/Privacy Question</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tool" class="form-label">Related Tool (if applicable)</label>
+                        <input type="text" id="tool" name="tool" class="form-control" placeholder="e.g., Image Converter, JSON Formatter">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message" class="form-label">Message *</label>
+                        <textarea id="message" name="message" class="form-control form-textarea" placeholder="Tell us more about your question, feedback, or issue..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">📨 Send Message</button>
+                    
+                    <p class="form-note">
+                        * Required fields. We respect your privacy and will never share your information.
+                    </p>
+                </form>
+            </div>
+        </div>
+
+        <div class="social-section">
+            <h2 class="social-title">🌐 Follow Us</h2>
+            <p class="social-text">Stay updated with new tools, features, and announcements</p>
+            <div class="social-links">
+                <a href="#" class="social-link" onclick="alert('Follow us on Twitter @ToolSlap (coming soon!)')">🐦 Twitter</a>
+                <a href="#" class="social-link" onclick="alert('Like us on Facebook (coming soon!)')">📘 Facebook</a>
+                <a href="#" class="social-link" onclick="alert('Follow us on GitHub (coming soon!)')">🐙 GitHub</a>
+                <a href="#" class="social-link" onclick="alert('Subscribe to our newsletter (coming soon!)')">📬 Newsletter</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function submitForm(event) {
+            event.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+            
+            // Basic validation
+            if (!data.name || !data.email || !data.subject || !data.message) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(data.email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+            
+            // Create email content
+            const emailSubject = `ToolSlap Contact: ${data.subject} - ${data.name}`;
+            const emailBody = `Name: ${data.name}
+Email: ${data.email}
+Subject: ${data.subject}
+Related Tool: ${data.tool || 'None specified'}
+
+Message:
+${data.message}
+
+---
+Sent from ToolSlap Contact Form`;
+            
+            // Create mailto link
+            const mailtoLink = `mailto:contact@toolslap.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+            
+            // Show success message
+            const submitBtn = event.target.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            
+            submitBtn.textContent = '✅ Opening Email Client...';
+            submitBtn.style.background = 'linear-gradient(45deg, #28a745, #20c997)';
+            
+            // Open email client
+            setTimeout(() => {
+                window.location.href = mailtoLink;
+                
+                // Reset form after a delay
+                setTimeout(() => {
+                    event.target.reset();
+                    submitBtn.textContent = originalText;
+                    submitBtn.style.background = 'linear-gradient(45deg, #FFD700, #FFA500)';
+                    
+                    alert('Your email client should have opened with the message pre-filled. If not, please send an email to contact@toolslap.com with your message.');
+                }, 2000);
+            }, 500);
+        }
+        
+        // Auto-resize textarea
+        document.getElementById('message').addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.max(150, this.scrollHeight) + 'px';
+        });
+        
+        // Add character counter to message field
+        const messageField = document.getElementById('message');
+        const messageGroup = messageField.parentElement;
+        
+        const charCounter = document.createElement('div');
+        charCounter.style.cssText = 'font-size: 0.85rem; opacity: 0.7; text-align: right; margin-top: 5px;';
+        charCounter.textContent = '0 characters';
+        messageGroup.appendChild(charCounter);
+        
+        messageField.addEventListener('input', function() {
+            const length = this.value.length;
+            charCounter.textContent = `${length} character${length !== 1 ? 's' : ''}`;
+            
+            if (length > 1000) {
+                charCounter.style.color = '#ffc107';
+            } else if (length > 2000) {
+                charCounter.style.color = '#dc3545';
+            } else {
+                charCounter.style.color = 'inherit';
+            }
+        });
+    </script>
+</body>
+</html>

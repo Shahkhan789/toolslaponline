@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free JSON Formatter & Validator - Format, validate, and beautify JSON data with syntax highlighting. Perfect for developers and API testing.">
+    <meta name="keywords" content="json formatter, json validator, json beautifier, json minifier, json syntax checker, api testing tools">
+    <meta name="author" content="ToolSlap">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Free JSON Formatter & Validator - Format and Validate JSON">
+    <meta property="og:description" content="Format, validate, and beautify JSON data with syntax highlighting and error detection. Perfect for developers.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolslap.com/json-formatter.html">
+    <meta property="og:image" content="https://toolslap.com/og-image.jpg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free JSON Formatter & Validator">
+    <meta name="twitter:description" content="Format, validate, and beautify JSON data with syntax highlighting and error detection.">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://toolslap.com/json-formatter.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <title>Free JSON Formatter & Validator | Format and Validate JSON Online - ToolSlap</title>
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "JSON Formatter & Validator",
+        "description": "Free online JSON formatter and validator with syntax highlighting",
+        "url": "https://toolslap.com/json-formatter.html",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "permissions": "browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1E1E2F 0%, #2B2D42 100%);
+            color: #EAEAEA;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2B2D42 0%, #3A3D5B 100%);
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 2px 20px rgba(255, 215, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 28px !important;
+            font-weight: bold !important;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 5px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .tagline {
+            font-size: 14px !important;
+            color: #EAEAEA;
+            opacity: 0.9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .tool-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .tool-title {
+            font-size: 2.5rem !important;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .tool-description {
+            font-size: 1.1rem !important;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .action-bar {
+            background: linear-gradient(135deg, #3A3D5B 0%, #2B2D42 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .json-panel {
+            background: linear-gradient(135deg, #3A3D5B 0%, #2B2D42 100%);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .panel-header {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .panel-title {
+            color: #FFD700;
+            font-weight: bold !important;
+            font-size: 1.1rem !important;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .panel-info {
+            font-size: 0.9rem !important;
+            opacity: 0.8;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .json-textarea {
+            width: 100%;
+            height: 500px;
+            padding: 20px;
+            border: none;
+            background: #1a1a1a;
+            color: #EAEAEA;
+            font-size: 14px !important;
+            resize: none;
+            font-family: 'Courier New', monospace !important;
+            line-height: 1.5;
+        }
+
+        .json-textarea:focus {
+            outline: none;
+        }
+
+        .json-textarea::placeholder {
+            color: rgba(234, 234, 234, 0.4);
+        }
+
+        .output-area {
+            width: 100%;
+            height: 500px;
+            padding: 20px;
+            border: none;
+            background: #1a1a1a;
+            color: #EAEAEA;
+            font-size: 14px !important;
+            resize: none;
+            font-family: 'Courier New', monospace !important;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            overflow-y: auto;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #1E1E2F;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 20px;
+            font-size: 14px !important;
+            font-weight: bold !important;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(255, 215, 0, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #6c757d, #495057);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #dc3545, #c82333);
+            color: white;
+        }
+
+        .status-indicator {
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin: 15px 20px;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold !important;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .status-valid {
+            background: rgba(40, 167, 69, 0.2);
+            border: 1px solid rgba(40, 167, 69, 0.3);
+            color: #28a745;
+        }
+
+        .status-invalid {
+            background: rgba(220, 53, 69, 0.2);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            color: #dc3545;
+        }
+
+        .status-info {
+            background: rgba(23, 162, 184, 0.2);
+            border: 1px solid rgba(23, 162, 184, 0.3);
+            color: #17a2b8;
+        }
+
+        .error-details {
+            background: rgba(220, 53, 69, 0.1);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 20px;
+            display: none;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-weight: bold !important;
+            margin-bottom: 10px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .error-line {
+            color: #ff6b6b;
+            font-size: 0.9rem !important;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .stats-bar {
+            background: rgba(255, 215, 0, 0.1);
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem !important;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .back-btn {
+            background: linear-gradient(45deg, #6c757d, #495057);
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: bold !important;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 117, 125, 0.4);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-title {
+            font-size: 1.2rem !important;
+            font-weight: bold !important;
+            margin-bottom: 10px;
+            color: #FFD700;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        .feature-text {
+            opacity: 0.9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        /* JSON Syntax Highlighting */
+        .json-key { color: #92c5f7; }
+        .json-string { color: #ce9178; }
+        .json-number { color: #b5cea8; }
+        .json-boolean { color: #569cd6; }
+        .json-null { color: #569cd6; }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 10px;
+            }
+
+            .tool-title {
+                font-size: 2rem !important;
+            }
+
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .action-bar {
+                padding: 15px;
+                justify-content: center;
+            }
+
+            .json-textarea, .output-area {
+                height: 300px;
+                font-size: 12px !important;
+            }
+
+            .panel-header {
+                flex-direction: column;
+                gap: 5px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 class="logo">ToolSlap</h1>
+        <p class="tagline">JSON Formatter & Validator</p>
+    </header>
+
+    <div class="container">
+        <a href="index.html" class="back-btn">← Back to Tools</a>
+        
+        <div class="tool-header">
+            <h1 class="tool-title">JSON Formatter & Validator</h1>
+            <p class="tool-description">Format, validate, and beautify JSON data with syntax highlighting and error detection. Perfect for API development and testing.</p>
+        </div>
+
+        <div class="action-bar">
+            <button class="btn" onclick="formatJSON()">✨ Format & Validate</button>
+            <button class="btn btn-secondary" onclick="minifyJSON()">🗜️ Minify</button>
+            <button class="btn btn-secondary" onclick="copyOutput()">📋 Copy Output</button>
+            <button class="btn btn-secondary" onclick="downloadJSON()">💾 Download</button>
+            <button class="btn btn-danger" onclick="clearAll()">🗑️ Clear All</button>
+            <button class="btn btn-secondary" onclick="loadSample()">📄 Load Sample</button>
+        </div>
+
+        <div class="main-content">
+            <div class="json-panel">
+                <div class="panel-header">
+                    <div class="panel-title">Input JSON</div>
+                    <div class="panel-info" id="inputStats">Enter JSON data</div>
+                </div>
+                <textarea 
+                    id="jsonInput" 
+                    class="json-textarea" 
+                    placeholder='Enter your JSON here...\n\nExample:\n{\n  "name": "John Doe",\n  "age": 30,\n  "city": "New York"\n}'
+                    oninput="updateInputStats()"
+                ></textarea>
+                <div class="status-indicator" id="validationStatus"></div>
+                <div class="error-details" id="errorDetails"></div>
+                <div class="stats-bar">
+                    <span id="inputSize">Size: 0 bytes</span>
+                    <span id="inputLines">Lines: 0</span>
+                </div>
+            </div>
+
+            <div class="json-panel">
+                <div class="panel-header">
+                    <div class="panel-title">Formatted Output</div>
+                    <div class="panel-info" id="outputStats">Formatted JSON will appear here</div>
+                </div>
+                <div id="jsonOutput" class="output-area"></div>
+                <div class="stats-bar">
+                    <span id="outputSize">Size: 0 bytes</span>
+                    <span id="outputLines">Lines: 0</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">✅</div>
+                <h3 class="feature-title">JSON Validation</h3>
+                <p class="feature-text">Validate JSON syntax with detailed error messages and line numbers</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3 class="feature-title">Syntax Highlighting</h3>
+                <p class="feature-text">Beautiful syntax highlighting for better readability</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📏</div>
+                <h3 class="feature-title">Format & Minify</h3>
+                <p class="feature-text">Format for readability or minify for production use</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3 class="feature-title">Statistics</h3>
+                <p class="feature-text">Get detailed statistics about your JSON data</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function formatJSON() {
+            const input = document.getElementById('jsonInput').value.trim();
+            const outputDiv = document.getElementById('jsonOutput');
+            const statusDiv = document.getElementById('validationStatus');
+            const errorDiv = document.getElementById('errorDetails');
+            
+            if (!input) {
+                showStatus('Please enter some JSON data', 'info');
+                outputDiv.textContent = '';
+                updateOutputStats();
+                return;
+            }
+
+            try {
+                const parsed = JSON.parse(input);
+                const formatted = JSON.stringify(parsed, null, 2);
+                outputDiv.innerHTML = syntaxHighlight(formatted);
+                showStatus('✅ Valid JSON', 'valid');
+                hideError();
+                updateOutputStats();
+            } catch (error) {
+                showStatus('❌ Invalid JSON', 'invalid');
+                showError(error.message);
+                outputDiv.textContent = '';
+                updateOutputStats();
+            }
+        }
+
+        function minifyJSON() {
+            const input = document.getElementById('jsonInput').value.trim();
+            const outputDiv = document.getElementById('jsonOutput');
+            
+            if (!input) {
+                showStatus('Please enter some JSON data', 'info');
+                return;
+            }
+
+            try {
+                const parsed = JSON.parse(input);
+                const minified = JSON.stringify(parsed);
+                outputDiv.textContent = minified;
+                showStatus('✅ JSON Minified', 'valid');
+                hideError();
+                updateOutputStats();
+            } catch (error) {
+                showStatus('❌ Invalid JSON - Cannot minify', 'invalid');
+                showError(error.message);
+            }
+        }
+
+        function syntaxHighlight(json) {
+            json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                var cls = 'json-number';
+                if (/^"/.test(match)) {
+                    if (/:$/.test(match)) {
+                        cls = 'json-key';
+                    } else {
+                        cls = 'json-string';
+                    }
+                } else if (/true|false/.test(match)) {
+                    cls = 'json-boolean';
+                } else if (/null/.test(match)) {
+                    cls = 'json-null';
+                }
+                return '<span class="' + cls + '">' + match + '</span>';
+            });
+        }
+
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('validationStatus');
+            statusDiv.textContent = message;
+            statusDiv.className = 'status-indicator status-' + type;
+            statusDiv.style.display = 'flex';
+        }
+
+        function showError(errorMessage) {
+            const errorDiv = document.getElementById('errorDetails');
+            const errorMsgDiv = document.createElement('div');
+            errorMsgDiv.className = 'error-message';
+            errorMsgDiv.textContent = 'Error: ' + errorMessage;
+            
+            errorDiv.innerHTML = '';
+            errorDiv.appendChild(errorMsgDiv);
+            
+            // Try to extract line number from error message
+            const lineMatch = errorMessage.match(/line (\d+)/i) || errorMessage.match(/position (\d+)/i);
+            if (lineMatch) {
+                const lineDiv = document.createElement('div');
+                lineDiv.className = 'error-line';
+                lineDiv.textContent = 'Check around ' + (lineMatch[0].toLowerCase().includes('line') ? 'line' : 'position') + ' ' + lineMatch[1];
+                errorDiv.appendChild(lineDiv);
+            }
+            
+            errorDiv.style.display = 'block';
+        }
+
+        function hideError() {
+            document.getElementById('errorDetails').style.display = 'none';
+        }
+
+        function updateInputStats() {
+            const input = document.getElementById('jsonInput').value;
+            const size = new TextEncoder().encode(input).length;
+            const lines = input.split('\n').length;
+            
+            document.getElementById('inputSize').textContent = `Size: ${formatBytes(size)}`;
+            document.getElementById('inputLines').textContent = `Lines: ${lines}`;
+            document.getElementById('inputStats').textContent = `${input.length} characters`;
+        }
+
+        function updateOutputStats() {
+            const output = document.getElementById('jsonOutput').textContent;
+            const size = new TextEncoder().encode(output).length;
+            const lines = output.split('\n').length;
+            
+            document.getElementById('outputSize').textContent = `Size: ${formatBytes(size)}`;
+            document.getElementById('outputLines').textContent = `Lines: ${lines}`;
+            document.getElementById('outputStats').textContent = output ? `${output.length} characters` : 'No output';
+        }
+
+        function formatBytes(bytes) {
+            if (bytes === 0) return '0 bytes';
+            const k = 1024;
+            const sizes = ['bytes', 'KB', 'MB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function copyOutput() {
+            const output = document.getElementById('jsonOutput').textContent;
+            if (!output) {
+                alert('No output to copy');
+                return;
+            }
+            
+            navigator.clipboard.writeText(output).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✅ Copied!';
+                btn.className = 'btn btn-success';
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.className = 'btn btn-secondary';
+                }, 2000);
+            }).catch(() => {
+                alert('Failed to copy. Please select and copy manually.');
+            });
+        }
+
+        function downloadJSON() {
+            const output = document.getElementById('jsonOutput').textContent;
+            if (!output) {
+                alert('No formatted JSON to download');
+                return;
+            }
+            
+            const blob = new Blob([output], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `formatted-json-${Date.now()}.json`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        function clearAll() {
+            if (confirm('Are you sure you want to clear all data?')) {
+                document.getElementById('jsonInput').value = '';
+                document.getElementById('jsonOutput').textContent = '';
+                document.getElementById('validationStatus').style.display = 'none';
+                document.getElementById('errorDetails').style.display = 'none';
+                updateInputStats();
+                updateOutputStats();
+            }
+        }
+
+        function loadSample() {
+            const sampleJSON = {
+                "name": "John Doe",
+                "age": 30,
+                "email": "john.doe@example.com",
+                "address": {
+                    "street": "123 Main St",
+                    "city": "New York",
+                    "zipCode": "10001",
+                    "coordinates": {
+                        "lat": 40.7128,
+                        "lng": -74.0060
+                    }
+                },
+                "hobbies": ["reading", "photography", "hiking"],
+                "isActive": true,
+                "profile": null,
+                "settings": {
+                    "theme": "dark",
+                    "notifications": {
+                        "email": true,
+                        "push": false,
+                        "sms": true
+                    }
+                }
+            };
+            
+            document.getElementById('jsonInput').value = JSON.stringify(sampleJSON, null, 2);
+            updateInputStats();
+            formatJSON();
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateInputStats();
+            updateOutputStats();
+        });
+    </script>
+</body>
+</html>

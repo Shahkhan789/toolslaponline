@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Random Number Generator | ToolSlap</title>
+  <meta name="description" content="Generate random numbers with custom ranges, decimals, uniqueness, and sets. Copy or export results. Free RNG tool." />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important; }
+    body { background: linear-gradient(135deg,#1E1E2F 0%,#2B2D42 100%); color:#EAEAEA; min-height:100vh; }
+    .header{background:linear-gradient(135deg,#2B2D42 0%,#3A3D5B 100%); padding:24px 16px; text-align:center; box-shadow:0 2px 20px rgba(255,215,0,.1); position:sticky; top:0; z-index:10}
+    .logo{color:#FFD700; font-weight:800; font-size:28px}
+    .tag{opacity:.85}
+    .container{max-width:1000px; margin:0 auto; padding:32px 16px}
+    .back-btn{background:linear-gradient(45deg,#6c757d,#495057); color:#fff; padding:10px 18px; border-radius:18px; text-decoration:none; font-weight:700; display:inline-block; margin-bottom:16px}
+    .title{text-align:center; font-size:36px; margin:8px 0 6px; background:linear-gradient(45deg,#FFD700,#FFA500); -webkit-background-clip:text; -webkit-text-fill-color:transparent}
+    .sub{opacity:.9; text-align:center; margin-bottom:22px}
+    .grid{display:grid; grid-template-columns:1fr 1fr; gap:20px}
+    .card{background:linear-gradient(135deg,#3A3D5B 0%,#2B2D42 100%); border:1px solid rgba(255,215,0,.18); border-radius:14px; box-shadow:0 10px 30px rgba(255,215,0,.08); padding:20px}
+    .label{display:block; color:#FFD700; font-weight:700; margin-bottom:8px}
+    .row{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+    .input, .select{width:100%; padding:12px; border-radius:10px; border:2px solid rgba(255,215,0,.28); background:rgba(255,255,255,.08); color:#EAEAEA; font-size:15px}
+    .input:focus, .select:focus{outline:none; border-color:#FFD700; background:rgba(255,255,255,.12)}
+    .checkbox{display:flex; gap:10px; align-items:center; margin-top:10px}
+    .checkbox input{transform:scale(1.15); accent-color:#FFD700}
+    .btn{background:linear-gradient(45deg,#FFD700,#FFA500); color:#1E1E2F; border:none; border-radius:22px; padding:12px 20px; font-weight:800; cursor:pointer; margin-top:12px}
+    .btn.alt{background:linear-gradient(45deg,#28a745,#20c997); color:#fff}
+    .out{min-height:250px; background:rgba(0,0,0,.35); border:2px solid rgba(255,215,0,.28); border-radius:10px; padding:14px; font-family:ui-monospace, Menlo, Consolas, monospace !important; white-space:pre-wrap}
+    .actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+    .statbar{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-top:10px}
+    .stat{background:rgba(255,215,0,.1); border:1px solid rgba(255,215,0,.2); border-radius:10px; text-align:center; padding:10px}
+    .stat .v{color:#FFD700; font-weight:800; font-size:22px}
+    @media(max-width:900px){.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">ToolSlap</div>
+    <div class="tag">Random Number Generator</div>
+  </header>
+  <div class="container">
+    <a href="index.html" class="back-btn">← Back to Tools</a>
+    <h1 class="title">🎲 Random Number Generator</h1>
+    <p class="sub">Generate random numbers with custom ranges, decimals, unique values, and sets</p>
+    <div class="grid">
+      <section class="card">
+        <label class="label">Range</label>
+        <div class="row">
+          <input id="min" class="input" type="number" value="1" placeholder="Min" />
+          <input id="max" class="input" type="number" value="100" placeholder="Max" />
+        </div>
+        <div class="row" style="margin-top:10px">
+          <div>
+            <label class="label">Count</label>
+            <input id="count" class="input" type="number" value="10" min="1" max="10000" />
+          </div>
+          <div>
+            <label class="label">Decimal Places</label>
+            <select id="decimals" class="select">
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2" selected>2</option>
+              <option value="3">3</option>
+            </select>
+          </div>
+        </div>
+        <div class="checkbox">
+          <input id="unique" type="checkbox" />
+          <label for="unique">Unique values (integers only)</label>
+        </div>
+        <div class="checkbox">
+          <input id="sorted" type="checkbox" />
+          <label for="sorted">Sort ascending</label>
+        </div>
+        <button class="btn" onclick="generate()">Generate</button>
+        <div class="actions">
+          <button class="btn alt" onclick="copyOut()">📋 Copy</button>
+          <button class="btn alt" onclick="downloadOut()">⬇ Export .txt</button>
+          <button class="btn alt" onclick="clearOut()">🧹 Clear</button>
+        </div>
+      </section>
+      <section class="card">
+        <label class="label">Output</label>
+        <div id="out" class="out">Click Generate to create random numbers…</div>
+        <div class="statbar">
+          <div class="stat"><div class="v" id="statCount">0</div><div>Count</div></div>
+          <div class="stat"><div class="v" id="statMin">0</div><div>Min</div></div>
+          <div class="stat"><div class="v" id="statMax">0</div><div>Max</div></div>
+          <div class="stat"><div class="v" id="statMean">0</div><div>Mean</div></div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <script>
+    function rnd(min, max) { return Math.random() * (max - min) + min; }
+    function generate(){
+      const min = parseFloat(document.getElementById('min').value);
+      const max = parseFloat(document.getElementById('max').value);
+      const count = parseInt(document.getElementById('count').value) || 1;
+      const decimals = parseInt(document.getElementById('decimals').value) || 0;
+      const unique = document.getElementById('unique').checked;
+      const sorted = document.getElementById('sorted').checked;
+      if (isNaN(min) || isNaN(max) || max < min) { return alert('Please enter a valid range'); }
+      if (unique && decimals > 0) { return alert('Unique mode works with integers only. Set decimals to 0.'); }
+      let arr = [];
+      if (unique) {
+        const rangeSize = Math.floor(max) - Math.ceil(min) + 1;
+        if (count > rangeSize) { return alert('Count exceeds the number of unique integers in range'); }
+        const set = new Set();
+        while (set.size < count) set.add(Math.floor(rnd(Math.ceil(min), Math.floor(max)+1)));
+        arr = Array.from(set);
+      } else {
+        for (let i=0;i<count;i++) arr.push(rnd(min, max));
+      }
+      if (decimals >= 0) arr = arr.map(n => parseFloat(n.toFixed(decimals)));
+      if (sorted) arr.sort((a,b)=>a-b);
+      const out = document.getElementById('out');
+      out.textContent = arr.join(', ');
+      const c = arr.length; const mn = Math.min(...arr); const mx = Math.max(...arr); const mean = (arr.reduce((s,n)=>s+n,0)/c)||0;
+      document.getElementById('statCount').textContent = c;
+      document.getElementById('statMin').textContent = (mn||0).toString();
+      document.getElementById('statMax').textContent = (mx||0).toString();
+      document.getElementById('statMean').textContent = mean.toFixed(decimals);
+    }
+    async function copyOut(){ const t=document.getElementById('out').textContent; if(!t||t.includes('Generate')) return alert('Generate output first'); await navigator.clipboard.writeText(t); alert('Copied!'); }
+    function downloadOut(){ const t=document.getElementById('out').textContent; if(!t||t.includes('Generate')) return alert('Generate output first'); const blob=new Blob([t],{type:'text/plain'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='random-numbers.txt'; a.click(); URL.revokeObjectURL(url); }
+    function clearOut(){ document.getElementById('out').textContent=''; document.getElementById('statCount').textContent='0'; document.getElementById('statMin').textContent='0'; document.getElementById('statMax').textContent='0'; document.getElementById('statMean').textContent='0'; }
+    document.addEventListener('DOMContentLoaded', generate);
+  </script>
+</body>
+</html>
+

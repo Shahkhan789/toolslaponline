@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator - ToolSlap</title>
+
+    <style>
+        /* --- Theme Variables (from ToolSlap Website) --- */
+        :root {
+            --bg-dark-navy: #1E1E2F;
+            --text-light-gray: #EAEAEA;
+            --header-deep-blue: #2B2D42;
+            --accent-gold: #FFD700;
+            --accent-gold-hover: #E6C200;
+            --card-grayish-blue: #3A3D5B;
+            --gold-shadow: rgba(255, 215, 0, 0.2);
+            --error-red: #E57373;
+        }
+
+        /* --- General Styling --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-dark-navy);
+            color: var(--text-light-gray);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        /* --- Main Tool Container --- */
+        .main-container {
+            background-color: var(--header-deep-blue);
+            border-radius: 12px;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 8px 30px var(--gold-shadow);
+            border: 1px solid var(--card-grayish-blue);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--accent-gold);
+            font-size: 2.5rem;
+        }
+
+        /* --- Input Form Styling --- */
+        .input-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .date-inputs, .time-inputs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .input-group label {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 5px;
+            background-color: var(--bg-dark-navy);
+            color: var(--text-light-gray);
+            border: 1px solid var(--card-grayish-blue);
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 5px var(--gold-shadow);
+        }
+
+        /* Hide number input arrows */
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        .btn {
+            background-color: var(--accent-gold);
+            color: var(--bg-dark-navy);
+            border: none;
+            padding: 1rem;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-gold-hover);
+        }
+        
+        #error-message {
+            color: var(--error-red);
+            text-align: center;
+            min-height: 24px;
+            font-weight: bold;
+        }
+
+        /* --- Results Section --- */
+        #results-section {
+            display: none; /* Hidden by default */
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--card-grayish-blue);
+        }
+        
+        .result-box {
+            background-color: var(--card-grayish-blue);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .result-box h3 {
+            margin-bottom: 1rem;
+            color: #ccc;
+            font-weight: normal;
+        }
+        
+        .result-box p {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .result-box p span {
+            color: var(--accent-gold);
+        }
+
+        #time-result-box {
+            display: none; /* Hidden by default */
+        }
+        
+        /* --- Responsive Design --- */
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .main-container { padding: 1.5rem; }
+            .date-inputs, .time-inputs { grid-template-columns: 1fr 1fr; }
+            .time-inputs .input-group:nth-child(3) { grid-column: 1 / -1; } /* AM/PM full width */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <h1>Age Calculator</h1>
+        
+        <form class="input-form" id="age-form">
+            <div id="error-message"></div>
+            <div class="date-inputs">
+                <div class="input-group">
+                    <label for="day">Day</label>
+                    <input type="number" id="day" placeholder="DD" min="1" max="31" required>
+                </div>
+                <div class="input-group">
+                    <label for="month">Month</label>
+                    <input type="number" id="month" placeholder="MM" min="1" max="12" required>
+                </div>
+                <div class="input-group">
+                    <label for="year">Year</label>
+                    <input type="number" id="year" placeholder="YYYY" min="1900" max="2099" required>
+                </div>
+            </div>
+            <div class="time-inputs">
+                <div class="input-group">
+                    <label for="hour">Hour (Optional)</label>
+                    <input type="number" id="hour" placeholder="HH" min="1" max="12">
+                </div>
+                <div class="input-group">
+                    <label for="minute">Minute (Optional)</label>
+                    <input type="number" id="minute" placeholder="MM" min="0" max="59">
+                </div>
+                <div class="input-group">
+                    <label for="ampm">AM/PM</label>
+                    <select id="ampm">
+                        <option value="am">AM</option>
+                        <option value="pm">PM</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn">Calculate Age</button>
+        </form>
+        
+        <div id="results-section">
+            <div class="result-box">
+                <h3>Your Age Is</h3>
+                <p>
+                    <span id="years-result">--</span> Years, 
+                    <span id="months-result">--</span> Months, 
+                    <span id="days-result">--</span> Days
+                </p>
+            </div>
+            <div class="result-box" id="time-result-box">
+                <h3>Total Time Lived</h3>
+                <p>
+                    <span id="hours-result">--</span> Hours, 
+                    <span id="minutes-result">--</span> Minutes
+                </p>
+            </div>
+             <div class="result-box">
+                <h3>Next Birthday In</h3>
+                <p>
+                    <span id="countdown-result">--</span> Days
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const ageForm = document.getElementById('age-form');
+            const errorMessage = document.getElementById('error-message');
+            const resultsSection = document.getElementById('results-section');
+            const timeResultBox = document.getElementById('time-result-box');
+            const yearsResult = document.getElementById('years-result');
+            const monthsResult = document.getElementById('months-result');
+            const daysResult = document.getElementById('days-result');
+            const hoursResult = document.getElementById('hours-result');
+            const minutesResult = document.getElementById('minutes-result');
+            const countdownResult = document.getElementById('countdown-result');
+
+            ageForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                calculateAndDisplayAge();
+            });
+
+            function calculateAndDisplayAge() {
+                errorMessage.textContent = '';
+                resultsSection.style.display = 'none';
+
+                const day = parseInt(document.getElementById('day').value, 10);
+                const month = parseInt(document.getElementById('month').value, 10);
+                const year = parseInt(document.getElementById('year').value, 10);
+                let hour = document.getElementById('hour').value;
+                let minute = document.getElementById('minute').value;
+                const ampm = document.getElementById('ampm').value;
+
+                // --- Input Validation ---
+                if (!day || !month || !year) {
+                    errorMessage.textContent = 'Please fill in the date of birth.';
+                    return;
+                }
+
+                // Validate ranges
+                if (month < 1 || month > 12 || day < 1 || day > 31 || year < 1900 || year > 2099) {
+                    errorMessage.textContent = 'Please enter a valid date.';
+                    return;
+                }
+
+                // Handle hour/minute optional
+                hour = hour ? parseInt(hour, 10) : 0;
+                minute = minute ? parseInt(minute, 10) : 0;
+
+                // Adjust hour for AM/PM
+                if (hour > 0) {
+                    if (hour === 12 && ampm === 'am') hour = 0;
+                    else if (hour < 12 && ampm === 'pm') hour += 12;
+                }
+
+                // Validate day for month/year (leap year, etc.)
+                const birthDate = new Date(year, month - 1, day, hour, minute);
+                if (
+                    birthDate.getFullYear() !== year ||
+                    birthDate.getMonth() !== month - 1 ||
+                    birthDate.getDate() !== day
+                ) {
+                    errorMessage.textContent = 'The date you entered is invalid.';
+                    return;
+                }
+
+                const currentDate = new Date();
+                if (birthDate > currentDate) {
+                    errorMessage.textContent = 'Date of birth cannot be in the future.';
+                    return;
+                }
+
+                // --- Calculation ---
+                let years = currentDate.getFullYear() - birthDate.getFullYear();
+                let months = currentDate.getMonth() - birthDate.getMonth();
+                let days = currentDate.getDate() - birthDate.getDate();
+
+                if (days < 0) {
+                    months--;
+                    const prevMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
+                    days += prevMonth.getDate();
+                }
+                if (months < 0) {
+                    years--;
+                    months += 12;
+                }
+
+                // --- Next Birthday Countdown ---
+                let nextBirthday = new Date(currentDate.getFullYear(), birthDate.getMonth(), birthDate.getDate());
+                if (nextBirthday < currentDate) {
+                    nextBirthday.setFullYear(currentDate.getFullYear() + 1);
+                }
+                const timeDiff = nextBirthday.getTime() - currentDate.getTime();
+                const daysToNextBirthday = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+                // --- Total Time Lived ---
+                const totalMs = currentDate.getTime() - birthDate.getTime();
+                const totalMinutes = Math.floor(totalMs / (1000 * 60));
+                const totalHours = Math.floor(totalMinutes / 60);
+                const remMinutes = totalMinutes % 60;
+
+                // --- Display Results ---
+                animateValue(yearsResult, 0, years, 500);
+                animateValue(monthsResult, 0, months, 500);
+                animateValue(daysResult, 0, days, 500);
+                animateValue(countdownResult, 0, daysToNextBirthday, 500);
+
+                // Show time results only if time was entered
+                if (document.getElementById('hour').value || document.getElementById('minute').value) {
+                    animateValue(hoursResult, 0, totalHours, 500);
+                    animateValue(minutesResult, 0, remMinutes, 500);
+                    timeResultBox.style.display = 'block';
+                } else {
+                    timeResultBox.style.display = 'none';
+                }
+
+                resultsSection.style.display = 'block';
+            }
+
+            function animateValue(element, start, end, duration) {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    element.textContent = Math.floor(progress * (end - start) + start);
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+        });
+    </script>
+</body>
+</html>

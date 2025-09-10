@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HTML Online Viewer – write or paste HTML/CSS/JS and preview instantly in your browser. Secure sandboxed preview, export, and autosave.">
+    <meta name="keywords" content="html viewer, online html preview, live html editor, html css js, code runner, sandbox">
+    <meta name="author" content="ToolSlap">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="HTML Online Viewer - Live HTML/CSS/JS Preview | ToolSlap">
+    <meta property="og:description" content="Paste or write HTML, CSS, and JavaScript with instant preview in a secure sandbox. Export as a single HTML file.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolslap.com/html-viewer.html">
+    <meta property="og:image" content="https://toolslap.com/og-html-viewer.jpg">
+
+    <link rel="canonical" href="https://toolslap.com/html-viewer.html">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <title>HTML Online Viewer - Live HTML/CSS/JS Preview | ToolSlap</title>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important; }
+        body { background: linear-gradient(135deg, #1E1E2F 0%, #2B2D42 100%); color: #EAEAEA; line-height: 1.6; min-height: 100vh; }
+        .header { background: linear-gradient(135deg, #2B2D42 0%, #3A3D5B 100%); padding: 25px 20px; text-align: center; box-shadow: 0 2px 20px rgba(255, 215, 0, 0.1); position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 28px !important; font-weight: bold !important; color: #FFD700; text-shadow: 2px 2px 4px rgba(0,0,0,.3); margin-bottom: 5px; }
+        .tagline { font-size: 14px !important; opacity: .9; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px 20px; }
+        .back-btn { background: linear-gradient(45deg, #6c757d, #495057); color: #fff; padding: 10px 18px; text-decoration: none; border-radius: 18px; font-weight: 700; display: inline-block; margin-bottom: 16px; transition: transform .2s, box-shadow .2s; }
+        .back-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(108,117,125,.35); }
+        .title-wrap { text-align: center; margin-bottom: 24px; }
+        .tool-title { font-size: 2.2rem !important; background: linear-gradient(45deg,#FFD700,#FFA500); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 8px; }
+        .tool-desc { opacity: .9; }
+
+        .layout { display: grid; grid-template-columns: 1.2fr 1fr; gap: 20px; }
+        .card { background: linear-gradient(135deg, #3A3D5B 0%, #2B2D42 100%); border: 1px solid rgba(255,215,0,.15); border-radius: 14px; box-shadow: 0 10px 30px rgba(255,215,0,.08); overflow: hidden; }
+
+        .editor-header, .preview-header { display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; border-bottom: 1px solid rgba(255,215,0,.15); }
+        .section-title { color: #FFD700; font-weight: 800; }
+        .controls { display: flex; gap: 8px; flex-wrap: wrap; }
+        .btn { background: linear-gradient(45deg, #FFD700, #FFA500); color: #1E1E2F; border: none; border-radius: 18px; padding: 8px 14px; font-weight: 700; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+        .btn.alt { background: linear-gradient(45deg, #495057, #343a40); color: #fff; }
+        .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 14px rgba(255,215,0,.35); }
+
+        .tabs { display: flex; gap: 8px; padding: 10px; border-bottom: 1px solid rgba(255,215,0,.15); background: rgba(0,0,0,.1); }
+        .tab { padding: 8px 12px; border-radius: 12px; cursor: pointer; user-select: none; font-weight: 700; color: #EAEAEA; }
+        .tab.active { background: rgba(255,215,0,.15); color: #FFD700; border: 1px solid rgba(255,215,0,.35); }
+
+        .panes { padding: 12px; }
+        .pane { display: none; }
+        .pane.active { display: block; }
+        .codearea { width: 100%; min-height: 380px; background: rgba(0,0,0,.35); color: #EAEAEA; border: 2px solid rgba(255,215,0,.25); border-radius: 10px; padding: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace !important; font-size: 14px !important; line-height: 1.55; outline: none; }
+        .codearea:focus { border-color: #FFD700; box-shadow: 0 0 0 3px rgba(255,215,0,.12); }
+        .inline-hint { font-size: 12px; opacity: .75; margin-top: 8px; }
+
+        .preview { height: 520px; border: 0; width: 100%; background: #fff; }
+        .preview-wrap { padding: 0; }
+
+        .footer-note { text-align: center; opacity: .75; font-size: 12px; padding: 12px; border-top: 1px solid rgba(255,215,0,.15); }
+
+        @media (max-width: 1000px) { .layout { grid-template-columns: 1fr; } .preview { height: 420px; } }
+    </style>
+</head>
+<body>
+<header class="header">
+    <h1 class="logo">ToolSlap</h1>
+    <p class="tagline">HTML Online Viewer</p>
+</header>
+
+<div class="container">
+    <a href="index.html" class="back-btn">← Back to Tools</a>
+
+    <div class="title-wrap">
+        <h1 class="tool-title">🌐 HTML Online Viewer</h1>
+        <p class="tool-desc">Write or paste HTML, CSS, and JavaScript with instant preview in a secure sandbox. Nothing gets uploaded.</p>
+    </div>
+
+    <div class="layout">
+        <section class="card">
+            <div class="editor-header">
+                <div class="section-title">Editor</div>
+                <div class="controls">
+                    <button class="btn" id="runBtn">▶ Run</button>
+                    <button class="btn alt" id="clearBtn">🧹 Clear</button>
+                    <button class="btn alt" id="resetBtn">↺ Reset</button>
+                    <button class="btn" id="downloadBtn">⬇ Export .html</button>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <div class="tab active" data-pane="htmlPane">HTML</div>
+                <div class="tab" data-pane="cssPane">CSS</div>
+                <div class="tab" data-pane="jsPane">JS</div>
+            </div>
+
+            <div class="panes">
+                <div class="pane active" id="htmlPane">
+                    <textarea id="htmlInput" class="codearea" placeholder="<!-- Paste or write your HTML here -->\n<div class='card'>Hello ToolSlap!</div>"></textarea>
+                    <div class="inline-hint">Tip: Press Ctrl/Cmd + Enter to run</div>
+                </div>
+                <div class="pane" id="cssPane">
+                    <textarea id="cssInput" class="codearea" placeholder="/* Optional CSS */\n.card{padding:16px;border-radius:8px;background:#eef3ff;color:#123;}"></textarea>
+                </div>
+                <div class="pane" id="jsPane">
+                    <textarea id="jsInput" class="codearea" placeholder="// Optional JavaScript\nconsole.log('Hello from ToolSlap HTML Viewer');"></textarea>
+                </div>
+            </div>
+            <div class="footer-note">Autosaves locally. Export bundles HTML+CSS+JS into a single file.</div>
+        </section>
+
+        <section class="card preview-wrap">
+            <div class="preview-header">
+                <div class="section-title">Preview (sandboxed)</div>
+                <div class="controls">
+                    <button class="btn" id="popoutBtn">🗔 Open Preview</button>
+                </div>
+            </div>
+            <iframe id="previewFrame" class="preview" sandbox="allow-scripts allow-forms allow-pointer-lock allow-same-origin"></iframe>
+        </section>
+    </div>
+</div>
+
+<script>
+    const htmlInput = document.getElementById('htmlInput');
+    const cssInput = document.getElementById('cssInput');
+    const jsInput = document.getElementById('jsInput');
+    const frame = document.getElementById('previewFrame');
+
+    const runBtn = document.getElementById('runBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const popoutBtn = document.getElementById('popoutBtn');
+
+    const LS_KEY = 'toolslap_html_viewer_state_v1';
+
+    const defaultState = {
+        html: "<!DOCTYPE html>\n<html>\n<head>\n  <meta charset='utf-8'>\n  <meta name='viewport' content='width=device-width,initial-scale=1'>\n  <title>ToolSlap Preview</title>\n</head>\n<body>\n  <h1>Hello ToolSlap 👋</h1>\n  <p>Welcome to the HTML Online Viewer.</p>\n  <div class='card'>Edit the editors on the left and click Run.</div>\n</body>\n</html>",
+        css: ".card{padding:12px;border:1px solid #ddd;border-radius:8px;background:#f8f9fa;color:#333}",
+        js: "console.log('ToolSlap Preview Ready');"
+    };
+
+    function saveState() {
+        const state = { html: htmlInput.value, css: cssInput.value, js: jsInput.value };
+        localStorage.setItem(LS_KEY, JSON.stringify(state));
+    }
+
+    function loadState() {
+        try {
+            const raw = localStorage.getItem(LS_KEY);
+            if (!raw) return defaultState;
+            const parsed = JSON.parse(raw);
+            return { ...defaultState, ...parsed };
+        } catch { return defaultState; }
+    }
+
+    function buildSrcDoc(html, css, js) {
+        return `<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<style>${css || ''}</style>\n</head>\n<body>\n${html || ''}\n<script>${js || ''}<\/script>\n</body>\n</html>`;
+    }
+
+    function run() {
+        const srcdoc = buildSrcDoc(htmlInput.value, cssInput.value, jsInput.value);
+        frame.srcdoc = srcdoc;
+        saveState();
+    }
+
+    function clearAll() {
+        htmlInput.value = '';
+        cssInput.value = '';
+        jsInput.value = '';
+        run();
+    }
+
+    function resetAll() {
+        htmlInput.value = defaultState.html;
+        cssInput.value = defaultState.css;
+        jsInput.value = defaultState.js;
+        run();
+    }
+
+    function downloadHtml() {
+        const blob = new Blob([buildSrcDoc(htmlInput.value, cssInput.value, jsInput.value)], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'toolslap-preview.html';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+    }
+
+    function popout() {
+        const srcdoc = buildSrcDoc(htmlInput.value, cssInput.value, jsInput.value);
+        const newWin = window.open('', '_blank');
+        if (newWin) {
+            newWin.document.write(srcdoc);
+            newWin.document.close();
+        } else {
+            alert('Pop-up blocked. Please allow pop-ups for this site.');
+        }
+    }
+
+    // Tabs
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.pane').forEach(p => p.classList.remove('active'));
+            tab.classList.add('active');
+            document.getElementById(tab.dataset.pane).classList.add('active');
+        });
+    });
+
+    // Shortcuts and live updates
+    [htmlInput, cssInput, jsInput].forEach(el => {
+        el.addEventListener('input', () => saveState());
+        el.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); run(); }
+        });
+    });
+
+    runBtn.addEventListener('click', run);
+    clearBtn.addEventListener('click', clearAll);
+    resetBtn.addEventListener('click', resetAll);
+    downloadBtn.addEventListener('click', downloadHtml);
+    popoutBtn.addEventListener('click', popout);
+
+    // Initialize
+    const init = loadState();
+    htmlInput.value = init.html;
+    cssInput.value = init.css;
+    jsInput.value = init.js;
+    run();
+</script>
+</body>
+</html>
+

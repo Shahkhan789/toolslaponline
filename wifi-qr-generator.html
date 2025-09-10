@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free WiFi QR Code Generator - Create QR codes for WiFi networks with WPA, WEP, and Open security. Easy WiFi sharing tool.">
+    <meta name="keywords" content="wifi qr code, wifi qr generator, qr code generator, wifi sharing, network qr code">
+    <title>WiFi QR Generator - ToolSlap</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1E1E2F 0%, #2B2D42 100%);
+            color: #EAEAEA;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2B2D42 0%, #3A3D5B 100%);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 20px rgba(255, 215, 0, 0.1);
+        }
+
+        .logo {
+            color: #FFD700;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .tool-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .tool-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tool-description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .generator-section {
+            background: rgba(58, 61, 91, 0.3);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #FFD700;
+            margin-bottom: 25px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .form-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .input-label {
+            color: #FFD700;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .input-field {
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            color: #EAEAEA;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #FFD700;
+        }
+
+        .select-field {
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            color: #EAEAEA;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .select-field:focus {
+            outline: none;
+            border-color: #FFD700;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .checkbox-field {
+            width: 18px;
+            height: 18px;
+            accent-color: #FFD700;
+        }
+
+        .checkbox-label {
+            color: #EAEAEA;
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+
+        .qr-display-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .qr-container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            min-height: 300px;
+            justify-content: center;
+        }
+
+        .qr-placeholder {
+            color: #666;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .qr-canvas {
+            border-radius: 10px;
+        }
+
+        .network-info {
+            text-align: center;
+            color: #333;
+            font-size: 0.9rem;
+        }
+
+        .network-name {
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .controls-section {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #1E1E2F;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 215, 0, 0.2);
+            color: #FFD700;
+            border: 1px solid #FFD700;
+        }
+
+        .btn-secondary:hover {
+            background: #FFD700;
+            color: #1E1E2F;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .size-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .size-label {
+            color: #FFD700;
+            font-weight: 600;
+        }
+
+        .size-slider {
+            flex: 1;
+            max-width: 200px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .size-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #FFD700;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .size-value {
+            color: #EAEAEA;
+            font-weight: bold;
+            min-width: 60px;
+        }
+
+        .examples-section {
+            background: rgba(58, 61, 91, 0.3);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+        }
+
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .example-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .example-item:hover {
+            background: rgba(255, 215, 0, 0.1);
+            border-color: #FFD700;
+        }
+
+        .example-title {
+            color: #FFD700;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .example-details {
+            color: #EAEAEA;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        @media (max-width: 768px) {
+            .tool-title {
+                font-size: 2rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .controls-section {
+                justify-content: center;
+            }
+
+            .size-controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .size-slider {
+                max-width: none;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">ToolSlap</a>
+    </header>
+
+    <div class="container">
+        <div class="tool-header">
+            <h1 class="tool-title">📶 WiFi QR Generator</h1>
+            <p class="tool-description">
+                Generate QR codes for WiFi networks that can be scanned to automatically connect. 
+                Share your WiFi credentials securely and conveniently with guests and devices.
+            </p>
+        </div>
+
+        <div class="generator-section">
+            <h2 class="section-title">🔧 Network Configuration</h2>
+            
+            <div class="form-grid">
+                <div class="form-section">
+                    <div class="input-group">
+                        <label class="input-label" for="networkName">Network Name (SSID) *</label>
+                        <input type="text" class="input-field" id="networkName" placeholder="Enter WiFi network name" 
+                               oninput="updateQRCode()" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label" for="networkPassword">Password</label>
+                        <input type="password" class="input-field" id="networkPassword" placeholder="Enter WiFi password" 
+                               oninput="updateQRCode()">
+                        <div class="checkbox-group">
+                            <input type="checkbox" class="checkbox-field" id="showPassword" onchange="togglePasswordVisibility()">
+                            <label class="checkbox-label" for="showPassword">Show password</label>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label class="input-label" for="securityType">Security Type</label>
+                        <select class="select-field" id="securityType" onchange="updateQRCode()">
+                            <option value="WPA">WPA/WPA2</option>
+                            <option value="WEP">WEP</option>
+                            <option value="nopass">Open (No Password)</option>
+                        </select>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" class="checkbox-field" id="hiddenNetwork" onchange="updateQRCode()">
+                        <label class="checkbox-label" for="hiddenNetwork">Hidden network</label>
+                    </div>
+                </div>
+
+                <div class="qr-display-section">
+                    <div class="size-controls">
+                        <label class="size-label">QR Size:</label>
+                        <input type="range" class="size-slider" id="qrSize" min="150" max="400" value="250" 
+                               oninput="updateQRSize()">
+                        <span class="size-value" id="sizeValue">250px</span>
+                    </div>
+
+                    <div class="qr-container">
+                        <div class="qr-placeholder" id="qrPlaceholder">
+                            Enter network name to generate QR code
+                        </div>
+                        <canvas id="qrCanvas" style="display: none;"></canvas>
+                        <div class="network-info" id="networkInfo" style="display: none;">
+                            <div class="network-name" id="displayNetworkName"></div>
+                            <div id="displaySecurityType"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls-section">
+                <button class="btn" onclick="generateQRCode()">🔄 Generate QR</button>
+                <button class="btn btn-secondary" onclick="downloadQRCode()" id="downloadBtn" disabled>📥 Download PNG</button>
+                <button class="btn btn-secondary" onclick="printQRCode()" id="printBtn" disabled>🖨️ Print</button>
+                <button class="btn btn-secondary" onclick="clearForm()">🗑️ Clear</button>
+            </div>
+        </div>
+
+        <div class="examples-section">
+            <h2 class="section-title">💡 Example Networks</h2>
+            <div class="examples-grid">
+                <div class="example-item" onclick="loadExample('home', 'HomeNetwork_5G', 'mypassword123', 'WPA', false)">
+                    <div class="example-title">Home Network</div>
+                    <div class="example-details">
+                        Network: HomeNetwork_5G<br>
+                        Security: WPA/WPA2<br>
+                        Password: Protected
+                    </div>
+                </div>
+                
+                <div class="example-item" onclick="loadExample('guest', 'GuestWiFi', '', 'nopass', false)">
+                    <div class="example-title">Guest Network</div>
+                    <div class="example-details">
+                        Network: GuestWiFi<br>
+                        Security: Open<br>
+                        Password: None
+                    </div>
+                </div>
+                
+                <div class="example-item" onclick="loadExample('office', 'OfficeWiFi', 'company2024!', 'WPA', false)">
+                    <div class="example-title">Office Network</div>
+                    <div class="example-details">
+                        Network: OfficeWiFi<br>
+                        Security: WPA/WPA2<br>
+                        Password: Protected
+                    </div>
+                </div>
+                
+                <div class="example-item" onclick="loadExample('hidden', 'HiddenNetwork', 'secretpass', 'WPA', true)">
+                    <div class="example-title">Hidden Network</div>
+                    <div class="example-details">
+                        Network: HiddenNetwork<br>
+                        Security: WPA/WPA2<br>
+                        Hidden: Yes
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="notification" id="notification">
+        QR code downloaded successfully! 🎉
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.3/qrcode.min.js"></script>
+    <script>
+        // Embedded QR Code generator fallback
+        (function() {
+            if (typeof QRCode !== 'undefined') return;
+            
+            window.QRCode = (function() {
+                function QRCodeGenerator(el, text, opts, cb) {
+                    if (typeof el === 'string') {
+                        el = document.getElementById(el);
+                    }
+                    
+                    const options = opts || {};
+                    const size = options.width || 250;
+                    
+                    if (el.tagName.toLowerCase() === 'canvas') {
+                        const ctx = el.getContext('2d');
+                        el.width = size;
+                        el.height = size;
+                        
+                        ctx.fillStyle = '#FFFFFF';
+                        ctx.fillRect(0, 0, size, size);
+                        
+                        ctx.fillStyle = '#000000';
+                        ctx.font = '12px Arial';
+                        ctx.textAlign = 'center';
+                        ctx.fillText('Generating QR...', size/2, size/2);
+                        
+                        const encodedText = encodeURIComponent(text);
+                        const img = new Image();
+                        img.crossOrigin = 'anonymous';
+                        img.onload = function() {
+                            ctx.fillStyle = '#FFFFFF';
+                            ctx.fillRect(0, 0, size, size);
+                            ctx.drawImage(img, 0, 0, size, size);
+                            if (cb) cb(null);
+                        };
+                        img.onerror = function() {
+                            if (cb) cb(new Error('Failed to generate QR code'));
+                        };
+                        
+                        img.src = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodedText}`;
+                    }
+                }
+                
+                return {
+                    toCanvas: function(canvas, text, options, callback) {
+                        return new QRCodeGenerator(canvas, text, options, callback);
+                    }
+                };
+            })();
+        })();
+
+        let currentQRData = '';
+        let qrCodeGenerated = false;
+
+        function updateQRCode() {
+            const networkName = document.getElementById('networkName').value.trim();
+            
+            if (!networkName) {
+                showPlaceholder();
+                return;
+            }
+
+            generateQRCode();
+        }
+
+        function generateQRCode() {
+            const networkName = document.getElementById('networkName').value.trim();
+            const password = document.getElementById('networkPassword').value;
+            const securityType = document.getElementById('securityType').value;
+            const isHidden = document.getElementById('hiddenNetwork').checked;
+
+            if (!networkName) {
+                showPlaceholder();
+                return;
+            }
+
+            let qrData = 'WIFI:';
+            qrData += `T:${securityType};`;
+            qrData += `S:${escapeSpecialChars(networkName)};`;
+            
+            if (securityType !== 'nopass' && password) {
+                qrData += `P:${escapeSpecialChars(password)};`;
+            }
+            
+            if (isHidden) {
+                qrData += 'H:true;';
+            }
+            
+            qrData += ';';
+
+            currentQRData = qrData;
+
+            const canvas = document.getElementById('qrCanvas');
+            const qrSize = parseInt(document.getElementById('qrSize').value);
+            
+            try {
+                QRCode.toCanvas(canvas, qrData, {
+                    width: qrSize,
+                    height: qrSize,
+                    color: {
+                        dark: '#000000',
+                        light: '#FFFFFF'
+                    },
+                    margin: 2,
+                    errorCorrectionLevel: 'M'
+                }, function(error) {
+                    if (error) {
+                        console.error('QR Code generation failed:', error);
+                        showPlaceholder('Error generating QR code');
+                    } else {
+                        showQRCode();
+                        updateNetworkInfo();
+                    }
+                });
+            } catch (e) {
+                console.error('Exception during QR generation:', e);
+                showPlaceholder('Failed to generate QR code');
+            }
+        }
+
+        function escapeSpecialChars(str) {
+            return str.replace(/[\\";,]/g, '\\$&');
+        }
+
+        function showQRCode() {
+            document.getElementById('qrPlaceholder').style.display = 'none';
+            document.getElementById('qrCanvas').style.display = 'block';
+            document.getElementById('networkInfo').style.display = 'block';
+            
+            document.getElementById('downloadBtn').disabled = false;
+            document.getElementById('printBtn').disabled = false;
+            qrCodeGenerated = true;
+        }
+
+        function showPlaceholder(message = 'Enter network name to generate QR code') {
+            document.getElementById('qrPlaceholder').textContent = message;
+            document.getElementById('qrPlaceholder').style.display = 'block';
+            document.getElementById('qrCanvas').style.display = 'none';
+            document.getElementById('networkInfo').style.display = 'none';
+            
+            document.getElementById('downloadBtn').disabled = true;
+            document.getElementById('printBtn').disabled = true;
+            qrCodeGenerated = false;
+        }
+
+        function updateNetworkInfo() {
+            const networkName = document.getElementById('networkName').value.trim();
+            const securityType = document.getElementById('securityType').value;
+            const isHidden = document.getElementById('hiddenNetwork').checked;
+
+            document.getElementById('displayNetworkName').textContent = networkName;
+            
+            let securityText = '';
+            switch (securityType) {
+                case 'WPA':
+                    securityText = 'WPA/WPA2 Protected';
+                    break;
+                case 'WEP':
+                    securityText = 'WEP Protected';
+                    break;
+                case 'nopass':
+                    securityText = 'Open Network';
+                    break;
+            }
+
+            if (isHidden) {
+                securityText += ' • Hidden';
+            }
+
+            document.getElementById('displaySecurityType').textContent = securityText;
+        }
+
+        function updateQRSize() {
+            const size = document.getElementById('qrSize').value;
+            document.getElementById('sizeValue').textContent = size + 'px';
+            
+            if (qrCodeGenerated) {
+                generateQRCode();
+            }
+        }
+
+        function togglePasswordVisibility() {
+            const passwordField = document.getElementById('networkPassword');
+            const showPassword = document.getElementById('showPassword').checked;
+            
+            passwordField.type = showPassword ? 'text' : 'password';
+        }
+
+        function downloadQRCode() {
+            if (!qrCodeGenerated) return;
+
+            const canvas = document.getElementById('qrCanvas');
+            const networkName = document.getElementById('networkName').value.trim() || 'WiFi_QR';
+            
+            const link = document.createElement('a');
+            link.download = `${networkName}_WiFi_QR.png`;
+            link.href = canvas.toDataURL('image/png');
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            showNotification('QR code downloaded successfully! 🎉');
+        }
+
+        function printQRCode() {
+            if (!qrCodeGenerated) return;
+
+            const canvas = document.getElementById('qrCanvas');
+            const networkName = document.getElementById('networkName').value.trim();
+            
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <html>
+                <head>
+                    <title>WiFi QR Code - ${networkName}</title>
+                    <style>
+                        body { 
+                            font-family: Arial, sans-serif; 
+                            text-align: center; 
+                            padding: 20px;
+                            margin: 0;
+                        }
+                        .qr-container {
+                            display: inline-block;
+                            border: 2px solid #000;
+                            padding: 20px;
+                            margin: 20px;
+                        }
+                        .network-info {
+                            margin-top: 15px;
+                            font-size: 14px;
+                        }
+                        .network-name {
+                            font-weight: bold;
+                            font-size: 16px;
+                            margin-bottom: 5px;
+                        }
+                        @media print {
+                            body { margin: 0; padding: 10px; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <h1>WiFi QR Code</h1>
+                    <div class="qr-container">
+                        <img src="${canvas.toDataURL()}" alt="WiFi QR Code">
+                        <div class="network-info">
+                            <div class="network-name">${networkName}</div>
+                            <div>Scan to connect to this WiFi network</div>
+                        </div>
+                    </div>
+                    <script>
+                        window.onload = function() {
+                            window.print();
+                            window.onafterprint = function() {
+                                window.close();
+                            }
+                        }
+                    <\/script>
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+        }
+
+        function clearForm() {
+            document.getElementById('networkName').value = '';
+            document.getElementById('networkPassword').value = '';
+            document.getElementById('securityType').value = 'WPA';
+            document.getElementById('hiddenNetwork').checked = false;
+            document.getElementById('showPassword').checked = false;
+            document.getElementById('networkPassword').type = 'password';
+            
+            showPlaceholder();
+        }
+
+        function loadExample(type, ssid, password, security, hidden) {
+            document.getElementById('networkName').value = ssid;
+            document.getElementById('networkPassword').value = password;
+            document.getElementById('securityType').value = security;
+            document.getElementById('hiddenNetwork').checked = hidden;
+            
+            generateQRCode();
+        }
+
+        function showNotification(message = 'Operation completed! 🎉') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Initialize with example
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                if (typeof QRCode !== 'undefined') {
+                    loadExample('home', 'MyHomeWiFi', 'password123', 'WPA', false);
+                } else {
+                    showPlaceholder('QR Code generation not available. Please check internet connection.');
+                }
+            }, 1000);
+        });
+
+        // Handle security type change
+        document.getElementById('securityType').addEventListener('change', function() {
+            const passwordGroup = document.getElementById('networkPassword').parentElement;
+            if (this.value === 'nopass') {
+                passwordGroup.style.opacity = '0.5';
+                passwordGroup.style.pointerEvents = 'none';
+            } else {
+                passwordGroup.style.opacity = '1';
+                passwordGroup.style.pointerEvents = 'auto';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Audio Trim Tool | ToolSlap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --bg: #181a20;
+      --panel: #23272f;
+      --accent: #00bfae;
+      --text: #e0e0e0;
+      --error: #ff5252;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      background: var(--panel);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 24px #0008;
+      max-width: 400px;
+      width: 100%;
+      margin: 2rem;
+    }
+    h1 {
+      color: var(--accent);
+      text-align: center;
+      margin-bottom: 1rem;
+      font-size: 1.6rem;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    input[type="file"] {
+      width: 100%;
+      padding: 0.5rem;
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--accent);
+      border-radius: 0.5rem;
+    }
+    .time-inputs {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .time-inputs input {
+      width: 100%;
+      padding: 0.5rem;
+      background: var(--bg);
+      color: var(--text);
+      border: 1px solid var(--accent);
+      border-radius: 0.5rem;
+      text-align: center;
+    }
+    button {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 1rem;
+      width: 100%;
+      transition: background 0.2s;
+    }
+    button:disabled {
+      background: #444;
+      cursor: not-allowed;
+    }
+    .audio-preview {
+      margin-top: 1.5rem;
+      text-align: center;
+    }
+    .error {
+      color: var(--error);
+      margin-top: 0.5rem;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+    .processing {
+      color: var(--accent);
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 1.1rem;
+    }
+    @media (max-width: 500px) {
+      .container {
+        padding: 1rem;
+        max-width: 98vw;
+      }
+      h1 {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Audio Trim Tool</h1>
+    <label for="audioFile">Upload Audio File</label>
+    <input type="file" id="audioFile" accept=".mp3,.wav,.aac,.ogg,.flac" />
+    <div id="fileInfo"></div>
+    <label>Trim Selection</label>
+    <div class="time-inputs">
+      <input type="text" id="startTime" placeholder="Start (HH:MM:SS)" disabled />
+      <input type="text" id="endTime" placeholder="End (HH:MM:SS)" disabled />
+    </div>
+    <button id="trimBtn" disabled>Trim</button>
+    <div class="processing" id="processingMsg" style="display:none;">Processing...</div>
+    <div class="error" id="errorMsg"></div>
+    <div class="audio-preview" id="audioPreview"></div>
+  </div>
+  <script>
+    // Supported formats
+    const SUPPORTED_FORMATS = ['audio/mp3', 'audio/mpeg', 'audio/wav', 'audio/x-wav', 'audio/aac', 'audio/ogg', 'audio/flac'];
+
+    const audioFileInput = document.getElementById('audioFile');
+    const startTimeInput = document.getElementById('startTime');
+    const endTimeInput = document.getElementById('endTime');
+    const trimBtn = document.getElementById('trimBtn');
+    const errorMsg = document.getElementById('errorMsg');
+    const processingMsg = document.getElementById('processingMsg');
+    const audioPreview = document.getElementById('audioPreview');
+    const fileInfo = document.getElementById('fileInfo');
+
+    let audioBuffer = null;
+    let audioDuration = 0;
+    let fileName = '';
+    let fileType = '';
+
+    function secondsToHMS(sec) {
+      sec = Math.floor(sec);
+      const h = Math.floor(sec / 3600);
+      const m = Math.floor((sec % 3600) / 60);
+      const s = sec % 60;
+      return [h, m, s].map(v => v.toString().padStart(2, '0')).join(':');
+    }
+
+    function HMSToSeconds(hms) {
+      const parts = hms.split(':').map(Number);
+      if (parts.length === 3) {
+        return parts[0] * 3600 + parts[1] * 60 + parts[2];
+      } else if (parts.length === 2) {
+        return parts[0] * 60 + parts[1];
+      } else if (parts.length === 1) {
+        return parts[0];
+      }
+      return NaN;
+    }
+
+    audioFileInput.addEventListener('change', async (e) => {
+      errorMsg.textContent = '';
+      audioPreview.innerHTML = '';
+      startTimeInput.value = '';
+      endTimeInput.value = '';
+      startTimeInput.disabled = true;
+      endTimeInput.disabled = true;
+      trimBtn.disabled = true;
+      fileInfo.textContent = '';
+
+      const file = e.target.files[0];
+      if (!file) return;
+
+      fileName = file.name.replace(/\.[^/.]+$/, "");
+      fileType = file.type;
+
+      if (!SUPPORTED_FORMATS.includes(fileType)) {
+        errorMsg.textContent = 'Unsupported file type. Please upload MP3, WAV, AAC, OGG, or FLAC.';
+        return;
+      }
+
+      fileInfo.textContent = `File: ${file.name}`;
+
+      const arrayBuffer = await file.arrayBuffer();
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      try {
+        audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+        audioDuration = audioBuffer.duration;
+        startTimeInput.disabled = false;
+        endTimeInput.disabled = false;
+        startTimeInput.value = '00:00:00';
+        endTimeInput.value = secondsToHMS(audioDuration);
+        trimBtn.disabled = false;
+      } catch (err) {
+        errorMsg.textContent = 'Failed to decode audio. Please try another file.';
+      }
+    });
+
+    trimBtn.addEventListener('click', async () => {
+      errorMsg.textContent = '';
+      audioPreview.innerHTML = '';
+      processingMsg.style.display = 'block';
+
+      let startSec = HMSToSeconds(startTimeInput.value);
+      let endSec = HMSToSeconds(endTimeInput.value);
+
+      if (isNaN(startSec) || isNaN(endSec)) {
+        errorMsg.textContent = 'Invalid time format. Use HH:MM:SS.';
+        processingMsg.style.display = 'none';
+        return;
+      }
+      if (startSec < 0 || endSec > audioDuration || startSec >= endSec) {
+        errorMsg.textContent = 'Incorrect time selection.';
+        processingMsg.style.display = 'none';
+        return;
+      }
+
+      // Trim using Web Audio API
+      const length = endSec - startSec;
+      const sampleRate = audioBuffer.sampleRate;
+      const numChannels = audioBuffer.numberOfChannels;
+      const trimmedBuffer = new AudioBuffer({
+        length: Math.floor(length * sampleRate),
+        numberOfChannels: numChannels,
+        sampleRate: sampleRate
+      });
+
+      for (let channel = 0; channel < numChannels; channel++) {
+        const channelData = audioBuffer.getChannelData(channel).slice(
+          Math.floor(startSec * sampleRate),
+          Math.floor(endSec * sampleRate)
+        );
+        trimmedBuffer.copyToChannel(channelData, channel, 0);
+      }
+
+      // Encode to WAV (browser-friendly)
+      function encodeWAV(audioBuffer) {
+        const numChannels = audioBuffer.numberOfChannels;
+        const sampleRate = audioBuffer.sampleRate;
+        const format = 1; // PCM
+        const bitDepth = 16;
+
+        let samples = [];
+        for (let ch = 0; ch < numChannels; ch++) {
+          samples.push(audioBuffer.getChannelData(ch));
+        }
+
+        const length = audioBuffer.length * numChannels * (bitDepth / 8);
+        const buffer = new ArrayBuffer(44 + length);
+        const view = new DataView(buffer);
+
+        // RIFF chunk descriptor
+        writeString(view, 0, 'RIFF');
+        view.setUint32(4, 36 + length, true);
+        writeString(view, 8, 'WAVE');
+
+        // fmt sub-chunk
+        writeString(view, 12, 'fmt ');
+        view.setUint32(16, 16, true); // Subchunk1Size
+        view.setUint16(20, format, true); // AudioFormat
+        view.setUint16(22, numChannels, true);
+        view.setUint32(24, sampleRate, true);
+        view.setUint32(28, sampleRate * numChannels * (bitDepth / 8), true); // ByteRate
+        view.setUint16(32, numChannels * (bitDepth / 8), true); // BlockAlign
+        view.setUint16(34, bitDepth, true);
+
+        // data sub-chunk
+        writeString(view, 36, 'data');
+        view.setUint32(40, length, true);
+
+        // Write interleaved PCM samples
+        let offset = 44;
+        for (let i = 0; i < audioBuffer.length; i++) {
+          for (let ch = 0; ch < numChannels; ch++) {
+            let sample = samples[ch][i];
+            sample = Math.max(-1, Math.min(1, sample));
+            view.setInt16(offset, sample < 0 ? sample * 0x8000 : sample * 0x7FFF, true);
+            offset += 2;
+          }
+        }
+        return new Blob([buffer], { type: 'audio/wav' });
+      }
+
+      function writeString(view, offset, string) {
+        for (let i = 0; i < string.length; i++) {
+          view.setUint8(offset + i, string.charCodeAt(i));
+        }
+      }
+
+      const wavBlob = encodeWAV(trimmedBuffer);
+      const url = URL.createObjectURL(wavBlob);
+
+      audioPreview.innerHTML = `
+        <audio controls src="${url}"></audio>
+        <br>
+        <a href="${url}" download="${fileName}_trimmed.wav">
+          <button>Download Trimmed Audio</button>
+        </a>
+      `;
+      processingMsg.style.display = 'none';
+    });
+
+    // Optional: Validate time input format
+    [startTimeInput, endTimeInput].forEach(input => {
+      input.addEventListener('input', () => {
+        if (!/^(\d{2}:\d{2}:\d{2})$/.test(input.value)) {
+          input.style.borderColor = 'var(--error)';
+        } else {
+          input.style.borderColor = 'var(--accent)';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

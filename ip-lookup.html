@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IP Address Lookup Tool - Find your IP address, location, ISP, timezone, and security information instantly. Free IP geolocation service.">
+    <meta name="keywords" content="ip lookup, ip address, geolocation, what is my ip, ip location, network info, ISP lookup">
+    <meta name="author" content="ToolSlap">
+    <meta name="robots" content="index, follow">
+    
+    <meta property="og:title" content="IP Address Lookup Tool - Find Your IP & Location | ToolSlap">
+    <meta property="og:description" content="Discover your IP address, location, ISP, and network information instantly with our free IP lookup tool.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolslap.com/ip-lookup.html">
+    <meta property="og:image" content="https://toolslap.com/og-ip-lookup.jpg">
+    
+    <link rel="canonical" href="https://toolslap.com/ip-lookup.html">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <title>IP Address Lookup Tool - Find Your IP & Location | ToolSlap</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1E1E2F 0%, #2B2D42 100%);
+            color: #EAEAEA;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2B2D42 0%, #3A3D5B 100%);
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 2px 20px rgba(255, 215, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 28px !important;
+            font-weight: bold !important;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 5px;
+        }
+
+        .tagline {
+            font-size: 14px !important;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .back-btn {
+            background: linear-gradient(45deg, #6c757d, #495057);
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: bold !important;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 117, 125, 0.4);
+        }
+
+        .tool-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .tool-title {
+            font-size: 3rem !important;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tool-subtitle {
+            font-size: 1.2rem !important;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .main-card {
+            background: linear-gradient(135deg, #3A3D5B 0%, #2B2D42 100%);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            margin-bottom: 30px;
+        }
+
+        .ip-display {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .ip-label {
+            font-size: 1.1rem !important;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
+        .ip-address {
+            font-size: 2.5rem !important;
+            font-weight: bold !important;
+            color: #FFD700;
+            font-family: 'Courier New', monospace !important;
+            margin-bottom: 20px;
+            word-break: break-all;
+        }
+
+        .loading {
+            color: #20c997;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #1E1E2F;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold !important;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .btn.secondary {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .info-card {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .info-title {
+            font-size: 1.3rem !important;
+            color: #FFD700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold !important;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #EAEAEA;
+            min-width: 100px;
+        }
+
+        .info-value {
+            color: #20c997;
+            text-align: right;
+            font-family: 'Courier New', monospace !important;
+            word-break: break-word;
+        }
+
+        .security-indicator {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem !important;
+            font-weight: bold !important;
+        }
+
+        .security-safe {
+            background: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+            border: 1px solid #28a745;
+        }
+
+        .security-warning {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+            border: 1px solid #ffc107;
+        }
+
+        .security-danger {
+            background: rgba(220, 53, 69, 0.2);
+            color: #dc3545;
+            border: 1px solid #dc3545;
+        }
+
+        .features {
+            background: linear-gradient(135deg, #3A3D5B 0%, #2B2D42 100%);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .features-title {
+            font-size: 2rem !important;
+            color: #FFD700;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .feature-item {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .feature-title {
+            font-size: 1.1rem !important;
+            color: #FFD700;
+            margin-bottom: 10px;
+            font-weight: bold !important;
+        }
+
+        .feature-desc {
+            opacity: 0.9;
+            font-size: 0.9rem !important;
+        }
+
+        .error {
+            color: #dc3545;
+            background: rgba(220, 53, 69, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 10px;
+            }
+
+            .tool-title {
+                font-size: 2.5rem !important;
+            }
+
+            .ip-address {
+                font-size: 2rem !important;
+            }
+
+            .main-card {
+                padding: 25px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 class="logo">ToolSlap</h1>
+        <p class="tagline">IP Address Lookup</p>
+    </header>
+
+    <div class="container">
+        <a href="index.html" class="back-btn">← Back to Tools</a>
+        
+        <div class="tool-header">
+            <h1 class="tool-title">🌐 IP Address Lookup</h1>
+            <p class="tool-subtitle">Discover your IP address, location, ISP information, and network details instantly</p>
+        </div>
+
+        <div class="main-card">
+            <div class="ip-display">
+                <div class="ip-label">Your IP Address</div>
+                <div class="ip-address loading" id="ipAddress">Loading...</div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn" onclick="copyIP()">📋 Copy IP</button>
+                <button class="btn secondary" onclick="refreshIP()">🔄 Refresh</button>
+                <button class="btn secondary" onclick="lookupCustomIP()">🔍 Lookup Custom IP</button>
+            </div>
+
+            <div id="errorMessage" class="error" style="display: none;"></div>
+
+            <div class="info-grid" id="infoGrid" style="display: none;">
+                <div class="info-card">
+                    <h3 class="info-title">📍 Location Information</h3>
+                    <ul class="info-list" id="locationInfo">
+                        <!-- Location data will be populated here -->
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3 class="info-title">🌐 Network Information</h3>
+                    <ul class="info-list" id="networkInfo">
+                        <!-- Network data will be populated here -->
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3 class="info-title">🔒 Security Information</h3>
+                    <ul class="info-list" id="securityInfo">
+                        <!-- Security data will be populated here -->
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3 class="info-title">⏰ Time & Timezone</h3>
+                    <ul class="info-list" id="timeInfo">
+                        <!-- Time data will be populated here -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="features">
+            <h2 class="features-title">✨ IP Lookup Features</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <span class="feature-icon">🎯</span>
+                    <h3 class="feature-title">Accurate Geolocation</h3>
+                    <p class="feature-desc">Get precise location data including country, region, city, and coordinates</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🏢</span>
+                    <h3 class="feature-title">ISP Information</h3>
+                    <p class="feature-desc">Identify your Internet Service Provider, organization, and AS number</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🔒</span>
+                    <h3 class="feature-title">Security Analysis</h3>
+                    <p class="feature-desc">Check for VPN, proxy, hosting, and potential security threats</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">⏰</span>
+                    <h3 class="feature-title">Timezone Data</h3>
+                    <p class="feature-desc">Get current time, timezone, and UTC offset information</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🔍</span>
+                    <h3 class="feature-title">Custom Lookup</h3>
+                    <p class="feature-desc">Look up information for any IP address, not just your own</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🚀</span>
+                    <h3 class="feature-title">Instant Results</h3>
+                    <p class="feature-desc">Get comprehensive IP information in seconds with real-time updates</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentIP = '';
+
+        async function getIPInfo(ip = '') {
+            try {
+                const ipElement = document.getElementById('ipAddress');
+                const errorElement = document.getElementById('errorMessage');
+                const infoGrid = document.getElementById('infoGrid');
+                
+                // Show loading state
+                if (!ip) {
+                    ipElement.textContent = 'Loading...';
+                    ipElement.className = 'ip-address loading';
+                }
+                
+                errorElement.style.display = 'none';
+                infoGrid.style.display = 'none';
+
+                // Use multiple APIs for comprehensive data
+                let apiUrl = ip ? 
+                    `http://ip-api.com/json/${ip}?fields=status,message,country,countryCode,region,regionName,city,zip,lat,lon,timezone,isp,org,as,query,proxy,hosting` :
+                    'http://ip-api.com/json/?fields=status,message,country,countryCode,region,regionName,city,zip,lat,lon,timezone,isp,org,as,query,proxy,hosting';
+
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+
+                if (data.status === 'fail') {
+                    throw new Error(data.message || 'Failed to get IP information');
+                }
+
+                currentIP = data.query;
+                
+                // Update IP display
+                ipElement.textContent = currentIP;
+                ipElement.className = 'ip-address';
+
+                // Populate information cards
+                populateLocationInfo(data);
+                populateNetworkInfo(data);
+                populateSecurityInfo(data);
+                populateTimeInfo(data);
+
+                // Show info grid
+                infoGrid.style.display = 'grid';
+
+            } catch (error) {
+                console.error('Error fetching IP info:', error);
+                showError(`Error: ${error.message}`);
+            }
+        }
+
+        function populateLocationInfo(data) {
+            const locationInfo = document.getElementById('locationInfo');
+            locationInfo.innerHTML = `
+                <li class="info-item">
+                    <span class="info-label">Country:</span>
+                    <span class="info-value">${data.country || 'Unknown'} (${data.countryCode || 'N/A'})</span>
+                </li>
+                <li class="info-item">
+                    <span class="info-label">Region:</span>
+                    <span class="info-value">${data.regionName || 'Unknown'}</span>
+                </li>
+                <li class="info-item">
+                    <span class="info-label">City:</span>
+                    <span class="info-value">${data.city || 'Unknown'}</span>
+                </li>
+                <li class="info-item">
+                    <span class="info-label">ZIP Code:</span>
+                    <span class="info-value">${data.zip || 'Unknown'}</span>
+                </li>
+                <li class="info-item">
+                    <span class="info-label">Coordinates:</span>
+                    <span class="info-value">${data.lat ? `${data.lat}, ${data.lon}` : 'Unknown'}</span>
+                </li>
+            `;
+        }
+
+        function populateNetworkInfo(data) {
+            const networkInfo = document.getElementById('networkInfo');
+            networkInfo.innerHTML = `
+                <li class="info-item">
+                    <span class="info-label">ISP:</span>
+                    <span class="info-value">${data.isp || 'Unknown'}</span>
+                </li>
+                <li class="info-item">
+                    <span class="info-label">Organization:</span>
+                    <span class="info-value">${data.org || 'Unknown'}</span>
+                </li>
+                <li class="info-item">
+                    <span class="info-label">AS Number:</span>
+                    <span class="info-value">${data.as || 'Unknown'}</span>
+                </li>
+                <li class="info-item">
+                    <span class="info-label">IP Version:</span>
+                    <span class="info-value">${isIPv6(currentIP) ? 'IPv6' : 'IPv4'}</span>
+                </li>
+                <li class="info-item">
+                    <span class="info-label">IP Type:</span>
+                    <span class="info-value">${getIPType(currentIP)}</span>
+                </li>
+            `;
+        }
+
+        function populateSecurityInfo(data) {
+            const securityInfo = document.getElementById('securityInfo');
+            const isProxy = data.proxy || false;
+            const isHosting = data.hosting || false;
+            
+            let securityLevel = 'safe';
+            let securityText = 'Safe';
+            
+            if (isProxy && isHosting) {
+                securityLevel = 'danger';
+                securityText = 'High Risk';
+            } else if (isProxy || isHosting) {
+                securityLevel = 'warning';
+                securityText = 'Moderate Risk';
+            }
+
+            securityInfo.innerHTML = `
+                <li class="info-item">
+                    <span class="info-label">Security Level:</span>
+                    <span class="info-value">
+                        <span class="security-indicator security-${securityLevel}">${securityText}</span>
+                    </span>
+                </li>
+                <li class="info-item">
+                    <span class="info-label">Proxy/VPN:</span>
+                    <span class="info-value">${isProxy ? '⚠️ Detected' : '✅ None'}</span>
+                </li>
+                <li class="info-item">
+                    <span class="info-label">Hosting/Datacenter:</span>
+                    <span class="info-value">${isHosting ? '⚠️ Yes' : '✅ No'}</span>
+                </li>
+                <li class="info-item">
+                    <span class="info-label">Residential:</span>
+                    <span class="info-value">${!isHosting ? '✅ Yes' : '❌ No'}</span>
+                </li>
+            `;
+        }
+
+        function populateTimeInfo(data) {
+            const timeInfo = document.getElementById('timeInfo');
+            const now = new Date();
+            const timezone = data.timezone || 'Unknown';
+            
+            let localTime = 'Unknown';
+            if (timezone !== 'Unknown') {
+                try {
+                    localTime = new Date().toLocaleString('en-US', {timeZone: timezone});
+                } catch (e) {
+                    localTime = 'Unable to determine';
+                }
+            }
+
+            timeInfo.innerHTML = `
+                <li class="info-item">
+                    <span class="info-label">Timezone:</span>
+                    <span class="info-value">${timezone}</span>
+                </li>
+                <li class="info-item">
+                    <span class="info-label">Local Time:</span>
+                    <span class="info-value">${localTime}</span>
+                </li>
+                <li class="info-item">
+                    <span class="info-label">UTC Time:</span>
+                    <span class="info-value">${now.toUTCString()}</span>
+                </li>
+                <li class="info-item">
+                    <span class="info-label">Timestamp:</span>
+                    <span class="info-value">${Math.floor(now.getTime() / 1000)}</span>
+                </li>
+            `;
+        }
+
+        function isIPv6(ip) {
+            return ip && ip.includes(':');
+        }
+
+        function getIPType(ip) {
+            if (!ip) return 'Unknown';
+            
+            if (isIPv6(ip)) return 'IPv6';
+            
+            const parts = ip.split('.');
+            if (parts.length !== 4) return 'Invalid';
+            
+            const first = parseInt(parts[0]);
+            const second = parseInt(parts[1]);
+            
+            if (first === 10) return 'Private (Class A)';
+            if (first === 172 && second >= 16 && second <= 31) return 'Private (Class B)';
+            if (first === 192 && second === 168) return 'Private (Class C)';
+            if (first === 127) return 'Loopback';
+            if (first >= 224 && first <= 239) return 'Multicast';
+            
+            return 'Public';
+        }
+
+        function showError(message) {
+            const errorElement = document.getElementById('errorMessage');
+            const ipElement = document.getElementById('ipAddress');
+            const infoGrid = document.getElementById('infoGrid');
+            
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+            ipElement.textContent = 'Error';
+            ipElement.className = 'ip-address';
+            infoGrid.style.display = 'none';
+        }
+
+        async function copyIP() {
+            if (!currentIP) {
+                alert('No IP address to copy');
+                return;
+            }
+            
+            try {
+                await navigator.clipboard.writeText(currentIP);
+                
+                // Show success feedback
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✅ Copied!';
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+                
+            } catch (error) {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = currentIP;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                alert('IP address copied to clipboard!');
+            }
+        }
+
+        function refreshIP() {
+            getIPInfo();
+        }
+
+        function lookupCustomIP() {
+            const ip = prompt('Enter an IP address to lookup:');
+            if (ip && ip.trim()) {
+                getIPInfo(ip.trim());
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            getIPInfo();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMI Calculator - ToolSlap</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-dark-navy: #1E1E2F;
+            --text-light-gray: #EAEAEA;
+            --header-deep-blue: #2B2D42;
+            --accent-gold: #FFD700;
+            --accent-gold-hover: #E6C200;
+            --card-grayish-blue: #3A3D5B;
+            --gold-shadow: rgba(255, 215, 0, 0.2);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-dark-navy);
+            color: var(--text-light-gray);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+        .main-container {
+            background-color: var(--header-deep-blue);
+            border-radius: 12px;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 900px;
+            box-shadow: 0 8px 30px var(--gold-shadow);
+            border: 1px solid var(--card-grayish-blue);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--accent-gold);
+            font-size: 2.5rem;
+        }
+        .calculator-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+        }
+        .calculator-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .input-group label {
+            font-size: 1rem;
+            color: #ccc;
+        }
+        .input-group .value-display {
+            font-size: 1.1rem;
+            color: var(--accent-gold);
+            font-weight: bold;
+        }
+        input[type="range"] {
+            width: 100%;
+        }
+        .tenure-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .tenure-btn {
+            padding: 0.5rem 1.2rem;
+            border-radius: 5px;
+            border: none;
+            background: var(--card-grayish-blue);
+            color: var(--accent-gold);
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .tenure-btn.active {
+            background: var(--accent-gold);
+            color: var(--header-deep-blue);
+        }
+        .calculator-results h3 {
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+        .emi-amount {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+        .chart-container {
+            width: 100%;
+            max-width: 320px;
+            margin: 1.5rem auto;
+        }
+        .payment-breakdown {
+            margin-top: 1.5rem;
+        }
+        .breakdown-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.7rem;
+        }
+        .breakdown-row .label {
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        .breakdown-row .label::before {
+            content: '';
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .breakdown-row .label.principal::before { background-color: var(--accent-gold); }
+        .breakdown-row .label.interest::before { background-color: var(--bg-dark-navy); border: 1px solid var(--accent-gold); }
+        .breakdown-row .value {
+            font-size: 1.1rem;
+            color: var(--accent-gold);
+        }
+        @media (max-width: 768px) {
+            .main-container { padding: 1rem; }
+            .calculator-body { grid-template-columns: 1fr; gap: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <h1>EMI Calculator</h1>
+        <div class="calculator-body">
+            <div class="calculator-inputs">
+                <div class="input-group">
+                    <label for="loanAmountSlider">Loan Amount</label>
+                    <span class="value-display" id="loanAmountValue">₹5,00,000</span>
+                    <input type="range" id="loanAmountSlider" min="10000" max="10000000" step="10000" value="500000">
+                </div>
+                <div class="input-group">
+                    <label for="interestRateSlider">Interest Rate (% per annum)</label>
+                    <span class="value-display" id="interestRateValue">7.5%</span>
+                    <input type="range" id="interestRateSlider" min="1" max="20" step="0.1" value="7.5">
+                </div>
+                <div class="input-group">
+                    <label>Loan Tenure</label>
+                    <div class="tenure-controls">
+                        <button type="button" class="tenure-btn active" id="yearsBtn">Years</button>
+                        <button type="button" class="tenure-btn" id="monthsBtn">Months</button>
+                    </div>
+                    <span class="value-display" id="loanTenureValue">5 Years</span>
+                    <input type="range" id="loanTenureSlider" min="1" max="30" step="1" value="5">
+                </div>
+            </div>
+            <div class="calculator-results">
+                <h3>Monthly EMI</h3>
+                <div class="emi-amount" id="emiResult">₹0</div>
+                <div class="chart-container">
+                    <canvas id="paymentChart" width="320" height="320"></canvas>
+                </div>
+                <div class="payment-breakdown">
+                    <div class="breakdown-row">
+                        <span class="label principal">Principal</span>
+                        <span class="value" id="principalResult">₹0</span>
+                    </div>
+                    <div class="breakdown-row">
+                        <span class="label interest">Interest</span>
+                        <span class="value" id="interestResult">₹0</span>
+                    </div>
+                    <div class="breakdown-row">
+                        <span class="label">Total Payment</span>
+                        <span class="value" id="totalResult">₹0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Get elements
+        const loanAmountSlider = document.getElementById('loanAmountSlider');
+        const loanAmountValue = document.getElementById('loanAmountValue');
+        const interestRateSlider = document.getElementById('interestRateSlider');
+        const interestRateValue = document.getElementById('interestRateValue');
+        const loanTenureSlider = document.getElementById('loanTenureSlider');
+        const loanTenureValue = document.getElementById('loanTenureValue');
+        const yearsBtn = document.getElementById('yearsBtn');
+        const monthsBtn = document.getElementById('monthsBtn');
+        const emiResult = document.getElementById('emiResult');
+        const principalResult = document.getElementById('principalResult');
+        const interestResult = document.getElementById('interestResult');
+        const totalResult = document.getElementById('totalResult');
+        let tenureType = 'years'; // 'years' or 'months'
+        let paymentChart = null;
+
+        function formatCurrency(num) {
+            return '₹' + num.toLocaleString('en-IN', {maximumFractionDigits: 0});
+        }
+
+        function updateTenureSlider() {
+            if (tenureType === 'years') {
+                loanTenureSlider.min = 1;
+                loanTenureSlider.max = 30;
+                loanTenureSlider.step = 1;
+                if (loanTenureSlider.value < 1 || loanTenureSlider.value > 30) {
+                    loanTenureSlider.value = 5;
+                }
+            } else {
+                loanTenureSlider.min = 12;
+                loanTenureSlider.max = 360;
+                loanTenureSlider.step = 1;
+                if (loanTenureSlider.value < 12 || loanTenureSlider.value > 360) {
+                    loanTenureSlider.value = 60;
+                }
+            }
+        }
+
+        function updateCalculator() {
+            loanAmountValue.textContent = formatCurrency(Number(loanAmountSlider.value));
+            interestRateValue.textContent = `${parseFloat(interestRateSlider.value).toFixed(1)}%`;
+            loanTenureValue.textContent = `${loanTenureSlider.value} ${tenureType === 'years' ? 'Years' : 'Months'}`;
+
+            const P = parseFloat(loanAmountSlider.value);
+            const annualRate = parseFloat(interestRateSlider.value);
+            const R = annualRate / 12 / 100;
+
+            let N;
+            if (tenureType === 'years') {
+                N = parseFloat(loanTenureSlider.value) * 12;
+            } else {
+                N = parseFloat(loanTenureSlider.value);
+            }
+
+            let emi;
+            if (R > 0) {
+                const powerFactor = Math.pow(1 + R, N);
+                emi = (P * R * powerFactor) / (powerFactor - 1);
+            } else {
+                emi = P / N;
+            }
+
+            if (!isFinite(emi)) emi = 0;
+
+            const totalPayment = emi * N;
+            const totalInterest = totalPayment - P;
+
+            emiResult.textContent = formatCurrency(Math.round(emi));
+            principalResult.textContent = formatCurrency(Math.round(P));
+            interestResult.textContent = formatCurrency(Math.round(totalInterest));
+            totalResult.textContent = formatCurrency(Math.round(totalPayment));
+
+            updateChart(P, totalInterest);
+        }
+
+        function updateChart(principal, interest) {
+            const data = {
+                labels: ['Principal', 'Interest'],
+                datasets: [{
+                    data: [principal, interest],
+                    backgroundColor: [
+                        '#FFD700', // Gold
+                        '#1E1E2F'  // Navy
+                    ],
+                    borderColor: [
+                        '#E6C200', // Gold hover
+                        '#FFD700'
+                    ],
+                    borderWidth: 1
+                }]
+            };
+
+            if (paymentChart) {
+                paymentChart.data = data;
+                paymentChart.update();
+            } else {
+                const ctx = document.getElementById('paymentChart').getContext('2d');
+                paymentChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: data,
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.label || '';
+                                        if (label) label += ': ';
+                                        if (context.parsed !== null) label += formatCurrency(Math.round(context.parsed));
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Event listeners
+        loanAmountSlider.addEventListener('input', updateCalculator);
+        interestRateSlider.addEventListener('input', updateCalculator);
+        loanTenureSlider.addEventListener('input', updateCalculator);
+
+        yearsBtn.addEventListener('click', () => {
+            tenureType = 'years';
+            yearsBtn.classList.add('active');
+            monthsBtn.classList.remove('active');
+            updateTenureSlider();
+            updateCalculator();
+        });
+
+        monthsBtn.addEventListener('click', () => {
+            tenureType = 'months';
+            monthsBtn.classList.add('active');
+            yearsBtn.classList.remove('active');
+            updateTenureSlider();
+            updateCalculator();
+        });
+
+        // Initialize
+        updateTenureSlider();
+        updateCalculator();
+    </script>
+</body>
+</html>
