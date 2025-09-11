@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best AI Image Generators 2025 | DALL-E, Midjourney, Stable Diffusion - ToolSlap</title>
+    <meta name="description" content="Discover the top 10 AI image generators in 2025. Compare DALL-E 3, Midjourney, Stable Diffusion, and more. Free AI art tools with use-cases and pricing comparison.">
+    <meta name="keywords" content="AI image generators, DALL-E 3, Midjourney, Stable Diffusion, AI art, image generation, AI artwork, text to image, art generators">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#3B82F6',
+                        'light-blue': '#EFF6FF',
+                        'dark-blue': '#1E40AF'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Styles -->
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+        .comparison-table {
+            overflow-x: auto;
+        }
+        .comparison-table table {
+            width: 100%;
+            min-width: 800px;
+        }
+        .pricing-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        .pricing-free { background: #10B981; color: white; }
+        .pricing-paid { background: #F59E0B; color: white; }
+        .pricing-freemium { background: #8B5CF6; color: white; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-tools text-2xl"></i>
+                    <a href="index.html" class="text-2xl font-bold">ToolSlap</a>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="hover:text-blue-200 transition-colors">Home</a>
+                    <a href="tools.html" class="hover:text-blue-200 transition-colors">All Tools</a>
+                    <a href="about.html" class="hover:text-blue-200 transition-colors">About</a>
+                    <a href="contact.html" class="hover:text-blue-200 transition-colors">Contact</a>
+                </div>
+                <button class="md:hidden text-white">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-4xl mx-auto">
+                <i class="fas fa-palette text-6xl mb-6 text-blue-200"></i>
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">Best AI Image Generators 2025</h1>
+                <p class="text-xl md:text-2xl mb-8 text-blue-100">
+                    Create stunning AI-generated artwork with the top image generation tools. 
+                    Compare DALL-E 3, Midjourney, Stable Diffusion and more AI art platforms.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#generators-gallery" class="bg-white text-primary-blue px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+                        <i class="fas fa-eye mr-2"></i>Browse Generators
+                    </a>
+                    <a href="#comparison" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary-blue transition-colors">
+                        <i class="fas fa-chart-bar mr-2"></i>Compare Features
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Popular Use Cases</h2>
+                <p class="text-lg text-gray-600">AI image generators are perfect for various creative and professional needs</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center p-6">
+                    <i class="fas fa-paintbrush text-4xl text-primary-blue mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Digital Art</h3>
+                    <p class="text-gray-600">Create unique artwork, illustrations, and creative designs</p>
+                </div>
+                <div class="text-center p-6">
+                    <i class="fas fa-bullhorn text-4xl text-primary-blue mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Marketing</h3>
+                    <p class="text-gray-600">Generate social media content, ads, and promotional materials</p>
+                </div>
+                <div class="text-center p-6">
+                    <i class="fas fa-globe text-4xl text-primary-blue mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Web Design</h3>
+                    <p class="text-gray-600">Create website headers, backgrounds, and visual elements</p>
+                </div>
+                <div class="text-center p-6">
+                    <i class="fas fa-book text-4xl text-primary-blue mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Content Creation</h3>
+                    <p class="text-gray-600">Generate blog images, book covers, and educational materials</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top 10 AI Image Generators -->
+    <section id="generators-gallery" class="py-16 bg-light-blue">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Top 10 AI Image Generators</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Explore the most powerful AI image generation tools available today. Each offers unique features and capabilities for different creative needs.
+                </p>
+            </div>
+
+            <div class="feature-grid">
+                <!-- DALL-E 3 -->
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-robot text-2xl text-green-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold text-gray-800">DALL-E 3</h3>
+                            <p class="text-gray-600">OpenAI</p>
+                            <span class="pricing-badge pricing-paid">$20/month</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-6">
+                        The latest version of OpenAI's image generator with improved prompt understanding and photorealistic results. Integrated with ChatGPT for enhanced creativity.
+                    </p>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Natural language prompts</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>High-quality 1024x1024 images</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>ChatGPT integration</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Safety filters built-in</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <div class="flex text-yellow-400 mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="text-sm text-gray-600">4.8/5</span>
+                        </div>
+                        <a href="https://openai.com/dall-e-3" target="_blank" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                            Try Now <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Midjourney -->
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-purple-100 rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-magic text-2xl text-purple-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold text-gray-800">Midjourney</h3>
+                            <p class="text-gray-600">Midjourney Inc.</p>
+                            <span class="pricing-badge pricing-paid">$10/month</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-6">
+                        Renowned for creating artistic and stylized images with exceptional quality. Popular among digital artists and creative professionals for its unique aesthetic.
+                    </p>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Artistic and stylized results</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Discord-based interface</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Version 6 with enhanced quality</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Community gallery</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <div class="flex text-yellow-400 mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="text-sm text-gray-600">4.9/5</span>
+                        </div>
+                        <a href="https://midjourney.com" target="_blank" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                            Try Now <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Stable Diffusion -->
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-code text-2xl text-blue-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold text-gray-800">Stable Diffusion</h3>
+                            <p class="text-gray-600">Stability AI</p>
+                            <span class="pricing-badge pricing-free">Free</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-6">
+                        Open-source AI image generator that can run locally or in the cloud. Highly customizable with fine-tuned models and extensions for specific use cases.
+                    </p>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Open source & free</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Run locally or cloud</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Custom models available</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>API access</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <div class="flex text-yellow-400 mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="text-sm text-gray-600">4.7/5</span>
+                        </div>
+                        <a href="https://stability.ai" target="_blank" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                            Try Now <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Adobe Firefly -->
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mr-4">
+                            <i class="fab fa-adobe text-2xl text-red-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold text-gray-800">Adobe Firefly</h3>
+                            <p class="text-gray-600">Adobe</p>
+                            <span class="pricing-badge pricing-freemium">Freemium</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-6">
+                        Adobe's AI image generator integrated into Creative Cloud. Trained on licensed content with commercial safety and Creative Cloud integration.
+                    </p>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Creative Cloud integration</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Commercial safe training data</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Text effects generation</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Vector recoloring</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <div class="flex text-yellow-400 mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="text-sm text-gray-600">4.3/5</span>
+                        </div>
+                        <a href="https://firefly.adobe.com" target="_blank" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                            Try Now <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Leonardo AI -->
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-indigo-100 rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-user-astronaut text-2xl text-indigo-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold text-gray-800">Leonardo AI</h3>
+                            <p class="text-gray-600">Leonardo.AI</p>
+                            <span class="pricing-badge pricing-freemium">Freemium</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-6">
+                        Focus on game assets, concept art, and character design. Offers fine-tuned models for specific art styles and gaming content creation.
+                    </p>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Game asset generation</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Character design tools</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Style-specific models</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Texture generation</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <div class="flex text-yellow-400 mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="text-sm text-gray-600">4.4/5</span>
+                        </div>
+                        <a href="https://leonardo.ai" target="_blank" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                            Try Now <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Canva AI -->
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-cyan-100 rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-palette text-2xl text-cyan-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold text-gray-800">Canva AI</h3>
+                            <p class="text-gray-600">Canva</p>
+                            <span class="pricing-badge pricing-freemium">Freemium</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-6">
+                        Built into Canva's design platform for seamless integration with templates and design workflows. Perfect for social media and marketing content.
+                    </p>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Integrated with Canva editor</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Template compatibility</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Brand kit integration</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Social media formats</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <div class="flex text-yellow-400 mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="text-sm text-gray-600">4.2/5</span>
+                        </div>
+                        <a href="https://canva.com" target="_blank" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                            Try Now <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <button class="bg-primary-blue text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors" onclick="showMore()">
+                    <i class="fas fa-plus mr-2"></i>Show 4 More Generators
+                </button>
+            </div>
+
+            <!-- Additional generators (initially hidden) -->
+            <div id="more-generators" class="feature-grid mt-8 hidden">
+                <!-- Playground AI -->
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-orange-100 rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-gamepad text-2xl text-orange-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold text-gray-800">Playground AI</h3>
+                            <p class="text-gray-600">Playground AI</p>
+                            <span class="pricing-badge pricing-freemium">Freemium</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-6">
+                        User-friendly interface with various AI models and filters. Great for beginners with extensive customization options and style presets.
+                    </p>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Multiple AI models</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Style presets</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Image editing tools</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Community sharing</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <div class="flex text-yellow-400 mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="text-sm text-gray-600">4.1/5</span>
+                        </div>
+                        <a href="https://playground.ai" target="_blank" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                            Try Now <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Artbreeder -->
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-pink-100 rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-dna text-2xl text-pink-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold text-gray-800">Artbreeder</h3>
+                            <p class="text-gray-600">Artbreeder</p>
+                            <span class="pricing-badge pricing-freemium">Freemium</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-6">
+                        Collaborative platform for creating and evolving images through breeding and mixing. Unique approach to AI art generation with community features.
+                    </p>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Image breeding/mixing</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Collaborative creation</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Portrait generation</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Landscape creation</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <div class="flex text-yellow-400 mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="text-sm text-gray-600">4.0/5</span>
+                        </div>
+                        <a href="https://artbreeder.com" target="_blank" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                            Try Now <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- RunwayML -->
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-play text-2xl text-gray-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold text-gray-800">RunwayML</h3>
+                            <p class="text-gray-600">Runway</p>
+                            <span class="pricing-badge pricing-freemium">Freemium</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-6">
+                        Creative AI platform with image, video, and audio generation. Popular among content creators and filmmakers for its comprehensive AI toolkit.
+                    </p>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Image & video generation</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Real-time editing</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Background removal</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Style transfer</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <div class="flex text-yellow-400 mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="text-sm text-gray-600">4.3/5</span>
+                        </div>
+                        <a href="https://runwayml.com" target="_blank" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                            Try Now <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- NightCafe -->
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-yellow-100 rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-moon text-2xl text-yellow-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold text-gray-800">NightCafe</h3>
+                            <p class="text-gray-600">NightCafe Studio</p>
+                            <span class="pricing-badge pricing-freemium">Freemium</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-6">
+                        Community-focused AI art platform with daily challenges and competitions. Offers multiple AI algorithms and artistic styles for diverse creativity.
+                    </p>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Multiple AI algorithms</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Daily challenges</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Community voting</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Print on demand</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <div class="flex text-yellow-400 mr-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="text-sm text-gray-600">4.2/5</span>
+                        </div>
+                        <a href="https://nightcafe.studio" target="_blank" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                            Try Now <i class="fas fa-external-link-alt ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section id="comparison" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Feature Comparison</h2>
+                <p class="text-lg text-gray-600">Compare the key features and pricing of top AI image generators</p>
+            </div>
+
+            <div class="comparison-table">
+                <table class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <thead class="gradient-bg text-white">
+                        <tr>
+                            <th class="px-6 py-4 text-left font-semibold">Generator</th>
+                            <th class="px-6 py-4 text-center font-semibold">Pricing</th>
+                            <th class="px-6 py-4 text-center font-semibold">Quality</th>
+                            <th class="px-6 py-4 text-center font-semibold">Speed</th>
+                            <th class="px-6 py-4 text-center font-semibold">API</th>
+                            <th class="px-6 py-4 text-center font-semibold">Commercial Use</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold">DALL-E 3</td>
+                            <td class="px-6 py-4 text-center">$20/mo</td>
+                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></td>
+                            <td class="px-6 py-4 text-center text-yellow-600"><i class="fas fa-clock"></i> Medium</td>
+                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-check"></i></td>
+                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold">Midjourney</td>
+                            <td class="px-6 py-4 text-center">$10/mo</td>
+                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></td>
+                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-bolt"></i> Fast</td>
+                            <td class="px-6 py-4 text-center text-red-600"><i class="fas fa-times"></i></td>
+                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold">Stable Diffusion</td>
+                            <td class="px-6 py-4 text-center">Free</td>
+                            <td class="px-6 py-4 text-center text-yellow-600"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></td>
+                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-bolt"></i> Fast</td>
+                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-check"></i></td>
+                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold">Adobe Firefly</td>
+                            <td class="px-6 py-4 text-center">Freemium</td>
+                            <td class="px-6 py-4 text-center text-yellow-600"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></td>
+                            <td class="px-6 py-4 text-center text-yellow-600"><i class="fas fa-clock"></i> Medium</td>
+                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-check"></i></td>
+                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold">Leonardo AI</td>
+                            <td class="px-6 py-4 text-center">Freemium</td>
+                            <td class="px-6 py-4 text-center text-yellow-600"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></td>
+                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-bolt"></i> Fast</td>
+                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-check"></i></td>
+                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-check"></i></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold">Canva AI</td>
+                            <td class="px-6 py-4 text-center">Freemium</td>
+                            <td class="px-6 py-4 text-center text-yellow-600"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></td>
+                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-bolt"></i> Fast</td>
+                            <td class="px-6 py-4 text-center text-red-600"><i class="fas fa-times"></i></td>
+                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-check"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">ToolSlap</h3>
+                    <p class="text-blue-200 mb-4">Your hub for the best AI tools and online utilities.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-blue-200 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-blue-200 hover:text-white"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-blue-200 hover:text-white"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">AI Tools</h4>
+                    <ul class="space-y-2 text-blue-200">
+                        <li><a href="ai-chatbots.html" class="hover:text-white">AI Chatbots</a></li>
+                        <li><a href="ai-image-generators.html" class="hover:text-white">Image Generators</a></li>
+                        <li><a href="ai-website-builders.html" class="hover:text-white">Website Builders</a></li>
+                        <li><a href="ai-voice-generators.html" class="hover:text-white">Voice Generators</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-blue-200">
+                        <li><a href="blog.html" class="hover:text-white">Blog</a></li>
+                        <li><a href="guides.html" class="hover:text-white">Guides</a></li>
+                        <li><a href="tutorials.html" class="hover:text-white">Tutorials</a></li>
+                        <li><a href="comparison.html" class="hover:text-white">Comparisons</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-blue-200">
+                        <li><a href="about.html" class="hover:text-white">About</a></li>
+                        <li><a href="contact.html" class="hover:text-white">Contact</a></li>
+                        <li><a href="privacy-policy.html" class="hover:text-white">Privacy</a></li>
+                        <li><a href="terms-of-service.html" class="hover:text-white">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-blue-400 mt-8 pt-8 text-center text-blue-200">
+                <p>&copy; 2025 ToolSlap. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Show more generators function
+        function showMore() {
+            const moreGenerators = document.getElementById('more-generators');
+            const button = event.target;
+            
+            if (moreGenerators.classList.contains('hidden')) {
+                moreGenerators.classList.remove('hidden');
+                button.innerHTML = '<i class="fas fa-minus mr-2"></i>Show Less';
+            } else {
+                moreGenerators.classList.add('hidden');
+                button.innerHTML = '<i class="fas fa-plus mr-2"></i>Show 4 More Generators';
+                moreGenerators.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('.md\\:hidden');
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', () => {
+                // Add mobile menu logic here if needed
+                console.log('Mobile menu clicked');
+            });
+        }
+    </script>
+</body>
+</html>
