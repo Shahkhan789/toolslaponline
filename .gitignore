@@ -1,5 +1,6 @@
 # API Configuration (contains sensitive keys)
 api-config.js
+set-api-keys.html
 
 # Logs
 logs

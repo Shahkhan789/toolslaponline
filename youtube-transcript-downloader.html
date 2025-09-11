@@ -625,31 +625,55 @@
         async function extractTranscript(videoId) {
             try {
                 // Get API key from configuration
-                const apiKey = window.getApiKey ? window.getApiKey('youtube') : null;
+                console.log('Checking for API key function:', typeof window.getApiKey);
+                let apiKey = window.getApiKey ? window.getApiKey('youtube') : null;
+                
+                // Try to get from environment if config file isn't loaded
+                if (!apiKey) {
+                    console.log('API key not found from config file');
+                    const envKey = localStorage.getItem('youtube_api_key') || sessionStorage.getItem('youtube_api_key');
+                    if (envKey) {
+                        console.log('Using environment API key');
+                        apiKey = envKey;
+                    }
+                }
+                
+                console.log('YouTube API key available:', apiKey ? 'Yes' : 'No');
                 if (!apiKey) {
                     throw new Error('YouTube API key not configured');
                 }
                 
                 // First, get video info
-                const videoResponse = await fetch(
-                    `https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&id=${videoId}&key=${apiKey}`
-                );
+                console.log('Fetching video info for:', videoId);
+                const videoUrl = `https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails&id=${videoId}&key=${apiKey}`;
+                console.log('Video API URL:', videoUrl.replace(apiKey, 'API_KEY_HIDDEN'));
+                
+                const videoResponse = await fetch(videoUrl);
+                console.log('Video API Response status:', videoResponse.status);
                 
                 if (!videoResponse.ok) {
-                    throw new Error('Failed to fetch video info');
+                    const errorText = await videoResponse.text();
+                    console.error('Video API Error:', errorText);
+                    throw new Error(`Failed to fetch video info: ${videoResponse.status} - ${errorText}`);
                 }
                 
                 const videoData = await videoResponse.json();
+                console.log('Video data received:', videoData);
+                
                 if (!videoData.items || videoData.items.length === 0) {
+                    console.error('No video found for ID:', videoId);
                     throw new Error('Video not found');
                 }
                 
                 const video = videoData.items[0];
+                console.log('Video found:', video.snippet.title);
                 
                 // Get captions list
-                const captionsResponse = await fetch(
-                    `https://www.googleapis.com/youtube/v3/captions?part=snippet&videoId=${videoId}&key=${apiKey}`
-                );
+                console.log('Fetching captions for video...');
+                const captionsUrl = `https://www.googleapis.com/youtube/v3/captions?part=snippet&videoId=${videoId}&key=${apiKey}`;
+                console.log('Captions API URL:', captionsUrl.replace(apiKey, 'API_KEY_HIDDEN'));
+                
+                const captionsResponse = await fetch(captionsUrl);
                 
                 if (!captionsResponse.ok) {
                     throw new Error('Failed to fetch captions info');

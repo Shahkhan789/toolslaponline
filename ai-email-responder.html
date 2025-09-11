@@ -568,15 +568,33 @@
         // Generate AI response using Groq API
         async function generateAIResponse(customerEmail, template, tone) {
             // Get API key from configuration
+            console.log('Checking for API key function:', typeof window.getApiKey);
             const apiKey = window.getApiKey ? window.getApiKey('groq') : null;
+            console.log('API key available:', apiKey ? 'Yes' : 'No');
+            
             if (!apiKey) {
-                throw new Error('API key not configured');
+                // Try to get from environment or fail gracefully
+                console.log('API key not found from config file');
+                const envKey = localStorage.getItem('groq_api_key') || sessionStorage.getItem('groq_api_key');
+                if (envKey) {
+                    console.log('Using environment API key');
+                    apiKey = envKey;
+                } else {
+                    console.error('No API key available. Please configure your API key.');
+                    throw new Error('API key not configured. Please add your API key to api-config.js');
+                }
             }
             
+            return await makeGroqAPICall(customerEmail, template, tone, apiKey);
+        }
+        
+        // Make actual Groq API call
+        async function makeGroqAPICall(customerEmail, template, tone, apiKey) {
             const apiUrl = 'https://api.groq.com/openai/v1/chat/completions';
 
             // Create context-aware prompt
             const prompt = createEmailPrompt(customerEmail, template, tone);
+            console.log('Making API call with prompt:', prompt.substring(0, 100) + '...');
 
             const requestBody = {
                 model: 'mixtral-8x7b-32768',
@@ -596,6 +614,7 @@
                 stream: false
             };
 
+            console.log('Making Groq API request...');
             const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
@@ -605,11 +624,15 @@
                 body: JSON.stringify(requestBody)
             });
 
+            console.log('API Response status:', response.status);
             if (!response.ok) {
-                throw new Error(`Groq API error: ${response.status}`);
+                const errorText = await response.text();
+                console.error('API Error:', errorText);
+                throw new Error(`Groq API error: ${response.status} - ${errorText}`);
             }
 
             const data = await response.json();
+            console.log('API Response received:', data.choices?.[0]?.message?.content?.substring(0, 100) + '...');
             return data.choices[0].message.content.trim();
         }
 
