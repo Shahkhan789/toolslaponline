@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Story Writer | Free Story Generation Tool - ToolSlap</title>
+    <meta name="description" content="Create amazing stories with AI! Free story generator powered by Qwen AI. Write novels, short stories, scripts, and more with advanced AI assistance.">
+    <meta name="keywords" content="AI story writer, story generator, creative writing, AI writing assistant, free story tool, Qwen AI, automated storytelling">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#3B82F6',
+                        'light-blue': '#EFF6FF',
+                        'dark-blue': '#1E40AF'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+        }
+        .story-output {
+            min-height: 300px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        @keyframes pulse-blue {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+        }
+        .pulse-blue {
+            animation: pulse-blue 2s infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-tools text-2xl"></i>
+                    <a href="index.html" class="text-2xl font-bold">ToolSlap</a>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="hover:text-blue-200 transition-colors">Home</a>
+                    <a href="ai-chatbots.html" class="hover:text-blue-200 transition-colors">AI Chatbots</a>
+                    <a href="tools.html" class="hover:text-blue-200 transition-colors">All Tools</a>
+                    <a href="contact.html" class="hover:text-blue-200 transition-colors">Contact</a>
+                </div>
+                <button class="md:hidden text-white">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-4xl mx-auto">
+                <i class="fas fa-feather-alt text-6xl mb-6 text-blue-200"></i>
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">AI Story Writer</h1>
+                <p class="text-xl md:text-2xl mb-8 text-blue-100">
+                    Unleash your creativity with AI-powered storytelling. Generate compelling stories, novels, 
+                    scripts, and creative content in any genre with the power of Qwen AI.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#story-generator" class="bg-white text-primary-blue px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+                        <i class="fas fa-magic mr-2"></i>Start Writing
+                    </a>
+                    <a href="#examples" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary-blue transition-colors">
+                        <i class="fas fa-book-open mr-2"></i>See Examples
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Generator Tool -->
+    <section id="story-generator" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                    <i class="fas fa-robot text-primary-blue mr-3"></i>AI Story Generator
+                </h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Powered by Qwen AI - Create unique, engaging stories tailored to your vision
+                </p>
+                <div class="mt-4">
+                    <span id="connectionStatus" class="text-sm px-4 py-2 rounded-full bg-gray-100 text-gray-600">
+                        <i class="fas fa-circle text-gray-400"></i> Checking connection...
+                    </span>
+                </div>
+            </div>
+
+            <div class="max-w-6xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Input Panel -->
+                    <div class="bg-white rounded-xl shadow-lg border border-blue-200 p-8">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-edit text-blue-600 mr-2"></i>Story Settings
+                        </h3>
+
+                        <!-- Story Prompt -->
+                        <div class="mb-6">
+                            <label class="block text-lg font-semibold text-gray-700 mb-3">Story Idea or Prompt</label>
+                            <textarea id="storyPrompt" rows="4" placeholder="Describe your story idea... For example: 'A detective discovers that their reflection is solving crimes in a parallel universe'" 
+                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"></textarea>
+                            <p class="text-sm text-gray-500 mt-2">Be as detailed or as brief as you like - the AI will expand on your idea!</p>
+                        </div>
+
+                        <!-- Genre Selection -->
+                        <div class="mb-6">
+                            <label class="block text-lg font-semibold text-gray-700 mb-3">Genre</label>
+                            <select id="genre" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="fantasy">Fantasy</option>
+                                <option value="science-fiction">Science Fiction</option>
+                                <option value="mystery">Mystery/Thriller</option>
+                                <option value="romance">Romance</option>
+                                <option value="horror">Horror</option>
+                                <option value="adventure">Adventure</option>
+                                <option value="drama">Drama</option>
+                                <option value="comedy">Comedy</option>
+                                <option value="historical">Historical Fiction</option>
+                                <option value="young-adult">Young Adult</option>
+                                <option value="children">Children's Story</option>
+                                <option value="general" selected>General Fiction</option>
+                            </select>
+                        </div>
+
+                        <!-- Story Length -->
+                        <div class="mb-6">
+                            <label class="block text-lg font-semibold text-gray-700 mb-3">Story Length</label>
+                            <select id="storyLength" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="short">Short Story (500-1000 words)</option>
+                                <option value="medium" selected>Medium Story (1000-2000 words)</option>
+                                <option value="long">Long Story (2000-3000 words)</option>
+                                <option value="chapter">Single Chapter (3000+ words)</option>
+                            </select>
+                        </div>
+
+                        <!-- Writing Style -->
+                        <div class="mb-6">
+                            <label class="block text-lg font-semibold text-gray-700 mb-3">Writing Style</label>
+                            <select id="writingStyle" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="descriptive" selected>Descriptive & Detailed</option>
+                                <option value="dialogue-heavy">Dialogue Heavy</option>
+                                <option value="action-packed">Action Packed</option>
+                                <option value="poetic">Poetic & Literary</option>
+                                <option value="minimalist">Minimalist</option>
+                                <option value="humorous">Humorous</option>
+                                <option value="dark">Dark & Intense</option>
+                                <option value="casual">Casual & Conversational</option>
+                            </select>
+                        </div>
+
+                        <!-- Quick Prompts -->
+                        <div class="mb-6">
+                            <label class="block text-lg font-semibold text-gray-700 mb-3">Quick Prompts</label>
+                            <div class="flex flex-wrap gap-2">
+                                <button class="quick-prompt bg-blue-100 hover:bg-blue-200 text-blue-800 px-3 py-2 rounded-lg text-sm transition-colors" data-prompt="A time traveler accidentally changes the wrong historical event">Time Travel Mix-up</button>
+                                <button class="quick-prompt bg-green-100 hover:bg-green-200 text-green-800 px-3 py-2 rounded-lg text-sm transition-colors" data-prompt="An AI robot develops emotions and must hide it from humans">Emotional AI</button>
+                                <button class="quick-prompt bg-purple-100 hover:bg-purple-200 text-purple-800 px-3 py-2 rounded-lg text-sm transition-colors" data-prompt="The last bookstore on Earth becomes a sanctuary for forbidden knowledge">Last Bookstore</button>
+                                <button class="quick-prompt bg-orange-100 hover:bg-orange-200 text-orange-800 px-3 py-2 rounded-lg text-sm transition-colors" data-prompt="A person wakes up with the ability to see everyone's remaining lifespan">Lifespan Vision</button>
+                            </div>
+                        </div>
+
+                        <!-- Generate Button -->
+                        <button id="generateStory" class="w-full bg-primary-blue hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed">
+                            <i class="fas fa-magic mr-2"></i><span id="generateButtonText">Generate Story</span>
+                        </button>
+                    </div>
+
+                    <!-- Output Panel -->
+                    <div class="bg-white rounded-xl shadow-lg border border-blue-200 p-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-2xl font-bold text-gray-800">
+                                <i class="fas fa-book text-green-600 mr-2"></i>Generated Story
+                            </h3>
+                            <div class="flex space-x-2">
+                                <button id="copyStory" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors text-sm disabled:bg-gray-300" disabled>
+                                    <i class="fas fa-copy mr-1"></i>Copy
+                                </button>
+                                <button id="downloadStory" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors text-sm disabled:bg-gray-300" disabled>
+                                    <i class="fas fa-download mr-1"></i>Download
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Story Output -->
+                        <div id="storyOutput" class="story-output bg-gray-50 border border-gray-200 rounded-lg p-6 text-gray-700 leading-relaxed">
+                            <div class="text-center text-gray-500 py-12">
+                                <i class="fas fa-feather-alt text-4xl mb-4 text-gray-400"></i>
+                                <p class="text-lg">Your AI-generated story will appear here</p>
+                                <p class="text-sm mt-2">Fill out the story settings and click "Generate Story" to begin</p>
+                            </div>
+                        </div>
+
+                        <!-- Story Stats -->
+                        <div id="storyStats" class="mt-6 p-4 bg-blue-50 rounded-lg hidden">
+                            <h4 class="font-semibold text-blue-800 mb-2">Story Statistics</h4>
+                            <div class="grid grid-cols-3 gap-4 text-sm">
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-blue-600" id="wordCount">0</div>
+                                    <div class="text-blue-800">Words</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-green-600" id="charCount">0</div>
+                                    <div class="text-green-800">Characters</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-purple-600" id="readTime">0</div>
+                                    <div class="text-purple-800">Min Read</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Examples Section -->
+    <section id="examples" class="py-16 bg-light-blue">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Story Examples</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    See what our AI can create across different genres and styles
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Example 1: Sci-Fi -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-rocket text-blue-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800">The Last Signal</h3>
+                            <p class="text-sm text-gray-500">Science Fiction</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 text-sm mb-4">
+                        "Dr. Sarah Chen stared at the monitor, her coffee growing cold as the impossible signal repeated its pattern. After three years of silence from deep space, this wasn't just any transmission—it was answering questions humanity hadn't even asked yet..."
+                    </p>
+                    <div class="text-xs text-gray-500">Generated from: "A scientist receives a mysterious signal from space"</div>
+                </div>
+
+                <!-- Example 2: Fantasy -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-magic text-purple-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800">The Mapmaker's Daughter</h3>
+                            <p class="text-sm text-gray-500">Fantasy</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 text-sm mb-4">
+                        "Elara discovered that the maps her father drew weren't just representations of places—they were doorways. Each carefully inked line held the power to transport her to worlds that existed only in his imagination, until now..."
+                    </p>
+                    <div class="text-xs text-gray-500">Generated from: "Magical maps that lead to real places"</div>
+                </div>
+
+                <!-- Example 3: Mystery -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-search text-red-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800">The Memory Thief</h3>
+                            <p class="text-sm text-gray-500">Mystery/Thriller</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 text-sm mb-4">
+                        "Detective Maya Rodriguez had seen amnesia cases before, but never like this. Five victims, all missing exactly 48 hours of memory, all from the same week. The only connection? A small antique shop that no one remembered visiting..."
+                    </p>
+                    <div class="text-xs text-gray-500">Generated from: "People are losing specific memories"</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">ToolSlap</h3>
+                    <p class="text-blue-200 mb-4">Your hub for the best AI tools and online utilities.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">AI Tools</h4>
+                    <ul class="space-y-2 text-blue-200">
+                        <li><a href="ai-chatbots.html" class="hover:text-white">AI Chatbots</a></li>
+                        <li><a href="ai-story-writer.html" class="hover:text-white">Story Writer</a></li>
+                        <li><a href="ai-image-generators.html" class="hover:text-white">Image Generators</a></li>
+                        <li><a href="ai-website-builders.html" class="hover:text-white">Website Builders</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-blue-200">
+                        <li><a href="blog.html" class="hover:text-white">Blog</a></li>
+                        <li><a href="guides.html" class="hover:text-white">Writing Guides</a></li>
+                        <li><a href="tutorials.html" class="hover:text-white">Tutorials</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-blue-200">
+                        <li><a href="about.html" class="hover:text-white">About</a></li>
+                        <li><a href="contact.html" class="hover:text-white">Contact</a></li>
+                        <li><a href="privacy-policy.html" class="hover:text-white">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-blue-400 mt-8 pt-8 text-center text-blue-200">
+                <p>&copy; 2025 ToolSlap. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        class StoryWriter {
+            constructor() {
+                this.apiUrl = 'http://localhost:8001';
+                this.isConnected = false;
+                this.isGenerating = false;
+                
+                this.initializeElements();
+                this.setupEventListeners();
+                this.checkConnection();
+            }
+
+            initializeElements() {
+                this.storyPrompt = document.getElementById('storyPrompt');
+                this.genre = document.getElementById('genre');
+                this.storyLength = document.getElementById('storyLength');
+                this.writingStyle = document.getElementById('writingStyle');
+                this.generateButton = document.getElementById('generateStory');
+                this.generateButtonText = document.getElementById('generateButtonText');
+                this.storyOutput = document.getElementById('storyOutput');
+                this.copyButton = document.getElementById('copyStory');
+                this.downloadButton = document.getElementById('downloadStory');
+                this.connectionStatus = document.getElementById('connectionStatus');
+                this.storyStats = document.getElementById('storyStats');
+                this.wordCount = document.getElementById('wordCount');
+                this.charCount = document.getElementById('charCount');
+                this.readTime = document.getElementById('readTime');
+            }
+
+            setupEventListeners() {
+                this.generateButton.addEventListener('click', () => this.generateStory());
+                this.copyButton.addEventListener('click', () => this.copyStory());
+                this.downloadButton.addEventListener('click', () => this.downloadStory());
+
+                // Quick prompt buttons
+                document.querySelectorAll('.quick-prompt').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        this.storyPrompt.value = e.target.dataset.prompt;
+                    });
+                });
+
+                // Auto-resize textarea
+                this.storyPrompt.addEventListener('input', () => {
+                    this.storyPrompt.style.height = 'auto';
+                    this.storyPrompt.style.height = this.storyPrompt.scrollHeight + 'px';
+                });
+            }
+
+            async checkConnection() {
+                try {
+                    const response = await fetch(`${this.apiUrl}/health`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.model_loaded) {
+                            this.setConnectionStatus('Connected to Qwen AI', 'green', true);
+                        } else {
+                            this.setConnectionStatus('Server running, loading model...', 'yellow', false);
+                        }
+                    } else {
+                        this.setConnectionStatus('Server not responding', 'red', false);
+                    }
+                } catch (error) {
+                    this.setConnectionStatus('Please start Qwen server', 'red', false);
+                }
+            }
+
+            setConnectionStatus(message, color, connected) {
+                this.isConnected = connected;
+                this.connectionStatus.innerHTML = `
+                    <i class="fas fa-circle text-${color}-400"></i> ${message}
+                `;
+                this.connectionStatus.className = `text-sm px-4 py-2 rounded-full bg-${color}-50 text-${color}-600`;
+                
+                this.generateButton.disabled = !connected || this.isGenerating;
+            }
+
+            async generateStory() {
+                const prompt = this.storyPrompt.value.trim();
+                if (!prompt || !this.isConnected || this.isGenerating) return;
+
+                this.isGenerating = true;
+                this.generateButton.disabled = true;
+                this.generateButtonText.textContent = 'Generating Story...';
+                this.generateButton.classList.add('pulse-blue');
+
+                // Create detailed prompt
+                const detailedPrompt = this.createDetailedPrompt(prompt);
+                
+                // Show loading in output
+                this.showGeneratingMessage();
+
+                try {
+                    const response = await fetch(`${this.apiUrl}/api/generate`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            prompt: detailedPrompt,
+                            task_type: 'story',
+                            language: 'English',
+                            style: this.writingStyle.value,
+                            length: this.storyLength.value
+                        })
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        this.displayStory(data.generated_text);
+                        this.updateStats(data.generated_text);
+                    } else {
+                        throw new Error('Failed to generate story');
+                    }
+                } catch (error) {
+                    this.showError(`Error: ${error.message}. Please check if the Qwen server is running.`);
+                } finally {
+                    this.isGenerating = false;
+                    this.generateButton.disabled = false;
+                    this.generateButtonText.textContent = 'Generate Story';
+                    this.generateButton.classList.remove('pulse-blue');
+                }
+            }
+
+            createDetailedPrompt(userPrompt) {
+                const genre = this.genre.value;
+                const length = this.storyLength.value;
+                const style = this.writingStyle.value;
+
+                const lengthGuide = {
+                    'short': '500-1000 words',
+                    'medium': '1000-2000 words',
+                    'long': '2000-3000 words',
+                    'chapter': '3000+ words with chapter structure'
+                };
+
+                const styleGuide = {
+                    'descriptive': 'rich in detail and imagery',
+                    'dialogue-heavy': 'with plenty of character dialogue',
+                    'action-packed': 'fast-paced with lots of action',
+                    'poetic': 'with beautiful, literary language',
+                    'minimalist': 'concise and to the point',
+                    'humorous': 'funny and entertaining',
+                    'dark': 'with a dark, intense atmosphere',
+                    'casual': 'in a casual, conversational tone'
+                };
+
+                return `Write a complete ${genre} story that is ${styleGuide[style]} and approximately ${lengthGuide[length]} long.
+
+Story premise: ${userPrompt}
+
+Requirements:
+- Create compelling characters with clear motivations
+- Build an engaging plot with conflict and resolution
+- Use vivid descriptions and strong narrative voice
+- Include dialogue that advances the story
+- Ensure the story has a satisfying conclusion
+- Make it appropriate for the ${genre} genre
+- Write in a ${style} style
+
+Please write the complete story now:`;
+            }
+
+            showGeneratingMessage() {
+                this.storyOutput.innerHTML = `
+                    <div class="text-center text-gray-500 py-12">
+                        <div class="animate-spin w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full mx-auto mb-4"></div>
+                        <p class="text-lg font-semibold">Creating your story...</p>
+                        <p class="text-sm mt-2">This may take 30-60 seconds depending on story length</p>
+                    </div>
+                `;
+            }
+
+            displayStory(story) {
+                // Format the story with proper paragraphs
+                const formattedStory = story
+                    .split('\n\n')
+                    .map(paragraph => paragraph.trim())
+                    .filter(paragraph => paragraph.length > 0)
+                    .map(paragraph => `<p class="mb-4">${paragraph}</p>`)
+                    .join('');
+
+                this.storyOutput.innerHTML = formattedStory || '<p>Generated story content will appear here.</p>';
+                
+                // Enable action buttons
+                this.copyButton.disabled = false;
+                this.downloadButton.disabled = false;
+            }
+
+            showError(error) {
+                this.storyOutput.innerHTML = `
+                    <div class="text-center text-red-500 py-12">
+                        <i class="fas fa-exclamation-triangle text-4xl mb-4"></i>
+                        <p class="text-lg font-semibold">${error}</p>
+                        <button onclick="location.reload()" class="mt-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg">
+                            Retry
+                        </button>
+                    </div>
+                `;
+            }
+
+            updateStats(story) {
+                const words = story.split(/\s+/).filter(word => word.length > 0).length;
+                const characters = story.length;
+                const readingSpeed = 200; // words per minute
+                const readTime = Math.ceil(words / readingSpeed);
+
+                this.wordCount.textContent = words.toLocaleString();
+                this.charCount.textContent = characters.toLocaleString();
+                this.readTime.textContent = readTime;
+
+                this.storyStats.classList.remove('hidden');
+            }
+
+            copyStory() {
+                const storyText = this.storyOutput.innerText;
+                navigator.clipboard.writeText(storyText).then(() => {
+                    this.copyButton.innerHTML = '<i class="fas fa-check mr-1"></i>Copied!';
+                    setTimeout(() => {
+                        this.copyButton.innerHTML = '<i class="fas fa-copy mr-1"></i>Copy';
+                    }, 2000);
+                });
+            }
+
+            downloadStory() {
+                const storyText = this.storyOutput.innerText;
+                const title = 'AI Generated Story';
+                const blob = new Blob([`${title}\n\nGenerated by ToolSlap AI Story Writer\n\n${storyText}`], 
+                    { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'ai_story.txt';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+
+                this.downloadButton.innerHTML = '<i class="fas fa-check mr-1"></i>Downloaded!';
+                setTimeout(() => {
+                    this.downloadButton.innerHTML = '<i class="fas fa-download mr-1"></i>Download';
+                }, 2000);
+            }
+        }
+
+        // Initialize the story writer when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new StoryWriter();
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

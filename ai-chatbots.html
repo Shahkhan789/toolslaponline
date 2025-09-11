@@ -413,6 +413,116 @@
         </div>
     </section>
 
+    <!-- Live Qwen AI Chat Demo -->
+    <section id="qwen-chat-demo" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                    <i class="fas fa-robot text-primary-blue mr-3"></i>Try Qwen AI Chat Demo
+                </h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Experience the power of Alibaba's Qwen AI directly in your browser. Start a conversation and see what makes this AI special!
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-xl shadow-lg border border-blue-200 overflow-hidden">
+                    <!-- Chat Header -->
+                    <div class="gradient-bg text-white p-6">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-robot text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Qwen AI Assistant</h3>
+                                    <p class="text-blue-200 text-sm" id="connectionStatus">Connecting...</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 rounded-full bg-yellow-400 animate-pulse" id="statusIndicator"></div>
+                                <button id="clearChat" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-lg transition-colors text-sm">
+                                    <i class="fas fa-trash mr-1"></i>Clear
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chat Messages Area -->
+                    <div class="h-96 overflow-y-auto p-6 bg-gray-50" id="chatMessages">
+                        <div class="text-center text-gray-500 py-8" id="welcomeMessage">
+                            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-comments text-2xl text-blue-600"></i>
+                            </div>
+                            <h4 class="text-lg font-semibold text-gray-700 mb-2">Welcome to Qwen AI!</h4>
+                            <p>Ask me anything - I can help with writing, coding, analysis, creative tasks, and more!</p>
+                            <div class="mt-4 flex flex-wrap justify-center gap-2">
+                                <button class="suggestion-btn bg-blue-100 hover:bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-sm transition-colors">Write a story</button>
+                                <button class="suggestion-btn bg-green-100 hover:bg-green-200 text-green-800 px-3 py-1 rounded-full text-sm transition-colors">Code a function</button>
+                                <button class="suggestion-btn bg-purple-100 hover:bg-purple-200 text-purple-800 px-3 py-1 rounded-full text-sm transition-colors">Explain AI concepts</button>
+                                <button class="suggestion-btn bg-orange-100 hover:bg-orange-200 text-orange-800 px-3 py-1 rounded-full text-sm transition-colors">Help with homework</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Input Area -->
+                    <div class="p-6 bg-white border-t border-gray-200">
+                        <div class="flex space-x-4 mb-4">
+                            <input type="text" id="userInput" placeholder="Type your message here..." 
+                                   class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                   disabled>
+                            <button id="sendButton" class="bg-primary-blue hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed" disabled>
+                                <i class="fas fa-paper-plane mr-2"></i>Send
+                            </button>
+                        </div>
+
+                        <!-- Settings Row -->
+                        <div class="flex flex-wrap items-center justify-between gap-4 text-sm">
+                            <div class="flex items-center space-x-4">
+                                <div class="flex items-center space-x-2">
+                                    <label class="text-gray-600">Temperature:</label>
+                                    <input type="range" id="temperature" min="0.1" max="1.0" step="0.1" value="0.7" 
+                                           class="w-20">
+                                    <span id="temperatureValue" class="text-blue-600 font-semibold">0.7</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <label class="text-gray-600">Max tokens:</label>
+                                    <select id="maxLength" class="border border-gray-300 rounded px-2 py-1 text-sm">
+                                        <option value="512">512</option>
+                                        <option value="1024" selected>1024</option>
+                                        <option value="2048">2048</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="text-xs text-gray-500">
+                                Powered by <strong>Qwen AI</strong> • Running locally on your server
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Features Overview -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                    <div class="text-center p-6">
+                        <i class="fas fa-brain text-3xl text-blue-600 mb-3"></i>
+                        <h4 class="font-semibold text-gray-800 mb-2">Advanced Reasoning</h4>
+                        <p class="text-sm text-gray-600">Complex problem solving and logical analysis</p>
+                    </div>
+                    <div class="text-center p-6">
+                        <i class="fas fa-code text-3xl text-green-600 mb-3"></i>
+                        <h4 class="font-semibold text-gray-800 mb-2">Code Generation</h4>
+                        <p class="text-sm text-gray-600">Write, debug, and explain code in multiple languages</p>
+                    </div>
+                    <div class="text-center p-6">
+                        <i class="fas fa-language text-3xl text-purple-600 mb-3"></i>
+                        <h4 class="font-semibold text-gray-800 mb-2">Multilingual</h4>
+                        <p class="text-sm text-gray-600">Communicate in dozens of languages</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- FAQ Section -->
     <section class="py-16 bg-light-blue">
         <div class="container mx-auto px-4">
@@ -508,6 +618,280 @@
                 mobileMenu.classList.toggle('hidden');
             });
         }
+
+        // Qwen AI Chat Functionality
+        class QwenChat {
+            constructor() {
+                this.apiUrl = 'http://localhost:8001';
+                this.chatHistory = [];
+                this.isConnected = false;
+                this.isTyping = false;
+                
+                this.initializeElements();
+                this.setupEventListeners();
+                this.checkConnection();
+            }
+
+            initializeElements() {
+                this.chatMessages = document.getElementById('chatMessages');
+                this.userInput = document.getElementById('userInput');
+                this.sendButton = document.getElementById('sendButton');
+                this.clearButton = document.getElementById('clearChat');
+                this.connectionStatus = document.getElementById('connectionStatus');
+                this.statusIndicator = document.getElementById('statusIndicator');
+                this.temperatureSlider = document.getElementById('temperature');
+                this.temperatureValue = document.getElementById('temperatureValue');
+                this.maxLengthSelect = document.getElementById('maxLength');
+                this.welcomeMessage = document.getElementById('welcomeMessage');
+            }
+
+            setupEventListeners() {
+                // Send message on button click or Enter key
+                this.sendButton.addEventListener('click', () => this.sendMessage());
+                this.userInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        this.sendMessage();
+                    }
+                });
+
+                // Clear chat
+                this.clearButton.addEventListener('click', () => this.clearChat());
+
+                // Temperature slider
+                this.temperatureSlider.addEventListener('input', (e) => {
+                    this.temperatureValue.textContent = e.target.value;
+                });
+
+                // Suggestion buttons
+                document.querySelectorAll('.suggestion-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        this.userInput.value = btn.textContent;
+                        this.sendMessage();
+                    });
+                });
+            }
+
+            async checkConnection() {
+                try {
+                    const response = await fetch(`${this.apiUrl}/health`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.model_loaded) {
+                            this.setConnectionStatus('Connected to Qwen AI', 'green', true);
+                        } else {
+                            this.setConnectionStatus('Server running, loading model...', 'yellow', false);
+                        }
+                    } else {
+                        this.setConnectionStatus('Server not responding', 'red', false);
+                    }
+                } catch (error) {
+                    this.setConnectionStatus('Please start Qwen server', 'red', false);
+                    this.showConnectionHelp();
+                }
+            }
+
+            setConnectionStatus(message, color, connected) {
+                this.isConnected = connected;
+                this.connectionStatus.textContent = message;
+                
+                // Update status indicator
+                this.statusIndicator.className = `w-3 h-3 rounded-full bg-${color}-400`;
+                if (!connected) {
+                    this.statusIndicator.classList.add('animate-pulse');
+                }
+                
+                // Enable/disable input
+                this.userInput.disabled = !connected;
+                this.sendButton.disabled = !connected;
+                
+                if (connected) {
+                    this.userInput.placeholder = "Type your message here...";
+                } else {
+                    this.userInput.placeholder = "Please start the Qwen API server first...";
+                }
+            }
+
+            showConnectionHelp() {
+                const helpMessage = this.createMessageElement(
+                    'system',
+                    `To use this chat demo, please start the Qwen API server:\n\n1. Open terminal in your toolslap directory\n2. Install requirements: pip install -r qwen-requirements.txt\n3. Run server: python qwen-api-server.py\n4. Refresh this page\n\nThe server will run at http://localhost:8001`
+                );
+                this.welcomeMessage.style.display = 'none';
+                this.chatMessages.appendChild(helpMessage);
+            }
+
+            async sendMessage() {
+                const message = this.userInput.value.trim();
+                if (!message || !this.isConnected || this.isTyping) return;
+
+                // Hide welcome message
+                if (this.welcomeMessage) {
+                    this.welcomeMessage.style.display = 'none';
+                }
+
+                // Add user message
+                this.addMessage('user', message);
+                this.userInput.value = '';
+
+                // Show typing indicator
+                this.showTypingIndicator();
+
+                try {
+                    const response = await fetch(`${this.apiUrl}/api/chat`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            message: message,
+                            history: this.chatHistory,
+                            temperature: parseFloat(this.temperatureSlider.value),
+                            max_length: parseInt(this.maxLengthSelect.value)
+                        })
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        this.hideTypingIndicator();
+                        this.addMessage('assistant', data.response);
+                        
+                        // Update chat history
+                        this.chatHistory.push([message, data.response]);
+                    } else {
+                        throw new Error('Failed to get response from server');
+                    }
+                } catch (error) {
+                    this.hideTypingIndicator();
+                    this.addMessage('system', `Error: ${error.message}. Please check if the Qwen server is running.`);
+                    console.error('Chat error:', error);
+                }
+            }
+
+            addMessage(sender, content) {
+                const messageElement = this.createMessageElement(sender, content);
+                this.chatMessages.appendChild(messageElement);
+                this.scrollToBottom();
+            }
+
+            createMessageElement(sender, content) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `mb-4 flex ${sender === 'user' ? 'justify-end' : 'justify-start'}`;
+
+                const messageBubble = document.createElement('div');
+                messageBubble.className = `max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${this.getMessageStyles(sender)}`;
+
+                // Handle system messages differently
+                if (sender === 'system') {
+                    messageBubble.className = 'w-full bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-3 rounded-lg text-sm';
+                    messageBubble.innerHTML = `<i class="fas fa-info-circle mr-2"></i>${content.replace(/\n/g, '<br>')}`;
+                } else {
+                    const avatar = document.createElement('div');
+                    avatar.className = `w-8 h-8 rounded-full flex items-center justify-center ${sender === 'user' ? 'bg-blue-500 text-white ml-2' : 'bg-gray-200 text-gray-600 mr-2'}`;
+                    avatar.innerHTML = `<i class="fas fa-${sender === 'user' ? 'user' : 'robot'} text-sm"></i>`;
+
+                    messageBubble.textContent = content;
+
+                    if (sender === 'user') {
+                        messageDiv.appendChild(messageBubble);
+                        messageDiv.appendChild(avatar);
+                    } else {
+                        messageDiv.appendChild(avatar);
+                        messageDiv.appendChild(messageBubble);
+                    }
+                }
+
+                if (sender !== 'system') {
+                    return messageDiv;
+                } else {
+                    const systemDiv = document.createElement('div');
+                    systemDiv.className = 'mb-4';
+                    systemDiv.appendChild(messageBubble);
+                    return systemDiv;
+                }
+            }
+
+            getMessageStyles(sender) {
+                switch (sender) {
+                    case 'user':
+                        return 'bg-blue-500 text-white';
+                    case 'assistant':
+                        return 'bg-gray-200 text-gray-800';
+                    default:
+                        return 'bg-yellow-100 text-yellow-800';
+                }
+            }
+
+            showTypingIndicator() {
+                this.isTyping = true;
+                const typingDiv = document.createElement('div');
+                typingDiv.id = 'typing-indicator';
+                typingDiv.className = 'mb-4 flex justify-start';
+                typingDiv.innerHTML = `
+                    <div class="w-8 h-8 rounded-full bg-gray-200 text-gray-600 mr-2 flex items-center justify-center">
+                        <i class="fas fa-robot text-sm"></i>
+                    </div>
+                    <div class="bg-gray-200 text-gray-600 px-4 py-2 rounded-lg">
+                        <div class="typing-animation">
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                    </div>
+                `;
+                
+                this.chatMessages.appendChild(typingDiv);
+                this.scrollToBottom();
+            }
+
+            hideTypingIndicator() {
+                this.isTyping = false;
+                const typingIndicator = document.getElementById('typing-indicator');
+                if (typingIndicator) {
+                    typingIndicator.remove();
+                }
+            }
+
+            clearChat() {
+                this.chatHistory = [];
+                this.chatMessages.innerHTML = '';
+                this.welcomeMessage.style.display = 'block';
+                this.chatMessages.appendChild(this.welcomeMessage);
+            }
+
+            scrollToBottom() {
+                this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
+            }
+        }
+
+        // Initialize Qwen Chat when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new QwenChat();
+        });
+
+        // Add typing animation styles
+        const style = document.createElement('style');
+        style.textContent = `
+            .typing-animation {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+            }
+            .typing-animation .dot {
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background-color: #9CA3AF;
+                animation: typing 1.4s infinite ease-in-out;
+            }
+            .typing-animation .dot:nth-child(1) { animation-delay: -0.32s; }
+            .typing-animation .dot:nth-child(2) { animation-delay: -0.16s; }
+            @keyframes typing {
+                0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+                40% { transform: scale(1); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
