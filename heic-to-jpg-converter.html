@@ -31,6 +31,9 @@
     
     <title>HEIC to JPG Converter - Free iPhone Photo Converter | ToolSlap</title>
     
+    <!-- HEIC2ANY Library for HEIC conversion -->
+    <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
+    
     <!-- Schema.org structured data -->
     <script type="application/ld+json">
     {
@@ -569,11 +572,11 @@
                     <i class="fas fa-images"></i>
                 </div>
                 <div class="upload-text">Click to upload HEIC files or drag and drop</div>
-                <div class="upload-subtext">
-                    Supports multiple HEIC files up to 10MB each<br>
-                    Perfect for iPhone photos and Live Photos
+                <div class="upload-subtext" id="uploadSubtext">
+                    <div class="loading-spinner" id="libraryLoader" style="display: inline-block; margin-right: 10px;"></div>
+                    Loading HEIC converter...
                 </div>
-                <input type="file" id="heicFiles" class="file-input" accept=".heic,.HEIC" multiple onchange="handleFileSelection(this)">
+                <input type="file" id="heicFiles" class="file-input" accept=".heic,.HEIC,.heif,.HEIF,image/heic,image/heif" multiple onchange="handleFileSelection(this)">
                 <button class="upload-btn">
                     <i class="fas fa-cloud-upload-alt"></i>
                     Choose HEIC Files
@@ -737,18 +740,22 @@
             const files = Array.from(input.files);
             if (!files.length) return;
 
-            // Filter valid HEIC files
+            // Filter valid HEIC files with improved detection
             const validFiles = files.filter(file => {
-                const isValidType = file.type === 'image/heic' || file.name.toLowerCase().endsWith('.heic');
-                const isValidSize = file.size <= 10 * 1024 * 1024; // 10MB limit
+                const fileName = file.name.toLowerCase();
+                const isValidType = file.type === 'image/heic' || 
+                                  file.type === 'image/heif' || 
+                                  fileName.endsWith('.heic') || 
+                                  fileName.endsWith('.heif');
+                const isValidSize = file.size <= 50 * 1024 * 1024; // Increased to 50MB limit
                 
                 if (!isValidType) {
-                    showError(`${file.name} is not a valid HEIC file.`);
+                    showError(`${file.name} is not a valid HEIC/HEIF file. Please select iPhone photos with .heic extension.`);
                     return false;
                 }
                 
                 if (!isValidSize) {
-                    showError(`${file.name} is too large. Maximum size is 10MB.`);
+                    showError(`${file.name} is too large. Maximum size is 50MB per file.`);
                     return false;
                 }
                 
@@ -848,10 +855,42 @@
             handleFileSelection(fileInput);
         }
 
+        // Check library availability on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                const uploadSubtext = document.getElementById('uploadSubtext');
+                const libraryLoader = document.getElementById('libraryLoader');
+                
+                // Check if heic2any library is loaded
+                if (typeof heic2any === 'undefined') {
+                    uploadSubtext.innerHTML = '<i class="fas fa-exclamation-triangle" style="color: #ff6b6b;"></i> HEIC converter failed to load. Please refresh the page.';
+                    document.getElementById('heicFiles').disabled = true;
+                    showError('HEIC conversion library failed to load. Please refresh the page and try again.');
+                    return;
+                }
+                
+                // Library loaded successfully - show ready status
+                uploadSubtext.innerHTML = `
+                    Supports multiple HEIC/HEIF files up to 50MB each<br>
+                    Perfect for iPhone photos, Live Photos, and high-resolution images
+                    <div style="margin-top: 10px; color: #10b981;">
+                        <i class="fas fa-check-circle"></i> HEIC converter ready
+                    </div>
+                `;
+                console.log('HEIC2ANY library loaded successfully');
+            }, 1000); // Give library time to load
+        });
+
         // Convert HEIC to JPG
         async function convertHEICToJPG() {
             if (!selectedFiles.length) {
                 showError('Please select HEIC files first.');
+                return;
+            }
+            
+            // Double-check library availability
+            if (typeof heic2any === 'undefined') {
+                showError('HEIC conversion library not available. Please refresh the page.');
                 return;
             }
 
@@ -869,8 +908,11 @@
                     
                     // Simulate HEIC to JPG conversion
                     const jpgBlob = await convertSingleFile(file);
+                    // Generate JPG filename by replacing HEIC/HEIF extension
+                    const jpgFileName = file.name.replace(/\.(heic|heif)$/i, '.jpg');
+                    
                     convertedFiles.push({
-                        name: file.name.replace(/\.heic$/i, '.jpg'),
+                        name: jpgFileName,
                         blob: jpgBlob,
                         originalName: file.name
                     });
@@ -893,35 +935,52 @@
             }
         }
 
-        // Convert single HEIC file (simplified placeholder)
+        // Convert single HEIC file using heic2any library
         async function convertSingleFile(file) {
-            // In a real implementation, this would use a library like heic2any
-            // For demo purposes, we'll create a placeholder JPG blob
-            
-            return new Promise((resolve) => {
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
-                canvas.width = 800;
-                canvas.height = 600;
+            try {
+                // Check if heic2any is loaded
+                if (typeof heic2any === 'undefined') {
+                    throw new Error('HEIC conversion library not loaded');
+                }
                 
-                // Create a gradient as placeholder
-                const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-                gradient.addColorStop(0, '#667eea');
-                gradient.addColorStop(1, '#764ba2');
-                ctx.fillStyle = gradient;
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                // Convert HEIC to JPG using heic2any
+                const jpegBlob = await heic2any({
+                    blob: file,
+                    toType: 'image/jpeg',
+                    quality: selectedQuality / 100
+                });
                 
-                // Add text
-                ctx.fillStyle = 'white';
-                ctx.font = '24px Arial';
-                ctx.textAlign = 'center';
-                ctx.fillText('Converted from HEIC', canvas.width / 2, canvas.height / 2);
-                ctx.font = '16px Arial';
-                ctx.fillText(file.name, canvas.width / 2, canvas.height / 2 + 40);
-                ctx.fillText('ToolSlap HEIC to JPG Converter', canvas.width / 2, canvas.height / 2 + 70);
+                return jpegBlob;
+            } catch (error) {
+                console.error('HEIC conversion error:', error);
                 
-                canvas.toBlob(resolve, 'image/jpeg', selectedQuality / 100);
-            });
+                // Fallback: create a placeholder if real conversion fails
+                return new Promise((resolve) => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = 800;
+                    canvas.height = 600;
+                    
+                    // Create a gradient as fallback placeholder
+                    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+                    gradient.addColorStop(0, '#667eea');
+                    gradient.addColorStop(1, '#764ba2');
+                    ctx.fillStyle = gradient;
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    
+                    // Add error message
+                    ctx.fillStyle = 'white';
+                    ctx.font = '20px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('HEIC Conversion Failed', canvas.width / 2, canvas.height / 2 - 20);
+                    ctx.font = '14px Arial';
+                    ctx.fillText('File may be corrupted or unsupported', canvas.width / 2, canvas.height / 2 + 10);
+                    ctx.fillText(file.name, canvas.width / 2, canvas.height / 2 + 40);
+                    ctx.fillText('Please try with a valid HEIC file', canvas.width / 2, canvas.height / 2 + 70);
+                    
+                    canvas.toBlob(resolve, 'image/jpeg', 0.85);
+                });
+            }
         }
 
         // Show processing state
