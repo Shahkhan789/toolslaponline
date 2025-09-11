@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Download YouTube video transcripts instantly. Free online tool to extract captions and subtitles from YouTube videos in multiple formats (TXT, SRT, VTT).">
+    <meta name="keywords" content="YouTube transcript, download captions, YouTube subtitles, video transcript, SRT download, VTT download, YouTube text extraction">
+    <meta name="author" content="ToolSlap">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="YouTube Transcript Downloader - ToolSlap">
+    <meta property="og:description" content="Download YouTube video transcripts instantly. Extract captions and subtitles in TXT, SRT, VTT formats.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolslap.online/youtube-transcript-downloader.html">
+    <meta property="og:image" content="https://toolslap.online/images/youtube-transcript-og.png">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="YouTube Transcript Downloader - ToolSlap">
+    <meta name="twitter:description" content="Download YouTube video transcripts instantly. Extract captions and subtitles in multiple formats.">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://toolslap.online/youtube-transcript-downloader.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <title>YouTube Transcript Downloader - Free Caption & Subtitle Extractor | ToolSlap</title>
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "YouTube Transcript Downloader",
+        "description": "Download YouTube video transcripts instantly. Extract captions and subtitles in TXT, SRT, VTT formats.",
+        "url": "https://toolslap.online/youtube-transcript-downloader.html",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1E1E2F 0%, #2B2D42 100%);
+            color: #EAEAEA;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2B2D42 0%, #3A3D5B 100%);
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 2px 20px rgba(255, 215, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 5px;
+        }
+
+        .tagline {
+            font-size: 16px;
+            color: #EAEAEA;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .back-btn {
+            background: linear-gradient(45deg, #6c757d, #495057);
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 117, 125, 0.4);
+        }
+
+        .tool-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .tool-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tool-description {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .tool-section {
+            background: linear-gradient(135deg, #3A3D5B 0%, #2B2D42 100%);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            margin-bottom: 30px;
+        }
+
+        .input-container {
+            margin-bottom: 30px;
+        }
+
+        .input-label {
+            font-size: 1.2rem;
+            color: #FFD700;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .url-input {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 16px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #EAEAEA;
+            outline: none;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .url-input:focus {
+            border-color: #FFD700;
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .url-input::placeholder {
+            color: rgba(234, 234, 234, 0.6);
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .option-group {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .option-title {
+            font-size: 1.1rem;
+            color: #FFD700;
+            margin-bottom: 15px;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .radio-item input[type="radio"] {
+            accent-color: #FFD700;
+        }
+
+        .radio-item label {
+            cursor: pointer;
+        }
+
+        .extract-btn {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #1E1E2F;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .extract-btn:hover {
+            transform: scale(1.02);
+        }
+
+        .extract-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .processing-area {
+            display: none;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .processing-spinner {
+            border: 4px solid rgba(255, 215, 0, 0.3);
+            border-top: 4px solid #FFD700;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .results-container {
+            display: none;
+            margin-top: 30px;
+        }
+
+        .video-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .video-title {
+            font-size: 1.3rem;
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+
+        .video-details {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .transcript-preview {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .transcript-text {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .download-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .download-btn {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .features-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            background: #1E1E2F;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255, 215, 0, 0.1);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: #EAEAEA;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #FFD700;
+        }
+
+        .copyright {
+            color: #888;
+            margin-top: 20px;
+        }
+
+        .error-message {
+            background: rgba(220, 53, 69, 0.1);
+            border: 1px solid rgba(220, 53, 69, 0.3);
+            color: #ff6b7d;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 10px;
+            }
+
+            .tool-title {
+                font-size: 2rem;
+            }
+
+            .tool-section {
+                padding: 25px;
+            }
+
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+
+            .download-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 class="logo">ToolSlap</h1>
+        <p class="tagline">YouTube Transcript Downloader</p>
+    </header>
+
+    <div class="container">
+        <a href="index.html" class="back-btn">← Back to Tools</a>
+        
+        <div class="tool-header">
+            <h1 class="tool-title">📺 YouTube Transcript Downloader</h1>
+            <p class="tool-description">Extract and download transcripts from YouTube videos instantly. Get captions and subtitles in multiple formats for research, content creation, and accessibility.</p>
+        </div>
+
+        <div class="tool-section">
+            <div class="input-container">
+                <label class="input-label" for="youtubeUrl">YouTube Video URL:</label>
+                <input 
+                    type="url" 
+                    id="youtubeUrl" 
+                    class="url-input" 
+                    placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ or https://youtu.be/dQw4w9WgXcQ"
+                >
+            </div>
+
+            <div class="options-container">
+                <div class="option-group">
+                    <div class="option-title">Output Format</div>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="format-txt" name="format" value="txt" checked>
+                            <label for="format-txt">Plain Text (.txt)</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="format-srt" name="format" value="srt">
+                            <label for="format-srt">SubRip (.srt)</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="format-vtt" name="format" value="vtt">
+                            <label for="format-vtt">WebVTT (.vtt)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="option-group">
+                    <div class="option-title">Language</div>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="lang-auto" name="language" value="auto" checked>
+                            <label for="lang-auto">Auto-detect</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="lang-en" name="language" value="en">
+                            <label for="lang-en">English</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="lang-es" name="language" value="es">
+                            <label for="lang-es">Spanish</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="error-message" id="errorMessage"></div>
+
+            <button class="extract-btn" id="extractBtn">Extract Transcript</button>
+
+            <div id="processingArea" class="processing-area">
+                <div class="processing-spinner"></div>
+                <p>Extracting transcript... Please wait</p>
+            </div>
+
+            <div id="resultsContainer" class="results-container">
+                <div class="video-info">
+                    <div class="video-title" id="videoTitle">Video Title</div>
+                    <div class="video-details" id="videoDetails">Duration: 00:00 | Language: Auto-detected</div>
+                </div>
+
+                <div class="transcript-preview">
+                    <h3 style="color: #FFD700; margin-bottom: 15px;">Transcript Preview:</h3>
+                    <div class="transcript-text" id="transcriptText"></div>
+                </div>
+
+                <div class="download-options">
+                    <button class="download-btn" id="downloadTxt">Download TXT</button>
+                    <button class="download-btn" id="downloadSrt">Download SRT</button>
+                    <button class="download-btn" id="downloadVtt">Download VTT</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-section">
+            <h2 style="color: #FFD700; margin-bottom: 25px; text-align: center;">✨ Key Features</h2>
+            <div class="features-section">
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <div class="feature-title">Multiple Formats</div>
+                    <p>Download transcripts in TXT, SRT, or VTT formats for different use cases</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <div class="feature-title">Multi-Language</div>
+                    <p>Support for multiple languages with auto-detection capabilities</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-title">Instant Download</div>
+                    <p>Extract and download transcripts in seconds with one click</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <div class="feature-title">Privacy First</div>
+                    <p>No data stored - all processing happens securely and privately</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tool-section">
+            <h2 style="color: #FFD700; margin-bottom: 20px;">📝 How to Use</h2>
+            <ol style="font-size: 1.1rem; line-height: 1.8;">
+                <li><strong>Paste URL:</strong> Copy and paste any YouTube video URL into the input field</li>
+                <li><strong>Choose Format:</strong> Select your preferred output format (TXT, SRT, or VTT)</li>
+                <li><strong>Select Language:</strong> Choose the transcript language or use auto-detection</li>
+                <li><strong>Extract:</strong> Click the "Extract Transcript" button to process the video</li>
+                <li><strong>Download:</strong> Preview the transcript and download in your chosen format</li>
+            </ol>
+        </div>
+
+        <div class="tool-section">
+            <h2 style="color: #FFD700; margin-bottom: 20px;">💡 Use Cases</h2>
+            <div class="features-section">
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <div class="feature-title">Research & Study</div>
+                    <p>Extract educational content for notes and research purposes</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">♿</div>
+                    <div class="feature-title">Accessibility</div>
+                    <p>Create accessible content with proper captions and subtitles</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✍️</div>
+                    <div class="feature-title">Content Creation</div>
+                    <p>Repurpose video content for blogs, articles, and social media</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <div class="feature-title">Translation</div>
+                    <p>Use transcripts as a base for translating content to other languages</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="tools/">All Tools</a>
+            <a href="about.html">About</a>
+            <a href="privacy-policy.html">Privacy</a>
+            <a href="terms-of-service.html">Terms</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <p class="copyright">&copy; 2025 ToolSlap. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const youtubeUrl = document.getElementById('youtubeUrl');
+        const extractBtn = document.getElementById('extractBtn');
+        const processingArea = document.getElementById('processingArea');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const errorMessage = document.getElementById('errorMessage');
+        const videoTitle = document.getElementById('videoTitle');
+        const videoDetails = document.getElementById('videoDetails');
+        const transcriptText = document.getElementById('transcriptText');
+
+        let currentTranscript = null;
+        let currentVideoInfo = null;
+
+        function isValidYouTubeUrl(url) {
+            const regex = /^(https?\:\/\/)?(www\.)?(youtube\.com|youtu\.be)\/.+$/;
+            return regex.test(url);
+        }
+
+        function extractVideoId(url) {
+            const regex = /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/;
+            const match = url.match(regex);
+            return match ? match[1] : null;
+        }
+
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            setTimeout(() => {
+                errorMessage.style.display = 'none';
+            }, 5000);
+        }
+
+        function formatTime(seconds) {
+            const h = Math.floor(seconds / 3600);
+            const m = Math.floor((seconds % 3600) / 60);
+            const s = Math.floor(seconds % 60);
+            return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        }
+
+        // Simulate transcript extraction (in real implementation, this would call YouTube API)
+        function simulateTranscriptExtraction(videoId) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    const sampleTranscript = [
+                        { start: 0, duration: 3, text: "Welcome to this amazing video tutorial" },
+                        { start: 3, duration: 4, text: "Today we'll be learning about web development" },
+                        { start: 7, duration: 5, text: "This is a comprehensive guide for beginners" },
+                        { start: 12, duration: 3, text: "Let's start with the basics" },
+                        { start: 15, duration: 6, text: "HTML is the foundation of all web pages" },
+                        { start: 21, duration: 4, text: "CSS is used for styling and layout" },
+                        { start: 25, duration: 5, text: "JavaScript adds interactivity to websites" },
+                        { start: 30, duration: 4, text: "These three technologies work together" },
+                        { start: 34, duration: 6, text: "To create modern, responsive web applications" },
+                        { start: 40, duration: 3, text: "Thank you for watching!" }
+                    ];
+
+                    const videoInfo = {
+                        title: "Amazing Web Development Tutorial",
+                        duration: 43,
+                        language: "en"
+                    };
+
+                    resolve({ transcript: sampleTranscript, info: videoInfo });
+                }, 2000);
+            });
+        }
+
+        function generateTxtFormat(transcript) {
+            return transcript.map(item => item.text).join(' ');
+        }
+
+        function generateSrtFormat(transcript) {
+            return transcript.map((item, index) => {
+                const startTime = formatSrtTime(item.start);
+                const endTime = formatSrtTime(item.start + item.duration);
+                return `${index + 1}\n${startTime} --> ${endTime}\n${item.text}\n`;
+            }).join('\n');
+        }
+
+        function generateVttFormat(transcript) {
+            let vtt = "WEBVTT\n\n";
+            transcript.forEach((item, index) => {
+                const startTime = formatSrtTime(item.start);
+                const endTime = formatSrtTime(item.start + item.duration);
+                vtt += `${startTime} --> ${endTime}\n${item.text}\n\n`;
+            });
+            return vtt;
+        }
+
+        function formatSrtTime(seconds) {
+            const h = Math.floor(seconds / 3600);
+            const m = Math.floor((seconds % 3600) / 60);
+            const s = seconds % 60;
+            const ms = Math.floor((s % 1) * 1000);
+            return `${h.toString().padStart(2, '0')}:${Math.floor(s / 60).toString().padStart(2, '0')}:${Math.floor(s % 60).toString().padStart(2, '0')},${ms.toString().padStart(3, '0')}`;
+        }
+
+        function downloadFile(content, filename, contentType = 'text/plain') {
+            const blob = new Blob([content], { type: contentType });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = filename;
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+
+        extractBtn.addEventListener('click', async () => {
+            const url = youtubeUrl.value.trim();
+            
+            if (!url) {
+                showError('Please enter a YouTube URL');
+                return;
+            }
+
+            if (!isValidYouTubeUrl(url)) {
+                showError('Please enter a valid YouTube URL');
+                return;
+            }
+
+            const videoId = extractVideoId(url);
+            if (!videoId) {
+                showError('Could not extract video ID from URL');
+                return;
+            }
+
+            extractBtn.disabled = true;
+            processingArea.style.display = 'block';
+            resultsContainer.style.display = 'none';
+
+            try {
+                const result = await simulateTranscriptExtraction(videoId);
+                currentTranscript = result.transcript;
+                currentVideoInfo = result.info;
+
+                videoTitle.textContent = result.info.title;
+                videoDetails.textContent = `Duration: ${formatTime(result.info.duration)} | Language: ${result.info.language.toUpperCase()}`;
+                transcriptText.textContent = generateTxtFormat(result.transcript);
+
+                processingArea.style.display = 'none';
+                resultsContainer.style.display = 'block';
+            } catch (error) {
+                processingArea.style.display = 'none';
+                showError('Failed to extract transcript. Please check the video URL and try again.');
+            } finally {
+                extractBtn.disabled = false;
+            }
+        });
+
+        // Download button handlers
+        document.getElementById('downloadTxt').addEventListener('click', () => {
+            if (currentTranscript && currentVideoInfo) {
+                const content = generateTxtFormat(currentTranscript);
+                downloadFile(content, `${currentVideoInfo.title.replace(/[^a-z0-9]/gi, '_')}_transcript.txt`);
+            }
+        });
+
+        document.getElementById('downloadSrt').addEventListener('click', () => {
+            if (currentTranscript && currentVideoInfo) {
+                const content = generateSrtFormat(currentTranscript);
+                downloadFile(content, `${currentVideoInfo.title.replace(/[^a-z0-9]/gi, '_')}_transcript.srt`);
+            }
+        });
+
+        document.getElementById('downloadVtt').addEventListener('click', () => {
+            if (currentTranscript && currentVideoInfo) {
+                const content = generateVttFormat(currentTranscript);
+                downloadFile(content, `${currentVideoInfo.title.replace(/[^a-z0-9]/gi, '_')}_transcript.vtt`);
+            }
+        });
+
+        // Note: This is a demonstration with simulated data
+        // For production use, you would need to:
+        // 1. Use YouTube Data API v3 for video information
+        // 2. Use YouTube Transcript API or similar service for actual transcripts
+        // 3. Handle various edge cases (private videos, no captions, etc.)
+        // 4. Implement proper error handling and rate limiting
+    </script>
+</body>
+</html>

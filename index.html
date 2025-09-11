@@ -27,6 +27,9 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <title>ToolSlap - Free Online Tools Hub | PDF, Image, AI & Text Tools</title>
     
     <!-- Schema.org structured data -->
@@ -72,6 +75,124 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            flex: 1;
+        }
+
+        .header-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 2;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            flex: 1;
+        }
+
+        .tools-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tools-btn {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #1E1E2F;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tools-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: linear-gradient(135deg, #2B2D42 0%, #3A3D5B 100%);
+            min-width: 320px;
+            max-height: 500px;
+            overflow-y: auto;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            margin-top: 10px;
+        }
+
+        .dropdown-content.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown-category {
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+        }
+
+        .dropdown-category:last-child {
+            border-bottom: none;
+        }
+
+        .category-title-dropdown {
+            font-size: 14px;
+            color: #FFD700;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .category-tools {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .dropdown-tool {
+            color: #EAEAEA;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-tool:hover {
+            background: rgba(255, 215, 0, 0.1);
+            color: #FFD700;
+            transform: translateX(5px);
         }
 
         .logo {
@@ -314,6 +435,29 @@
 
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .header-left,
+            .header-right {
+                flex: none;
+            }
+
+            .header-center {
+                order: -1;
+            }
+
+            .dropdown-content {
+                position: fixed;
+                left: 10px;
+                right: 10px;
+                top: auto;
+                margin-top: 5px;
+                max-height: 70vh;
+            }
+
             .hero-title {
                 font-size: 2rem;
             }
@@ -343,6 +487,11 @@
                 flex-direction: column;
                 gap: 15px;
             }
+
+            .tools-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
         }
 
         /* Loading animation */
@@ -359,8 +508,125 @@
 </head>
 <body>
     <header class="header">
-        <h1 class="logo">ToolSlap</h1>
-        <p class="tagline">Your Ultimate Multi-Tool Hub</p>
+        <div class="header-content">
+            <div class="header-left"></div>
+            <div class="header-center">
+                <h1 class="logo">ToolSlap</h1>
+                <p class="tagline">Your Ultimate Multi-Tool Hub</p>
+            </div>
+            <div class="header-right">
+                <div class="tools-dropdown">
+                    <button class="tools-btn" onclick="toggleDropdown()">
+                        <i class="fas fa-tools"></i>
+                        All Tools
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-content" id="toolsDropdown">
+                        <div class="dropdown-category">
+                            <div class="category-title-dropdown">🖼️ Image & Media</div>
+                            <div class="category-tools">
+                                <a href="image-converter.html" class="dropdown-tool">Image Converter</a>
+                                <a href="image-compressor.html" class="dropdown-tool">Image Compressor</a>
+                                <a href="image-crop.html" class="dropdown-tool">Image Crop</a>
+                                <a href="image-resizer.html" class="dropdown-tool">Image Resizer</a>
+                                <a href="video-converter.html" class="dropdown-tool">Video Converter</a>
+                                <a href="audio-trimmer.html" class="dropdown-tool">Audio Trimmer</a>
+                                <a href="jpg-to-png.html" class="dropdown-tool">JPG to PNG</a>
+                                <a href="png-to-jpg.html" class="dropdown-tool">PNG to JPG</a>
+                                <a href="bg-remover.html" class="dropdown-tool">Background Remover</a>
+                                <a href="youtube-transcribe-ai.html" class="dropdown-tool">AI YouTube Transcribe</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-category">
+                            <div class="category-title-dropdown">🧮 Calculator & Financial</div>
+                            <div class="category-tools">
+                                <a href="age-calculator.html" class="dropdown-tool">Age Calculator</a>
+                                <a href="emi-calculator.html" class="dropdown-tool">EMI Calculator</a>
+                                <a href="sip-calculator.html" class="dropdown-tool">SIP Calculator</a>
+                                <a href="unit-converter.html" class="dropdown-tool">Unit Converter</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-category">
+                            <div class="category-title-dropdown">📝 Text & Content</div>
+                            <div class="category-tools">
+                                <a href="text-formatter.html" class="dropdown-tool">Text Formatter</a>
+                                <a href="word-counter.html" class="dropdown-tool">Word Counter</a>
+                                <a href="text-diff.html" class="dropdown-tool">Text Diff Checker</a>
+                                <a href="lorem-generator.html" class="dropdown-tool">Lorem Generator</a>
+                                <a href="blog-generator.html" class="dropdown-tool">SEO Blog Generator</a>
+                                <a href="notes-app.html" class="dropdown-tool">Notes App</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-category">
+                            <div class="category-title-dropdown">💻 Developer Tools</div>
+                            <div class="category-tools">
+                                <a href="json-formatter.html" class="dropdown-tool">JSON Formatter</a>
+                                <a href="html-viewer.html" class="dropdown-tool">HTML Viewer</a>
+                                <a href="css-minifier.html" class="dropdown-tool">CSS Minifier</a>
+                                <a href="js-minifier.html" class="dropdown-tool">JS Minifier</a>
+                                <a href="gradient-generator.html" class="dropdown-tool">Gradient Generator</a>
+                                <a href="uuid-generator.html" class="dropdown-tool">UUID Generator</a>
+                                <a href="regex-tester.html" class="dropdown-tool">Regex Tester</a>
+                                <a href="binary-converter.html" class="dropdown-tool">Binary Converter</a>
+                                <a href="url-encoder-decoder.html" class="dropdown-tool">URL Encoder/Decoder</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-category">
+                            <div class="category-title-dropdown">🔄 Converter & Format</div>
+                            <div class="category-tools">
+                                <a href="pdf-to-html-converter.html" class="dropdown-tool">PDF to HTML</a>
+                                <a href="pdf-to-csv-converter.html" class="dropdown-tool">PDF to CSV</a>
+                                <a href="markdown-converter.html" class="dropdown-tool">Markdown to HTML</a>
+                                <a href="base64-encoder.html" class="dropdown-tool">Base64 Encoder</a>
+                                <a href="compress-pdf.html" class="dropdown-tool">Compress PDF</a>
+                                <a href="case-converter.html" class="dropdown-tool">Case Converter</a>
+                                <a href="merge-pdf.html" class="dropdown-tool">Merge PDF</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-category">
+                            <div class="category-title-dropdown">🔐 Security & Privacy</div>
+                            <div class="category-tools">
+                                <a href="password-generator.html" class="dropdown-tool">Password Generator</a>
+                                <a href="hash-generator.html" class="dropdown-tool">Hash Generator</a>
+                                <a href="ip-lookup.html" class="dropdown-tool">IP Lookup</a>
+                                <a href="credit-card-validator.html" class="dropdown-tool">Credit Card Validator</a>
+                                <a href="domain-checker.html" class="dropdown-tool">Domain Checker</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-category">
+                            <div class="category-title-dropdown">📊 QR Code & Link</div>
+                            <div class="category-tools">
+                                <a href="qr-generator.html" class="dropdown-tool">QR Generator</a>
+                                <a href="qr-scanner.html" class="dropdown-tool">QR Scanner</a>
+                                <a href="wifi-qr-generator.html" class="dropdown-tool">WiFi QR Generator</a>
+                                <a href="url-shortener.html" class="dropdown-tool">URL Shortener</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-category">
+                            <div class="category-title-dropdown">🎨 Design & Creative</div>
+                            <div class="category-tools">
+                                <a href="color-picker.html" class="dropdown-tool">Color Picker</a>
+                                <a href="screenshot-tool.html" class="dropdown-tool">Screenshot Tool</a>
+                                <a href="hex-color-converter.html" class="dropdown-tool">Hex Color Converter</a>
+                                <a href="emoji-picker.html" class="dropdown-tool">Emoji Picker</a>
+                                <a href="ascii-art.html" class="dropdown-tool">ASCII Art Generator</a>
+                            </div>
+                        </div>
+                        <div class="dropdown-category">
+                            <div class="category-title-dropdown">🛠️ Utility & Misc</div>
+                            <div class="category-tools">
+                                <a href="random-number.html" class="dropdown-tool">Random Number</a>
+                                <a href="youtube-downloader.html" class="dropdown-tool">YouTube Downloader</a>
+                                <a href="tic-tac-toe-game.html" class="dropdown-tool">Tic Tac Toe</a>
+                                <a href="stopwatch-timer.html" class="dropdown-tool">Stopwatch & Timer</a>
+                                <a href="meta-description-generator.html" class="dropdown-tool">Meta Description</a>
+                                <a href="json-formatter-new.html" class="dropdown-tool">JSON Formatter (New)</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
 
     <main>
@@ -430,6 +696,18 @@
                     <h3>PNG to JPG Converter</h3>
                     <p>Convert PNG images to JPG format with quality control. Batch processing and background color selection.</p>
                     <a href="png-to-jpg.html" class="btn" aria-label="Go to PNG to JPG Converter Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">🎨</span>
+                    <h3>Background Remover</h3>
+                    <p>Remove backgrounds from images instantly using AI-powered technology. Perfect for product photos and professional editing.</p>
+                    <a href="bg-remover.html" class="btn" aria-label="Go to Background Remover Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">🤖</span>
+                    <h3>AI YouTube Transcribe Tool</h3>
+                    <p>AI-powered transcript extraction with summaries, key points, and sentiment analysis. Advanced features for content creators.</p>
+                    <a href="youtube-transcribe-ai.html" class="btn" aria-label="Go to AI YouTube Transcribe Tool">Use Tool</a>
                 </div>
             </div>
 
@@ -551,6 +829,24 @@
                     <p>Generate and validate UUIDs (v1, v4) with bulk generation, multiple formats, and export functionality for developers.</p>
                     <a href="uuid-generator.html" class="btn" aria-label="Go to UUID Generator Tool">Use Tool</a>
                 </div>
+                <div class="tool-card">
+                    <span class="tool-icon">🔍</span>
+                    <h3>Regex Tester</h3>
+                    <p>Test and debug regular expressions with real-time matching, group capture, and detailed explanations for developers.</p>
+                    <a href="regex-tester.html" class="btn" aria-label="Go to Regex Tester Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">🔢</span>
+                    <h3>Binary Converter</h3>
+                    <p>Convert between binary, decimal, hexadecimal, and octal number systems. Perfect for programming and computer science.</p>
+                    <a href="binary-converter.html" class="btn" aria-label="Go to Binary Converter Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">🌐</span>
+                    <h3>URL Encoder/Decoder</h3>
+                    <p>Encode and decode URLs for web development. Handle special characters and ensure proper URL formatting.</p>
+                    <a href="url-encoder-decoder.html" class="btn" aria-label="Go to URL Encoder Decoder Tool">Use Tool</a>
+                </div>
             </div>
 
             <!-- Converter & Format Tools -->
@@ -627,6 +923,18 @@
                     <p>Discover your IP address, location, ISP information, and network details instantly. Check for VPN/proxy detection.</p>
                     <a href="ip-lookup.html" class="btn" aria-label="Go to IP Address Lookup Tool">Use Tool</a>
                 </div>
+                <div class="tool-card">
+                    <span class="tool-icon">💳</span>
+                    <h3>Credit Card Validator</h3>
+                    <p>Validate credit card numbers, detect card type, and check format. Useful for form validation and testing purposes.</p>
+                    <a href="credit-card-validator.html" class="btn" aria-label="Go to Credit Card Validator Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">🌐</span>
+                    <h3>Domain Checker</h3>
+                    <p>Check domain availability, get WHOIS information, and analyze domain details for your next project.</p>
+                    <a href="domain-checker.html" class="btn" aria-label="Go to Domain Checker Tool">Use Tool</a>
+                </div>
             </div>
 
             <!-- QR Code & Link Tools -->
@@ -679,6 +987,24 @@
                     <p>Capture high-quality screenshots of any website instantly. Perfect for documentation, presentations, and social media content creation.</p>
                     <a href="screenshot-tool.html" class="btn" aria-label="Go to Website Screenshot Tool">Use Tool</a>
                 </div>
+                <div class="tool-card">
+                    <span class="tool-icon">🌈</span>
+                    <h3>Hex Color Converter</h3>
+                    <p>Convert colors between HEX, RGB, HSL, and other formats. Perfect for web design and development projects.</p>
+                    <a href="hex-color-converter.html" class="btn" aria-label="Go to Hex Color Converter Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">😀</span>
+                    <h3>Emoji Picker</h3>
+                    <p>Browse and copy emojis for social media, messaging, and content creation. Search by category or keyword.</p>
+                    <a href="emoji-picker.html" class="btn" aria-label="Go to Emoji Picker Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">🎨</span>
+                    <h3>ASCII Art Generator</h3>
+                    <p>Convert text and images to ASCII art. Create retro-style graphics and text designs for creative projects.</p>
+                    <a href="ascii-art.html" class="btn" aria-label="Go to ASCII Art Generator Tool">Use Tool</a>
+                </div>
             </div>
 
             <!-- Utility & Miscellaneous Tools -->
@@ -705,12 +1031,31 @@
                     <p>Challenge yourself against our smart AI or play with friends. Classic strategy game with multiple difficulty levels and score tracking.</p>
                     <a href="tic-tac-toe-game.html" class="btn" aria-label="Go to Tic Tac Toe Game">Play Game</a>
                 </div>
+                <div class="tool-card">
+                    <span class="tool-icon">⏱️</span>
+                    <h3>Stopwatch & Timer</h3>
+                    <p>Professional stopwatch and countdown timer with lap tracking, alarms, and productivity features for time management.</p>
+                    <a href="stopwatch-timer.html" class="btn" aria-label="Go to Stopwatch Timer Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">🎯</span>
+                    <h3>Meta Description Generator</h3>
+                    <p>Generate SEO-optimized meta descriptions for your web pages. Improve click-through rates and search rankings.</p>
+                    <a href="meta-description-generator.html" class="btn" aria-label="Go to Meta Description Generator Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">📋</span>
+                    <h3>JSON Formatter (New)</h3>
+                    <p>Advanced JSON formatter with validation, minification, and error detection. Enhanced version with more features.</p>
+                    <a href="json-formatter-new.html" class="btn" aria-label="Go to JSON Formatter New Tool">Use Tool</a>
+                </div>
             </div>
         </section>
     </main>
 
     <footer class="footer">
         <div class="footer-links">
+            <a href="blog.html">Blog</a>
             <a href="about.html">About</a>
             <a href="tools.html">All Tools</a>
             <a href="privacy-policy.html">Privacy Policy</a>
@@ -859,6 +1204,25 @@
                 searchInput.focus();
             }
         });
+
+        // Dropdown functionality
+        function toggleDropdown() {
+            const dropdown = document.getElementById('toolsDropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        // Close dropdown when clicking outside
+        window.onclick = function(event) {
+            if (!event.target.matches('.tools-btn') && !event.target.closest('.tools-btn')) {
+                const dropdowns = document.getElementsByClassName('dropdown-content');
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
 
         // Service Worker registration for PWA capabilities
         if ('serviceWorker' in navigator) {

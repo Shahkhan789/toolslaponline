@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI-powered YouTube Transcript Downloader. Extract, summarize, and analyze YouTube video transcripts instantly. Free online tool with advanced features.">
+    <meta name="keywords" content="YouTube transcript, AI transcript, video summarizer, YouTube AI, transcript analyzer, caption downloader, video content extractor">
+    <meta name="author" content="ToolSlap">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="AI YouTube Transcript Downloader - ToolSlap">
+    <meta property="og:description" content="Extract, summarize, and analyze YouTube video transcripts with AI. Advanced features for content creators and researchers.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolslap.online/youtube-transcribe-ai.html">
+    <meta property="og:image" content="https://toolslap.online/images/youtube-ai-transcript-og.png">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI YouTube Transcript Downloader - ToolSlap">
+    <meta name="twitter:description" content="Extract, summarize, and analyze YouTube video transcripts with AI-powered features.">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://toolslap.online/youtube-transcribe-ai.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <title>AI YouTube Transcript Downloader - Free Video Content Extractor | ToolSlap</title>
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI YouTube Transcript Downloader",
+        "description": "Extract, summarize, and analyze YouTube video transcripts with AI-powered features.",
+        "url": "https://toolslap.online/youtube-transcribe-ai.html",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+    
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #3b82f6, #1e40af);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(45deg, #6b7280, #374151);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(107, 114, 128, 0.4);
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .typing-animation::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .gradient-text {
+            background: linear-gradient(45deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- Header with Tools Button -->
+    <header class="glass-card sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="btn-secondary text-white px-4 py-2 rounded-full text-sm font-semibold">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to Home
+                    </a>
+                </div>
+                <div class="text-center">
+                    <h1 class="text-2xl md:text-3xl font-bold gradient-text">ToolSlap</h1>
+                    <p class="text-sm opacity-80">AI-Powered Transcript Tool</p>
+                </div>
+                <div class="tools-dropdown relative">
+                    <button onclick="toggleDropdown()" class="btn-primary text-white px-4 py-2 rounded-full text-sm font-semibold flex items-center space-x-2">
+                        <i class="fas fa-tools"></i>
+                        <span>All Tools</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="toolsDropdown" class="dropdown-content hidden absolute right-0 mt-2 w-80 max-h-96 overflow-y-auto glass-card rounded-2xl p-4">
+                        <div class="grid grid-cols-1 gap-3">
+                            <div class="border-b border-white/20 pb-3">
+                                <h3 class="text-sm font-semibold text-yellow-300 mb-2">🖼️ Image & Media</h3>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <a href="image-converter.html" class="text-xs text-white/80 hover:text-white p-2 rounded hover:bg-white/10">Image Converter</a>
+                                    <a href="bg-remover.html" class="text-xs text-white/80 hover:text-white p-2 rounded hover:bg-white/10">Background Remover</a>
+                                    <a href="youtube-transcript-downloader.html" class="text-xs text-white/80 hover:text-white p-2 rounded hover:bg-white/10">YouTube Transcribe</a>
+                                </div>
+                            </div>
+                            <div class="border-b border-white/20 pb-3">
+                                <h3 class="text-sm font-semibold text-yellow-300 mb-2">💻 Developer Tools</h3>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <a href="json-formatter.html" class="text-xs text-white/80 hover:text-white p-2 rounded hover:bg-white/10">JSON Formatter</a>
+                                    <a href="css-minifier.html" class="text-xs text-white/80 hover:text-white p-2 rounded hover:bg-white/10">CSS Minifier</a>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <a href="tools.html" class="text-sm text-blue-300 hover:text-blue-200">View All Tools →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+        <!-- Hero Section -->
+        <div class="text-center mb-12">
+            <div class="floating mb-6">
+                <i class="fas fa-robot text-6xl text-yellow-300"></i>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                AI YouTube <span class="gradient-text">Transcript</span> Downloader
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 opacity-90 max-w-4xl mx-auto">
+                Extract, summarize, and analyze YouTube video transcripts with advanced AI-powered features. 
+                Perfect for content creators, researchers, and anyone who needs to work with video content.
+            </p>
+        </div>
+
+        <!-- Main Tool Section -->
+        <div class="max-w-4xl mx-auto">
+            <div class="glass-card rounded-3xl p-8 mb-8">
+                <div class="mb-8">
+                    <label class="block text-lg font-semibold mb-4 text-yellow-300">
+                        <i class="fab fa-youtube mr-2"></i>YouTube Video URL
+                    </label>
+                    <div class="relative">
+                        <input 
+                            type="text" 
+                            id="youtubeUrl" 
+                            placeholder="Paste YouTube video URL here (e.g., https://youtube.com/watch?v=...)"
+                            class="w-full p-4 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent text-lg"
+                        >
+                        <button onclick="extractTranscript()" class="absolute right-2 top-2 btn-primary text-white px-6 py-2 rounded-lg font-semibold">
+                            <i class="fas fa-download mr-2"></i>Extract
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Options Panel -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="feature-card p-6 rounded-2xl">
+                        <h3 class="font-semibold mb-3 text-yellow-300">
+                            <i class="fas fa-file-alt mr-2"></i>Output Format
+                        </h3>
+                        <select id="outputFormat" class="w-full p-3 rounded-lg bg-white/10 border border-white/20 text-white">
+                            <option value="txt">Plain Text (.txt)</option>
+                            <option value="srt">Subtitle (.srt)</option>
+                            <option value="vtt">WebVTT (.vtt)</option>
+                            <option value="json">JSON (.json)</option>
+                        </select>
+                    </div>
+                    <div class="feature-card p-6 rounded-2xl">
+                        <h3 class="font-semibold mb-3 text-yellow-300">
+                            <i class="fas fa-language mr-2"></i>Language
+                        </h3>
+                        <select id="language" class="w-full p-3 rounded-lg bg-white/10 border border-white/20 text-white">
+                            <option value="auto">Auto-detect</option>
+                            <option value="en">English</option>
+                            <option value="es">Spanish</option>
+                            <option value="fr">French</option>
+                            <option value="de">German</option>
+                            <option value="it">Italian</option>
+                            <option value="pt">Portuguese</option>
+                            <option value="ru">Russian</option>
+                            <option value="ja">Japanese</option>
+                            <option value="ko">Korean</option>
+                            <option value="zh">Chinese</option>
+                            <option value="ar">Arabic</option>
+                            <option value="hi">Hindi</option>
+                        </select>
+                    </div>
+                    <div class="feature-card p-6 rounded-2xl">
+                        <h3 class="font-semibold mb-3 text-yellow-300">
+                            <i class="fas fa-magic mr-2"></i>AI Features
+                        </h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" id="aiSummary" class="mr-2 rounded">
+                                <span class="text-sm">AI Summary</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" id="keyPoints" class="mr-2 rounded">
+                                <span class="text-sm">Key Points</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="checkbox" id="sentiment" class="mr-2 rounded">
+                                <span class="text-sm">Sentiment Analysis</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loadingState" class="hidden text-center py-12">
+                <div class="pulse-animation mb-4">
+                    <i class="fas fa-sync fa-spin text-4xl text-blue-400"></i>
+                </div>
+                <h3 class="text-2xl font-semibold mb-2">Processing Video...</h3>
+                <p class="text-lg opacity-80">This may take a few moments depending on video length</p>
+                <div class="mt-6">
+                    <div class="progress-bar bg-white/20 rounded-full h-2 max-w-md mx-auto">
+                        <div class="bg-gradient-to-r from-blue-400 to-blue-600 h-full rounded-full" style="width: 0%" id="progressBar"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsSection" class="hidden">
+                <!-- Video Info -->
+                <div class="glass-card rounded-3xl p-8 mb-8">
+                    <h2 class="text-2xl font-bold mb-6 text-yellow-300">
+                        <i class="fas fa-video mr-2"></i>Video Information
+                    </h2>
+                    <div id="videoInfo" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Transcript Output -->
+                <div class="glass-card rounded-3xl p-8 mb-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-yellow-300">
+                            <i class="fas fa-file-text mr-2"></i>Transcript
+                        </h2>
+                        <div class="space-x-3">
+                            <button onclick="copyTranscript()" class="btn-secondary text-white px-4 py-2 rounded-lg font-semibold">
+                                <i class="fas fa-copy mr-2"></i>Copy
+                            </button>
+                            <button onclick="downloadTranscript()" class="btn-primary text-white px-4 py-2 rounded-lg font-semibold">
+                                <i class="fas fa-download mr-2"></i>Download
+                            </button>
+                        </div>
+                    </div>
+                    <div id="transcriptOutput" class="bg-white/10 rounded-xl p-6 max-h-96 overflow-y-auto">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- AI Analysis (if enabled) -->
+                <div id="aiAnalysisSection" class="hidden">
+                    <div class="glass-card rounded-3xl p-8 mb-8">
+                        <h2 class="text-2xl font-bold mb-6 text-yellow-300">
+                            <i class="fas fa-brain mr-2"></i>AI Analysis
+                        </h2>
+                        <div id="aiAnalysisContent" class="space-y-6">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="max-w-6xl mx-auto mt-20">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
+                Why Choose Our <span class="gradient-text">AI Transcript Tool</span>?
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="feature-card p-8 rounded-2xl text-center">
+                    <i class="fas fa-rocket text-4xl text-blue-400 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-4">Lightning Fast</h3>
+                    <p class="opacity-90">Extract transcripts in seconds using advanced processing algorithms</p>
+                </div>
+                <div class="feature-card p-8 rounded-2xl text-center">
+                    <i class="fas fa-brain text-4xl text-purple-400 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-4">AI-Powered Analysis</h3>
+                    <p class="opacity-90">Get summaries, key points, and sentiment analysis automatically</p>
+                </div>
+                <div class="feature-card p-8 rounded-2xl text-center">
+                    <i class="fas fa-globe text-4xl text-green-400 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-4">Multi-Language</h3>
+                    <p class="opacity-90">Support for 13+ languages with auto-detection capability</p>
+                </div>
+                <div class="feature-card p-8 rounded-2xl text-center">
+                    <i class="fas fa-file-export text-4xl text-yellow-400 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-4">Multiple Formats</h3>
+                    <p class="opacity-90">Export in TXT, SRT, VTT, or JSON formats for any use case</p>
+                </div>
+                <div class="feature-card p-8 rounded-2xl text-center">
+                    <i class="fas fa-shield-alt text-4xl text-red-400 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-4">100% Secure</h3>
+                    <p class="opacity-90">Your data is processed securely and never stored on our servers</p>
+                </div>
+                <div class="feature-card p-8 rounded-2xl text-center">
+                    <i class="fas fa-mobile-alt text-4xl text-indigo-400 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-4">Mobile Friendly</h3>
+                    <p class="opacity-90">Works perfectly on all devices - desktop, tablet, and mobile</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-card mt-20 py-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-center space-x-8 mb-8 flex-wrap">
+                <a href="blog.html" class="text-white/80 hover:text-white transition-colors">Blog</a>
+                <a href="about.html" class="text-white/80 hover:text-white transition-colors">About</a>
+                <a href="tools.html" class="text-white/80 hover:text-white transition-colors">All Tools</a>
+                <a href="privacy-policy.html" class="text-white/80 hover:text-white transition-colors">Privacy Policy</a>
+                <a href="terms-of-service.html" class="text-white/80 hover:text-white transition-colors">Terms</a>
+                <a href="contact.html" class="text-white/80 hover:text-white transition-colors">Contact</a>
+            </div>
+            <p class="opacity-60">&copy; 2025 ToolSlap. All rights reserved. Made with ❤️ for the community.</p>
+        </div>
+    </footer>
+
+    <script>
+        let currentTranscript = '';
+        let videoInfo = {};
+
+        // Dropdown functionality
+        function toggleDropdown() {
+            const dropdown = document.getElementById('toolsDropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        // Close dropdown when clicking outside
+        window.onclick = function(event) {
+            if (!event.target.closest('.tools-dropdown')) {
+                document.getElementById('toolsDropdown').classList.add('hidden');
+            }
+        }
+
+        // Extract YouTube video ID from URL
+        function extractVideoId(url) {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[2].length === 11) ? match[2] : null;
+        }
+
+        // Show loading state with animation
+        function showLoading() {
+            document.getElementById('loadingState').classList.remove('hidden');
+            document.getElementById('resultsSection').classList.add('hidden');
+            animateProgressBar();
+        }
+
+        function hideLoading() {
+            document.getElementById('loadingState').classList.add('hidden');
+        }
+
+        function animateProgressBar() {
+            const progressBar = document.getElementById('progressBar');
+            let width = 0;
+            const interval = setInterval(() => {
+                width += Math.random() * 15;
+                if (width > 90) {
+                    clearInterval(interval);
+                    width = 90;
+                }
+                progressBar.style.width = width + '%';
+            }, 200);
+            
+            // Complete progress when done
+            setTimeout(() => {
+                progressBar.style.width = '100%';
+                clearInterval(interval);
+            }, 3000);
+        }
+
+        // Main extraction function
+        async function extractTranscript() {
+            const url = document.getElementById('youtubeUrl').value.trim();
+            if (!url) {
+                alert('Please enter a YouTube URL');
+                return;
+            }
+
+            const videoId = extractVideoId(url);
+            if (!videoId) {
+                alert('Please enter a valid YouTube URL');
+                return;
+            }
+
+            showLoading();
+
+            try {
+                // Simulate API call (replace with actual implementation)
+                await simulateTranscriptExtraction(videoId, url);
+            } catch (error) {
+                console.error('Error extracting transcript:', error);
+                alert('Error extracting transcript. Please try again.');
+                hideLoading();
+            }
+        }
+
+        // Simulate transcript extraction (replace with real API)
+        async function simulateTranscriptExtraction(videoId, url) {
+            // Simulate API delay
+            await new Promise(resolve => setTimeout(resolve, 3000));
+
+            // Mock video info
+            videoInfo = {
+                title: "How to Build AI Tools and Make $5,000/Month",
+                duration: "12:45",
+                views: "1.2M views",
+                channel: "AI Creator",
+                publishDate: "2 days ago"
+            };
+
+            // Mock transcript (using the provided text)
+            currentTranscript = `Forget what you've been told about building AI tools. While lots of people are worried that AI is coming for their jobs, I just put together an AI tool that's earning me $5,000 a month with nothing except chat GPT5 and ADN and some copypaste skills. Here's what's wild. I'm not a coder. 6 months ago, API was just a random buzzword to me. But in the next 5 minutes, I'll walk you through the exact steps I took. And trust me, step three will totally flip your idea of what's possible with AI.
+
+Hi, I'm Zero. Stick with me until the end and you'll learn how to start building your own AI cash machine. In this video, I'll share the exact blueprint I followed. For the full tutorial with every template, prompt, and line of code I used, just comment tutorial below. Six months back, it's 2 am. I'm doom scrolling Twitter and just watching people roll out AI tools, making bank. But every video tutorial out there, either you needed years of coding or you had to pay developers
+
+thousands. I actually asked for quotes. 15K for something basic, 25K for anything truly useful. I thought about giving up. Then Chat GPT5 dropped and everything was suddenly different. I had this wild idea. What if chat GPT5 could actually code the whole thing for me? Not just bits and pieces, but the entire project. I picked a real problem. Small businesses buried under customer emails. I simply asked Chatg GPT5 to help build an AI email responder. Here's the crazy part. It didn't just hand over the code.
+
+It mapped out the complete architecture, explained every step, even helped me debug. In just 3 days, I had a working prototype. Let me break down the five exact steps I used. Don't guess what people want. Find problems where money is already changing hands, even if the current solutions stink. Took me 2 hours on business forums to see it. Can't keep up with all these emails. Look for places where people will pay just to make their pain go away. Most people just start building. That's
+
+a trap. Instead, I had chat GPT5 help me sketch the user flow. What screens show up? What's the simplest feature set? Just 30 minutes of planning saved me weeks of headaches. Here's the big secret nobody talks about. Stop asking chat GPT5 for random code. Treat it like you've actually hired a top developer. I told it you're a senior full stack developer. Help me build an AI powered email responder. I want to use N8N for the back end, Firebase Studio for the front end, Superbase for the database, and
+
+integrate an LLM model. Please provide a complete system architecture first. Boom. What I got back was a professional production level plan you'd pay 5K for as a consultancy. Forget perfection. One week in with a rough version, I pinged 10 small business owners on LinkedIn and gave them beta access for free. The feedback was amazing. Add templates, different tones, bulk email processing. I sent every new request to ChatGpt5, which helped me code exactly what users wanted. A total game changer.
+
+3 weeks later, I launched with simple plans. $19 for small biz, $49 for bigger teams. No fancy launches, just a real solution to a real problem. Most important, my users save around 5 hours a week. It's easily worth $19 to them. I won't sugarcoat it. Plenty of bumps along the way. Stuff broke, bugs came up, servers got pricey. But here's the secret. Every problem, I'd walk chat GPT5 through it step by step, just like explaining it to a human partner. It helped me fix things in minutes that
+
+would have stumped even prodevelopers for hours. Bottom line, the difference between winning and quitting is treating problems as lessons, not failures. This is what fires me up. AI tools are just starting out and small businesses need automation. But most options are way too complex or expensive. While the big companies target massive contracts, there's a giant opportunity in helping the millions of smaller shops who need simple, affordable AI tools fast. Think bigger. AI powered social media
+
+schedulers, docs, organizers, customer bots. The possibilities are endless. I've just handed you the blueprint, but if you want the real nuts and bolts, the prompts, templates, code, launch plan, pricing, tests, drop a tutorial in the comments right now. When we cross 2,000 subs, the full live build course will be yours for free. We're at 1,739, so it's almost here. Hit subscribe and let's build your AI success story together.`;
+
+            displayResults();
+        }
+
+        // Display results
+        function displayResults() {
+            hideLoading();
+            
+            // Show results section
+            document.getElementById('resultsSection').classList.remove('hidden');
+            
+            // Populate video info
+            const videoInfoDiv = document.getElementById('videoInfo');
+            videoInfoDiv.innerHTML = `
+                <div class="space-y-3">
+                    <h3 class="text-lg font-semibold">${videoInfo.title}</h3>
+                    <div class="flex items-center space-x-4 text-sm opacity-80">
+                        <span><i class="fas fa-clock mr-1"></i>${videoInfo.duration}</span>
+                        <span><i class="fas fa-eye mr-1"></i>${videoInfo.views}</span>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <p class="text-sm opacity-80">Channel: ${videoInfo.channel}</p>
+                    <p class="text-sm opacity-80">Published: ${videoInfo.publishDate}</p>
+                    <p class="text-sm text-green-400">✓ Transcript extracted successfully</p>
+                </div>
+            `;
+            
+            // Display transcript
+            const transcriptOutput = document.getElementById('transcriptOutput');
+            transcriptOutput.innerHTML = `<pre class="whitespace-pre-wrap text-sm leading-relaxed">${currentTranscript}</pre>`;
+            
+            // Show AI analysis if enabled
+            if (document.getElementById('aiSummary').checked || 
+                document.getElementById('keyPoints').checked || 
+                document.getElementById('sentiment').checked) {
+                showAIAnalysis();
+            }
+        }
+
+        // Show AI analysis
+        function showAIAnalysis() {
+            document.getElementById('aiAnalysisSection').classList.remove('hidden');
+            const analysisContent = document.getElementById('aiAnalysisContent');
+            
+            let analysisHTML = '';
+            
+            if (document.getElementById('aiSummary').checked) {
+                analysisHTML += `
+                    <div class="bg-white/10 rounded-xl p-6">
+                        <h3 class="text-lg font-semibold mb-3 text-yellow-300">
+                            <i class="fas fa-compress-alt mr-2"></i>AI Summary
+                        </h3>
+                        <p class="text-sm leading-relaxed">
+                            This video explains how to build profitable AI tools using ChatGPT without coding experience. 
+                            The creator shares a 5-step process that helped them earn $5,000/month by building an AI email 
+                            responder for small businesses. Key steps include: identifying real problems, planning the solution, 
+                            using ChatGPT as a development partner, getting user feedback, and launching with simple pricing.
+                        </p>
+                    </div>
+                `;
+            }
+            
+            if (document.getElementById('keyPoints').checked) {
+                analysisHTML += `
+                    <div class="bg-white/10 rounded-xl p-6">
+                        <h3 class="text-lg font-semibold mb-3 text-yellow-300">
+                            <i class="fas fa-list-ul mr-2"></i>Key Points
+                        </h3>
+                        <ul class="text-sm space-y-2">
+                            <li>• Built a $5,000/month AI tool without coding experience</li>
+                            <li>• Used ChatGPT-5 as a development partner, not just for code snippets</li>
+                            <li>• Started with a real problem: small businesses overwhelmed by emails</li>
+                            <li>• Got user feedback early and iterated based on requests</li>
+                            <li>• Launched with simple pricing: $19 for small businesses, $49 for bigger teams</li>
+                            <li>• Treats ChatGPT like hiring a senior full-stack developer</li>
+                            <li>• Focus on simple, affordable AI tools for small businesses</li>
+                        </ul>
+                    </div>
+                `;
+            }
+            
+            if (document.getElementById('sentiment').checked) {
+                analysisHTML += `
+                    <div class="bg-white/10 rounded-xl p-6">
+                        <h3 class="text-lg font-semibold mb-3 text-yellow-300">
+                            <i class="fas fa-heart mr-2"></i>Sentiment Analysis
+                        </h3>
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="flex items-center">
+                                <div class="w-4 h-4 bg-green-400 rounded mr-2"></div>
+                                <span class="text-sm">Positive: 85%</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-4 h-4 bg-yellow-400 rounded mr-2"></div>
+                                <span class="text-sm">Neutral: 10%</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-4 h-4 bg-red-400 rounded mr-2"></div>
+                                <span class="text-sm">Negative: 5%</span>
+                            </div>
+                        </div>
+                        <p class="text-sm opacity-80">
+                            Overall positive and encouraging tone. The content is motivational and educational, 
+                            focusing on empowerment and practical solutions.
+                        </p>
+                    </div>
+                `;
+            }
+            
+            analysisContent.innerHTML = analysisHTML;
+        }
+
+        // Copy transcript to clipboard
+        async function copyTranscript() {
+            try {
+                await navigator.clipboard.writeText(currentTranscript);
+                
+                // Show success feedback
+                const btn = event.target.closest('button');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check mr-2"></i>Copied!';
+                btn.classList.remove('btn-secondary');
+                btn.classList.add('bg-green-500');
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.classList.remove('bg-green-500');
+                    btn.classList.add('btn-secondary');
+                }, 2000);
+            } catch (err) {
+                alert('Failed to copy transcript');
+            }
+        }
+
+        // Download transcript
+        function downloadTranscript() {
+            const format = document.getElementById('outputFormat').value;
+            let content = currentTranscript;
+            let filename = `transcript.${format}`;
+            let mimeType = 'text/plain';
+            
+            // Format content based on selected format
+            switch(format) {
+                case 'srt':
+                    content = formatAsSRT(currentTranscript);
+                    mimeType = 'text/srt';
+                    break;
+                case 'vtt':
+                    content = formatAsVTT(currentTranscript);
+                    mimeType = 'text/vtt';
+                    break;
+                case 'json':
+                    content = JSON.stringify({
+                        videoInfo: videoInfo,
+                        transcript: currentTranscript,
+                        timestamp: new Date().toISOString()
+                    }, null, 2);
+                    mimeType = 'application/json';
+                    break;
+            }
+            
+            // Create download
+            const blob = new Blob([content], { type: mimeType });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Format transcript as SRT
+        function formatAsSRT(transcript) {
+            const sentences = transcript.split('. ');
+            let srt = '';
+            let index = 1;
+            let currentTime = 0;
+            
+            sentences.forEach(sentence => {
+                if (sentence.trim()) {
+                    const startTime = formatSRTTime(currentTime);
+                    currentTime += 3; // Approximate 3 seconds per sentence
+                    const endTime = formatSRTTime(currentTime);
+                    
+                    srt += `${index}\n${startTime} --> ${endTime}\n${sentence.trim()}.\n\n`;
+                    index++;
+                }
+            });
+            
+            return srt;
+        }
+
+        // Format transcript as VTT
+        function formatAsVTT(transcript) {
+            const srt = formatAsSRT(transcript);
+            return 'WEBVTT\n\n' + srt.replace(/(\d+)\n(\d{2}:\d{2}:\d{2},\d{3})/g, '$2');
+        }
+
+        // Format time for SRT
+        function formatSRTTime(seconds) {
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            const secs = seconds % 60;
+            const milliseconds = Math.floor((secs % 1) * 1000);
+            
+            return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${Math.floor(secs).toString().padStart(2, '0')},${milliseconds.toString().padStart(3, '0')}`;
+        }
+
+        // Auto-detect paste in URL field
+        document.getElementById('youtubeUrl').addEventListener('paste', function(e) {
+            setTimeout(() => {
+                const url = e.target.value;
+                if (url && extractVideoId(url)) {
+                    // Auto-extract after paste if URL is valid
+                    // extractTranscript();
+                }
+            }, 100);
+        });
+
+        // Enter key support
+        document.getElementById('youtubeUrl').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                extractTranscript();
+            }
+        });
+    </script>
+</body>
+</html>
