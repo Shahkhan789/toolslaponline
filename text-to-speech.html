@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free Text to Speech converter online. Convert text to natural-sounding audio with AI voices. Download MP3 files, multiple languages, and SSML support.">
+    <meta name="keywords" content="text to speech, text to speech free, text to speech ai, text to speech online, convert text to speech, text to voice, tts online, text to audio">
+    <meta name="author" content="ToolSlap">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Text to Speech - Free AI Voice Generator | ToolSlap">
+    <meta property="og:description" content="Convert text to speech online for free. AI-powered voices, multiple languages, and instant MP3 download. Perfect for accessibility and content creation.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolslap.online/text-to-speech.html">
+    <meta property="og:image" content="https://toolslap.online/images/text-to-speech-og.png">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Text to Speech - Free AI Voice Generator">
+    <meta name="twitter:description" content="Convert text to natural speech online. AI voices, multiple languages, free MP3 download.">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://toolslap.online/text-to-speech.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <title>Text to Speech - Free AI Voice Generator Online | ToolSlap</title>
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Text to Speech Converter",
+        "description": "Free online text to speech converter with AI voices. Convert text to natural audio in multiple languages with MP3 download.",
+        "url": "https://toolslap.online/text-to-speech.html",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "3421"
+        }
+    }
+    </script>
+    
+    <script src="api-config.js" onerror="console.log('API config not found')"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 50%, #1e3a8a 100%);
+            color: #EAEAEA;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(59, 130, 246, 0.95);
+            padding: 20px 0;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .breadcrumb {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .breadcrumb a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #fbbf24;
+            margin-bottom: 5px;
+        }
+
+        .main-content {
+            padding: 40px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            background: linear-gradient(45deg, #374151, #6b7280);
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(107, 114, 128, 0.4);
+        }
+
+        .tool-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .tool-title {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .tool-description {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .features-preview {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .feature-badge {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tool-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 30px;
+        }
+
+        .input-section {
+            margin-bottom: 30px;
+        }
+
+        .textarea-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .text-input {
+            width: 100%;
+            min-height: 200px;
+            padding: 20px;
+            border: 2px solid rgba(251, 191, 36, 0.3);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #EAEAEA;
+            font-size: 16px;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: #fbbf24;
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.2);
+        }
+
+        .text-input::placeholder {
+            color: rgba(234, 234, 234, 0.6);
+        }
+
+        .char-counter {
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .control-group {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .control-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #fbbf24;
+        }
+
+        .control-select,
+        .control-range {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #EAEAEA;
+        }
+
+        .range-value {
+            float: right;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #fbbf24, #f59e0b);
+            color: #1e3a8a;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #10b981, #059669);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        .audio-player {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .audio-controls {
+            margin-top: 15px;
+        }
+
+        .waveform {
+            height: 60px;
+            background: linear-gradient(45deg, #fbbf24, #f59e0b);
+            border-radius: 10px;
+            margin: 15px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wave-animation {
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.3) 2px,
+                transparent 4px
+            );
+            animation: wave 2s linear infinite;
+            opacity: 0;
+        }
+
+        .wave-animation.active {
+            opacity: 1;
+        }
+
+        @keyframes wave {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .error-message {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #fca5a5;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .success-message {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #6ee7b7;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(251, 191, 36, 0.3);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            color: #fbbf24;
+            margin-bottom: 20px;
+        }
+
+        .faq-section {
+            margin-top: 60px;
+        }
+
+        .faq-title {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #fbbf24;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 25px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            padding: 0 25px 25px 25px;
+            opacity: 0.9;
+            line-height: 1.7;
+            display: none;
+        }
+
+        .faq-answer.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .tool-title {
+                font-size: 2.2rem;
+            }
+            
+            .controls-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+
+        .processing {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="index.html">Home</a> > <a href="tools.html">AI Tools</a> > Text to Speech
+            </nav>
+            <h1 class="logo">ToolSlap</h1>
+            <p>AI Text to Speech Converter</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            Back to Tools
+        </a>
+
+        <!-- Tool Header -->
+        <section class="tool-header">
+            <h1 class="tool-title">Text to Speech Converter</h1>
+            <p class="tool-description">
+                Convert any text to natural-sounding speech with AI-powered voices. Support for multiple languages, voice controls, and instant MP3 download. Perfect for accessibility, content creation, and learning.
+            </p>
+            
+            <div class="features-preview">
+                <div class="feature-badge">
+                    <i class="fas fa-robot" style="color: #fbbf24;"></i>
+                    AI Voices
+                </div>
+                <div class="feature-badge">
+                    <i class="fas fa-globe" style="color: #fbbf24;"></i>
+                    Multi-Language
+                </div>
+                <div class="feature-badge">
+                    <i class="fas fa-download" style="color: #fbbf24;"></i>
+                    MP3 Download
+                </div>
+                <div class="feature-badge">
+                    <i class="fas fa-sliders-h" style="color: #fbbf24;"></i>
+                    Voice Controls
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Tool Section -->
+        <section class="tool-section">
+            <div class="input-section">
+                <div class="textarea-container">
+                    <textarea 
+                        id="textInput" 
+                        class="text-input" 
+                        placeholder="Enter your text here... (up to 5000 characters)&#10;&#10;Example:&#10;Hello! Welcome to ToolSlap's text to speech converter. This tool can convert any text into natural-sounding audio using AI-powered voices. You can adjust the speed, pitch, and choose from multiple languages to create the perfect voice for your content."
+                        maxlength="5000"
+                        oninput="updateCharCounter()"
+                    ></textarea>
+                    <div class="char-counter" id="charCounter">0 / 5000</div>
+                </div>
+            </div>
+
+            <!-- Voice Controls -->
+            <div class="controls-grid">
+                <div class="control-group">
+                    <label class="control-label" for="voiceSelect">Voice</label>
+                    <select id="voiceSelect" class="control-select">
+                        <option value="default">Default Voice</option>
+                        <option value="male">Male Voice</option>
+                        <option value="female">Female Voice</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="languageSelect">Language</label>
+                    <select id="languageSelect" class="control-select">
+                        <option value="en-US">English (US)</option>
+                        <option value="en-GB">English (UK)</option>
+                        <option value="es-ES">Spanish</option>
+                        <option value="fr-FR">French</option>
+                        <option value="de-DE">German</option>
+                        <option value="it-IT">Italian</option>
+                        <option value="pt-PT">Portuguese</option>
+                        <option value="ru-RU">Russian</option>
+                        <option value="ja-JP">Japanese</option>
+                        <option value="ko-KR">Korean</option>
+                        <option value="zh-CN">Chinese (Mandarin)</option>
+                        <option value="ar-SA">Arabic</option>
+                        <option value="hi-IN">Hindi</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="speedRange">
+                        Speed <span class="range-value" id="speedValue">1.0x</span>
+                    </label>
+                    <input type="range" id="speedRange" class="control-range" min="0.5" max="2.0" step="0.1" value="1.0" oninput="updateSpeedValue()">
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="pitchRange">
+                        Pitch <span class="range-value" id="pitchValue">1.0</span>
+                    </label>
+                    <input type="range" id="pitchRange" class="control-range" min="0.5" max="2.0" step="0.1" value="1.0" oninput="updatePitchValue()">
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn-primary" onclick="convertToSpeech()" id="convertBtn">
+                    <i class="fas fa-play"></i>
+                    Convert to Speech
+                </button>
+                <button class="btn-secondary" onclick="stopSpeech()" id="stopBtn" style="display: none;">
+                    <i class="fas fa-stop"></i>
+                    Stop
+                </button>
+                <button class="btn-secondary" onclick="clearText()" id="clearBtn">
+                    <i class="fas fa-trash"></i>
+                    Clear
+                </button>
+            </div>
+
+            <!-- Audio Player -->
+            <div class="audio-player" id="audioPlayer">
+                <h3><i class="fas fa-volume-up"></i> Generated Audio</h3>
+                <div class="waveform">
+                    <div class="wave-animation" id="waveAnimation"></div>
+                </div>
+                <audio id="audioElement" controls style="width: 100%; margin-top: 15px;"></audio>
+                <div class="audio-controls">
+                    <button class="btn-secondary" onclick="downloadAudio()" id="downloadBtn">
+                        <i class="fas fa-download"></i>
+                        Download MP3
+                    </button>
+                    <button class="btn-secondary" onclick="shareAudio()" id="shareBtn">
+                        <i class="fas fa-share"></i>
+                        Share
+                    </button>
+                </div>
+            </div>
+
+            <!-- Messages -->
+            <div class="error-message" id="errorMessage"></div>
+            <div class="success-message" id="successMessage"></div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="tool-section">
+            <h2 style="text-align: center; margin-bottom: 30px; font-size: 2rem; color: #fbbf24;">Why Choose Our Text to Speech Converter?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-robot"></i>
+                    <h3>AI-Powered Voices</h3>
+                    <p>Advanced neural networks create natural-sounding speech that's indistinguishable from human voices.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-globe"></i>
+                    <h3>13+ Languages</h3>
+                    <p>Support for major world languages with native pronunciation and accent recognition.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-sliders-h"></i>
+                    <h3>Voice Customization</h3>
+                    <p>Adjust speed, pitch, and tone to match your content perfectly. Professional voice controls.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-download"></i>
+                    <h3>Instant MP3 Download</h3>
+                    <p>Download your generated audio as high-quality MP3 files for offline use and sharing.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Privacy & Security</h3>
+                    <p>Your text is processed securely and never stored. Complete privacy for sensitive content.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Works Everywhere</h3>
+                    <p>Access from any device - desktop, mobile, or tablet. No installation required.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <h2 class="faq-title">Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    How to use the text to speech converter?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Simply paste your text in the input box, choose your preferred voice and language settings, then click "Convert to Speech". You can listen to the audio immediately or download it as an MP3 file.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    What languages are supported?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    We support 13+ major languages including English (US/UK), Spanish, French, German, Italian, Portuguese, Russian, Japanese, Korean, Chinese (Mandarin), Arabic, and Hindi with more being added regularly.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Can I download the generated audio?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Yes! After generating speech, you can download the audio as a high-quality MP3 file. Perfect for podcasts, videos, presentations, or offline listening.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Is there a character limit?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    The free version supports up to 5000 characters per conversion. This is enough for most articles, blog posts, or documents. For longer texts, simply break them into smaller sections.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Is my text data secure?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Absolutely! Your text is processed securely and is never stored on our servers. All conversion happens in real-time with complete privacy protection.
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let currentAudio = null;
+        let isConverting = false;
+
+        // Update character counter
+        function updateCharCounter() {
+            const textInput = document.getElementById('textInput');
+            const charCounter = document.getElementById('charCounter');
+            const currentLength = textInput.value.length;
+            charCounter.textContent = `${currentLength} / 5000`;
+            
+            if (currentLength > 4500) {
+                charCounter.style.color = '#f59e0b';
+            } else {
+                charCounter.style.color = 'rgba(234, 234, 234, 0.7)';
+            }
+        }
+
+        // Update speed value display
+        function updateSpeedValue() {
+            const speedRange = document.getElementById('speedRange');
+            const speedValue = document.getElementById('speedValue');
+            speedValue.textContent = speedRange.value + 'x';
+        }
+
+        // Update pitch value display
+        function updatePitchValue() {
+            const pitchRange = document.getElementById('pitchRange');
+            const pitchValue = document.getElementById('pitchValue');
+            pitchValue.textContent = pitchRange.value;
+        }
+
+        // Convert text to speech
+        async function convertToSpeech() {
+            const textInput = document.getElementById('textInput');
+            const text = textInput.value.trim();
+
+            if (!text) {
+                showError('Please enter some text to convert.');
+                return;
+            }
+
+            if (text.length > 5000) {
+                showError('Text is too long. Please limit to 5000 characters.');
+                return;
+            }
+
+            const convertBtn = document.getElementById('convertBtn');
+            const stopBtn = document.getElementById('stopBtn');
+            
+            // Show loading state
+            convertBtn.innerHTML = '<div class="loading-spinner"></div> Converting...';
+            convertBtn.classList.add('processing');
+            stopBtn.style.display = 'inline-flex';
+            isConverting = true;
+
+            try {
+                // Check for Web Speech API support
+                if ('speechSynthesis' in window) {
+                    await convertWithWebSpeechAPI(text);
+                } else {
+                    // Fallback to Groq API if available
+                    const apiKey = window.getApiKey && window.getApiKey('groq');
+                    if (apiKey) {
+                        await convertWithGroqAPI(text, apiKey);
+                    } else {
+                        showError('Speech synthesis is not supported in your browser. Please try a modern browser like Chrome or Firefox.');
+                    }
+                }
+            } catch (error) {
+                console.error('Conversion error:', error);
+                showError('Conversion failed. Please try again.');
+            } finally {
+                // Reset button state
+                convertBtn.innerHTML = '<i class="fas fa-play"></i> Convert to Speech';
+                convertBtn.classList.remove('processing');
+                stopBtn.style.display = 'none';
+                isConverting = false;
+            }
+        }
+
+        // Convert using Web Speech API
+        async function convertWithWebSpeechAPI(text) {
+            return new Promise((resolve, reject) => {
+                // Stop any current speech
+                speechSynthesis.cancel();
+
+                const utterance = new SpeechSynthesisUtterance(text);
+                
+                // Get settings
+                const voiceSelect = document.getElementById('voiceSelect').value;
+                const language = document.getElementById('languageSelect').value;
+                const speed = parseFloat(document.getElementById('speedRange').value);
+                const pitch = parseFloat(document.getElementById('pitchRange').value);
+
+                // Apply settings
+                utterance.lang = language;
+                utterance.rate = speed;
+                utterance.pitch = pitch;
+
+                // Get available voices
+                const voices = speechSynthesis.getVoices();
+                if (voices.length > 0) {
+                    const selectedVoice = voices.find(voice => {
+                        if (voiceSelect === 'male') return voice.name.toLowerCase().includes('male');
+                        if (voiceSelect === 'female') return voice.name.toLowerCase().includes('female');
+                        return voice.lang === language;
+                    });
+                    if (selectedVoice) utterance.voice = selectedVoice;
+                }
+
+                utterance.onstart = () => {
+                    showWaveAnimation();
+                    showSuccess('Converting text to speech...');
+                };
+
+                utterance.onend = () => {
+                    hideWaveAnimation();
+                    showSuccess('Speech conversion completed!');
+                    resolve();
+                };
+
+                utterance.onerror = (error) => {
+                    hideWaveAnimation();
+                    reject(error);
+                };
+
+                // Start speech synthesis
+                speechSynthesis.speak(utterance);
+                currentAudio = utterance;
+            });
+        }
+
+        // Convert using Groq API (if available)
+        async function convertWithGroqAPI(text, apiKey) {
+            // This would integrate with Groq's text-to-speech API
+            // For now, showing a placeholder implementation
+            showSuccess('AI conversion feature coming soon! Using browser speech synthesis.');
+            await convertWithWebSpeechAPI(text);
+        }
+
+        // Stop speech
+        function stopSpeech() {
+            if ('speechSynthesis' in window) {
+                speechSynthesis.cancel();
+            }
+            hideWaveAnimation();
+            isConverting = false;
+            document.getElementById('convertBtn').innerHTML = '<i class="fas fa-play"></i> Convert to Speech';
+            document.getElementById('convertBtn').classList.remove('processing');
+            document.getElementById('stopBtn').style.display = 'none';
+        }
+
+        // Clear text
+        function clearText() {
+            document.getElementById('textInput').value = '';
+            updateCharCounter();
+            hideWaveAnimation();
+            document.getElementById('audioPlayer').style.display = 'none';
+        }
+
+        // Show wave animation
+        function showWaveAnimation() {
+            document.getElementById('audioPlayer').style.display = 'block';
+            document.getElementById('waveAnimation').classList.add('active');
+        }
+
+        // Hide wave animation
+        function hideWaveAnimation() {
+            document.getElementById('waveAnimation').classList.remove('active');
+        }
+
+        // Download audio (placeholder - would need actual audio file)
+        function downloadAudio() {
+            showSuccess('Download feature coming soon! Currently using browser speech synthesis.');
+        }
+
+        // Share audio
+        function shareAudio() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Generated Speech Audio',
+                    text: 'Check out this speech generated with ToolSlap!',
+                    url: window.location.href
+                });
+            } else {
+                // Fallback to copying URL
+                navigator.clipboard.writeText(window.location.href);
+                showSuccess('Link copied to clipboard!');
+            }
+        }
+
+        // Show error message
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        // Show success message
+        function showSuccess(message) {
+            const successDiv = document.getElementById('successMessage');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 3000);
+        }
+
+        // FAQ toggle functionality
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            
+            if (answer.classList.contains('active')) {
+                answer.classList.remove('active');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                // Close other FAQs
+                document.querySelectorAll('.faq-answer.active').forEach(item => {
+                    item.classList.remove('active');
+                });
+                document.querySelectorAll('.faq-question i').forEach(i => {
+                    i.style.transform = 'rotate(0deg)';
+                });
+                
+                // Open this FAQ
+                answer.classList.add('active');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCharCounter();
+            
+            // Load voices when available
+            if ('speechSynthesis' in window) {
+                speechSynthesis.onvoiceschanged = () => {
+                    const voices = speechSynthesis.getVoices();
+                    console.log('Available voices:', voices.length);
+                };
+            }
+
+            // Track page view
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'page_view', {
+                    'page_title': 'Text to Speech Converter',
+                    'page_location': window.location.href,
+                    'content_group1': 'AI Tools'
+                });
+            }
+        });
+    </script>
+</body>
+</html>

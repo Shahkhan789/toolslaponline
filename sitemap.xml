@@ -37,7 +37,19 @@
     <priority>0.6</priority>
   </url>
 
+  <!-- AI Tools - High Priority -->
+  <url>
+    <loc>https://toolslap.online/text-to-speech.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.96</priority>
+  </url>
+
   <!-- Image & Media Tools -->
+  <url>
+    <loc>https://toolslap.online/heic-to-jpg-converter.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.93</priority>
+  </url>
   <url>
     <loc>https://toolslap.online/image-converter.html</loc>
     <changefreq>monthly</changefreq>
@@ -70,6 +82,16 @@
   </url>
 
   <!-- PDF Tools - High Priority -->
+  <url>
+    <loc>https://toolslap.online/pdf-to-word-converter.html</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.98</priority>
+  </url>
+  <url>
+    <loc>https://toolslap.online/word-to-pdf-converter.html</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.97</priority>
+  </url>
   <url>
     <loc>https://toolslap.online/compress-pdf.html</loc>
     <changefreq>daily</changefreq>
