@@ -545,15 +545,114 @@
             }
         }
 
-        // Simulate AI response generation
+        // Generate AI response using Groq API
         async function simulateAIResponse(customerEmail) {
-            // Simulate API delay
-            await new Promise(resolve => setTimeout(resolve, 2500));
-
             const tone = document.querySelector('input[name="tone"]:checked').value;
             
-            // Generate response based on template and tone
-            const responses = {
+            try {
+                // Try to use real AI first
+                const response = await generateAIResponse(customerEmail, selectedTemplate, tone);
+                generatedResponse = response;
+                
+                // Update analytics
+                updateAnalytics(generatedResponse);
+                
+                displayResponse(false); // false = using real AI
+            } catch (error) {
+                console.error('AI Generation Error:', error);
+                // Fallback to template-based response
+                await generateFallbackResponse(customerEmail, selectedTemplate, tone);
+            }
+        }
+
+        // Generate AI response using Groq API
+        async function generateAIResponse(customerEmail, template, tone) {
+            // Get API key from configuration
+            const apiKey = window.getApiKey ? window.getApiKey('groq') : null;
+            if (!apiKey) {
+                throw new Error('API key not configured');
+            }
+            
+            const apiUrl = 'https://api.groq.com/openai/v1/chat/completions';
+
+            // Create context-aware prompt
+            const prompt = createEmailPrompt(customerEmail, template, tone);
+
+            const requestBody = {
+                model: 'mixtral-8x7b-32768',
+                messages: [
+                    {
+                        role: 'system',
+                        content: 'You are a professional customer service AI assistant. Generate helpful, accurate, and appropriately toned email responses to customer inquiries.'
+                    },
+                    {
+                        role: 'user',
+                        content: prompt
+                    }
+                ],
+                temperature: 0.7,
+                max_tokens: 1000,
+                top_p: 1,
+                stream: false
+            };
+
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${apiKey}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestBody)
+            });
+
+            if (!response.ok) {
+                throw new Error(`Groq API error: ${response.status}`);
+            }
+
+            const data = await response.json();
+            return data.choices[0].message.content.trim();
+        }
+
+        // Create context-aware email prompt
+        function createEmailPrompt(customerEmail, template, tone) {
+            const templateContext = {
+                general: 'general customer service inquiry',
+                support: 'technical support request',
+                sales: 'sales or product inquiry',
+                refund: 'refund or return request'
+            };
+
+            const toneInstructions = {
+                professional: 'Use a professional, courteous tone with formal language',
+                friendly: 'Use a warm, friendly tone with casual but professional language',
+                formal: 'Use very formal, business-appropriate language',
+                casual: 'Use a relaxed, conversational tone while remaining helpful'
+            };
+
+            return `Please generate a customer service email response for the following:
+
+Customer Email:
+"${customerEmail}"
+
+Context: This is a ${templateContext[template] || 'general inquiry'}.
+Tone: ${toneInstructions[tone]}
+
+Please write a complete, helpful response that:
+1. Addresses the customer's concern appropriately
+2. Uses the specified tone
+3. Includes a proper greeting and closing
+4. Is professional and helpful
+5. Provides clear next steps if applicable
+
+Response:`;
+        }
+
+        // Fallback response generation for when AI fails
+        async function generateFallbackResponse(customerEmail, template, tone) {
+            // Simulate processing time
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            const fallbackResponses = {
                 general: {
                     professional: `Dear Valued Customer,
 
@@ -583,7 +682,7 @@ Cheers,
 
                     formal: `Dear Sir/Madam,
 
-We acknowledge receipt of your correspondence dated today and thank you for bringing this matter to our attention.
+We acknowledge receipt of your correspondence and thank you for bringing this matter to our attention.
 
 We have reviewed your inquiry in detail and will ensure that it receives the appropriate consideration from our relevant department. Our team is committed to providing you with a thorough and accurate response within our standard timeframe.
 
@@ -647,22 +746,37 @@ Thanks for your patience!
             };
 
             // Get appropriate response or generate a default one
-            generatedResponse = responses[selectedTemplate]?.[tone] || responses.general[tone];
+            generatedResponse = fallbackResponses[template]?.[tone] || fallbackResponses.general[tone] || fallbackResponses.general.professional;
 
             // Update analytics
             updateAnalytics(generatedResponse);
             
-            displayResponse();
+            displayResponse(true); // true = using fallback
         }
 
         // Display the generated response
-        function displayResponse() {
+        function displayResponse(isFromFallback = false) {
             hideLoading();
             
             document.getElementById('resultsSection').classList.remove('hidden');
-            document.getElementById('responseOutput').innerHTML = `
-                <pre class="whitespace-pre-wrap text-sm leading-relaxed font-sans">${generatedResponse}</pre>
-            `;
+            
+            let responseHtml = `<pre class="whitespace-pre-wrap text-sm leading-relaxed font-sans">${generatedResponse}</pre>`;
+            
+            if (isFromFallback) {
+                responseHtml += `
+                <div class="mt-4 p-3 bg-yellow-500/20 border border-yellow-500/30 rounded-lg text-yellow-200 text-sm">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>
+                    Note: AI service is temporarily unavailable. Using template-based response. To enable AI-powered responses, configure your API key.
+                </div>`;
+            } else {
+                responseHtml += `
+                <div class="mt-4 p-3 bg-green-500/20 border border-green-500/30 rounded-lg text-green-200 text-sm">
+                    <i class="fas fa-robot mr-2"></i>
+                    Generated using Groq AI for personalized, context-aware response.
+                </div>`;
+            }
+            
+            document.getElementById('responseOutput').innerHTML = responseHtml;
         }
 
         // Update response analytics
