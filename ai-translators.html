@@ -781,6 +781,189 @@ def translate_text(text, target_lang):<br>
         </div>
     </section>
 
+    <!-- Live AI Translation Tool -->
+    <section id="live-translation" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                    <i class="fas fa-language text-primary-blue mr-3"></i>Live AI Translation
+                </h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Instant, accurate translations powered by Qwen AI. Supports 100+ languages with context-aware translation.
+                </p>
+                <div class="mt-4">
+                    <span id="connectionStatus" class="text-sm px-4 py-2 rounded-full bg-gray-100 text-gray-600">
+                        <i class="fas fa-circle text-gray-400"></i> Connecting to AI...
+                    </span>
+                </div>
+            </div>
+
+            <div class="max-w-6xl mx-auto">
+                <div class="bg-white rounded-xl shadow-lg border border-blue-200 overflow-hidden">
+                    <!-- Translation Header -->
+                    <div class="gradient-bg text-white p-6">
+                        <div class="flex flex-col md:flex-row items-center justify-between">
+                            <div class="text-center md:text-left mb-4 md:mb-0">
+                                <h3 class="text-2xl font-bold mb-2">Universal Translator</h3>
+                                <p class="text-blue-100">Real-time translation with AI intelligence</p>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <button id="swapLanguages" class="bg-white bg-opacity-20 hover:bg-opacity-30 p-3 rounded-full transition-colors">
+                                    <i class="fas fa-exchange-alt text-xl"></i>
+                                </button>
+                                <button id="clearTranslation" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-lg transition-colors">
+                                    <i class="fas fa-trash mr-2"></i>Clear
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Language Selection -->
+                    <div class="p-6 border-b border-gray-200">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-lg font-semibold text-gray-700 mb-3">
+                                    <i class="fas fa-arrow-right text-blue-600 mr-2"></i>From
+                                </label>
+                                <select id="sourceLanguage" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option value="auto">🌐 Auto-detect</option>
+                                    <option value="en">🇺🇸 English</option>
+                                    <option value="es">🇪🇸 Spanish</option>
+                                    <option value="fr">🇫🇷 French</option>
+                                    <option value="de">🇩🇪 German</option>
+                                    <option value="it">🇮🇹 Italian</option>
+                                    <option value="pt">🇵🇹 Portuguese</option>
+                                    <option value="ru">🇷🇺 Russian</option>
+                                    <option value="ja">🇯🇵 Japanese</option>
+                                    <option value="ko">🇰🇷 Korean</option>
+                                    <option value="zh">🇨🇳 Chinese (Simplified)</option>
+                                    <option value="zh-TW">🇹🇼 Chinese (Traditional)</option>
+                                    <option value="ar">🇸🇦 Arabic</option>
+                                    <option value="hi">🇮🇳 Hindi</option>
+                                    <option value="tr">🇹🇷 Turkish</option>
+                                    <option value="nl">🇳🇱 Dutch</option>
+                                    <option value="sv">🇸🇪 Swedish</option>
+                                    <option value="da">🇩🇰 Danish</option>
+                                    <option value="no">🇳🇴 Norwegian</option>
+                                    <option value="pl">🇵🇱 Polish</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-lg font-semibold text-gray-700 mb-3">
+                                    <i class="fas fa-arrow-left text-green-600 mr-2"></i>To
+                                </label>
+                                <select id="targetLanguage" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option value="en">🇺🇸 English</option>
+                                    <option value="es">🇪🇸 Spanish</option>
+                                    <option value="fr" selected>🇫🇷 French</option>
+                                    <option value="de">🇩🇪 German</option>
+                                    <option value="it">🇮🇹 Italian</option>
+                                    <option value="pt">🇵🇹 Portuguese</option>
+                                    <option value="ru">🇷🇺 Russian</option>
+                                    <option value="ja">🇯🇵 Japanese</option>
+                                    <option value="ko">🇰🇷 Korean</option>
+                                    <option value="zh">🇨🇳 Chinese (Simplified)</option>
+                                    <option value="zh-TW">🇹🇼 Chinese (Traditional)</option>
+                                    <option value="ar">🇸🇦 Arabic</option>
+                                    <option value="hi">🇮🇳 Hindi</option>
+                                    <option value="tr">🇹🇷 Turkish</option>
+                                    <option value="nl">🇳🇱 Dutch</option>
+                                    <option value="sv">🇸🇪 Swedish</option>
+                                    <option value="da">🇩🇰 Danish</option>
+                                    <option value="no">🇳🇴 Norwegian</option>
+                                    <option value="pl">🇵🇱 Polish</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Translation Interface -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <!-- Input Panel -->
+                        <div class="p-6 border-r border-gray-200">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="text-lg font-semibold text-gray-700">
+                                    <i class="fas fa-edit text-blue-600 mr-2"></i>Source Text
+                                </h4>
+                                <div class="flex space-x-2">
+                                    <button id="pasteText" class="text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded transition-colors">
+                                        <i class="fas fa-paste mr-1"></i>Paste
+                                    </button>
+                                    <button id="speakSource" class="text-sm bg-blue-100 hover:bg-blue-200 text-blue-800 px-3 py-1 rounded transition-colors">
+                                        <i class="fas fa-volume-up mr-1"></i>Listen
+                                    </button>
+                                </div>
+                            </div>
+                            <textarea id="sourceText" rows="8" 
+                                     placeholder="Type or paste text here to translate...\n\nExample: Hello, how are you today? I hope you're having a wonderful day!"
+                                     class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"></textarea>
+                            <div class="mt-3 flex items-center justify-between text-sm text-gray-500">
+                                <span id="sourceInfo">Ready to translate</span>
+                                <span id="characterCount">0 characters</span>
+                            </div>
+                        </div>
+
+                        <!-- Output Panel -->
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="text-lg font-semibold text-gray-700">
+                                    <i class="fas fa-language text-green-600 mr-2"></i>Translation
+                                </h4>
+                                <div class="flex space-x-2">
+                                    <button id="copyTranslation" class="text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded transition-colors" disabled>
+                                        <i class="fas fa-copy mr-1"></i>Copy
+                                    </button>
+                                    <button id="speakTarget" class="text-sm bg-green-100 hover:bg-green-200 text-green-800 px-3 py-1 rounded transition-colors" disabled>
+                                        <i class="fas fa-volume-up mr-1"></i>Listen
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="translationOutput" class="w-full h-48 p-4 border border-gray-300 rounded-lg bg-gray-50 text-gray-700 overflow-y-auto">
+                                <div class="text-center text-gray-400 pt-16">
+                                    <i class="fas fa-language text-3xl mb-3"></i>
+                                    <p>Translation will appear here</p>
+                                </div>
+                            </div>
+                            <div class="mt-3 flex items-center justify-between text-sm text-gray-500">
+                                <span id="translationInfo">No translation yet</span>
+                                <span id="translationTime"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Translations -->
+                    <div class="p-6 bg-gray-50 border-t border-gray-200">
+                        <h4 class="font-semibold text-gray-700 mb-3">
+                            <i class="fas fa-bolt text-yellow-500 mr-2"></i>Quick Translations
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <button class="quick-translate bg-blue-100 hover:bg-blue-200 text-blue-800 px-3 py-2 rounded-lg text-sm transition-colors" 
+                                    data-text="Hello, how are you?">
+                                Hello, how are you?
+                            </button>
+                            <button class="quick-translate bg-green-100 hover:bg-green-200 text-green-800 px-3 py-2 rounded-lg text-sm transition-colors" 
+                                    data-text="Thank you very much!">
+                                Thank you very much!
+                            </button>
+                            <button class="quick-translate bg-purple-100 hover:bg-purple-200 text-purple-800 px-3 py-2 rounded-lg text-sm transition-colors" 
+                                    data-text="Where is the nearest restaurant?">
+                                Where is the nearest restaurant?
+                            </button>
+                            <button class="quick-translate bg-orange-100 hover:bg-orange-200 text-orange-800 px-3 py-2 rounded-lg text-sm transition-colors" 
+                                    data-text="Can you help me, please?">
+                                Can you help me, please?
+                            </button>
+                            <button class="quick-translate bg-red-100 hover:bg-red-200 text-red-800 px-3 py-2 rounded-lg text-sm transition-colors" 
+                                    data-text="I don't understand.">
+                                I don't understand.
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="gradient-bg text-white py-12">
         <div class="container mx-auto px-4">
@@ -830,40 +1013,298 @@ def translate_text(text, target_lang):<br>
     </footer>
 
     <script>
-        // Simple translation demo functionality
-        const translations = {
-            'en-es': {
-                'Hello! Welcome to our AI translation service. This demonstrates real-time language processing capabilities.': '¡Hola! Bienvenido a nuestro servicio de traducción de IA. Esto demuestra capacidades de procesamiento de idiomas en tiempo real.'
-            },
-            'en-fr': {
-                'Hello! Welcome to our AI translation service. This demonstrates real-time language processing capabilities.': 'Bonjour! Bienvenue dans notre service de traduction IA. Ceci démontre les capacités de traitement linguistique en temps réel.'
-            },
-            'en-de': {
-                'Hello! Welcome to our AI translation service. This demonstrates real-time language processing capabilities.': 'Hallo! Willkommen bei unserem KI-Übersetzungsservice. Dies demonstriert Echtzeit-Sprachverarbeitungsfähigkeiten.'
+        // Live AI Translation Functionality
+        class LiveTranslator {
+            constructor() {
+                this.apiUrl = 'http://localhost:8001';
+                this.isConnected = false;
+                this.isTranslating = false;
+                this.translationTimeout = null;
+                this.currentTranslation = '';
+                this.speechSynthesis = window.speechSynthesis;
+                
+                this.initializeElements();
+                this.setupEventListeners();
+                this.checkConnection();
             }
-        };
 
-        function translateText() {
-            const sourceText = document.getElementById('source-text').value;
-            const sourceLang = document.getElementById('source-lang').value;
-            const targetLang = document.getElementById('target-lang').value;
-            const targetElement = document.getElementById('target-text');
-            
-            if (!sourceText.trim()) {
-                targetElement.textContent = 'Enter text to see translation...';
-                return;
+            initializeElements() {
+                this.connectionStatus = document.getElementById('connectionStatus');
+                this.sourceLanguage = document.getElementById('sourceLanguage');
+                this.targetLanguage = document.getElementById('targetLanguage');
+                this.sourceText = document.getElementById('sourceText');
+                this.translationOutput = document.getElementById('translationOutput');
+                this.swapLanguages = document.getElementById('swapLanguages');
+                this.clearTranslation = document.getElementById('clearTranslation');
+                this.pasteText = document.getElementById('pasteText');
+                this.speakSource = document.getElementById('speakSource');
+                this.copyTranslation = document.getElementById('copyTranslation');
+                this.speakTarget = document.getElementById('speakTarget');
+                this.sourceInfo = document.getElementById('sourceInfo');
+                this.translationInfo = document.getElementById('translationInfo');
+                this.translationTime = document.getElementById('translationTime');
+                this.characterCount = document.getElementById('characterCount');
             }
-            
-            const translationKey = sourceLang + '-' + targetLang;
-            const translation = translations[translationKey] && translations[translationKey][sourceText];
-            
-            if (translation) {
-                targetElement.textContent = translation;
-            } else {
-                // Simulate translation for demo purposes
-                targetElement.textContent = `[${targetLang.toUpperCase()}] ${sourceText} (Demo translation)`;
+
+            setupEventListeners() {
+                if (!this.sourceText) return; // Exit if elements not found
+                
+                // Real-time translation as user types
+                this.sourceText.addEventListener('input', () => this.handleTextChange());
+                
+                // Language change triggers re-translation
+                this.sourceLanguage.addEventListener('change', () => this.translateText());
+                this.targetLanguage.addEventListener('change', () => this.translateText());
+                
+                // Button actions
+                this.swapLanguages.addEventListener('click', () => this.swapLanguagePair());
+                this.clearTranslation.addEventListener('click', () => this.clearAll());
+                this.pasteText.addEventListener('click', () => this.pasteFromClipboard());
+                this.speakSource.addEventListener('click', () => this.speakText(this.sourceText.value, this.sourceLanguage.value));
+                this.copyTranslation.addEventListener('click', () => this.copyToClipboard());
+                this.speakTarget.addEventListener('click', () => this.speakText(this.currentTranslation, this.targetLanguage.value));
+                
+                // Quick translation buttons
+                document.querySelectorAll('.quick-translate').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        this.sourceText.value = e.target.dataset.text;
+                        this.handleTextChange();
+                    });
+                });
+            }
+
+            async checkConnection() {
+                if (!this.connectionStatus) return;
+                
+                try {
+                    const response = await fetch(`${this.apiUrl}/health`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.model_loaded) {
+                            this.setConnectionStatus('Connected to Qwen AI', 'green', true);
+                        } else {
+                            this.setConnectionStatus('Server running, loading model...', 'yellow', false);
+                        }
+                    } else {
+                        this.setConnectionStatus('Server not responding', 'red', false);
+                    }
+                } catch (error) {
+                    this.setConnectionStatus('Please start Qwen server', 'red', false);
+                }
+            }
+
+            setConnectionStatus(message, color, connected) {
+                this.isConnected = connected;
+                this.connectionStatus.innerHTML = `
+                    <i class="fas fa-circle text-${color}-400"></i> ${message}
+                `;
+                this.connectionStatus.className = `text-sm px-4 py-2 rounded-full bg-${color}-50 text-${color}-600`;
+            }
+
+            handleTextChange() {
+                this.updateCharacterCount();
+                
+                // Clear existing timeout
+                if (this.translationTimeout) {
+                    clearTimeout(this.translationTimeout);
+                }
+                
+                // Set new timeout for delayed translation (to avoid too many API calls)
+                this.translationTimeout = setTimeout(() => {
+                    this.translateText();
+                }, 500); // Wait 500ms after user stops typing
+            }
+
+            updateCharacterCount() {
+                const count = this.sourceText.value.length;
+                this.characterCount.textContent = `${count} characters`;
+                
+                if (count === 0) {
+                    this.sourceInfo.textContent = 'Ready to translate';
+                } else {
+                    const words = this.sourceText.value.split(/\s+/).filter(w => w.length > 0).length;
+                    this.sourceInfo.textContent = `${words} words, ${count} characters`;
+                }
+            }
+
+            async translateText() {
+                const text = this.sourceText.value.trim();
+                if (!text || !this.isConnected || this.isTranslating) {
+                    if (!text) {
+                        this.showPlaceholder();
+                    }
+                    return;
+                }
+
+                this.isTranslating = true;
+                this.showTranslating();
+                
+                const startTime = Date.now();
+
+                try {
+                    // Map language codes to full language names for better translation
+                    const languageMap = {
+                        'auto': 'auto-detect',
+                        'en': 'English', 'es': 'Spanish', 'fr': 'French', 'de': 'German',
+                        'it': 'Italian', 'pt': 'Portuguese', 'ru': 'Russian', 'ja': 'Japanese',
+                        'ko': 'Korean', 'zh': 'Chinese (Simplified)', 'zh-TW': 'Chinese (Traditional)',
+                        'ar': 'Arabic', 'hi': 'Hindi', 'tr': 'Turkish', 'nl': 'Dutch',
+                        'sv': 'Swedish', 'da': 'Danish', 'no': 'Norwegian', 'pl': 'Polish'
+                    };
+
+                    const sourceLang = languageMap[this.sourceLanguage.value] || this.sourceLanguage.value;
+                    const targetLang = languageMap[this.targetLanguage.value] || this.targetLanguage.value;
+
+                    const response = await fetch(`${this.apiUrl}/api/translate`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            text: text,
+                            source_language: sourceLang,
+                            target_language: targetLang
+                        })
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        const endTime = Date.now();
+                        const duration = endTime - startTime;
+                        
+                        this.displayTranslation(data.translation, duration);
+                    } else {
+                        throw new Error('Translation failed');
+                    }
+                } catch (error) {
+                    this.showError(`Error: ${error.message}. Please check if the Qwen server is running.`);
+                } finally {
+                    this.isTranslating = false;
+                }
+            }
+
+            showPlaceholder() {
+                this.translationOutput.innerHTML = `
+                    <div class="text-center text-gray-400 pt-16">
+                        <i class="fas fa-language text-3xl mb-3"></i>
+                        <p>Translation will appear here</p>
+                    </div>
+                `;
+                this.translationInfo.textContent = 'No translation yet';
+                this.translationTime.textContent = '';
+                this.copyTranslation.disabled = true;
+                this.speakTarget.disabled = true;
+            }
+
+            showTranslating() {
+                this.translationOutput.innerHTML = `
+                    <div class="text-center text-blue-500 pt-16">
+                        <div class="animate-spin w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full mx-auto mb-3"></div>
+                        <p>Translating...</p>
+                    </div>
+                `;
+                this.translationInfo.textContent = 'Processing...';
+            }
+
+            displayTranslation(translation, duration) {
+                this.currentTranslation = translation;
+                this.translationOutput.innerHTML = `<p class="text-gray-700">${translation}</p>`;
+                
+                const words = translation.split(/\s+/).filter(w => w.length > 0).length;
+                this.translationInfo.textContent = `${words} words translated`;
+                this.translationTime.textContent = `${duration}ms`;
+                
+                this.copyTranslation.disabled = false;
+                this.speakTarget.disabled = false;
+            }
+
+            showError(error) {
+                this.translationOutput.innerHTML = `
+                    <div class="text-center text-red-500 pt-16">
+                        <i class="fas fa-exclamation-triangle text-3xl mb-3"></i>
+                        <p>${error}</p>
+                    </div>
+                `;
+                this.translationInfo.textContent = 'Translation failed';
+            }
+
+            swapLanguagePair() {
+                if (this.sourceLanguage.value === 'auto') {
+                    return; // Can't swap from auto-detect
+                }
+                
+                const temp = this.sourceLanguage.value;
+                this.sourceLanguage.value = this.targetLanguage.value;
+                this.targetLanguage.value = temp;
+                
+                // Also swap the text
+                if (this.currentTranslation && this.sourceText.value) {
+                    const tempText = this.sourceText.value;
+                    this.sourceText.value = this.currentTranslation;
+                    this.currentTranslation = tempText;
+                }
+                
+                this.handleTextChange();
+            }
+
+            clearAll() {
+                this.sourceText.value = '';
+                this.currentTranslation = '';
+                this.showPlaceholder();
+                this.updateCharacterCount();
+            }
+
+            async pasteFromClipboard() {
+                try {
+                    const text = await navigator.clipboard.readText();
+                    this.sourceText.value = text;
+                    this.handleTextChange();
+                } catch (error) {
+                    console.log('Clipboard access denied');
+                }
+            }
+
+            speakText(text, lang) {
+                if (!text || !this.speechSynthesis) return;
+                
+                // Stop any current speech
+                this.speechSynthesis.cancel();
+                
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = this.getVoiceLang(lang);
+                utterance.rate = 0.9;
+                utterance.pitch = 1;
+                
+                this.speechSynthesis.speak(utterance);
+            }
+
+            getVoiceLang(langCode) {
+                const voiceMap = {
+                    'en': 'en-US', 'es': 'es-ES', 'fr': 'fr-FR', 'de': 'de-DE',
+                    'it': 'it-IT', 'pt': 'pt-PT', 'ru': 'ru-RU', 'ja': 'ja-JP',
+                    'ko': 'ko-KR', 'zh': 'zh-CN', 'zh-TW': 'zh-TW', 'ar': 'ar-SA',
+                    'hi': 'hi-IN', 'tr': 'tr-TR', 'nl': 'nl-NL', 'sv': 'sv-SE',
+                    'da': 'da-DK', 'no': 'nb-NO', 'pl': 'pl-PL'
+                };
+                return voiceMap[langCode] || 'en-US';
+            }
+
+            copyToClipboard() {
+                if (!this.currentTranslation) return;
+                
+                navigator.clipboard.writeText(this.currentTranslation).then(() => {
+                    this.copyTranslation.innerHTML = '<i class="fas fa-check mr-1"></i>Copied!';
+                    setTimeout(() => {
+                        this.copyTranslation.innerHTML = '<i class="fas fa-copy mr-1"></i>Copy';
+                    }, 2000);
+                });
             }
         }
+
+        // Initialize Live Translator when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new LiveTranslator();
+        });
 
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {

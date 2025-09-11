@@ -845,6 +845,217 @@
         </div>
     </section>
 
+    <!-- Live Website Builder Demo -->
+    <section id="website-builder-demo" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                    <i class="fas fa-magic text-primary-blue mr-3"></i>AI Website Builder Demo
+                </h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Generate complete, functional websites instantly with Qwen AI. Just describe what you want!
+                </p>
+                <div class="mt-4">
+                    <span id="connectionStatus" class="text-sm px-4 py-2 rounded-full bg-gray-100 text-gray-600">
+                        <i class="fas fa-circle text-gray-400"></i> Connecting to AI...
+                    </span>
+                </div>
+            </div>
+
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Input Panel -->
+                    <div class="bg-white rounded-xl shadow-lg border border-blue-200 p-8">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-code text-blue-600 mr-2"></i>Website Requirements
+                        </h3>
+
+                        <!-- Website Description -->
+                        <div class="mb-6">
+                            <label class="block text-lg font-semibold text-gray-700 mb-3">Describe Your Website</label>
+                            <textarea id="websiteDescription" rows="4" 
+                                     placeholder="Example: Create a modern portfolio website for a photographer with a dark theme, image gallery, contact form, and smooth scrolling animations"
+                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"></textarea>
+                            <p class="text-sm text-gray-500 mt-2">Be specific about design, functionality, and style preferences</p>
+                        </div>
+
+                        <!-- Website Type -->
+                        <div class="mb-6">
+                            <label class="block text-lg font-semibold text-gray-700 mb-3">Website Type</label>
+                            <select id="websiteType" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="portfolio" selected>Portfolio/Personal</option>
+                                <option value="business">Business/Corporate</option>
+                                <option value="blog">Blog/Content Site</option>
+                                <option value="ecommerce">E-commerce/Shop</option>
+                                <option value="landing">Landing Page</option>
+                                <option value="restaurant">Restaurant/Food</option>
+                                <option value="agency">Creative Agency</option>
+                                <option value="nonprofit">Non-profit/Charity</option>
+                                <option value="startup">Startup/Tech</option>
+                                <option value="custom">Custom</option>
+                            </select>
+                        </div>
+
+                        <!-- Design Style -->
+                        <div class="mb-6">
+                            <label class="block text-lg font-semibold text-gray-700 mb-3">Design Style</label>
+                            <select id="designStyle" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="modern" selected>Modern & Clean</option>
+                                <option value="minimalist">Minimalist</option>
+                                <option value="creative">Creative & Bold</option>
+                                <option value="professional">Professional</option>
+                                <option value="dark">Dark Theme</option>
+                                <option value="colorful">Colorful & Vibrant</option>
+                                <option value="elegant">Elegant & Sophisticated</option>
+                                <option value="playful">Fun & Playful</option>
+                            </select>
+                        </div>
+
+                        <!-- Features -->
+                        <div class="mb-6">
+                            <label class="block text-lg font-semibold text-gray-700 mb-3">Required Features</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <label class="flex items-center">
+                                    <input type="checkbox" id="feature-responsive" checked class="mr-2 text-blue-500">
+                                    <span class="text-sm">Responsive Design</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" id="feature-navigation" checked class="mr-2 text-blue-500">
+                                    <span class="text-sm">Navigation Menu</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" id="feature-contact" class="mr-2 text-blue-500">
+                                    <span class="text-sm">Contact Form</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" id="feature-gallery" class="mr-2 text-blue-500">
+                                    <span class="text-sm">Image Gallery</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" id="feature-animations" class="mr-2 text-blue-500">
+                                    <span class="text-sm">Animations</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="checkbox" id="feature-social" class="mr-2 text-blue-500">
+                                    <span class="text-sm">Social Media</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Quick Templates -->
+                        <div class="mb-6">
+                            <label class="block text-lg font-semibold text-gray-700 mb-3">Quick Templates</label>
+                            <div class="flex flex-wrap gap-2">
+                                <button class="template-btn bg-blue-100 hover:bg-blue-200 text-blue-800 px-3 py-2 rounded-lg text-sm transition-colors" 
+                                        data-template="Create a modern portfolio website for a web developer with dark theme, project showcase, skills section, and contact form">
+                                    Developer Portfolio
+                                </button>
+                                <button class="template-btn bg-green-100 hover:bg-green-200 text-green-800 px-3 py-2 rounded-lg text-sm transition-colors" 
+                                        data-template="Build a restaurant website with hero image, menu section, online ordering, location info, and customer reviews">
+                                    Restaurant Site
+                                </button>
+                                <button class="template-btn bg-purple-100 hover:bg-purple-200 text-purple-800 px-3 py-2 rounded-lg text-sm transition-colors" 
+                                        data-template="Design a creative agency landing page with animated sections, service offerings, team profiles, and portfolio gallery">
+                                    Agency Landing
+                                </button>
+                                <button class="template-btn bg-orange-100 hover:bg-orange-200 text-orange-800 px-3 py-2 rounded-lg text-sm transition-colors" 
+                                        data-template="Create a startup website with product features, pricing tables, testimonials, and call-to-action buttons">
+                                    Startup Site
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Generate Button -->
+                        <button id="generateWebsite" class="w-full bg-primary-blue hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed">
+                            <i class="fas fa-magic mr-2"></i><span id="generateButtonText">Generate Website</span>
+                        </button>
+                    </div>
+
+                    <!-- Preview Panel -->
+                    <div class="bg-white rounded-xl shadow-lg border border-blue-200 overflow-hidden">
+                        <div class="flex items-center justify-between p-6 border-b border-gray-200">
+                            <h3 class="text-2xl font-bold text-gray-800">
+                                <i class="fas fa-desktop text-green-600 mr-2"></i>Live Preview
+                            </h3>
+                            <div class="flex space-x-2">
+                                <button id="copyCode" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors text-sm disabled:bg-gray-300" disabled>
+                                    <i class="fas fa-copy mr-1"></i>Copy HTML
+                                </button>
+                                <button id="downloadCode" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors text-sm disabled:bg-gray-300" disabled>
+                                    <i class="fas fa-download mr-1"></i>Download
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Website Preview -->
+                        <div class="relative" style="height: 500px;">
+                            <iframe id="websitePreview" class="w-full h-full border-none" 
+                                    style="transform: scale(0.8); transform-origin: top left; width: 125%; height: 125%;">
+                            </iframe>
+                            
+                            <!-- Placeholder Content -->
+                            <div id="previewPlaceholder" class="absolute inset-0 flex items-center justify-center bg-gray-50">
+                                <div class="text-center text-gray-500">
+                                    <i class="fas fa-globe text-4xl mb-4 text-gray-400"></i>
+                                    <p class="text-lg">Generated website will appear here</p>
+                                    <p class="text-sm mt-2">Describe your website and click "Generate Website"</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Code View Toggle -->
+                        <div class="p-4 bg-gray-50 border-t border-gray-200">
+                            <div class="flex items-center justify-between">
+                                <div class="flex space-x-4">
+                                    <button id="previewTab" class="px-4 py-2 bg-blue-500 text-white rounded-lg transition-colors">
+                                        <i class="fas fa-eye mr-1"></i>Preview
+                                    </button>
+                                    <button id="codeTab" class="px-4 py-2 bg-gray-300 text-gray-700 hover:bg-gray-400 rounded-lg transition-colors">
+                                        <i class="fas fa-code mr-1"></i>HTML Code
+                                    </button>
+                                </div>
+                                <div class="text-sm text-gray-600" id="codeStats" style="display: none;">
+                                    Lines: <span id="lineCount">0</span> | Size: <span id="codeSize">0 KB</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Code Editor -->
+                        <div id="codeView" class="hidden">
+                            <textarea id="codeEditor" class="w-full h-96 p-4 font-mono text-sm border-none resize-none bg-gray-900 text-green-400" 
+                                     readonly placeholder="Generated HTML code will appear here..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Generation Tips -->
+                <div class="mt-12 bg-blue-50 rounded-xl p-8">
+                    <h4 class="text-xl font-bold text-blue-800 mb-4">
+                        <i class="fas fa-lightbulb mr-2"></i>Tips for Better Results
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h5 class="font-semibold text-blue-700 mb-2">Be Specific</h5>
+                            <p class="text-blue-600 text-sm">Mention colors, layout preferences, specific sections, and functionality you need.</p>
+                        </div>
+                        <div>
+                            <h5 class="font-semibold text-blue-700 mb-2">Include Content Hints</h5>
+                            <p class="text-blue-600 text-sm">Describe the type of content, industry, and target audience for better customization.</p>
+                        </div>
+                        <div>
+                            <h5 class="font-semibold text-blue-700 mb-2">Mention Frameworks</h5>
+                            <p class="text-blue-600 text-sm">Specify if you want Bootstrap, Tailwind CSS, or other specific technologies.</p>
+                        </div>
+                        <div>
+                            <h5 class="font-semibold text-blue-700 mb-2">Interactive Elements</h5>
+                            <p class="text-blue-600 text-sm">Request forms, buttons, modals, or animations for more dynamic websites.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="gradient-bg text-white py-12">
         <div class="container mx-auto px-4">
@@ -893,6 +1104,281 @@
     </footer>
 
     <script>
+        // Website Builder Functionality
+        class WebsiteBuilder {
+            constructor() {
+                this.apiUrl = 'http://localhost:8001';
+                this.isConnected = false;
+                this.isGenerating = false;
+                this.generatedCode = '';
+                
+                this.initializeElements();
+                this.setupEventListeners();
+                this.checkConnection();
+            }
+
+            initializeElements() {
+                this.websiteDescription = document.getElementById('websiteDescription');
+                this.websiteType = document.getElementById('websiteType');
+                this.designStyle = document.getElementById('designStyle');
+                this.generateButton = document.getElementById('generateWebsite');
+                this.generateButtonText = document.getElementById('generateButtonText');
+                this.connectionStatus = document.getElementById('connectionStatus');
+                this.websitePreview = document.getElementById('websitePreview');
+                this.previewPlaceholder = document.getElementById('previewPlaceholder');
+                this.codeEditor = document.getElementById('codeEditor');
+                this.codeView = document.getElementById('codeView');
+                this.previewTab = document.getElementById('previewTab');
+                this.codeTab = document.getElementById('codeTab');
+                this.copyCode = document.getElementById('copyCode');
+                this.downloadCode = document.getElementById('downloadCode');
+                this.codeStats = document.getElementById('codeStats');
+                this.lineCount = document.getElementById('lineCount');
+                this.codeSize = document.getElementById('codeSize');
+            }
+
+            setupEventListeners() {
+                this.generateButton.addEventListener('click', () => this.generateWebsite());
+                this.copyCode.addEventListener('click', () => this.copyToClipboard());
+                this.downloadCode.addEventListener('click', () => this.downloadHTML());
+
+                // Tab switching
+                this.previewTab.addEventListener('click', () => this.showPreview());
+                this.codeTab.addEventListener('click', () => this.showCode());
+
+                // Template buttons
+                document.querySelectorAll('.template-btn').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        this.websiteDescription.value = e.target.dataset.template;
+                    });
+                });
+
+                // Auto-resize textarea
+                this.websiteDescription.addEventListener('input', () => {
+                    this.websiteDescription.style.height = 'auto';
+                    this.websiteDescription.style.height = this.websiteDescription.scrollHeight + 'px';
+                });
+            }
+
+            async checkConnection() {
+                try {
+                    const response = await fetch(`${this.apiUrl}/health`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.model_loaded) {
+                            this.setConnectionStatus('Connected to Qwen AI', 'green', true);
+                        } else {
+                            this.setConnectionStatus('Server running, loading model...', 'yellow', false);
+                        }
+                    } else {
+                        this.setConnectionStatus('Server not responding', 'red', false);
+                    }
+                } catch (error) {
+                    this.setConnectionStatus('Please start Qwen server', 'red', false);
+                }
+            }
+
+            setConnectionStatus(message, color, connected) {
+                this.isConnected = connected;
+                this.connectionStatus.innerHTML = `
+                    <i class="fas fa-circle text-${color}-400"></i> ${message}
+                `;
+                this.connectionStatus.className = `text-sm px-4 py-2 rounded-full bg-${color}-50 text-${color}-600`;
+                
+                this.generateButton.disabled = !connected || this.isGenerating;
+            }
+
+            getSelectedFeatures() {
+                const features = [];
+                if (document.getElementById('feature-responsive').checked) features.push('responsive design');
+                if (document.getElementById('feature-navigation').checked) features.push('navigation menu');
+                if (document.getElementById('feature-contact').checked) features.push('contact form');
+                if (document.getElementById('feature-gallery').checked) features.push('image gallery');
+                if (document.getElementById('feature-animations').checked) features.push('smooth animations');
+                if (document.getElementById('feature-social').checked) features.push('social media links');
+                return features;
+            }
+
+            createDetailedPrompt(description) {
+                const type = this.websiteType.value;
+                const style = this.designStyle.value;
+                const features = this.getSelectedFeatures();
+                
+                const prompt = `Create a complete, professional HTML website with the following specifications:
+
+Website Description: ${description}
+
+Website Type: ${type}
+Design Style: ${style}
+Required Features: ${features.join(', ')}
+
+Technical Requirements:
+- Use modern HTML5, CSS3, and JavaScript
+- Include Tailwind CSS via CDN for styling
+- Add Font Awesome icons via CDN
+- Make it fully responsive for mobile, tablet, and desktop
+- Include proper meta tags for SEO
+- Add smooth scrolling and hover effects
+- Use semantic HTML elements
+- Include placeholder images from https://picsum.photos/
+- Make all links and buttons functional with appropriate JavaScript
+- Add proper spacing, typography, and color schemes
+- Include comments in the code for clarity
+
+Please generate a complete, single-file HTML document that includes all CSS and JavaScript inline. The website should be production-ready and visually appealing.
+
+HTML Code:`;
+
+                return prompt;
+            }
+
+            async generateWebsite() {
+                const description = this.websiteDescription.value.trim();
+                if (!description || !this.isConnected || this.isGenerating) return;
+
+                this.isGenerating = true;
+                this.generateButton.disabled = true;
+                this.generateButtonText.textContent = 'Generating Website...';
+                this.showGeneratingMessage();
+
+                const detailedPrompt = this.createDetailedPrompt(description);
+
+                try {
+                    const response = await fetch(`${this.apiUrl}/api/generate-code`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            description: detailedPrompt,
+                            language: 'html',
+                            framework: 'Tailwind CSS'
+                        })
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        this.displayGeneratedWebsite(data.code);
+                        this.updateCodeStats(data.code);
+                    } else {
+                        throw new Error('Failed to generate website');
+                    }
+                } catch (error) {
+                    this.showError(`Error: ${error.message}. Please check if the Qwen server is running.`);
+                } finally {
+                    this.isGenerating = false;
+                    this.generateButton.disabled = !this.isConnected;
+                    this.generateButtonText.textContent = 'Generate Website';
+                }
+            }
+
+            showGeneratingMessage() {
+                this.previewPlaceholder.innerHTML = `
+                    <div class="text-center text-gray-500">
+                        <div class="animate-spin w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full mx-auto mb-4"></div>
+                        <p class="text-lg font-semibold">Generating your website...</p>
+                        <p class="text-sm mt-2">This may take 30-60 seconds</p>
+                    </div>
+                `;
+                this.previewPlaceholder.style.display = 'flex';
+            }
+
+            displayGeneratedWebsite(htmlCode) {
+                // Clean up the code - remove any markdown formatting
+                let cleanCode = htmlCode;
+                if (cleanCode.includes('```html')) {
+                    cleanCode = cleanCode.split('```html')[1];
+                }
+                if (cleanCode.includes('```')) {
+                    cleanCode = cleanCode.split('```')[0];
+                }
+                cleanCode = cleanCode.trim();
+
+                this.generatedCode = cleanCode;
+                this.codeEditor.value = cleanCode;
+
+                // Update preview
+                const blob = new Blob([cleanCode], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                this.websitePreview.src = url;
+                
+                // Hide placeholder
+                this.previewPlaceholder.style.display = 'none';
+                
+                // Enable action buttons
+                this.copyCode.disabled = false;
+                this.downloadCode.disabled = false;
+            }
+
+            showError(error) {
+                this.previewPlaceholder.innerHTML = `
+                    <div class="text-center text-red-500">
+                        <i class="fas fa-exclamation-triangle text-4xl mb-4"></i>
+                        <p class="text-lg font-semibold">${error}</p>
+                        <button onclick="location.reload()" class="mt-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg">
+                            Retry
+                        </button>
+                    </div>
+                `;
+                this.previewPlaceholder.style.display = 'flex';
+            }
+
+            updateCodeStats(code) {
+                const lines = code.split('\n').length;
+                const sizeKB = (new Blob([code]).size / 1024).toFixed(1);
+                
+                this.lineCount.textContent = lines;
+                this.codeSize.textContent = sizeKB;
+            }
+
+            showPreview() {
+                this.previewTab.className = 'px-4 py-2 bg-blue-500 text-white rounded-lg transition-colors';
+                this.codeTab.className = 'px-4 py-2 bg-gray-300 text-gray-700 hover:bg-gray-400 rounded-lg transition-colors';
+                this.codeView.classList.add('hidden');
+                this.websitePreview.parentElement.style.display = 'block';
+                this.codeStats.style.display = 'none';
+            }
+
+            showCode() {
+                this.codeTab.className = 'px-4 py-2 bg-blue-500 text-white rounded-lg transition-colors';
+                this.previewTab.className = 'px-4 py-2 bg-gray-300 text-gray-700 hover:bg-gray-400 rounded-lg transition-colors';
+                this.codeView.classList.remove('hidden');
+                this.websitePreview.parentElement.style.display = 'none';
+                this.codeStats.style.display = 'block';
+            }
+
+            copyToClipboard() {
+                navigator.clipboard.writeText(this.generatedCode).then(() => {
+                    this.copyCode.innerHTML = '<i class="fas fa-check mr-1"></i>Copied!';
+                    setTimeout(() => {
+                        this.copyCode.innerHTML = '<i class="fas fa-copy mr-1"></i>Copy HTML';
+                    }, 2000);
+                });
+            }
+
+            downloadHTML() {
+                const blob = new Blob([this.generatedCode], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'ai-generated-website.html';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+
+                this.downloadCode.innerHTML = '<i class="fas fa-check mr-1"></i>Downloaded!';
+                setTimeout(() => {
+                    this.downloadCode.innerHTML = '<i class="fas fa-download mr-1"></i>Download';
+                }, 2000);
+            }
+        }
+
+        // Initialize Website Builder when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new WebsiteBuilder();
+        });
+
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -905,14 +1391,14 @@
 
         // Mobile menu toggle
         const mobileMenuButton = document.querySelector('.md\\:hidden');
+        const mobileMenu = document.querySelector('.md\\:flex');
+        
         if (mobileMenuButton) {
             mobileMenuButton.addEventListener('click', () => {
-                console.log('Mobile menu clicked');
+                mobileMenu.classList.toggle('hidden');
             });
         }
-
-        // Add animation on scroll for demo containers
-        const observerOptions = {
+    </script>
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };

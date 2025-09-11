@@ -731,6 +731,200 @@
         </div>
     </section>
 
+    <!-- AI Voice Script Generator -->
+    <section id="voice-script-generator" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                    <i class="fas fa-microphone text-primary-blue mr-3"></i>AI Voice Script Generator
+                </h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Generate professional voice scripts with Qwen AI. Perfect for podcasts, voice-overs, presentations, and audio content.
+                </p>
+                <div class="mt-4">
+                    <span id="connectionStatus" class="text-sm px-4 py-2 rounded-full bg-gray-100 text-gray-600">
+                        <i class="fas fa-circle text-gray-400"></i> Connecting to AI...
+                    </span>
+                </div>
+            </div>
+
+            <div class="max-w-6xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Input Panel -->
+                    <div class="bg-white rounded-xl shadow-lg border border-blue-200 p-8">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-edit text-blue-600 mr-2"></i>Script Settings
+                        </h3>
+
+                        <!-- Topic/Subject -->
+                        <div class="mb-6">
+                            <label class="block text-lg font-semibold text-gray-700 mb-3">Topic or Subject</label>
+                            <textarea id="scriptTopic" rows="3" 
+                                     placeholder="Example: Introduction to machine learning for beginners, focusing on practical applications in daily life"
+                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"></textarea>
+                            <p class="text-sm text-gray-500 mt-2">Describe what you want to talk about in detail</p>
+                        </div>
+
+                        <!-- Script Type -->
+                        <div class="mb-6">
+                            <label class="block text-lg font-semibold text-gray-700 mb-3">Script Type</label>
+                            <select id="scriptType" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="podcast" selected>Podcast Episode</option>
+                                <option value="presentation">Presentation/Speech</option>
+                                <option value="voiceover">Voice-over Narration</option>
+                                <option value="tutorial">Tutorial/How-to</option>
+                                <option value="advertisement">Advertisement/Commercial</option>
+                                <option value="audiobook">Audiobook Chapter</option>
+                                <option value="interview">Interview Script</option>
+                                <option value="announcement">Announcement</option>
+                                <option value="explainer">Explainer Video</option>
+                            </select>
+                        </div>
+
+                        <!-- Voice Style -->
+                        <div class="mb-6">
+                            <label class="block text-lg font-semibold text-gray-700 mb-3">Voice Style</label>
+                            <select id="voiceStyle" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="conversational" selected>Conversational & Friendly</option>
+                                <option value="professional">Professional & Formal</option>
+                                <option value="enthusiastic">Enthusiastic & Energetic</option>
+                                <option value="calm">Calm & Soothing</option>
+                                <option value="authoritative">Authoritative & Confident</option>
+                                <option value="educational">Educational & Clear</option>
+                                <option value="dramatic">Dramatic & Engaging</option>
+                                <option value="humorous">Humorous & Light</option>
+                            </select>
+                        </div>
+
+                        <!-- Duration -->
+                        <div class="mb-6">
+                            <label class="block text-lg font-semibold text-gray-700 mb-3">Target Duration</label>
+                            <select id="scriptDuration" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="short">30 seconds - 1 minute</option>
+                                <option value="medium" selected>2 - 5 minutes</option>
+                                <option value="long">5 - 10 minutes</option>
+                                <option value="extended">10+ minutes</option>
+                            </select>
+                        </div>
+
+                        <!-- Target Audience -->
+                        <div class="mb-6">
+                            <label class="block text-lg font-semibold text-gray-700 mb-3">Target Audience</label>
+                            <select id="targetAudience" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="general" selected>General Audience</option>
+                                <option value="professionals">Business Professionals</option>
+                                <option value="students">Students & Learners</option>
+                                <option value="children">Children & Kids</option>
+                                <option value="seniors">Seniors</option>
+                                <option value="tech-savvy">Tech-Savvy Users</option>
+                                <option value="beginners">Complete Beginners</option>
+                                <option value="experts">Industry Experts</option>
+                            </select>
+                        </div>
+
+                        <!-- Quick Templates -->
+                        <div class="mb-6">
+                            <label class="block text-lg font-semibold text-gray-700 mb-3">Quick Templates</label>
+                            <div class="flex flex-wrap gap-2">
+                                <button class="template-btn bg-blue-100 hover:bg-blue-200 text-blue-800 px-3 py-2 rounded-lg text-sm transition-colors" 
+                                        data-template="Create a podcast introduction about the benefits of meditation and mindfulness practices for busy professionals">
+                                    Podcast Intro
+                                </button>
+                                <button class="template-btn bg-green-100 hover:bg-green-200 text-green-800 px-3 py-2 rounded-lg text-sm transition-colors" 
+                                        data-template="Write a tutorial script explaining how to set up a home office for maximum productivity and comfort">
+                                    Tutorial Guide
+                                </button>
+                                <button class="template-btn bg-purple-100 hover:bg-purple-200 text-purple-800 px-3 py-2 rounded-lg text-sm transition-colors" 
+                                        data-template="Create an advertisement script for a new eco-friendly product that helps reduce plastic waste">
+                                    Advertisement
+                                </button>
+                                <button class="template-btn bg-orange-100 hover:bg-orange-200 text-orange-800 px-3 py-2 rounded-lg text-sm transition-colors" 
+                                        data-template="Generate a presentation script about the future of artificial intelligence in healthcare and medicine">
+                                    Presentation
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Generate Button -->
+                        <button id="generateScript" class="w-full bg-primary-blue hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed">
+                            <i class="fas fa-magic mr-2"></i><span id="generateButtonText">Generate Voice Script</span>
+                        </button>
+                    </div>
+
+                    <!-- Output Panel -->
+                    <div class="bg-white rounded-xl shadow-lg border border-blue-200 p-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-2xl font-bold text-gray-800">
+                                <i class="fas fa-file-audio text-green-600 mr-2"></i>Generated Script
+                            </h3>
+                            <div class="flex space-x-2">
+                                <button id="playScript" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors text-sm disabled:bg-gray-300" disabled>
+                                    <i class="fas fa-play mr-1"></i>Read Aloud
+                                </button>
+                                <button id="copyScript" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors text-sm disabled:bg-gray-300" disabled>
+                                    <i class="fas fa-copy mr-1"></i>Copy
+                                </button>
+                                <button id="downloadScript" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors text-sm disabled:bg-gray-300" disabled>
+                                    <i class="fas fa-download mr-1"></i>Download
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Script Output -->
+                        <div id="scriptOutput" class="bg-gray-50 border border-gray-200 rounded-lg p-6 text-gray-700 leading-relaxed min-h-80 max-h-96 overflow-y-auto">
+                            <div class="text-center text-gray-500 py-12">
+                                <i class="fas fa-microphone text-4xl mb-4 text-gray-400"></i>
+                                <p class="text-lg">Your AI-generated script will appear here</p>
+                                <p class="text-sm mt-2">Fill out the script settings and click "Generate Voice Script"</p>
+                            </div>
+                        </div>
+
+                        <!-- Script Analysis -->
+                        <div id="scriptAnalysis" class="mt-6 p-4 bg-blue-50 rounded-lg hidden">
+                            <h4 class="font-semibold text-blue-800 mb-2">Script Analysis</h4>
+                            <div class="grid grid-cols-4 gap-4 text-sm">
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-blue-600" id="wordCount">0</div>
+                                    <div class="text-blue-800">Words</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-green-600" id="readTime">0</div>
+                                    <div class="text-green-800">Min Read</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-purple-600" id="speakTime">0</div>
+                                    <div class="text-purple-800">Min Speak</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-orange-600" id="sentences">0</div>
+                                    <div class="text-orange-800">Sentences</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Voice Settings Panel -->
+                        <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+                            <h4 class="font-semibold text-gray-700 mb-3">Text-to-Speech Settings</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <label class="block text-gray-600 mb-1">Voice</label>
+                                    <select id="voiceSelect" class="w-full border border-gray-300 rounded px-2 py-1 text-sm">
+                                        <!-- Populated by JavaScript -->
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-600 mb-1">Speed</label>
+                                    <input type="range" id="speechRate" min="0.5" max="2" step="0.1" value="1" class="w-full">
+                                    <span id="rateValue" class="text-gray-600">1x</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="gradient-bg text-white py-12">
         <div class="container mx-auto px-4">
@@ -816,6 +1010,297 @@
                 console.log('Mobile menu clicked');
             });
         }
+
+        // Voice Script Generator Functionality
+        class VoiceScriptGenerator {
+            constructor() {
+                this.apiUrl = 'http://localhost:8001';
+                this.isConnected = false;
+                this.isGenerating = false;
+                this.generatedScript = '';
+                this.speechSynthesis = window.speechSynthesis;
+                this.currentUtterance = null;
+                
+                this.initializeElements();
+                this.setupEventListeners();
+                this.loadVoices();
+                this.checkConnection();
+            }
+
+            initializeElements() {
+                this.scriptTopic = document.getElementById('scriptTopic');
+                this.scriptType = document.getElementById('scriptType');
+                this.voiceStyle = document.getElementById('voiceStyle');
+                this.scriptDuration = document.getElementById('scriptDuration');
+                this.targetAudience = document.getElementById('targetAudience');
+                this.generateButton = document.getElementById('generateScript');
+                this.generateButtonText = document.getElementById('generateButtonText');
+                this.connectionStatus = document.getElementById('connectionStatus');
+                this.scriptOutput = document.getElementById('scriptOutput');
+                this.playScript = document.getElementById('playScript');
+                this.copyScript = document.getElementById('copyScript');
+                this.downloadScript = document.getElementById('downloadScript');
+                this.scriptAnalysis = document.getElementById('scriptAnalysis');
+                this.wordCount = document.getElementById('wordCount');
+                this.readTime = document.getElementById('readTime');
+                this.speakTime = document.getElementById('speakTime');
+                this.sentences = document.getElementById('sentences');
+                this.voiceSelect = document.getElementById('voiceSelect');
+                this.speechRate = document.getElementById('speechRate');
+                this.rateValue = document.getElementById('rateValue');
+            }
+
+            setupEventListeners() {
+                if (!this.generateButton) return; // Exit if elements not found
+                
+                this.generateButton.addEventListener('click', () => this.generateScript());
+                this.playScript.addEventListener('click', () => this.togglePlayback());
+                this.copyScript.addEventListener('click', () => this.copyToClipboard());
+                this.downloadScript.addEventListener('click', () => this.downloadScriptFile());
+
+                // Template buttons
+                document.querySelectorAll('.template-btn').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        this.scriptTopic.value = e.target.dataset.template;
+                    });
+                });
+
+                // Speech rate slider
+                this.speechRate.addEventListener('input', (e) => {
+                    this.rateValue.textContent = e.target.value + 'x';
+                });
+
+                // Auto-resize textarea
+                this.scriptTopic.addEventListener('input', () => {
+                    this.scriptTopic.style.height = 'auto';
+                    this.scriptTopic.style.height = this.scriptTopic.scrollHeight + 'px';
+                });
+            }
+
+            loadVoices() {
+                // Load available voices for text-to-speech
+                const loadVoicesList = () => {
+                    const voices = this.speechSynthesis.getVoices();
+                    if (this.voiceSelect) {
+                        this.voiceSelect.innerHTML = '';
+                        
+                        voices.forEach((voice, index) => {
+                            const option = document.createElement('option');
+                            option.value = index;
+                            option.textContent = `${voice.name} (${voice.lang})`;
+                            if (voice.default) option.selected = true;
+                            this.voiceSelect.appendChild(option);
+                        });
+                    }
+                };
+
+                loadVoicesList();
+                this.speechSynthesis.addEventListener('voiceschanged', loadVoicesList);
+            }
+
+            async checkConnection() {
+                if (!this.connectionStatus) return;
+                
+                try {
+                    const response = await fetch(`${this.apiUrl}/health`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.model_loaded) {
+                            this.setConnectionStatus('Connected to Qwen AI', 'green', true);
+                        } else {
+                            this.setConnectionStatus('Server running, loading model...', 'yellow', false);
+                        }
+                    } else {
+                        this.setConnectionStatus('Server not responding', 'red', false);
+                    }
+                } catch (error) {
+                    this.setConnectionStatus('Please start Qwen server', 'red', false);
+                }
+            }
+
+            setConnectionStatus(message, color, connected) {
+                this.isConnected = connected;
+                this.connectionStatus.innerHTML = `
+                    <i class="fas fa-circle text-${color}-400"></i> ${message}
+                `;
+                this.connectionStatus.className = `text-sm px-4 py-2 rounded-full bg-${color}-50 text-${color}-600`;
+                
+                if (this.generateButton) {
+                    this.generateButton.disabled = !connected || this.isGenerating;
+                }
+            }
+
+            async generateScript() {
+                const topic = this.scriptTopic.value.trim();
+                if (!topic || !this.isConnected || this.isGenerating) return;
+
+                this.isGenerating = true;
+                this.generateButton.disabled = true;
+                this.generateButtonText.textContent = 'Generating Script...';
+                this.showGeneratingMessage();
+
+                try {
+                    const response = await fetch(`${this.apiUrl}/api/voice-script`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            topic: topic,
+                            style: this.voiceStyle.value,
+                            duration: this.scriptDuration.value,
+                            voice_type: this.targetAudience.value
+                        })
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        this.displayScript(data.script);
+                        this.updateAnalysis(data.script);
+                    } else {
+                        throw new Error('Failed to generate script');
+                    }
+                } catch (error) {
+                    this.showError(`Error: ${error.message}. Please check if the Qwen server is running.`);
+                } finally {
+                    this.isGenerating = false;
+                    this.generateButton.disabled = !this.isConnected;
+                    this.generateButtonText.textContent = 'Generate Voice Script';
+                }
+            }
+
+            showGeneratingMessage() {
+                this.scriptOutput.innerHTML = `
+                    <div class="text-center text-gray-500 py-12">
+                        <div class="animate-spin w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full mx-auto mb-4"></div>
+                        <p class="text-lg font-semibold">Creating your voice script...</p>
+                        <p class="text-sm mt-2">This may take 30-60 seconds</p>
+                    </div>
+                `;
+            }
+
+            displayScript(script) {
+                this.generatedScript = script;
+                
+                // Format script with proper paragraphs and stage directions
+                const formattedScript = script
+                    .split('\n')
+                    .map(line => line.trim())
+                    .filter(line => line.length > 0)
+                    .map(line => {
+                        // Highlight stage directions
+                        if (line.includes('[') && line.includes(']')) {
+                            return `<p class="mb-3"><em class="text-blue-600">${line}</em></p>`;
+                        }
+                        return `<p class="mb-3">${line}</p>`;
+                    })
+                    .join('');
+
+                this.scriptOutput.innerHTML = formattedScript || '<p>Generated script content will appear here.</p>';
+                
+                // Enable action buttons
+                this.playScript.disabled = false;
+                this.copyScript.disabled = false;
+                this.downloadScript.disabled = false;
+            }
+
+            showError(error) {
+                this.scriptOutput.innerHTML = `
+                    <div class="text-center text-red-500 py-12">
+                        <i class="fas fa-exclamation-triangle text-4xl mb-4"></i>
+                        <p class="text-lg font-semibold">${error}</p>
+                        <button onclick="location.reload()" class="mt-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg">
+                            Retry
+                        </button>
+                    </div>
+                `;
+            }
+
+            updateAnalysis(script) {
+                const words = script.split(/\s+/).filter(word => word.length > 0).length;
+                const sentences = script.split(/[.!?]+/).filter(s => s.trim().length > 0).length;
+                const readingSpeed = 200; // words per minute reading
+                const speakingSpeed = 150; // words per minute speaking
+                const readTime = Math.ceil(words / readingSpeed);
+                const speakTime = Math.ceil(words / speakingSpeed);
+
+                this.wordCount.textContent = words.toLocaleString();
+                this.readTime.textContent = readTime;
+                this.speakTime.textContent = speakTime;
+                this.sentences.textContent = sentences;
+
+                this.scriptAnalysis.classList.remove('hidden');
+            }
+
+            togglePlayback() {
+                if (this.speechSynthesis.speaking) {
+                    this.speechSynthesis.cancel();
+                    this.playScript.innerHTML = '<i class="fas fa-play mr-1"></i>Read Aloud';
+                    return;
+                }
+
+                // Create utterance
+                this.currentUtterance = new SpeechSynthesisUtterance(this.generatedScript);
+                
+                // Set voice settings
+                const voices = this.speechSynthesis.getVoices();
+                const selectedVoiceIndex = this.voiceSelect.value;
+                if (voices[selectedVoiceIndex]) {
+                    this.currentUtterance.voice = voices[selectedVoiceIndex];
+                }
+                
+                this.currentUtterance.rate = parseFloat(this.speechRate.value);
+                this.currentUtterance.pitch = 1;
+                this.currentUtterance.volume = 1;
+
+                // Event handlers
+                this.currentUtterance.onstart = () => {
+                    this.playScript.innerHTML = '<i class="fas fa-stop mr-1"></i>Stop';
+                };
+
+                this.currentUtterance.onend = () => {
+                    this.playScript.innerHTML = '<i class="fas fa-play mr-1"></i>Read Aloud';
+                };
+
+                this.currentUtterance.onerror = () => {
+                    this.playScript.innerHTML = '<i class="fas fa-play mr-1"></i>Read Aloud';
+                };
+
+                // Start speaking
+                this.speechSynthesis.speak(this.currentUtterance);
+            }
+
+            copyToClipboard() {
+                navigator.clipboard.writeText(this.generatedScript).then(() => {
+                    this.copyScript.innerHTML = '<i class="fas fa-check mr-1"></i>Copied!';
+                    setTimeout(() => {
+                        this.copyScript.innerHTML = '<i class="fas fa-copy mr-1"></i>Copy';
+                    }, 2000);
+                });
+            }
+
+            downloadScriptFile() {
+                const blob = new Blob([this.generatedScript], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'voice-script.txt';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+
+                this.downloadScript.innerHTML = '<i class="fas fa-check mr-1"></i>Downloaded!';
+                setTimeout(() => {
+                    this.downloadScript.innerHTML = '<i class="fas fa-download mr-1"></i>Download';
+                }, 2000);
+            }
+        }
+
+        // Initialize Voice Script Generator when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new VoiceScriptGenerator();
+        });
     </script>
 </body>
 </html>
