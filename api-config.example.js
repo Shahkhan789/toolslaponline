@@ -1,25 +1,36 @@
-// API Configuration Template
-// Copy this file to 'api-config.js' and add your API keys for local development
-// Never commit api-config.js to version control
+// api-config.example.js
+// Example API config for local development.
+// Copy this file to api-config.js locally and replace the placeholder values with your real keys.
+// IMPORTANT: Do NOT commit api-config.js to the repository. Add it to .gitignore.
 
-const API_CONFIG = {
-    GROQ_API_KEY: 'your-groq-api-key-here',
-    YOUTUBE_API_KEY: 'your-youtube-api-key-here'
+window.TOOLSLAP_API_KEYS = {
+  // YouTube Data API v3 key (for client-side requests like public video metadata/transcripts)
+  // Example format: "AIzaSy..."
+  YOUTUBE_API_KEY: "YOUR_YOUTUBE_API_KEY_HERE",
+
+  // Groq AI key (server-side usage strongly recommended)
+  // Example format: "gsk_..."
+  // WARNING: Do not expose this key in browser JS for production. Use a server-side proxy.
+  GROQ_API_KEY: "YOUR_GROQ_API_KEY_HERE"
 };
 
-// Function to get API key securely
+// Backward compatibility with existing tools
+window.API_CONFIG = {
+  YOUTUBE_API_KEY: window.TOOLSLAP_API_KEYS.YOUTUBE_API_KEY,
+  GROQ_API_KEY: window.TOOLSLAP_API_KEYS.GROQ_API_KEY
+};
+
+// Function to get API key securely (backward compatibility)
 function getApiKey(service) {
-    switch(service) {
-        case 'groq':
-            return API_CONFIG.GROQ_API_KEY !== 'your-groq-api-key-here' ? API_CONFIG.GROQ_API_KEY : null;
-        case 'youtube':
-            return API_CONFIG.YOUTUBE_API_KEY !== 'your-youtube-api-key-here' ? API_CONFIG.YOUTUBE_API_KEY : null;
-        default:
-            return null;
-    }
+  switch(service) {
+    case 'groq':
+      return window.TOOLSLAP_API_KEYS.GROQ_API_KEY !== 'YOUR_GROQ_API_KEY_HERE' ? window.TOOLSLAP_API_KEYS.GROQ_API_KEY : null;
+    case 'youtube':
+      return window.TOOLSLAP_API_KEYS.YOUTUBE_API_KEY !== 'YOUR_YOUTUBE_API_KEY_HERE' ? window.TOOLSLAP_API_KEYS.YOUTUBE_API_KEY : null;
+    default:
+      return null;
+  }
 }
 
 // Make function globally available
-if (typeof window !== 'undefined') {
-    window.getApiKey = getApiKey;
-}
+window.getApiKey = getApiKey;
