@@ -883,6 +883,7 @@
                         <div class="dropdown-category">
                             <div class="category-title-dropdown">🤖 AI Tools</div>
                             <div class="category-tools">
+                                <a href="ai-image-analyzer.html" class="dropdown-tool" style="background: rgba(255, 215, 0, 0.1); color: #FFD700;">AI Image Analyzer</a>
                                 <a href="ai-chatbots.html" class="dropdown-tool" style="background: rgba(255, 215, 0, 0.1); color: #FFD700;">AI Chatbots</a>
                                 <a href="ai-image-generators.html" class="dropdown-tool" style="background: rgba(255, 215, 0, 0.1); color: #FFD700;">AI Image Generators</a>
                                 <a href="ai-website-builders.html" class="dropdown-tool" style="background: rgba(255, 215, 0, 0.1); color: #FFD700;">AI Website Builders</a>
@@ -970,11 +971,11 @@
     <main>
         <section class="hero-section">
             <h1 class="hero-title">Free Online Tools for Everything</h1>
-            <p class="hero-description">Access 65+ trending online tools including AI Chatbots (ChatGPT, Claude), AI Image Generators (DALL-E 3, Midjourney), AI Website Builders (Qwen AI, Webflow), AI Voice Generators, AI Translators, HEIC to JPG converter, Word to PDF, and more. No registration required!</p>
+            <p class="hero-description">Access 70+ trending online tools including advanced AI Image Analyzer, AI Chatbots (ChatGPT, Claude), AI Image Generators (DALL-E 3, Midjourney), AI Website Builders (Qwen AI, Webflow), AI Voice Generators, AI Translators, HEIC to JPG converter, Word to PDF, and more. No registration required!</p>
             
             <!-- SEO Keywords Section -->
             <div class="keywords-highlight" style="margin: 30px auto; max-width: 700px; font-size: 0.9rem; opacity: 0.8; text-align: center;">
-                <strong>🔥 Hot Tools:</strong> AI Chatbots (ChatGPT, Claude), AI Image Generators (DALL-E 3, Midjourney), AI Website Builders (Qwen AI), AI Voice Generators, AI Translators, AI Text to Speech, HEIC to JPG Converter, Word to PDF, PDF Compressor, Background Remover, and more!
+                <strong>🔥 Hot Tools:</strong> 🆕 NEW: AI Image Analyzer (OCR, Object Detection), AI Chatbots (ChatGPT, Claude), AI Image Generators (DALL-E 3, Midjourney), AI Website Builders (Qwen AI), AI Voice Generators, AI Translators, AI Text to Speech, HEIC to JPG Converter, Word to PDF, PDF Compressor, Background Remover, and more!
             </div>
             
             <div class="search-container">
@@ -1234,46 +1235,143 @@
                 </div>
             </div>
 
-            <!-- AI Tools - NEW High Priority Section -->
-            <div class="category-header">
-                <h2 class="category-title">🤖 AI Tools Hub - 2025's Best AI Technologies</h2>
-                <p class="category-description">Discover cutting-edge AI tools for chatbots, image generation, website building, voice synthesis, and translation powered by GPT-4, Claude, DALL-E 3, and more</p>
+            <!-- AI Tools Discovery Hub - Enhanced -->
+            <div class="category-header" id="ai-tools">
+                <h2 class="category-title">🤖 AI Tools Discovery Hub - 2025's Latest AI Technologies</h2>
+                <p class="category-description">Explore our comprehensive collection of 15+ cutting-edge AI tools powered by GPT-4, Claude, DALL-E 3, Qwen AI, and more advanced technologies</p>
+                
+                <!-- AI Tool Search & Filter -->
+                <div class="ai-tools-controls" style="margin: 30px 0; display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; align-items: center;">
+                    <input type="text" id="aiToolsSearch" placeholder="Search AI tools... (e.g., 'chatbot', 'image generator')" 
+                           style="padding: 12px 20px; border: 2px solid #3B82F6; border-radius: 25px; background: rgba(255,255,255,0.9); color: #1E1E2F; font-size: 14px; width: 300px; outline: none;" />
+                    
+                    <select id="aiToolsCategory" 
+                            style="padding: 12px 16px; border: 2px solid #3B82F6; border-radius: 25px; background: rgba(255,255,255,0.9); color: #1E1E2F; font-size: 14px; outline: none;">
+                        <option value="all">All AI Tools</option>
+                        <option value="chatbots">AI Chatbots</option>
+                        <option value="image">Image Generation</option>
+                        <option value="voice">Voice & Audio</option>
+                        <option value="website">Website Building</option>
+                        <option value="translation">Translation</option>
+                        <option value="analysis">Analysis & OCR</option>
+                        <option value="content">Content Creation</option>
+                    </select>
+                    
+                    <button id="showAllAiTools" class="btn" 
+                            style="background: linear-gradient(45deg, #3B82F6, #1D4ED8); color: white; padding: 12px 20px; border: none; border-radius: 25px; font-size: 14px; cursor: pointer; font-weight: bold;">
+                        <i class="fas fa-th-large"></i> View All
+                    </button>
+                </div>
+                
+                <!-- Usage Statistics -->
+                <div class="ai-tools-stats" style="display: flex; justify-content: center; gap: 40px; margin: 20px 0; flex-wrap: wrap;">
+                    <div class="stat-item" style="text-align: center; color: #3B82F6;">
+                        <div style="font-size: 2rem; font-weight: bold;">15+</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">AI Tools</div>
+                    </div>
+                    <div class="stat-item" style="text-align: center; color: #10B981;">
+                        <div style="font-size: 2rem; font-weight: bold;">500K+</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Monthly Users</div>
+                    </div>
+                    <div class="stat-item" style="text-align: center; color: #F59E0B;">
+                        <div style="font-size: 2rem; font-weight: bold;">24/7</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Availability</div>
+                    </div>
+                    <div class="stat-item" style="text-align: center; color: #8B5CF6;">
+                        <div style="font-size: 2rem; font-weight: bold;">Free</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Forever</div>
+                    </div>
+                </div>
             </div>
-            <div class="tools-grid">
-                <div class="tool-card" style="background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%); color: white; border: 2px solid #3B82F6;">
+            
+            <!-- Featured AI Tools Carousel -->
+            <div class="ai-tools-carousel" style="margin: 40px 0; overflow: hidden; position: relative;">
+                <h3 style="text-align: center; color: #FFD700; font-size: 1.5rem; margin-bottom: 20px; font-weight: 600;">🌟 Featured AI Tools</h3>
+                <div class="carousel-container" style="display: flex; transition: transform 0.3s ease; gap: 20px;" id="aiCarousel">
+                    <div class="carousel-item" style="min-width: 300px; flex-shrink: 0;">
+                        <div class="tool-card" style="background: linear-gradient(135deg, #FF6B6B 0%, #FF5722 100%); color: white; border: 2px solid #FF6B6B; height: 200px;">
+                            <span class="tool-icon" style="color: white; font-size: 2rem;">🖼️</span>
+                            <h3 style="color: white; font-size: 1.2rem;">AI Image Analyzer</h3>
+                            <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.9rem;">Advanced OCR, object detection, and image analysis using Qwen AI vision capabilities.</p>
+                            <a href="ai-image-analyzer.html" class="btn" style="background: white; color: #FF6B6B; padding: 8px 16px; font-size: 0.9rem;" aria-label="Try AI Image Analyzer">Analyze Now</a>
+                            <div style="position: absolute; top: 8px; right: 8px; background: #FFD700; color: #1E1E2F; padding: 2px 6px; border-radius: 10px; font-size: 8px; font-weight: bold;">🆕 NEW</div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="min-width: 300px; flex-shrink: 0;">
+                        <div class="tool-card" style="background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%); color: white; border: 2px solid #3B82F6; height: 200px;">
+                            <span class="tool-icon" style="color: white; font-size: 2rem;">💬</span>
+                            <h3 style="color: white; font-size: 1.2rem;">AI Chatbots Hub</h3>
+                            <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.9rem;">Compare ChatGPT, Claude, Gemini. Direct links and feature comparisons.</p>
+                            <a href="ai-chatbots.html" class="btn" style="background: white; color: #3B82F6; padding: 8px 16px; font-size: 0.9rem;" aria-label="Explore AI Chatbots">Chat Now</a>
+                            <div style="position: absolute; top: 8px; right: 8px; background: #FF6B6B; color: white; padding: 2px 6px; border-radius: 10px; font-size: 8px; font-weight: bold;">🔥 HOT</div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="min-width: 300px; flex-shrink: 0;">
+                        <div class="tool-card" style="background: linear-gradient(135deg, #10B981 0%, #059669 100%); color: white; border: 2px solid #10B981; height: 200px;">
+                            <span class="tool-icon" style="color: white; font-size: 2rem;">🎨</span>
+                            <h3 style="color: white; font-size: 1.2rem;">AI Image Generators</h3>
+                            <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.9rem;">DALL-E 3, Midjourney, Stable Diffusion demos and guides.</p>
+                            <a href="ai-image-generators.html" class="btn" style="background: white; color: #10B981; padding: 8px 16px; font-size: 0.9rem;" aria-label="Try AI Image Generators">Create Art</a>
+                            <div style="position: absolute; top: 8px; right: 8px; background: #8B5CF6; color: white; padding: 2px 6px; border-radius: 10px; font-size: 8px; font-weight: bold;">✨ POPULAR</div>
+                        </div>
+                    </div>
+                    <div class="carousel-item" style="min-width: 300px; flex-shrink: 0;">
+                        <div class="tool-card" style="background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); color: white; border: 2px solid #F59E0B; height: 200px;">
+                            <span class="tool-icon" style="color: white; font-size: 2rem;">🎤</span>
+                            <h3 style="color: white; font-size: 1.2rem;">AI Voice Generators</h3>
+                            <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.9rem;">ElevenLabs, Qwen AI Voice, and more text-to-speech tools.</p>
+                            <a href="ai-voice-generators.html" class="btn" style="background: white; color: #F59E0B; padding: 8px 16px; font-size: 0.9rem;" aria-label="Generate AI Voices">Voice Now</a>
+                            <div style="position: absolute; top: 8px; right: 8px; background: #06B6D4; color: white; padding: 2px 6px; border-radius: 10px; font-size: 8px; font-weight: bold;">🎵 AUDIO</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-prev" onclick="moveCarousel(-1)" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(255,215,0,0.8); border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; color: #1E1E2F; font-size: 16px; font-weight: bold;">‹</button>
+                <button class="carousel-next" onclick="moveCarousel(1)" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(255,215,0,0.8); border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; color: #1E1E2F; font-size: 16px; font-weight: bold;">›</button>
+            </div>
+            
+            <!-- AI Tools Grid -->
+            <div class="tools-grid" id="aiToolsGrid">
+                <div class="tool-card ai-tool" data-category="analysis" style="background: linear-gradient(135deg, #FF6B6B 0%, #FF5722 100%); color: white; border: 2px solid #FF6B6B;">
+                    <span class="tool-icon" style="color: white;">🖼️</span>
+                    <h3 style="color: white;">AI Image Analyzer</h3>
+                    <p style="color: rgba(255, 255, 255, 0.9);">Advanced image analysis with OCR, object detection, and comprehensive AI-powered insights using Qwen vision models.</p>
+                    <a href="ai-image-analyzer.html" class="btn" style="background: white; color: #FF6B6B;" aria-label="Analyze Images with AI">Analyze Now</a>
+                    <div style="position: absolute; top: 10px; right: 10px; background: #FFD700; color: #1E1E2F; padding: 4px 8px; border-radius: 15px; font-size: 10px; font-weight: bold;">🆕 LATEST</div>
+                </div>
+                <div class="tool-card ai-tool" data-category="chatbots" style="background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%); color: white; border: 2px solid #3B82F6;">
                     <span class="tool-icon" style="color: white;">💬</span>
-                    <h3 style="color: white;">AI Chatbots</h3>
+                    <h3 style="color: white;">AI Chatbots Hub</h3>
                     <p style="color: rgba(255, 255, 255, 0.9);">Compare top AI chatbots: ChatGPT, Claude, Gemini, and more. Quick-start guides and feature comparisons.</p>
-                    <a href="ai-chatbots.html" class="btn" style="background: white; color: #3B82F6;" aria-label="Explore AI Chatbots">Explore Now</a>
+                    <a href="ai-chatbots.html" class="btn" style="background: white; color: #3B82F6;" aria-label="Explore AI Chatbots">Chat Now</a>
                     <div style="position: absolute; top: 10px; right: 10px; background: #FF6B6B; color: white; padding: 4px 8px; border-radius: 15px; font-size: 10px; font-weight: bold;">🔥 TRENDING</div>
                 </div>
-                <div class="tool-card" style="background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%); color: white; border: 2px solid #3B82F6;">
+                <div class="tool-card ai-tool" data-category="image" style="background: linear-gradient(135deg, #10B981 0%, #059669 100%); color: white; border: 2px solid #10B981;">
                     <span class="tool-icon" style="color: white;">🎨</span>
                     <h3 style="color: white;">AI Image Generators</h3>
-                    <p style="color: rgba(255, 255, 255, 0.9);">Top 10 AI art tools: DALL-E 3, Midjourney, Stable Diffusion. Create stunning images from text.</p>
-                    <a href="ai-image-generators.html" class="btn" style="background: white; color: #3B82F6;" aria-label="Try AI Image Generators">Try Now</a>
-                    <div style="position: absolute; top: 10px; right: 10px; background: #10B981; color: white; padding: 4px 8px; border-radius: 15px; font-size: 10px; font-weight: bold;">🚀 NEW</div>
+                    <p style="color: rgba(255, 255, 255, 0.9);">Top 10 AI art tools: DALL-E 3, Midjourney, Stable Diffusion. Create stunning images from text prompts.</p>
+                    <a href="ai-image-generators.html" class="btn" style="background: white; color: #10B981;" aria-label="Try AI Image Generators">Create Art</a>
+                    <div style="position: absolute; top: 10px; right: 10px; background: #8B5CF6; color: white; padding: 4px 8px; border-radius: 15px; font-size: 10px; font-weight: bold;">✨ POPULAR</div>
                 </div>
-                <div class="tool-card" style="background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%); color: white; border: 2px solid #3B82F6;">
+                <div class="tool-card ai-tool" data-category="website" style="background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%); color: white; border: 2px solid #8B5CF6;">
                     <span class="tool-icon" style="color: white;">💻</span>
                     <h3 style="color: white;">AI Website Builders</h3>
                     <p style="color: rgba(255, 255, 255, 0.9);">Build professional websites with Qwen AI, Wix ADI, Webflow. Side-by-side demos and pricing.</p>
-                    <a href="ai-website-builders.html" class="btn" style="background: white; color: #3B82F6;" aria-label="Build with AI">Build Now</a>
-                    <div style="position: absolute; top: 10px; right: 10px; background: #8B5CF6; color: white; padding: 4px 8px; border-radius: 15px; font-size: 10px; font-weight: bold;">⚡ FEATURED</div>
+                    <a href="ai-website-builders.html" class="btn" style="background: white; color: #8B5CF6;" aria-label="Build with AI">Build Now</a>
+                    <div style="position: absolute; top: 10px; right: 10px; background: #F59E0B; color: white; padding: 4px 8px; border-radius: 15px; font-size: 10px; font-weight: bold;">⚡ FEATURED</div>
                 </div>
-                <div class="tool-card" style="background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%); color: white; border: 2px solid #3B82F6;">
+                <div class="tool-card ai-tool" data-category="voice" style="background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); color: white; border: 2px solid #F59E0B;">
                     <span class="tool-icon" style="color: white;">🎤</span>
                     <h3 style="color: white;">AI Voice Generators</h3>
-                    <p style="color: rgba(255, 255, 255, 0.9);">Text-to-speech with ElevenLabs, Qwen AI Voice, Murf. Licensing guide and audio demos.</p>
-                    <a href="ai-voice-generators.html" class="btn" style="background: white; color: #3B82F6;" aria-label="Generate AI Voices">Listen Now</a>
-                    <div style="position: absolute; top: 10px; right: 10px; background: #F59E0B; color: white; padding: 4px 8px; border-radius: 15px; font-size: 10px; font-weight: bold;">🎵 AUDIO</div>
+                    <p style="color: rgba(255, 255, 255, 0.9);">Text-to-speech with ElevenLabs, Qwen AI Voice, Murf. Voice cloning, licensing guide and audio demos.</p>
+                    <a href="ai-voice-generators.html" class="btn" style="background: white; color: #F59E0B;" aria-label="Generate AI Voices">Voice Now</a>
+                    <div style="position: absolute; top: 10px; right: 10px; background: #06B6D4; color: white; padding: 4px 8px; border-radius: 15px; font-size: 10px; font-weight: bold;">🎵 AUDIO</div>
                 </div>
-                <div class="tool-card" style="background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%); color: white; border: 2px solid #3B82F6;">
+                <div class="tool-card ai-tool" data-category="translation" style="background: linear-gradient(135deg, #06B6D4 0%, #0891B2 100%); color: white; border: 2px solid #06B6D4;">
                     <span class="tool-icon" style="color: white;">🌐</span>
                     <h3 style="color: white;">AI Translators</h3>
-                    <p style="color: rgba(255, 255, 255, 0.9);">Google Translate API, DeepL, Qwen AI. Browser extensions, cloud APIs, and live demos.</p>
-                    <a href="ai-translators.html" class="btn" style="background: white; color: #3B82F6;" aria-label="Translate with AI">Translate</a>
-                    <div style="position: absolute; top: 10px; right: 10px; background: #06B6D4; color: white; padding: 4px 8px; border-radius: 15px; font-size: 10px; font-weight: bold;">🗣️ MULTILINGUAL</div>
+                    <p style="color: rgba(255, 255, 255, 0.9);">Google Translate API, DeepL, Qwen AI. Real-time translation, browser extensions, cloud APIs, and live demos.</p>
+                    <a href="ai-translators.html" class="btn" style="background: white; color: #06B6D4;" aria-label="Translate with AI">Translate</a>
+                    <div style="position: absolute; top: 10px; right: 10px; background: #10B981; color: white; padding: 4px 8px; border-radius: 15px; font-size: 10px; font-weight: bold;">🗣️ LIVE</div>
                 </div>
             </div>
 
@@ -2075,6 +2173,263 @@
         } else {
             measureWebVitals();
         }
+        
+        // AI Tools Discovery Features
+        document.addEventListener('DOMContentLoaded', function() {
+            const aiToolsSearch = document.getElementById('aiToolsSearch');
+            const aiToolsCategory = document.getElementById('aiToolsCategory');
+            const showAllAiTools = document.getElementById('showAllAiTools');
+            const aiToolsGrid = document.getElementById('aiToolsGrid');
+            
+            // Store original AI tools HTML for reset
+            let originalAiToolsHTML = aiToolsGrid ? aiToolsGrid.innerHTML : '';
+            
+            // AI Tools Search
+            if (aiToolsSearch) {
+                let aiSearchTimeout;
+                aiToolsSearch.addEventListener('input', function() {
+                    clearTimeout(aiSearchTimeout);
+                    aiSearchTimeout = setTimeout(() => {
+                        filterAiTools(this.value.toLowerCase(), aiToolsCategory.value);
+                    }, 300);
+                });
+            }
+            
+            // AI Tools Category Filter
+            if (aiToolsCategory) {
+                aiToolsCategory.addEventListener('change', function() {
+                    filterAiTools(aiToolsSearch ? aiToolsSearch.value.toLowerCase() : '', this.value);
+                });
+            }
+            
+            // Show All AI Tools
+            if (showAllAiTools) {
+                showAllAiTools.addEventListener('click', function() {
+                    if (aiToolsSearch) aiToolsSearch.value = '';
+                    if (aiToolsCategory) aiToolsCategory.value = 'all';
+                    filterAiTools('', 'all');
+                    document.getElementById('ai-tools').scrollIntoView({ behavior: 'smooth' });
+                });
+            }
+            
+            function filterAiTools(searchTerm, category) {
+                if (!aiToolsGrid) return;
+                
+                const aiTools = aiToolsGrid.querySelectorAll('.ai-tool');
+                let visibleCount = 0;
+                
+                aiTools.forEach(tool => {
+                    const title = tool.querySelector('h3').textContent.toLowerCase();
+                    const description = tool.querySelector('p').textContent.toLowerCase();
+                    const toolCategory = tool.dataset.category;
+                    
+                    const matchesSearch = searchTerm === '' || 
+                                        title.includes(searchTerm) || 
+                                        description.includes(searchTerm);
+                    const matchesCategory = category === 'all' || toolCategory === category;
+                    
+                    if (matchesSearch && matchesCategory) {
+                        tool.style.display = 'block';
+                        tool.classList.add('search-highlight');
+                        visibleCount++;
+                    } else {
+                        tool.style.display = 'none';
+                        tool.classList.remove('search-highlight');
+                    }
+                });
+                
+                // Update grid display
+                if (visibleCount === 0 && (searchTerm !== '' || category !== 'all')) {
+                    aiToolsGrid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #888;"><i class="fas fa-search text-4xl mb-3"></i><p>No AI tools found matching your criteria</p><p class="text-sm mt-2">Try different keywords or select "All AI Tools"</p></div>';
+                } else if (searchTerm === '' && category === 'all' && visibleCount === 0) {
+                    // Reset to original content
+                    aiToolsGrid.innerHTML = originalAiToolsHTML;
+                }
+            }
+        });
+        
+        // AI Tools Carousel
+        let carouselPosition = 0;
+        
+        function initCarousel() {
+            const carouselContainer = document.getElementById('aiCarousel');
+            if (!carouselContainer) return;
+            
+            const carouselItems = carouselContainer.querySelectorAll('.carousel-item');
+            const maxPosition = carouselItems.length - 1;
+            
+            window.moveCarousel = function(direction) {
+                carouselPosition += direction;
+                
+                // Loop around
+                if (carouselPosition > maxPosition) {
+                    carouselPosition = 0;
+                } else if (carouselPosition < 0) {
+                    carouselPosition = maxPosition;
+                }
+                
+                const offset = -carouselPosition * 320; // 300px width + 20px gap
+                carouselContainer.style.transform = `translateX(${offset}px)`;
+            };
+            
+            // Auto-rotate carousel every 5 seconds
+            setInterval(() => {
+                window.moveCarousel(1);
+            }, 5000);
+        }
+        
+        // Initialize carousel when DOM is ready
+        document.addEventListener('DOMContentLoaded', initCarousel);
+        
+        // Enhanced AI tool quick navigation
+        function addAiQuickNavigation() {
+            const style = document.createElement('style');
+            style.textContent = `
+                .ai-quick-nav {
+                    position: fixed;
+                    top: 50%;
+                    right: 20px;
+                    transform: translateY(-50%);
+                    background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+                    border-radius: 25px;
+                    padding: 15px 10px;
+                    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3);
+                    z-index: 1000;
+                    display: none;
+                    max-height: 400px;
+                    overflow-y: auto;
+                }
+                .ai-quick-nav.show {
+                    display: block;
+                    animation: slideInRight 0.3s ease;
+                }
+                .ai-nav-item {
+                    display: block;
+                    color: white;
+                    text-decoration: none;
+                    padding: 8px 12px;
+                    margin: 3px 0;
+                    border-radius: 15px;
+                    font-size: 12px;
+                    text-align: center;
+                    transition: all 0.3s ease;
+                    white-space: nowrap;
+                }
+                .ai-nav-item:hover {
+                    background: rgba(255, 255, 255, 0.2);
+                    transform: translateX(-5px);
+                    text-decoration: none;
+                    color: #FFD700;
+                }
+                @keyframes slideInRight {
+                    from { transform: translateY(-50%) translateX(100%); opacity: 0; }
+                    to { transform: translateY(-50%) translateX(0); opacity: 1; }
+                }
+                @media (max-width: 768px) {
+                    .ai-quick-nav { display: none !important; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            const quickNav = document.createElement('div');
+            quickNav.className = 'ai-quick-nav';
+            quickNav.innerHTML = `
+                <a href="#ai-tools" class="ai-nav-item">🤖 AI Hub</a>
+                <a href="ai-chatbots.html" class="ai-nav-item">💬 Chatbots</a>
+                <a href="ai-image-generators.html" class="ai-nav-item">🎨 Images</a>
+                <a href="ai-voice-generators.html" class="ai-nav-item">🎤 Voice</a>
+                <a href="ai-translators.html" class="ai-nav-item">🌐 Translate</a>
+                <a href="ai-image-analyzer.html" class="ai-nav-item">🖼️ Analyze</a>
+                <a href="ai-website-builders.html" class="ai-nav-item">💻 Websites</a>
+            `;
+            document.body.appendChild(quickNav);
+            
+            // Show/hide based on scroll position
+            let isQuickNavVisible = false;
+            window.addEventListener('scroll', () => {
+                const aiToolsSection = document.getElementById('ai-tools');
+                if (aiToolsSection) {
+                    const rect = aiToolsSection.getBoundingClientRect();
+                    const shouldShow = rect.top <= window.innerHeight && rect.bottom >= -100;
+                    
+                    if (shouldShow && !isQuickNavVisible) {
+                        quickNav.classList.add('show');
+                        isQuickNavVisible = true;
+                    } else if (!shouldShow && isQuickNavVisible) {
+                        quickNav.classList.remove('show');
+                        isQuickNavVisible = false;
+                    }
+                }
+            });
+            
+            // Smooth scroll for internal links
+            quickNav.addEventListener('click', function(e) {
+                if (e.target.getAttribute('href')?.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(e.target.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        }
+        
+        // Initialize AI quick navigation
+        document.addEventListener('DOMContentLoaded', addAiQuickNavigation);
+        
+        // Enhanced search with AI-specific keywords
+        const aiKeywordMappings = {
+            'chat': 'chatbots',
+            'gpt': 'chatbots',
+            'claude': 'chatbots',
+            'gemini': 'chatbots',
+            'conversation': 'chatbots',
+            'art': 'image',
+            'dalle': 'image',
+            'midjourney': 'image',
+            'stable diffusion': 'image',
+            'generate': 'image',
+            'create': 'image',
+            'speech': 'voice',
+            'tts': 'voice',
+            'text to speech': 'voice',
+            'elevenlabs': 'voice',
+            'murf': 'voice',
+            'translate': 'translation',
+            'language': 'translation',
+            'deepl': 'translation',
+            'google translate': 'translation',
+            'website': 'website',
+            'web': 'website',
+            'builder': 'website',
+            'wix': 'website',
+            'webflow': 'website',
+            'qwen': 'analysis',
+            'ocr': 'analysis',
+            'analyze': 'analysis',
+            'vision': 'analysis',
+            'detect': 'analysis'
+        };
+        
+        // Override the global search to include AI keyword mapping
+        const originalPerformSearch = window.performSearch || performSearch;
+        window.performSearch = function(query) {
+            // Enhanced search with AI keyword mapping
+            const searchTerm = query.toLowerCase().trim();
+            
+            // Check if search term matches AI keywords
+            let enhancedQuery = searchTerm;
+            Object.keys(aiKeywordMappings).forEach(keyword => {
+                if (searchTerm.includes(keyword)) {
+                    enhancedQuery += ` ${aiKeywordMappings[keyword]}`;
+                }
+            });
+            
+            // Call original search with enhanced query
+            if (originalPerformSearch && typeof originalPerformSearch === 'function') {
+                return originalPerformSearch(enhancedQuery);
+            }
+        };
     </script>
 </body>
 </html>
