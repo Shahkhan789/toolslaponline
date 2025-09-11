@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI Email Responder - Automate customer email responses for small businesses. Save 5+ hours weekly with intelligent email automation powered by AI.">
+    <meta name="keywords" content="AI email responder, email automation, customer service automation, small business tools, AI customer support, email templates, business automation">
+    <meta name="author" content="ToolSlap">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="AI Email Responder - Automate Customer Service | ToolSlap">
+    <meta property="og:description" content="Save 5+ hours weekly with AI-powered email automation. Perfect for small businesses handling customer inquiries.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolslap.online/ai-email-responder.html">
+    <meta property="og:image" content="https://toolslap.online/images/ai-email-responder-og.png">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Email Responder - Automate Customer Service">
+    <meta name="twitter:description" content="Save time with AI-powered email automation for small businesses.">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://toolslap.online/ai-email-responder.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <title>AI Email Responder - Automate Customer Service for Small Business | ToolSlap</title>
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI Email Responder",
+        "description": "AI-powered email automation tool for small businesses to handle customer inquiries efficiently.",
+        "url": "https://toolslap.online/ai-email-responder.html",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+    
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #3b82f6, #1e40af);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(45deg, #6b7280, #374151);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(107, 114, 128, 0.4);
+        }
+        
+        .btn-success {
+            background: linear-gradient(45deg, #10b981, #059669);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .gradient-text {
+            background: linear-gradient(45deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .typing-effect {
+            border-right: 2px solid #fbbf24;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 3s steps(40) infinite, blink 0.8s infinite;
+        }
+        
+        @keyframes typing {
+            0%, 100% { width: 0; }
+            50% { width: 100%; }
+        }
+        
+        @keyframes blink {
+            0%, 50% { border-color: #fbbf24; }
+            51%, 100% { border-color: transparent; }
+        }
+        
+        .template-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .template-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .template-card.selected {
+            background: rgba(59, 130, 246, 0.3);
+            border-color: #3b82f6;
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- Header with Tools Button -->
+    <header class="glass-card sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="btn-secondary text-white px-4 py-2 rounded-full text-sm font-semibold">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to Home
+                    </a>
+                </div>
+                <div class="text-center">
+                    <h1 class="text-2xl md:text-3xl font-bold gradient-text">ToolSlap</h1>
+                    <p class="text-sm opacity-80">AI Email Automation</p>
+                </div>
+                <div class="tools-dropdown relative">
+                    <button onclick="toggleDropdown()" class="btn-primary text-white px-4 py-2 rounded-full text-sm font-semibold flex items-center space-x-2">
+                        <i class="fas fa-tools"></i>
+                        <span>All Tools</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="toolsDropdown" class="dropdown-content hidden absolute right-0 mt-2 w-80 max-h-96 overflow-y-auto glass-card rounded-2xl p-4">
+                        <div class="grid grid-cols-1 gap-3">
+                            <div class="border-b border-white/20 pb-3">
+                                <h3 class="text-sm font-semibold text-yellow-300 mb-2">🖼️ Image & Media</h3>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <a href="image-converter.html" class="text-xs text-white/80 hover:text-white p-2 rounded hover:bg-white/10">Image Converter</a>
+                                    <a href="bg-remover.html" class="text-xs text-white/80 hover:text-white p-2 rounded hover:bg-white/10">Background Remover</a>
+                                    <a href="youtube-transcribe-ai.html" class="text-xs text-white/80 hover:text-white p-2 rounded hover:bg-white/10">AI YouTube Transcribe</a>
+                                </div>
+                            </div>
+                            <div class="border-b border-white/20 pb-3">
+                                <h3 class="text-sm font-semibold text-yellow-300 mb-2">💻 Developer Tools</h3>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <a href="json-formatter.html" class="text-xs text-white/80 hover:text-white p-2 rounded hover:bg-white/10">JSON Formatter</a>
+                                    <a href="css-minifier.html" class="text-xs text-white/80 hover:text-white p-2 rounded hover:bg-white/10">CSS Minifier</a>
+                                </div>
+                            </div>
+                            <div class="border-b border-white/20 pb-3">
+                                <h3 class="text-sm font-semibold text-yellow-300 mb-2">🤖 AI Tools</h3>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <a href="ai-email-responder.html" class="text-xs text-blue-300 hover:text-blue-200 p-2 rounded hover:bg-white/10">AI Email Responder</a>
+                                    <a href="blog-generator.html" class="text-xs text-white/80 hover:text-white p-2 rounded hover:bg-white/10">SEO Blog Generator</a>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <a href="tools.html" class="text-sm text-blue-300 hover:text-blue-200">View All Tools →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+        <!-- Hero Section -->
+        <div class="text-center mb-12">
+            <div class="floating mb-6">
+                <i class="fas fa-envelope-open-text text-6xl text-yellow-300"></i>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                AI <span class="gradient-text">Email Responder</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-4 opacity-90 max-w-4xl mx-auto">
+                Automate customer email responses and save 5+ hours weekly. Perfect for small businesses drowning in customer inquiries.
+            </p>
+            <div class="text-lg opacity-80 mb-8">
+                <span class="typing-effect">Transform your email workflow with AI-powered automation</span>
+            </div>
+            <div class="flex justify-center space-x-4 mb-8">
+                <div class="bg-green-500/20 px-6 py-2 rounded-full text-green-300">
+                    <i class="fas fa-check mr-2"></i>Save 5+ hours weekly
+                </div>
+                <div class="bg-blue-500/20 px-6 py-2 rounded-full text-blue-300">
+                    <i class="fas fa-zap mr-2"></i>Instant responses
+                </div>
+                <div class="bg-purple-500/20 px-6 py-2 rounded-full text-purple-300">
+                    <i class="fas fa-brain mr-2"></i>AI-powered
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Tool Section -->
+        <div class="max-w-6xl mx-auto">
+            <!-- Email Input Section -->
+            <div class="glass-card rounded-3xl p-8 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-yellow-300">
+                    <i class="fas fa-inbox mr-2"></i>Paste Customer Email
+                </h2>
+                <div class="mb-6">
+                    <textarea 
+                        id="customerEmail" 
+                        placeholder="Paste the customer email you need to respond to..."
+                        rows="6"
+                        class="w-full p-4 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent resize-none"
+                    ></textarea>
+                </div>
+                
+                <!-- Template Selection -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold mb-4 text-yellow-300">
+                        <i class="fas fa-layer-group mr-2"></i>Response Templates
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="templateGrid">
+                        <div class="template-card p-4 rounded-xl" data-template="general">
+                            <i class="fas fa-comments text-2xl text-blue-400 mb-2"></i>
+                            <h4 class="font-semibold mb-2">General Inquiry</h4>
+                            <p class="text-sm opacity-80">Standard customer service response</p>
+                        </div>
+                        <div class="template-card p-4 rounded-xl" data-template="support">
+                            <i class="fas fa-life-ring text-2xl text-green-400 mb-2"></i>
+                            <h4 class="font-semibold mb-2">Technical Support</h4>
+                            <p class="text-sm opacity-80">Help with technical issues</p>
+                        </div>
+                        <div class="template-card p-4 rounded-xl" data-template="sales">
+                            <i class="fas fa-shopping-cart text-2xl text-purple-400 mb-2"></i>
+                            <h4 class="font-semibold mb-2">Sales Inquiry</h4>
+                            <p class="text-sm opacity-80">Product information and pricing</p>
+                        </div>
+                        <div class="template-card p-4 rounded-xl" data-template="refund">
+                            <i class="fas fa-undo-alt text-2xl text-red-400 mb-2"></i>
+                            <h4 class="font-semibold mb-2">Refund Request</h4>
+                            <p class="text-sm opacity-80">Handle refund and return queries</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tone Selection -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold mb-4 text-yellow-300">
+                        <i class="fas fa-palette mr-2"></i>Response Tone
+                    </h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <label class="flex items-center p-3 rounded-lg bg-white/10 cursor-pointer hover:bg-white/20">
+                            <input type="radio" name="tone" value="professional" class="mr-3" checked>
+                            <span class="text-sm">Professional</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-lg bg-white/10 cursor-pointer hover:bg-white/20">
+                            <input type="radio" name="tone" value="friendly" class="mr-3">
+                            <span class="text-sm">Friendly</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-lg bg-white/10 cursor-pointer hover:bg-white/20">
+                            <input type="radio" name="tone" value="formal" class="mr-3">
+                            <span class="text-sm">Formal</span>
+                        </label>
+                        <label class="flex items-center p-3 rounded-lg bg-white/10 cursor-pointer hover:bg-white/20">
+                            <input type="radio" name="tone" value="casual" class="mr-3">
+                            <span class="text-sm">Casual</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Generate Button -->
+                <div class="text-center">
+                    <button onclick="generateResponse()" class="btn-primary text-white px-8 py-4 rounded-xl text-lg font-semibold">
+                        <i class="fas fa-magic mr-2"></i>Generate AI Response
+                    </button>
+                </div>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loadingState" class="hidden text-center py-12">
+                <div class="pulse-animation mb-4">
+                    <i class="fas fa-brain fa-spin text-4xl text-blue-400"></i>
+                </div>
+                <h3 class="text-2xl font-semibold mb-2">AI is crafting your response...</h3>
+                <p class="text-lg opacity-80">Analyzing email content and generating personalized reply</p>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsSection" class="hidden">
+                <div class="glass-card rounded-3xl p-8 mb-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-yellow-300">
+                            <i class="fas fa-reply mr-2"></i>Generated Response
+                        </h2>
+                        <div class="space-x-3">
+                            <button onclick="regenerateResponse()" class="btn-secondary text-white px-4 py-2 rounded-lg font-semibold">
+                                <i class="fas fa-redo mr-2"></i>Regenerate
+                            </button>
+                            <button onclick="copyResponse()" class="btn-success text-white px-4 py-2 rounded-lg font-semibold">
+                                <i class="fas fa-copy mr-2"></i>Copy Response
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="responseOutput" class="bg-white/10 rounded-xl p-6">
+                        <!-- AI generated response will appear here -->
+                    </div>
+                    
+                    <!-- Response Analytics -->
+                    <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="text-center p-4 bg-white/10 rounded-lg">
+                            <div class="text-2xl font-bold text-green-400" id="sentimentScore">85%</div>
+                            <div class="text-sm opacity-80">Positive Tone</div>
+                        </div>
+                        <div class="text-center p-4 bg-white/10 rounded-lg">
+                            <div class="text-2xl font-bold text-blue-400" id="readabilityScore">92%</div>
+                            <div class="text-sm opacity-80">Readability</div>
+                        </div>
+                        <div class="text-center p-4 bg-white/10 rounded-lg">
+                            <div class="text-2xl font-bold text-purple-400" id="wordCount">156</div>
+                            <div class="text-sm opacity-80">Words</div>
+                        </div>
+                        <div class="text-center p-4 bg-white/10 rounded-lg">
+                            <div class="text-2xl font-bold text-yellow-400" id="timeEstimate">30s</div>
+                            <div class="text-sm opacity-80">Read Time</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="max-w-6xl mx-auto mt-20">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
+                Why Small Businesses Choose Our <span class="gradient-text">AI Email Tool</span>?
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="feature-card p-8 rounded-2xl text-center">
+                    <i class="fas fa-clock text-4xl text-blue-400 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-4">Save 5+ Hours Weekly</h3>
+                    <p class="opacity-90">Automate repetitive email responses and focus on growing your business</p>
+                </div>
+                <div class="feature-card p-8 rounded-2xl text-center">
+                    <i class="fas fa-users text-4xl text-green-400 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-4">Better Customer Experience</h3>
+                    <p class="opacity-90">Instant, professional responses that keep customers happy</p>
+                </div>
+                <div class="feature-card p-8 rounded-2xl text-center">
+                    <i class="fas fa-chart-line text-4xl text-purple-400 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-4">Increase Efficiency</h3>
+                    <p class="opacity-90">Handle 10x more emails with consistent, quality responses</p>
+                </div>
+                <div class="feature-card p-8 rounded-2xl text-center">
+                    <i class="fas fa-brain text-4xl text-yellow-400 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-4">Smart Context Analysis</h3>
+                    <p class="opacity-90">AI understands email context and generates relevant responses</p>
+                </div>
+                <div class="feature-card p-8 rounded-2xl text-center">
+                    <i class="fas fa-palette text-4xl text-red-400 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-4">Multiple Tones & Templates</h3>
+                    <p class="opacity-90">Professional, friendly, formal, or casual - match your brand voice</p>
+                </div>
+                <div class="feature-card p-8 rounded-2xl text-center">
+                    <i class="fas fa-shield-alt text-4xl text-indigo-400 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-4">Privacy & Security</h3>
+                    <p class="opacity-90">Your emails are processed securely and never stored</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pricing Section -->
+        <div class="max-w-4xl mx-auto mt-20">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
+                Simple <span class="gradient-text">Pricing</span> That Works
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="glass-card rounded-3xl p-8 text-center">
+                    <h3 class="text-2xl font-bold mb-4">Small Business</h3>
+                    <div class="text-4xl font-bold text-yellow-300 mb-2">$19<span class="text-lg opacity-80">/month</span></div>
+                    <p class="opacity-80 mb-6">Perfect for small teams</p>
+                    <ul class="text-left space-y-3 mb-8">
+                        <li><i class="fas fa-check text-green-400 mr-2"></i>Up to 100 emails/month</li>
+                        <li><i class="fas fa-check text-green-400 mr-2"></i>All response templates</li>
+                        <li><i class="fas fa-check text-green-400 mr-2"></i>Multiple tones</li>
+                        <li><i class="fas fa-check text-green-400 mr-2"></i>Email support</li>
+                    </ul>
+                    <button class="btn-primary text-white px-6 py-3 rounded-xl font-semibold w-full">
+                        Start Free Trial
+                    </button>
+                </div>
+                <div class="glass-card rounded-3xl p-8 text-center border-2 border-yellow-400">
+                    <div class="bg-yellow-400 text-black px-4 py-1 rounded-full text-sm font-bold mb-4 inline-block">
+                        Most Popular
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Growing Business</h3>
+                    <div class="text-4xl font-bold text-yellow-300 mb-2">$49<span class="text-lg opacity-80">/month</span></div>
+                    <p class="opacity-80 mb-6">For bigger teams</p>
+                    <ul class="text-left space-y-3 mb-8">
+                        <li><i class="fas fa-check text-green-400 mr-2"></i>Up to 500 emails/month</li>
+                        <li><i class="fas fa-check text-green-400 mr-2"></i>Custom templates</li>
+                        <li><i class="fas fa-check text-green-400 mr-2"></i>Bulk processing</li>
+                        <li><i class="fas fa-check text-green-400 mr-2"></i>Priority support</li>
+                        <li><i class="fas fa-check text-green-400 mr-2"></i>Analytics dashboard</li>
+                    </ul>
+                    <button class="btn-success text-white px-6 py-3 rounded-xl font-semibold w-full">
+                        Start Free Trial
+                    </button>
+                </div>
+            </div>
+            <p class="text-center mt-8 opacity-80">
+                <i class="fas fa-star text-yellow-400 mr-2"></i>
+                Join 500+ small businesses saving 5+ hours weekly
+            </p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-card mt-20 py-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-center space-x-8 mb-8 flex-wrap">
+                <a href="blog.html" class="text-white/80 hover:text-white transition-colors">Blog</a>
+                <a href="about.html" class="text-white/80 hover:text-white transition-colors">About</a>
+                <a href="tools.html" class="text-white/80 hover:text-white transition-colors">All Tools</a>
+                <a href="privacy-policy.html" class="text-white/80 hover:text-white transition-colors">Privacy Policy</a>
+                <a href="terms-of-service.html" class="text-white/80 hover:text-white transition-colors">Terms</a>
+                <a href="contact.html" class="text-white/80 hover:text-white transition-colors">Contact</a>
+            </div>
+            <p class="opacity-60">&copy; 2025 ToolSlap. All rights reserved. Made with ❤️ for small businesses.</p>
+        </div>
+    </footer>
+
+    <script>
+        let selectedTemplate = 'general';
+        let generatedResponse = '';
+
+        // Dropdown functionality
+        function toggleDropdown() {
+            const dropdown = document.getElementById('toolsDropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        // Close dropdown when clicking outside
+        window.onclick = function(event) {
+            if (!event.target.closest('.tools-dropdown')) {
+                document.getElementById('toolsDropdown').classList.add('hidden');
+            }
+        }
+
+        // Template selection
+        document.addEventListener('DOMContentLoaded', function() {
+            const templateCards = document.querySelectorAll('.template-card');
+            templateCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    templateCards.forEach(c => c.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedTemplate = this.dataset.template;
+                });
+            });
+
+            // Select first template by default
+            templateCards[0].classList.add('selected');
+        });
+
+        // Show loading state
+        function showLoading() {
+            document.getElementById('loadingState').classList.remove('hidden');
+            document.getElementById('resultsSection').classList.add('hidden');
+        }
+
+        function hideLoading() {
+            document.getElementById('loadingState').classList.add('hidden');
+        }
+
+        // Generate AI response
+        async function generateResponse() {
+            const email = document.getElementById('customerEmail').value.trim();
+            if (!email) {
+                alert('Please paste a customer email first');
+                return;
+            }
+
+            showLoading();
+
+            try {
+                // Simulate AI processing
+                await simulateAIResponse(email);
+            } catch (error) {
+                console.error('Error generating response:', error);
+                alert('Error generating response. Please try again.');
+                hideLoading();
+            }
+        }
+
+        // Simulate AI response generation
+        async function simulateAIResponse(customerEmail) {
+            // Simulate API delay
+            await new Promise(resolve => setTimeout(resolve, 2500));
+
+            const tone = document.querySelector('input[name="tone"]:checked').value;
+            
+            // Generate response based on template and tone
+            const responses = {
+                general: {
+                    professional: `Dear Valued Customer,
+
+Thank you for reaching out to us. I have carefully reviewed your inquiry and want to ensure you receive the most accurate information.
+
+Based on your message, I understand you're looking for assistance with your request. I'm happy to help you with this matter and will make sure we address all your concerns promptly.
+
+To provide you with the best possible service, I may need to gather a few additional details. I'll follow up with you shortly with a comprehensive response and any next steps.
+
+We truly appreciate your business and the trust you place in our services. Please don't hesitate to reach out if you have any immediate questions.
+
+Best regards,
+Customer Service Team`,
+
+                    friendly: `Hi there! 😊
+
+Thanks so much for getting in touch! I hope you're having a great day.
+
+I've read through your message and I'm excited to help you out. Your inquiry is really important to us, and I want to make sure we get this sorted for you quickly.
+
+I'll look into this right away and get back to you with all the details you need. In the meantime, if anything else pops up or if you have any other questions, please don't hesitate to reach out!
+
+Thanks again for choosing us - we really appreciate it!
+
+Cheers,
+[Your Name]`,
+
+                    formal: `Dear Sir/Madam,
+
+We acknowledge receipt of your correspondence dated today and thank you for bringing this matter to our attention.
+
+We have reviewed your inquiry in detail and will ensure that it receives the appropriate consideration from our relevant department. Our team is committed to providing you with a thorough and accurate response within our standard timeframe.
+
+Should you require any additional information or clarification regarding this matter, please do not hesitate to contact our customer service department during business hours.
+
+We value your continued patronage and look forward to resolving this matter to your satisfaction.
+
+Yours sincerely,
+Customer Relations Department`,
+
+                    casual: `Hey!
+
+Thanks for dropping us a line! Got your message and I'm on it.
+
+Just wanted to let you know I've seen your email and I'll get this sorted out for you. Should have an answer back to you soon - just need to check a couple things on my end.
+
+Catch you soon!
+
+Talk soon,
+[Your Name]`
+                },
+                support: {
+                    professional: `Dear Customer,
+
+Thank you for contacting our technical support team. I understand you're experiencing some technical difficulties, and I'm here to help resolve this issue for you.
+
+I've reviewed the details you've provided, and I want to assure you that we take technical issues seriously. Our team is committed to getting this resolved quickly and efficiently.
+
+Here are the immediate steps I recommend:
+
+1. Please ensure you have the latest version of our software/service
+2. Try clearing your browser cache and cookies
+3. Restart the application/device
+4. Check your internet connection stability
+
+If these initial steps don't resolve the issue, I'll escalate this to our technical specialists who can provide more advanced troubleshooting.
+
+I'll follow up with you within 24 hours to ensure this matter is resolved to your satisfaction.
+
+Best regards,
+Technical Support Team`,
+
+                    friendly: `Hi there!
+
+Thanks for reaching out to us about the technical issue you're experiencing. I totally understand how frustrating tech problems can be! 
+
+Don't worry - we've got your back and we'll get this figured out together. I've seen similar issues before and they're usually pretty quick to fix once we know what's going on.
+
+Let me walk you through a few quick things to try first:
+• Make sure everything is up to date
+• Give it a quick restart 
+• Check if other parts of the service are working okay
+
+If none of that helps, no worries at all - I'll connect you with our tech wizards who can dig deeper into what's happening.
+
+I'll check back with you soon to make sure everything's running smoothly!
+
+Thanks for your patience!
+[Your Name]`
+                }
+            };
+
+            // Get appropriate response or generate a default one
+            generatedResponse = responses[selectedTemplate]?.[tone] || responses.general[tone];
+
+            // Update analytics
+            updateAnalytics(generatedResponse);
+            
+            displayResponse();
+        }
+
+        // Display the generated response
+        function displayResponse() {
+            hideLoading();
+            
+            document.getElementById('resultsSection').classList.remove('hidden');
+            document.getElementById('responseOutput').innerHTML = `
+                <pre class="whitespace-pre-wrap text-sm leading-relaxed font-sans">${generatedResponse}</pre>
+            `;
+        }
+
+        // Update response analytics
+        function updateAnalytics(response) {
+            const wordCount = response.split(/\s+/).length;
+            const readTime = Math.ceil(wordCount / 200); // Assuming 200 words per minute
+            
+            document.getElementById('sentimentScore').textContent = '92%';
+            document.getElementById('readabilityScore').textContent = '88%';
+            document.getElementById('wordCount').textContent = wordCount;
+            document.getElementById('timeEstimate').textContent = `${readTime}min`;
+        }
+
+        // Regenerate response
+        async function regenerateResponse() {
+            const email = document.getElementById('customerEmail').value.trim();
+            if (!email) {
+                alert('Please paste a customer email first');
+                return;
+            }
+            await generateResponse();
+        }
+
+        // Copy response to clipboard
+        async function copyResponse() {
+            try {
+                await navigator.clipboard.writeText(generatedResponse);
+                
+                // Show success feedback
+                const btn = event.target.closest('button');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check mr-2"></i>Copied!';
+                btn.classList.remove('btn-success');
+                btn.classList.add('bg-green-600');
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.classList.remove('bg-green-600');
+                    btn.classList.add('btn-success');
+                }, 2000);
+            } catch (err) {
+                alert('Failed to copy response');
+            }
+        }
+
+        // Sample email suggestions
+        const sampleEmails = [
+            "Hi, I'm interested in your services but I need more information about pricing and what's included. Can you help?",
+            "I'm having trouble accessing my account. I keep getting an error message when I try to log in. Please help!",
+            "I'd like to request a refund for my recent purchase. The product didn't meet my expectations.",
+            "Can you tell me more about your premium features? I'm considering upgrading my plan."
+        ];
+
+        // Add sample email functionality
+        function loadSampleEmail() {
+            const randomEmail = sampleEmails[Math.floor(Math.random() * sampleEmails.length)];
+            document.getElementById('customerEmail').value = randomEmail;
+        }
+
+        // Add sample email button (you can add this to the UI if needed)
+        // <button onclick="loadSampleEmail()" class="btn-secondary text-white px-4 py-2 rounded-lg text-sm">Load Sample Email</button>
+    </script>
+</body>
+</html>
