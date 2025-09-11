@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Content Creator Suite | Generate Blog Posts, Social Media & Marketing Copy - ToolSlap</title>
+    <meta name="description" content="Create high-quality content with AI. Generate blog posts, social media content, email templates, marketing copy, and SEO-optimized content in seconds.">
+    <meta name="keywords" content="AI content creator, blog generator, social media content, email templates, marketing copy, SEO content, AI writing, content marketing">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#3B82F6',
+                        'light-blue': '#EFF6FF',
+                        'dark-blue': '#1E40AF'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+        }
+        .content-type-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .content-type-card:hover {
+            background: rgba(59, 130, 246, 0.05);
+        }
+        .content-type-card.active {
+            background: rgba(59, 130, 246, 0.1);
+            border: 2px solid #3B82F6;
+        }
+        .tone-selector {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .tone-selector:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+        .tone-selector.active {
+            background: #3B82F6;
+            color: white;
+        }
+        .loading-spinner {
+            border: 3px solid rgba(59, 130, 246, 0.3);
+            border-top: 3px solid #3B82F6;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .content-editor {
+            min-height: 400px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 16px;
+            font-family: 'Inter', system-ui, sans-serif;
+            line-height: 1.6;
+        }
+        .content-editor:focus {
+            outline: none;
+            border-color: #3B82F6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-tools text-2xl"></i>
+                    <a href="index.html" class="text-2xl font-bold">ToolSlap</a>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="hover:text-blue-200 transition-colors">Home</a>
+                    <a href="ai-chatbots.html" class="hover:text-blue-200 transition-colors">AI Tools</a>
+                    <a href="tools.html" class="hover:text-blue-200 transition-colors">All Tools</a>
+                    <a href="contact.html" class="hover:text-blue-200 transition-colors">Contact</a>
+                </div>
+                <button class="md:hidden text-white">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-4xl mx-auto">
+                <i class="fas fa-pen-fancy text-6xl mb-6 text-blue-200"></i>
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">AI Content Creator Suite</h1>
+                <p class="text-xl md:text-2xl mb-8 text-blue-100">
+                    Create high-quality, engaging content in seconds. Generate blog posts, social media content, 
+                    email templates, marketing copy, and SEO-optimized content with advanced AI assistance.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#creator" class="bg-white text-primary-blue px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+                        <i class="fas fa-magic mr-2"></i>Start Creating
+                    </a>
+                    <a href="#features" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary-blue transition-colors">
+                        <i class="fas fa-list mr-2"></i>View Features
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Connection Status -->
+    <section class="py-8 bg-white">
+        <div class="container mx-auto px-4 text-center">
+            <span id="connectionStatus" class="text-sm px-4 py-2 rounded-full bg-gray-100 text-gray-600">
+                <i class="fas fa-circle text-gray-400"></i> Connecting to AI...
+            </span>
+        </div>
+    </section>
+
+    <!-- Content Creator Tool -->
+    <section id="creator" class="py-16 bg-light-blue">
+        <div class="container mx-auto px-4">
+            <div class="max-w-7xl mx-auto">
+                <!-- Content Type Selection -->
+                <div class="bg-white rounded-xl shadow-lg border border-blue-200 p-6 mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                        <i class="fas fa-edit text-primary-blue mr-3"></i>Choose Content Type
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                        <div class="content-type-card p-4 border-2 border-gray-200 rounded-lg text-center active" data-type="blog">
+                            <i class="fas fa-blog text-3xl text-blue-600 mb-3"></i>
+                            <h3 class="font-semibold text-gray-800">Blog Post</h3>
+                            <p class="text-xs text-gray-500 mt-1">Long-form articles</p>
+                        </div>
+                        <div class="content-type-card p-4 border-2 border-gray-200 rounded-lg text-center" data-type="social">
+                            <i class="fas fa-share-alt text-3xl text-green-600 mb-3"></i>
+                            <h3 class="font-semibold text-gray-800">Social Media</h3>
+                            <p class="text-xs text-gray-500 mt-1">Posts & captions</p>
+                        </div>
+                        <div class="content-type-card p-4 border-2 border-gray-200 rounded-lg text-center" data-type="email">
+                            <i class="fas fa-envelope text-3xl text-purple-600 mb-3"></i>
+                            <h3 class="font-semibold text-gray-800">Email</h3>
+                            <p class="text-xs text-gray-500 mt-1">Templates & campaigns</p>
+                        </div>
+                        <div class="content-type-card p-4 border-2 border-gray-200 rounded-lg text-center" data-type="marketing">
+                            <i class="fas fa-bullhorn text-3xl text-orange-600 mb-3"></i>
+                            <h3 class="font-semibold text-gray-800">Marketing</h3>
+                            <p class="text-xs text-gray-500 mt-1">Ad copy & sales</p>
+                        </div>
+                        <div class="content-type-card p-4 border-2 border-gray-200 rounded-lg text-center" data-type="seo">
+                            <i class="fas fa-search text-3xl text-red-600 mb-3"></i>
+                            <h3 class="font-semibold text-gray-800">SEO Content</h3>
+                            <p class="text-xs text-gray-500 mt-1">Optimized articles</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Configuration -->
+                <div class="bg-white rounded-xl shadow-lg border border-blue-200 p-6 mb-8">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6">Content Configuration</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- Topic Input -->
+                        <div class="lg:col-span-2">
+                            <label for="contentTopic" class="block text-sm font-semibold text-gray-700 mb-2">Topic / Subject</label>
+                            <input type="text" id="contentTopic" 
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                   placeholder="Enter your content topic...">
+                        </div>
+                        
+                        <!-- Target Audience -->
+                        <div>
+                            <label for="targetAudience" class="block text-sm font-semibold text-gray-700 mb-2">Target Audience</label>
+                            <select id="targetAudience" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="general">General Audience</option>
+                                <option value="professionals">Professionals</option>
+                                <option value="students">Students</option>
+                                <option value="entrepreneurs">Entrepreneurs</option>
+                                <option value="marketers">Marketers</option>
+                                <option value="developers">Developers</option>
+                                <option value="seniors">Seniors</option>
+                                <option value="teenagers">Teenagers</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Content Length -->
+                        <div>
+                            <label for="contentLength" class="block text-sm font-semibold text-gray-700 mb-2">Content Length</label>
+                            <select id="contentLength" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="short">Short (100-300 words)</option>
+                                <option value="medium" selected>Medium (300-800 words)</option>
+                                <option value="long">Long (800-1500 words)</option>
+                                <option value="very-long">Very Long (1500+ words)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Tone Selection -->
+                    <div class="mt-6">
+                        <label class="block text-sm font-semibold text-gray-700 mb-3">Writing Tone</label>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tone-selector px-4 py-2 bg-gray-100 rounded-lg text-sm font-medium active" data-tone="professional">Professional</span>
+                            <span class="tone-selector px-4 py-2 bg-gray-100 rounded-lg text-sm font-medium" data-tone="casual">Casual</span>
+                            <span class="tone-selector px-4 py-2 bg-gray-100 rounded-lg text-sm font-medium" data-tone="friendly">Friendly</span>
+                            <span class="tone-selector px-4 py-2 bg-gray-100 rounded-lg text-sm font-medium" data-tone="formal">Formal</span>
+                            <span class="tone-selector px-4 py-2 bg-gray-100 rounded-lg text-sm font-medium" data-tone="conversational">Conversational</span>
+                            <span class="tone-selector px-4 py-2 bg-gray-100 rounded-lg text-sm font-medium" data-tone="humorous">Humorous</span>
+                            <span class="tone-selector px-4 py-2 bg-gray-100 rounded-lg text-sm font-medium" data-tone="persuasive">Persuasive</span>
+                            <span class="tone-selector px-4 py-2 bg-gray-100 rounded-lg text-sm font-medium" data-tone="informative">Informative</span>
+                        </div>
+                    </div>
+
+                    <!-- Keywords (for SEO content) -->
+                    <div class="mt-6" id="keywordsSection" style="display: none;">
+                        <label for="keywords" class="block text-sm font-semibold text-gray-700 mb-2">SEO Keywords (comma-separated)</label>
+                        <input type="text" id="keywords" 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                               placeholder="keyword1, keyword2, keyword3...">
+                    </div>
+
+                    <!-- Generate Button -->
+                    <div class="mt-6 text-center">
+                        <button id="generateContent" class="bg-primary-blue hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors disabled:bg-gray-400" disabled>
+                            <i class="fas fa-magic mr-2"></i><span id="generateButtonText">Generate Content</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Generated Content Display -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Content Editor -->
+                    <div class="lg:col-span-2 bg-white rounded-xl shadow-lg border border-blue-200 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-gray-800">
+                                <i class="fas fa-file-alt text-blue-600 mr-2"></i><span id="contentTypeTitle">Generated Content</span>
+                            </h3>
+                            <div class="flex space-x-2">
+                                <button id="copyContent" class="text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded transition-colors" disabled>
+                                    <i class="fas fa-copy mr-1"></i>Copy
+                                </button>
+                                <button id="downloadContent" class="text-sm bg-blue-100 hover:bg-blue-200 text-blue-800 px-3 py-1 rounded transition-colors" disabled>
+                                    <i class="fas fa-download mr-1"></i>Download
+                                </button>
+                                <button id="regenerateContent" class="text-sm bg-green-100 hover:bg-green-200 text-green-800 px-3 py-1 rounded transition-colors" disabled>
+                                    <i class="fas fa-redo mr-1"></i>Regenerate
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div id="contentEditor" class="content-editor" contenteditable="true">
+                            <div class="text-center text-gray-400 py-16">
+                                <i class="fas fa-pen-fancy text-4xl mb-4"></i>
+                                <p class="text-lg">Your generated content will appear here</p>
+                                <p class="text-sm mt-2">Select a content type and topic to get started</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content Analysis & Tools -->
+                    <div class="bg-white rounded-xl shadow-lg border border-blue-200 p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">
+                            <i class="fas fa-chart-bar text-green-600 mr-2"></i>Content Analysis
+                        </h3>
+                        
+                        <!-- Content Stats -->
+                        <div id="contentStats" class="space-y-4 mb-6">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">Word Count:</span>
+                                <span id="wordCount" class="font-semibold text-blue-600">0</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">Character Count:</span>
+                                <span id="charCount" class="font-semibold text-blue-600">0</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">Reading Time:</span>
+                                <span id="readingTime" class="font-semibold text-blue-600">0 min</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">SEO Score:</span>
+                                <span id="seoScore" class="font-semibold text-green-600">-</span>
+                            </div>
+                        </div>
+
+                        <!-- Content Suggestions -->
+                        <div class="border-t pt-4">
+                            <h4 class="font-semibold text-gray-800 mb-3">Suggestions</h4>
+                            <div id="contentSuggestions" class="space-y-2 text-sm text-gray-600">
+                                <p>Generate content to see improvement suggestions</p>
+                            </div>
+                        </div>
+
+                        <!-- Content Templates -->
+                        <div class="border-t pt-4 mt-4">
+                            <h4 class="font-semibold text-gray-800 mb-3">Quick Templates</h4>
+                            <div class="space-y-2">
+                                <button class="template-btn w-full text-left text-sm bg-gray-50 hover:bg-gray-100 p-2 rounded transition-colors" data-template="introduction">
+                                    <i class="fas fa-play text-blue-500 mr-2"></i>Introduction Template
+                                </button>
+                                <button class="template-btn w-full text-left text-sm bg-gray-50 hover:bg-gray-100 p-2 rounded transition-colors" data-template="conclusion">
+                                    <i class="fas fa-flag-checkered text-green-500 mr-2"></i>Conclusion Template
+                                </button>
+                                <button class="template-btn w-full text-left text-sm bg-gray-50 hover:bg-gray-100 p-2 rounded transition-colors" data-template="cta">
+                                    <i class="fas fa-mouse-pointer text-orange-500 mr-2"></i>Call-to-Action
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Powerful Content Creation Features</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Everything you need to create engaging, high-quality content for any platform or purpose
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Blog Post Generator -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover border border-blue-100">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-blog text-blue-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Blog Post Generator</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        Create comprehensive, well-structured blog posts with proper headings, 
+                        engaging introductions, and compelling conclusions.
+                    </p>
+                    <ul class="space-y-1 text-sm text-gray-500">
+                        <li>• SEO-optimized structure</li>
+                        <li>• Research-backed content</li>
+                        <li>• Multiple writing styles</li>
+                        <li>• Automatic formatting</li>
+                    </ul>
+                </div>
+
+                <!-- Social Media Content -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover border border-green-100">
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-share-alt text-green-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Social Media Posts</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        Generate engaging social media content for all major platforms with 
+                        appropriate hashtags, mentions, and platform-specific formatting.
+                    </p>
+                    <ul class="space-y-1 text-sm text-gray-500">
+                        <li>• Platform-specific content</li>
+                        <li>• Trending hashtags</li>
+                        <li>• Engagement optimization</li>
+                        <li>• Multiple post variations</li>
+                    </ul>
+                </div>
+
+                <!-- Email Templates -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover border border-purple-100">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-envelope text-purple-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Email Campaigns</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        Create professional email templates for newsletters, marketing campaigns, 
+                        and customer communications with high conversion rates.
+                    </p>
+                    <ul class="space-y-1 text-sm text-gray-500">
+                        <li>• Newsletter templates</li>
+                        <li>• Sales email sequences</li>
+                        <li>• Welcome campaigns</li>
+                        <li>• Professional formatting</li>
+                    </ul>
+                </div>
+
+                <!-- Marketing Copy -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover border border-orange-100">
+                    <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-bullhorn text-orange-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Marketing Copy</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        Generate persuasive marketing copy for ads, landing pages, and sales 
+                        materials that convert visitors into customers.
+                    </p>
+                    <ul class="space-y-1 text-sm text-gray-500">
+                        <li>• Ad copy generation</li>
+                        <li>• Sales page content</li>
+                        <li>• Product descriptions</li>
+                        <li>• Conversion optimization</li>
+                    </ul>
+                </div>
+
+                <!-- SEO Content -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover border border-red-100">
+                    <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-search text-red-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">SEO Optimization</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        Create search-engine optimized content with proper keyword density, 
+                        meta descriptions, and ranking-friendly structure.
+                    </p>
+                    <ul class="space-y-1 text-sm text-gray-500">
+                        <li>• Keyword optimization</li>
+                        <li>• Meta descriptions</li>
+                        <li>• Schema markup ready</li>
+                        <li>• Ranking analysis</li>
+                    </ul>
+                </div>
+
+                <!-- Content Analysis -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover border border-teal-100">
+                    <div class="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-chart-line text-teal-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Content Analysis</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        Get detailed analytics on your content including readability scores, 
+                        SEO optimization, and improvement suggestions.
+                    </p>
+                    <ul class="space-y-1 text-sm text-gray-500">
+                        <li>• Readability analysis</li>
+                        <li>• SEO scoring</li>
+                        <li>• Tone analysis</li>
+                        <li>• Improvement suggestions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">ToolSlap</h3>
+                    <p class="text-blue-200 mb-4">Advanced AI tools for modern productivity and creativity.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">AI Tools</h4>
+                    <ul class="space-y-2 text-blue-200">
+                        <li><a href="ai-content-creator.html" class="hover:text-white">Content Creator</a></li>
+                        <li><a href="ai-code-assistant.html" class="hover:text-white">Code Assistant</a></li>
+                        <li><a href="ai-image-analyzer.html" class="hover:text-white">Image Analyzer</a></li>
+                        <li><a href="ai-chatbots.html" class="hover:text-white">AI Chatbots</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Content Types</h4>
+                    <ul class="space-y-2 text-blue-200">
+                        <li><a href="#" class="hover:text-white">Blog Posts</a></li>
+                        <li><a href="#" class="hover:text-white">Social Media</a></li>
+                        <li><a href="#" class="hover:text-white">Email Templates</a></li>
+                        <li><a href="#" class="hover:text-white">Marketing Copy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2 text-blue-200">
+                        <li><a href="#" class="hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white">API Docs</a></li>
+                        <li><a href="#" class="hover:text-white">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-blue-400 mt-8 pt-8 text-center text-blue-200">
+                <p>&copy; 2025 ToolSlap. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        class AIContentCreator {
+            constructor() {
+                this.apiUrl = 'http://localhost:8001';
+                this.isConnected = false;
+                this.isGenerating = false;
+                this.currentContentType = 'blog';
+                this.currentTone = 'professional';
+                this.currentContent = '';
+                
+                this.initializeElements();
+                this.setupEventListeners();
+                this.checkConnection();
+                this.updateContentTypeTitle();
+            }
+
+            initializeElements() {
+                this.connectionStatus = document.getElementById('connectionStatus');
+                this.contentTypeCards = document.querySelectorAll('.content-type-card');
+                this.toneSelectors = document.querySelectorAll('.tone-selector');
+                this.contentTopic = document.getElementById('contentTopic');
+                this.targetAudience = document.getElementById('targetAudience');
+                this.contentLength = document.getElementById('contentLength');
+                this.keywords = document.getElementById('keywords');
+                this.keywordsSection = document.getElementById('keywordsSection');
+                this.generateContent = document.getElementById('generateContent');
+                this.generateButtonText = document.getElementById('generateButtonText');
+                this.contentEditor = document.getElementById('contentEditor');
+                this.contentTypeTitle = document.getElementById('contentTypeTitle');
+                this.copyContent = document.getElementById('copyContent');
+                this.downloadContent = document.getElementById('downloadContent');
+                this.regenerateContent = document.getElementById('regenerateContent');
+                this.wordCount = document.getElementById('wordCount');
+                this.charCount = document.getElementById('charCount');
+                this.readingTime = document.getElementById('readingTime');
+                this.seoScore = document.getElementById('seoScore');
+                this.contentSuggestions = document.getElementById('contentSuggestions');
+                this.templateBtns = document.querySelectorAll('.template-btn');
+            }
+
+            setupEventListeners() {
+                // Content type selection
+                this.contentTypeCards.forEach(card => {
+                    card.addEventListener('click', (e) => {
+                        this.selectContentType(e.currentTarget.dataset.type);
+                    });
+                });
+
+                // Tone selection
+                this.toneSelectors.forEach(selector => {
+                    selector.addEventListener('click', (e) => {
+                        this.selectTone(e.currentTarget.dataset.tone);
+                    });
+                });
+
+                // Input validation
+                this.contentTopic.addEventListener('input', () => {
+                    this.validateInputs();
+                });
+
+                // Generate content
+                this.generateContent.addEventListener('click', () => this.generateContentAI());
+
+                // Content editing
+                this.contentEditor.addEventListener('input', () => {
+                    this.updateContentStats();
+                });
+
+                // Action buttons
+                this.copyContent.addEventListener('click', () => this.copyToClipboard());
+                this.downloadContent.addEventListener('click', () => this.downloadContentFile());
+                this.regenerateContent.addEventListener('click', () => this.generateContentAI());
+
+                // Template buttons
+                this.templateBtns.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        this.insertTemplate(e.currentTarget.dataset.template);
+                    });
+                });
+            }
+
+            async checkConnection() {
+                try {
+                    const response = await fetch(`${this.apiUrl}/health`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.model_loaded) {
+                            this.setConnectionStatus('Connected to AI Content Creator', 'green', true);
+                        } else {
+                            this.setConnectionStatus('Server running, loading model...', 'yellow', false);
+                        }
+                    } else {
+                        this.setConnectionStatus('Server not responding', 'red', false);
+                    }
+                } catch (error) {
+                    this.setConnectionStatus('Please start AI server', 'red', false);
+                }
+
+                this.validateInputs();
+            }
+
+            setConnectionStatus(message, color, connected) {
+                this.isConnected = connected;
+                this.connectionStatus.innerHTML = `
+                    <i class="fas fa-circle text-${color}-400"></i> ${message}
+                `;
+                this.connectionStatus.className = `text-sm px-4 py-2 rounded-full bg-${color}-50 text-${color}-600`;
+            }
+
+            selectContentType(type) {
+                this.currentContentType = type;
+                
+                // Update visual selection
+                this.contentTypeCards.forEach(card => {
+                    card.classList.remove('active');
+                });
+                
+                const selectedCard = document.querySelector(`[data-type="${type}"]`);
+                selectedCard.classList.add('active');
+                
+                // Show/hide keywords section for SEO content
+                if (type === 'seo') {
+                    this.keywordsSection.style.display = 'block';
+                } else {
+                    this.keywordsSection.style.display = 'none';
+                }
+                
+                this.updateContentTypeTitle();
+                this.validateInputs();
+            }
+
+            selectTone(tone) {
+                this.currentTone = tone;
+                
+                // Update visual selection
+                this.toneSelectors.forEach(selector => {
+                    selector.classList.remove('active');
+                });
+                
+                const selectedTone = document.querySelector(`[data-tone="${tone}"]`);
+                selectedTone.classList.add('active');
+            }
+
+            updateContentTypeTitle() {
+                const titles = {
+                    blog: 'Blog Post',
+                    social: 'Social Media Content',
+                    email: 'Email Template',
+                    marketing: 'Marketing Copy',
+                    seo: 'SEO Content'
+                };
+                this.contentTypeTitle.textContent = titles[this.currentContentType] || 'Generated Content';
+            }
+
+            validateInputs() {
+                const isValid = this.contentTopic.value.trim() && this.isConnected;
+                this.generateContent.disabled = !isValid;
+            }
+
+            async generateContentAI() {
+                if (!this.contentTopic.value.trim() || !this.isConnected || this.isGenerating) return;
+
+                this.isGenerating = true;
+                this.generateContent.disabled = true;
+                this.generateButtonText.textContent = 'Generating...';
+                
+                this.showGeneratingMessage();
+
+                try {
+                    const keywords = this.currentContentType === 'seo' ? 
+                        this.keywords.value.split(',').map(k => k.trim()).filter(k => k) : [];
+
+                    const response = await fetch(`${this.apiUrl}/api/content/create`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            content_type: this.currentContentType,
+                            topic: this.contentTopic.value.trim(),
+                            target_audience: this.targetAudience.value,
+                            tone: this.currentTone,
+                            length: this.contentLength.value,
+                            keywords: keywords
+                        })
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        this.displayGeneratedContent(data);
+                    } else {
+                        throw new Error('Content generation failed');
+                    }
+                } catch (error) {
+                    this.showError(`Error: ${error.message}. Please check if the AI server is running.`);
+                } finally {
+                    this.isGenerating = false;
+                    this.generateContent.disabled = false;
+                    this.generateButtonText.textContent = 'Generate Content';
+                }
+            }
+
+            showGeneratingMessage() {
+                this.contentEditor.innerHTML = `
+                    <div class="text-center text-blue-500 py-16">
+                        <div class="loading-spinner mx-auto mb-4"></div>
+                        <p class="text-lg font-semibold">Creating your content...</p>
+                        <p class="text-sm mt-2">This may take a moment</p>
+                    </div>
+                `;
+            }
+
+            displayGeneratedContent(data) {
+                this.currentContent = data.content;
+                this.contentEditor.innerHTML = `<div class="prose max-w-none">${data.content.replace(/\n/g, '<br><br>')}</div>`;
+                
+                // Enable action buttons
+                this.copyContent.disabled = false;
+                this.downloadContent.disabled = false;
+                this.regenerateContent.disabled = false;
+                
+                // Update stats
+                this.updateContentStats();
+                
+                // Show suggestions
+                this.showContentSuggestions(data);
+            }
+
+            updateContentStats() {
+                const text = this.contentEditor.innerText || '';
+                const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+                const chars = text.length;
+                const readingTime = Math.ceil(words / 200); // Average reading speed
+                
+                this.wordCount.textContent = words.toLocaleString();
+                this.charCount.textContent = chars.toLocaleString();
+                this.readingTime.textContent = `${readingTime} min`;
+                
+                // Calculate SEO score (simplified)
+                let seoScore = 0;
+                if (words >= 300) seoScore += 30;
+                if (words <= 2000) seoScore += 20;
+                if (this.currentContentType === 'seo' && this.keywords.value) seoScore += 30;
+                if (text.includes('?')) seoScore += 10; // Questions engage readers
+                if (this.currentTone === 'professional') seoScore += 10;
+                
+                this.seoScore.textContent = `${seoScore}/100`;
+                this.seoScore.className = seoScore >= 70 ? 'font-semibold text-green-600' : 
+                                          seoScore >= 50 ? 'font-semibold text-yellow-600' : 
+                                          'font-semibold text-red-600';
+            }
+
+            showContentSuggestions(data) {
+                const suggestions = [];
+                
+                if (data.word_count < 300) {
+                    suggestions.push('Consider expanding your content for better SEO');
+                }
+                if (data.seo_score < 80) {
+                    suggestions.push('Add more relevant keywords naturally');
+                }
+                if (data.readability_score < 70) {
+                    suggestions.push('Use shorter sentences for better readability');
+                }
+                
+                suggestions.push('Add subheadings to improve structure');
+                suggestions.push('Include a compelling call-to-action');
+                
+                this.contentSuggestions.innerHTML = suggestions.map(suggestion => 
+                    `<div class="flex items-start space-x-2">
+                        <i class="fas fa-lightbulb text-yellow-500 mt-0.5"></i>
+                        <span>${suggestion}</span>
+                    </div>`
+                ).join('');
+            }
+
+            showError(error) {
+                this.contentEditor.innerHTML = `
+                    <div class="text-center text-red-500 py-16">
+                        <i class="fas fa-exclamation-triangle text-4xl mb-4"></i>
+                        <p class="text-lg font-semibold">${error}</p>
+                        <button onclick="location.reload()" class="mt-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg">
+                            Retry
+                        </button>
+                    </div>
+                `;
+            }
+
+            copyToClipboard() {
+                const text = this.contentEditor.innerText;
+                navigator.clipboard.writeText(text).then(() => {
+                    this.copyContent.innerHTML = '<i class="fas fa-check mr-1"></i>Copied!';
+                    setTimeout(() => {
+                        this.copyContent.innerHTML = '<i class="fas fa-copy mr-1"></i>Copy';
+                    }, 2000);
+                });
+            }
+
+            downloadContentFile() {
+                const text = this.contentEditor.innerText;
+                const filename = `${this.currentContentType}-content-${Date.now()}.txt`;
+                const blob = new Blob([text], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+
+                this.downloadContent.innerHTML = '<i class="fas fa-check mr-1"></i>Downloaded!';
+                setTimeout(() => {
+                    this.downloadContent.innerHTML = '<i class="fas fa-download mr-1"></i>Download';
+                }, 2000);
+            }
+
+            insertTemplate(templateType) {
+                const templates = {
+                    introduction: "Welcome to this comprehensive guide on...",
+                    conclusion: "In conclusion, we've explored how...",
+                    cta: "Ready to get started? Contact us today!"
+                };
+
+                const template = templates[templateType];
+                if (template) {
+                    const currentContent = this.contentEditor.innerHTML;
+                    this.contentEditor.innerHTML = currentContent + '<br><br>' + template;
+                    this.updateContentStats();
+                }
+            }
+        }
+
+        // Initialize AI Content Creator when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new AIContentCreator();
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

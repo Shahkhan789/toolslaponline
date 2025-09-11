@@ -209,6 +209,12 @@ class CodeAssistantRequest(BaseModel):
     target_language: Optional[str] = None
     requirements: Optional[str] = None
 
+class CodeAssistRequest(BaseModel):
+    task: str  # generate, debug, explain, optimize
+    language: str  # javascript, python, java, etc.
+    input: str
+    include_explanation: bool = True
+
 class ContentCreatorRequest(BaseModel):
     content_type: str  # blog, social, email, ad, seo
     topic: str
@@ -653,6 +659,112 @@ async def code_assistant(request: CodeAssistantRequest, http_request: Request):
         
     except Exception as e:
         logger.error(f"Code assistant error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+# New Code Assist endpoint for AI Code Assistant tool
+@app.post("/api/code/assist")
+@rate_limit(40)
+async def code_assist(request: CodeAssistRequest, http_request: Request):
+    """AI Code Assistant - Generate, debug, explain, and optimize code."""
+    start_time = time.time()
+    
+    try:
+        # Task-specific prompts
+        if request.task == "generate":
+            prompt = f"""Create clean, well-documented {request.language} code for the following request:
+
+{request.input}
+
+Requirements:
+- Write clean, readable code
+- Follow best practices for {request.language}
+- Include appropriate comments
+- Handle edge cases and errors
+- Make it production-ready
+
+Provide only the code:"""
+            
+        elif request.task == "debug":
+            prompt = f"""Debug this {request.language} code and fix all issues:
+
+{request.input}
+
+Please:
+1. Identify all bugs and issues
+2. Fix them in the code
+3. Provide the corrected version
+4. Ensure the code follows best practices
+
+Provide the fixed code:"""
+            
+        elif request.task == "explain":
+            prompt = f"""Explain this {request.language} code in detail:
+
+{request.input}
+
+Provide a comprehensive explanation covering:
+- What the code does
+- How it works step by step
+- Key algorithms or patterns used
+- Potential improvements
+- Best practices demonstrated"""
+            
+        elif request.task == "optimize":
+            prompt = f"""Optimize this {request.language} code for better performance and maintainability:
+
+{request.input}
+
+Focus on:
+- Performance improvements
+- Memory efficiency
+- Code readability
+- Best practices
+- Error handling
+
+Provide the optimized code:"""
+            
+        else:
+            prompt = f"Process this {request.language} code request: {request.input}"
+
+        # Generate code response
+        code_result = generate_response(prompt, [], 0.3, 2048)  # Lower temperature for more consistent code
+        
+        # Generate explanation if requested
+        explanation = ""
+        if request.include_explanation and request.task != "explain":
+            explain_prompt = f"""Briefly explain this {request.language} code and its key features:
+
+{code_result}
+
+Provide a concise explanation covering:
+- Main purpose and functionality
+- Key components and structure
+- Important implementation details"""
+            
+            explanation = generate_response(explain_prompt, [], 0.5, 1024)
+        elif request.task == "explain":
+            explanation = code_result
+            code_result = request.input  # Keep original code for explanation task
+        
+        response = {
+            "code": code_result,
+            "explanation": explanation,
+            "task": request.task,
+            "language": request.language,
+            "processing_time": time.time() - start_time,
+            "status": "success",
+            "confidence": 0.92
+        }
+        
+        # Log analytics
+        log_request("/api/code/assist", "POST", time.time() - start_time, 
+                   200, str(http_request.headers.get("user-agent")), 
+                   http_request.client.host, len(str(request)), len(str(response)))
+        
+        return response
+        
+    except Exception as e:
+        logger.error(f"Code assist error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 # Content creator endpoint
