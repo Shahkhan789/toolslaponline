@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Image Analyzer | Advanced Image Analysis Tool - ToolSlap</title>
+    <meta name="description" content="Analyze images with AI! Extract text (OCR), detect objects, describe content, and enhance images using advanced AI technology.">
+    <meta name="keywords" content="AI image analysis, OCR, object detection, image enhancement, computer vision, AI image tools, image analyzer">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#3B82F6',
+                        'light-blue': '#EFF6FF',
+                        'dark-blue': '#1E40AF'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+        }
+        .drop-zone {
+            border: 2px dashed #3B82F6;
+            transition: all 0.3s ease;
+        }
+        .drop-zone.dragover {
+            border-color: #1D4ED8;
+            background-color: #EFF6FF;
+        }
+        .image-preview {
+            max-width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+        }
+        @keyframes pulse-analyze {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .analyzing {
+            animation: pulse-analyze 1.5s infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-tools text-2xl"></i>
+                    <a href="index.html" class="text-2xl font-bold">ToolSlap</a>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="hover:text-blue-200 transition-colors">Home</a>
+                    <a href="ai-chatbots.html" class="hover:text-blue-200 transition-colors">AI Tools</a>
+                    <a href="tools.html" class="hover:text-blue-200 transition-colors">All Tools</a>
+                    <a href="contact.html" class="hover:text-blue-200 transition-colors">Contact</a>
+                </div>
+                <button class="md:hidden text-white">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-4xl mx-auto">
+                <i class="fas fa-image text-6xl mb-6 text-blue-200"></i>
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">AI Image Analyzer</h1>
+                <p class="text-xl md:text-2xl mb-8 text-blue-100">
+                    Advanced AI-powered image analysis. Extract text, detect objects, describe content, 
+                    and enhance images with cutting-edge computer vision technology.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#analyzer" class="bg-white text-primary-blue px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+                        <i class="fas fa-upload mr-2"></i>Analyze Image
+                    </a>
+                    <a href="#features" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary-blue transition-colors">
+                        <i class="fas fa-eye mr-2"></i>View Features
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Connection Status -->
+    <section class="py-8 bg-white">
+        <div class="container mx-auto px-4 text-center">
+            <span id="connectionStatus" class="text-sm px-4 py-2 rounded-full bg-gray-100 text-gray-600">
+                <i class="fas fa-circle text-gray-400"></i> Connecting to AI...
+            </span>
+        </div>
+    </section>
+
+    <!-- Image Analyzer Tool -->
+    <section id="analyzer" class="py-16 bg-light-blue">
+        <div class="container mx-auto px-4">
+            <div class="max-w-7xl mx-auto">
+                <!-- Upload Section -->
+                <div class="bg-white rounded-xl shadow-lg border border-blue-200 p-8 mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                        <i class="fas fa-cloud-upload-alt text-primary-blue mr-3"></i>Upload & Analyze Image
+                    </h2>
+                    
+                    <!-- Drop Zone -->
+                    <div id="dropZone" class="drop-zone rounded-lg p-12 text-center mb-6 cursor-pointer">
+                        <div id="dropContent">
+                            <i class="fas fa-images text-4xl text-primary-blue mb-4"></i>
+                            <p class="text-lg font-semibold text-gray-700 mb-2">Drop your image here or click to browse</p>
+                            <p class="text-sm text-gray-500">Supports JPG, PNG, GIF, WebP (max 10MB)</p>
+                        </div>
+                        <input type="file" id="imageInput" accept="image/*" class="hidden">
+                    </div>
+
+                    <!-- Analysis Type Selection -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                        <div class="analysis-option bg-blue-50 border border-blue-200 rounded-lg p-4 cursor-pointer hover:bg-blue-100 transition-colors" data-type="description">
+                            <div class="text-center">
+                                <i class="fas fa-comments text-2xl text-blue-600 mb-2"></i>
+                                <h3 class="font-semibold text-blue-800">Description</h3>
+                                <p class="text-xs text-blue-600 mt-1">Describe image content</p>
+                            </div>
+                        </div>
+                        <div class="analysis-option bg-green-50 border border-green-200 rounded-lg p-4 cursor-pointer hover:bg-green-100 transition-colors" data-type="ocr">
+                            <div class="text-center">
+                                <i class="fas fa-font text-2xl text-green-600 mb-2"></i>
+                                <h3 class="font-semibold text-green-800">OCR</h3>
+                                <p class="text-xs text-green-600 mt-1">Extract text from image</p>
+                            </div>
+                        </div>
+                        <div class="analysis-option bg-purple-50 border border-purple-200 rounded-lg p-4 cursor-pointer hover:bg-purple-100 transition-colors" data-type="objects">
+                            <div class="text-center">
+                                <i class="fas fa-search text-2xl text-purple-600 mb-2"></i>
+                                <h3 class="font-semibold text-purple-800">Objects</h3>
+                                <p class="text-xs text-purple-600 mt-1">Detect objects & people</p>
+                            </div>
+                        </div>
+                        <div class="analysis-option bg-orange-50 border border-orange-200 rounded-lg p-4 cursor-pointer hover:bg-orange-100 transition-colors" data-type="analysis">
+                            <div class="text-center">
+                                <i class="fas fa-brain text-2xl text-orange-600 mb-2"></i>
+                                <h3 class="font-semibold text-orange-800">Analysis</h3>
+                                <p class="text-xs text-orange-600 mt-1">Comprehensive analysis</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Settings -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Detail Level</label>
+                            <select id="detailLevel" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="brief">Brief</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="detailed">Detailed</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Language</label>
+                            <select id="analysisLanguage" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="English">English</option>
+                                <option value="Spanish">Español</option>
+                                <option value="French">Français</option>
+                                <option value="German">Deutsch</option>
+                                <option value="Chinese">中文</option>
+                                <option value="Japanese">日本語</option>
+                            </select>
+                        </div>
+                        <div class="flex items-end">
+                            <button id="analyzeButton" class="w-full bg-primary-blue hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors disabled:bg-gray-400" disabled>
+                                <i class="fas fa-magic mr-2"></i><span id="analyzeButtonText">Analyze Image</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Section -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Image Preview -->
+                    <div class="bg-white rounded-xl shadow-lg border border-blue-200 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-gray-800">
+                                <i class="fas fa-image text-blue-600 mr-2"></i>Image Preview
+                            </h3>
+                            <div class="text-sm text-gray-500" id="imageInfo">No image selected</div>
+                        </div>
+                        
+                        <div id="imagePreviewContainer" class="bg-gray-50 rounded-lg min-h-64 flex items-center justify-center">
+                            <div class="text-center text-gray-400">
+                                <i class="fas fa-image text-4xl mb-3"></i>
+                                <p>Upload an image to see preview</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Analysis Results -->
+                    <div class="bg-white rounded-xl shadow-lg border border-blue-200 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-bold text-gray-800">
+                                <i class="fas fa-chart-bar text-green-600 mr-2"></i>Analysis Results
+                            </h3>
+                            <div class="flex space-x-2">
+                                <button id="copyResults" class="text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded transition-colors" disabled>
+                                    <i class="fas fa-copy mr-1"></i>Copy
+                                </button>
+                                <button id="exportResults" class="text-sm bg-blue-100 hover:bg-blue-200 text-blue-800 px-3 py-1 rounded transition-colors" disabled>
+                                    <i class="fas fa-download mr-1"></i>Export
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div id="analysisResults" class="bg-gray-50 rounded-lg p-4 min-h-64 max-h-96 overflow-y-auto">
+                            <div class="text-center text-gray-400 py-8">
+                                <i class="fas fa-search text-3xl mb-3"></i>
+                                <p>Analysis results will appear here</p>
+                                <p class="text-sm mt-2">Upload an image and select analysis type</p>
+                            </div>
+                        </div>
+
+                        <!-- Analysis Statistics -->
+                        <div id="analysisStats" class="mt-4 p-3 bg-blue-50 rounded-lg hidden">
+                            <div class="grid grid-cols-3 gap-4 text-sm text-center">
+                                <div>
+                                    <div class="text-lg font-bold text-blue-600" id="confidence">0%</div>
+                                    <div class="text-blue-800">Confidence</div>
+                                </div>
+                                <div>
+                                    <div class="text-lg font-bold text-green-600" id="processingTime">0s</div>
+                                    <div class="text-green-800">Process Time</div>
+                                </div>
+                                <div>
+                                    <div class="text-lg font-bold text-purple-600" id="detectedItems">0</div>
+                                    <div class="text-purple-800">Items Found</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Advanced AI Features</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Discover the powerful capabilities of our AI image analysis system
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Image Description -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover border border-blue-100">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-eye text-blue-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Smart Description</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Generate detailed, natural language descriptions of your images including objects, scenes, activities, and context.
+                    </p>
+                    <ul class="mt-4 space-y-1 text-sm text-gray-500">
+                        <li>• Scene understanding</li>
+                        <li>• Object relationships</li>
+                        <li>• Color & composition analysis</li>
+                    </ul>
+                </div>
+
+                <!-- OCR Text Extraction -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover border border-green-100">
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-font text-green-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">OCR Extraction</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Extract text from images with high accuracy. Perfect for documents, signs, screenshots, and handwritten notes.
+                    </p>
+                    <ul class="mt-4 space-y-1 text-sm text-gray-500">
+                        <li>• Multi-language support</li>
+                        <li>• Handwriting recognition</li>
+                        <li>• Structured output</li>
+                    </ul>
+                </div>
+
+                <!-- Object Detection -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover border border-purple-100">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-crosshairs text-purple-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Object Detection</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Identify and locate objects, people, animals, and items within your images with bounding box coordinates.
+                    </p>
+                    <ul class="mt-4 space-y-1 text-sm text-gray-500">
+                        <li>• Real-time detection</li>
+                        <li>• Confidence scoring</li>
+                        <li>• Location mapping</li>
+                    </ul>
+                </div>
+
+                <!-- Advanced Analysis -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover border border-orange-100">
+                    <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-chart-line text-orange-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Deep Analysis</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Comprehensive image analysis including style, mood, technical quality, and artistic elements.
+                    </p>
+                    <ul class="mt-4 space-y-1 text-sm text-gray-500">
+                        <li>• Style classification</li>
+                        <li>• Quality assessment</li>
+                        <li>• Artistic analysis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="py-16 bg-light-blue">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Use Cases</h2>
+                <p class="text-lg text-gray-600">See how AI image analysis can help in various scenarios</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl p-6 shadow-lg">
+                    <i class="fas fa-briefcase text-3xl text-blue-600 mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Business & E-commerce</h3>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li>• Product catalog automation</li>
+                        <li>• Invoice & receipt processing</li>
+                        <li>• Brand logo detection</li>
+                        <li>• Quality control inspection</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-lg">
+                    <i class="fas fa-graduation-cap text-3xl text-green-600 mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Education & Research</h3>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li>• Document digitization</li>
+                        <li>• Scientific image analysis</li>
+                        <li>• Historical photo research</li>
+                        <li>• Language learning aids</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-lg">
+                    <i class="fas fa-camera text-3xl text-purple-600 mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Creative & Personal</h3>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li>• Photo organization</li>
+                        <li>• Art style analysis</li>
+                        <li>• Social media optimization</li>
+                        <li>• Accessibility descriptions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">ToolSlap</h3>
+                    <p class="text-blue-200 mb-4">Advanced AI tools for modern productivity and creativity.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">AI Tools</h4>
+                    <ul class="space-y-2 text-blue-200">
+                        <li><a href="ai-image-analyzer.html" class="hover:text-white">Image Analyzer</a></li>
+                        <li><a href="ai-chatbots.html" class="hover:text-white">AI Chatbots</a></li>
+                        <li><a href="ai-story-writer.html" class="hover:text-white">Story Writer</a></li>
+                        <li><a href="ai-code-assistant.html" class="hover:text-white">Code Assistant</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Features</h4>
+                    <ul class="space-y-2 text-blue-200">
+                        <li><a href="#" class="hover:text-white">OCR Extraction</a></li>
+                        <li><a href="#" class="hover:text-white">Object Detection</a></li>
+                        <li><a href="#" class="hover:text-white">Image Description</a></li>
+                        <li><a href="#" class="hover:text-white">Deep Analysis</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2 text-blue-200">
+                        <li><a href="#" class="hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white">API Docs</a></li>
+                        <li><a href="#" class="hover:text-white">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-blue-400 mt-8 pt-8 text-center text-blue-200">
+                <p>&copy; 2025 ToolSlap. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        class ImageAnalyzer {
+            constructor() {
+                this.apiUrl = 'http://localhost:8001';
+                this.isConnected = false;
+                this.isAnalyzing = false;
+                this.currentImage = null;
+                this.selectedAnalysisType = 'description';
+                
+                this.initializeElements();
+                this.setupEventListeners();
+                this.checkConnection();
+            }
+
+            initializeElements() {
+                this.connectionStatus = document.getElementById('connectionStatus');
+                this.dropZone = document.getElementById('dropZone');
+                this.imageInput = document.getElementById('imageInput');
+                this.imagePreviewContainer = document.getElementById('imagePreviewContainer');
+                this.imageInfo = document.getElementById('imageInfo');
+                this.analysisOptions = document.querySelectorAll('.analysis-option');
+                this.detailLevel = document.getElementById('detailLevel');
+                this.analysisLanguage = document.getElementById('analysisLanguage');
+                this.analyzeButton = document.getElementById('analyzeButton');
+                this.analyzeButtonText = document.getElementById('analyzeButtonText');
+                this.analysisResults = document.getElementById('analysisResults');
+                this.analysisStats = document.getElementById('analysisStats');
+                this.confidence = document.getElementById('confidence');
+                this.processingTime = document.getElementById('processingTime');
+                this.detectedItems = document.getElementById('detectedItems');
+                this.copyResults = document.getElementById('copyResults');
+                this.exportResults = document.getElementById('exportResults');
+            }
+
+            setupEventListeners() {
+                // Drop zone events
+                this.dropZone.addEventListener('click', () => this.imageInput.click());
+                this.dropZone.addEventListener('dragover', this.handleDragOver.bind(this));
+                this.dropZone.addEventListener('dragleave', this.handleDragLeave.bind(this));
+                this.dropZone.addEventListener('drop', this.handleDrop.bind(this));
+                
+                // File input
+                this.imageInput.addEventListener('change', this.handleFileSelect.bind(this));
+                
+                // Analysis type selection
+                this.analysisOptions.forEach(option => {
+                    option.addEventListener('click', (e) => {
+                        this.selectAnalysisType(e.currentTarget.dataset.type);
+                    });
+                });
+                
+                // Analyze button
+                this.analyzeButton.addEventListener('click', () => this.analyzeImage());
+                
+                // Export buttons
+                this.copyResults.addEventListener('click', () => this.copyToClipboard());
+                this.exportResults.addEventListener('click', () => this.exportResults());
+            }
+
+            async checkConnection() {
+                try {
+                    const response = await fetch(`${this.apiUrl}/health`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        if (data.model_loaded) {
+                            this.setConnectionStatus('Connected to AI Image Analyzer', 'green', true);
+                        } else {
+                            this.setConnectionStatus('Server running, loading model...', 'yellow', false);
+                        }
+                    } else {
+                        this.setConnectionStatus('Server not responding', 'red', false);
+                    }
+                } catch (error) {
+                    this.setConnectionStatus('Please start AI server', 'red', false);
+                }
+            }
+
+            setConnectionStatus(message, color, connected) {
+                this.isConnected = connected;
+                this.connectionStatus.innerHTML = `
+                    <i class="fas fa-circle text-${color}-400"></i> ${message}
+                `;
+                this.connectionStatus.className = `text-sm px-4 py-2 rounded-full bg-${color}-50 text-${color}-600`;
+            }
+
+            handleDragOver(e) {
+                e.preventDefault();
+                this.dropZone.classList.add('dragover');
+            }
+
+            handleDragLeave(e) {
+                e.preventDefault();
+                this.dropZone.classList.remove('dragover');
+            }
+
+            handleDrop(e) {
+                e.preventDefault();
+                this.dropZone.classList.remove('dragover');
+                
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    this.processFile(files[0]);
+                }
+            }
+
+            handleFileSelect(e) {
+                const files = e.target.files;
+                if (files.length > 0) {
+                    this.processFile(files[0]);
+                }
+            }
+
+            processFile(file) {
+                // Validate file type
+                if (!file.type.startsWith('image/')) {
+                    alert('Please select a valid image file');
+                    return;
+                }
+                
+                // Validate file size (10MB limit)
+                if (file.size > 10 * 1024 * 1024) {
+                    alert('File size must be less than 10MB');
+                    return;
+                }
+                
+                this.currentImage = file;
+                this.displayImagePreview(file);
+                this.updateImageInfo(file);
+                this.analyzeButton.disabled = false;
+            }
+
+            displayImagePreview(file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    this.imagePreviewContainer.innerHTML = `
+                        <img src="${e.target.result}" alt="Preview" class="image-preview rounded-lg shadow-lg">
+                    `;
+                };
+                reader.readAsDataURL(file);
+            }
+
+            updateImageInfo(file) {
+                const sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
+                this.imageInfo.textContent = `${file.name} (${sizeInMB} MB)`;
+            }
+
+            selectAnalysisType(type) {
+                this.selectedAnalysisType = type;
+                
+                // Update visual selection
+                this.analysisOptions.forEach(option => {
+                    option.classList.remove('ring-2', 'ring-blue-500');
+                });
+                
+                const selectedOption = document.querySelector(`[data-type="${type}"]`);
+                selectedOption.classList.add('ring-2', 'ring-blue-500');
+            }
+
+            async analyzeImage() {
+                if (!this.currentImage || !this.isConnected || this.isAnalyzing) return;
+
+                this.isAnalyzing = true;
+                this.analyzeButton.disabled = true;
+                this.analyzeButtonText.textContent = 'Analyzing...';
+                this.dropZone.classList.add('analyzing');
+                
+                this.showAnalyzingMessage();
+                
+                const startTime = Date.now();
+                
+                try {
+                    // Convert image to base64
+                    const base64Image = await this.fileToBase64(this.currentImage);
+                    
+                    const response = await fetch(`${this.apiUrl}/api/image/analyze`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            image_data: base64Image,
+                            analysis_type: this.selectedAnalysisType,
+                            detail_level: this.detailLevel.value,
+                            language: this.analysisLanguage.value
+                        })
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        const processingTime = Date.now() - startTime;
+                        this.displayResults(data, processingTime);
+                    } else {
+                        throw new Error('Analysis failed');
+                    }
+                } catch (error) {
+                    this.showError(`Error: ${error.message}. Please check if the AI server is running.`);
+                } finally {
+                    this.isAnalyzing = false;
+                    this.analyzeButton.disabled = !this.currentImage;
+                    this.analyzeButtonText.textContent = 'Analyze Image';
+                    this.dropZone.classList.remove('analyzing');
+                }
+            }
+
+            fileToBase64(file) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = () => resolve(reader.result.split(',')[1]);
+                    reader.onerror = error => reject(error);
+                });
+            }
+
+            showAnalyzingMessage() {
+                this.analysisResults.innerHTML = `
+                    <div class="text-center text-blue-500 py-8">
+                        <div class="animate-spin w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full mx-auto mb-4"></div>
+                        <p class="text-lg font-semibold">Analyzing your image...</p>
+                        <p class="text-sm mt-2">This may take a few moments</p>
+                    </div>
+                `;
+            }
+
+            displayResults(data, processingTime) {
+                // Format results based on analysis type
+                let formattedResults = '';
+                
+                switch (this.selectedAnalysisType) {
+                    case 'description':
+                        formattedResults = `
+                            <div class="space-y-4">
+                                <h4 class="font-semibold text-gray-800 flex items-center">
+                                    <i class="fas fa-eye text-blue-600 mr-2"></i>Image Description
+                                </h4>
+                                <p class="text-gray-700 leading-relaxed">${data.analysis}</p>
+                            </div>
+                        `;
+                        break;
+                    case 'ocr':
+                        formattedResults = `
+                            <div class="space-y-4">
+                                <h4 class="font-semibold text-gray-800 flex items-center">
+                                    <i class="fas fa-font text-green-600 mr-2"></i>Extracted Text
+                                </h4>
+                                <div class="bg-white p-4 rounded border">
+                                    <pre class="whitespace-pre-wrap text-sm text-gray-700">${data.analysis}</pre>
+                                </div>
+                            </div>
+                        `;
+                        break;
+                    case 'objects':
+                        formattedResults = `
+                            <div class="space-y-4">
+                                <h4 class="font-semibold text-gray-800 flex items-center">
+                                    <i class="fas fa-search text-purple-600 mr-2"></i>Detected Objects
+                                </h4>
+                                <div class="space-y-2">
+                                    ${data.analysis.split('\\n').map(item => 
+                                        item.trim() ? `<div class="flex items-center justify-between bg-white p-2 rounded border">
+                                            <span class="text-gray-700">${item.trim()}</span>
+                                            <span class="text-xs text-green-600 bg-green-100 px-2 py-1 rounded">detected</span>
+                                        </div>` : ''
+                                    ).join('')}
+                                </div>
+                            </div>
+                        `;
+                        break;
+                    case 'analysis':
+                        formattedResults = `
+                            <div class="space-y-4">
+                                <h4 class="font-semibold text-gray-800 flex items-center">
+                                    <i class="fas fa-chart-line text-orange-600 mr-2"></i>Comprehensive Analysis
+                                </h4>
+                                <div class="text-gray-700 leading-relaxed">${data.analysis}</div>
+                            </div>
+                        `;
+                        break;
+                }
+                
+                this.analysisResults.innerHTML = formattedResults;
+                
+                // Update statistics
+                this.confidence.textContent = Math.round(data.confidence * 100) + '%';
+                this.processingTime.textContent = (processingTime / 1000).toFixed(1) + 's';
+                
+                // Count detected items (rough estimation)
+                const itemCount = data.analysis.split(/[,\n.]/).filter(item => item.trim().length > 0).length;
+                this.detectedItems.textContent = Math.min(itemCount, 20); // Cap at 20 for display
+                
+                this.analysisStats.classList.remove('hidden');
+                this.copyResults.disabled = false;
+                this.exportResults.disabled = false;
+            }
+
+            showError(error) {
+                this.analysisResults.innerHTML = `
+                    <div class="text-center text-red-500 py-8">
+                        <i class="fas fa-exclamation-triangle text-4xl mb-4"></i>
+                        <p class="text-lg font-semibold">${error}</p>
+                        <button onclick="location.reload()" class="mt-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg">
+                            Retry
+                        </button>
+                    </div>
+                `;
+            }
+
+            copyToClipboard() {
+                const text = this.analysisResults.innerText;
+                navigator.clipboard.writeText(text).then(() => {
+                    this.copyResults.innerHTML = '<i class="fas fa-check mr-1"></i>Copied!';
+                    setTimeout(() => {
+                        this.copyResults.innerHTML = '<i class="fas fa-copy mr-1"></i>Copy';
+                    }, 2000);
+                });
+            }
+
+            exportResults() {
+                const text = this.analysisResults.innerText;
+                const filename = `image-analysis-${Date.now()}.txt`;
+                const blob = new Blob([text], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+
+                this.exportResults.innerHTML = '<i class="fas fa-check mr-1"></i>Exported!';
+                setTimeout(() => {
+                    this.exportResults.innerHTML = '<i class="fas fa-download mr-1"></i>Export';
+                }, 2000);
+            }
+        }
+
+        // Initialize Image Analyzer when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new ImageAnalyzer();
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
