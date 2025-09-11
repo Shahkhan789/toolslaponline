@@ -703,6 +703,8 @@
         </section>
     </main>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mammoth@1.6.0/mammoth.browser.min.js"></script>
     <script>
         let selectedFile = null;
         let selectedFormat = 'standard';
@@ -826,115 +828,109 @@
             try {
                 updateProgress(20, 'Reading Word document...');
                 
-                // Simulate conversion process
-                const reader = new FileReader();
-                reader.onload = async function(e) {
-                    updateProgress(50, 'Converting to PDF...');
-                    
-                    // Simulate processing delay
-                    await new Promise(resolve => setTimeout(resolve, 2000));
-                    
-                    updateProgress(80, 'Optimizing PDF...');
-                    
-                    // Generate PDF (placeholder - in real implementation, would use library like docx-to-pdf)
-                    const pdfContent = generatePDF(selectedFile.name);
-                    
-                    updateProgress(100, 'Conversion complete!');
-                    
-                    // Show download
-                    setTimeout(() => {
-                        showDownload(pdfContent, selectedFile.name);
-                    }, 500);
-                    
-                    showSuccess('Your Word document has been successfully converted to PDF!');
-                };
+                // Read the file as array buffer
+                const arrayBuffer = await selectedFile.arrayBuffer();
                 
-                reader.readAsArrayBuffer(selectedFile);
+                updateProgress(40, 'Extracting content...');
+                
+                let extractedText = '';
+                let htmlContent = '';
+                
+                if (selectedFile.name.toLowerCase().endsWith('.docx')) {
+                    // Use Mammoth.js for DOCX files
+                    const result = await mammoth.extractRawText({arrayBuffer: arrayBuffer});
+                    extractedText = result.value;
+                    
+                    // Also get HTML representation for better formatting
+                    const htmlResult = await mammoth.convertToHtml({arrayBuffer: arrayBuffer});
+                    htmlContent = htmlResult.value;
+                } else {
+                    // For DOC files, show a message about limited support
+                    extractedText = `Document: ${selectedFile.name}\n\nNote: This is a DOC format file. For best results, please save your document as DOCX format.\n\nThe converter can extract basic text content, but formatting may be limited for older DOC formats.\n\nConverted on: ${new Date().toLocaleDateString()}\nUsing: ToolSlap Word to PDF Converter`;
+                }
+                
+                updateProgress(70, 'Creating PDF...');
+                
+                // Create PDF using jsPDF
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF();
+                
+                // Set document properties
+                pdf.setProperties({
+                    title: selectedFile.name.replace(/\.(doc|docx)$/i, ''),
+                    subject: 'Document converted from Word',
+                    author: 'ToolSlap Word to PDF Converter',
+                    creator: 'ToolSlap - https://toolslap.online'
+                });
+                
+                // Add title
+                pdf.setFontSize(16);
+                pdf.setFont(undefined, 'bold');
+                pdf.text('Document Converted from Word', 20, 20);
+                
+                // Add file info
+                pdf.setFontSize(10);
+                pdf.setFont(undefined, 'normal');
+                pdf.text(`Original file: ${selectedFile.name}`, 20, 35);
+                pdf.text(`Converted on: ${new Date().toLocaleDateString()}`, 20, 42);
+                pdf.text(`Conversion tool: ToolSlap Word to PDF Converter`, 20, 49);
+                
+                // Add content
+                pdf.setFontSize(12);
+                let yPosition = 65;
+                
+                if (extractedText) {
+                    // Split text into lines and add to PDF
+                    const lines = pdf.splitTextToSize(extractedText, 170);
+                    
+                    for (let i = 0; i < lines.length; i++) {
+                        if (yPosition > 280) { // Check if we need a new page
+                            pdf.addPage();
+                            yPosition = 20;
+                        }
+                        pdf.text(lines[i], 20, yPosition);
+                        yPosition += 7;
+                    }
+                } else {
+                    pdf.text('No text content could be extracted from this document.', 20, yPosition);
+                    yPosition += 14;
+                    pdf.text('This may be because:', 20, yPosition);
+                    yPosition += 7;
+                    pdf.text('- The document contains mostly images', 20, yPosition);
+                    yPosition += 7;
+                    pdf.text('- The document is password protected', 20, yPosition);
+                    yPosition += 7;
+                    pdf.text('- The document format is not supported', 20, yPosition);
+                }
+                
+                // Add footer
+                const pageCount = pdf.internal.getNumberOfPages();
+                for (let i = 1; i <= pageCount; i++) {
+                    pdf.setPage(i);
+                    pdf.setFontSize(8);
+                    pdf.text('Converted using ToolSlap - https://toolslap.online', 20, 285);
+                    pdf.text(`Page ${i} of ${pageCount}`, 170, 285);
+                }
+                
+                updateProgress(90, 'Finalizing PDF...');
+                
+                // Generate PDF blob
+                const pdfBlob = pdf.output('blob');
+                
+                updateProgress(100, 'Conversion complete!');
+                
+                // Show download
+                setTimeout(() => {
+                    showDownload(pdfBlob, selectedFile.name);
+                    showSuccess('Your Word document has been successfully converted to PDF!');
+                }, 500);
                 
             } catch (error) {
                 console.error('Conversion error:', error);
-                showError('Conversion failed. Please try again or check if your Word document is valid.');
+                showError('Conversion failed. Please ensure the Word document is valid and not corrupted.');
             }
         }
 
-        // Generate PDF (simplified placeholder)
-        function generatePDF(originalName) {
-            const pdfContent = `%PDF-1.4
-1 0 obj
-<<
-/Type /Catalog
-/Pages 2 0 R
->>
-endobj
-
-2 0 obj
-<<
-/Type /Pages
-/Kids [3 0 R]
-/Count 1
->>
-endobj
-
-3 0 obj
-<<
-/Type /Page
-/Parent 2 0 R
-/MediaBox [0 0 612 792]
-/Resources <<
-/Font <<
-/F1 4 0 R
->>
->>
-/Contents 5 0 R
->>
-endobj
-
-4 0 obj
-<<
-/Type /Font
-/Subtype /Type1
-/BaseFont /Times-Roman
->>
-endobj
-
-5 0 obj
-<<
-/Length 150
->>
-stream
-BT
-/F1 12 Tf
-100 700 Td
-(Document converted from Word: ${originalName}) Tj
-0 -20 Td
-(Converted on: ${new Date().toLocaleDateString()}) Tj
-0 -20 Td
-(Converted using ToolSlap Word to PDF Converter) Tj
-0 -20 Td
-(https://toolslap.online) Tj
-ET
-endstream
-endobj
-
-xref
-0 6
-0000000000 65535 f 
-0000000009 00000 n 
-0000000058 00000 n 
-0000000115 00000 n 
-0000000274 00000 n 
-0000000361 00000 n 
-trailer
-<<
-/Size 6
-/Root 1 0 R
->>
-startxref
-565
-%%EOF`;
-
-            return new Blob([pdfContent], { type: 'application/pdf' });
-        }
 
         // Show processing state
         function showProcessing() {

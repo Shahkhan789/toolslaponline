@@ -981,8 +981,12 @@
         </section>
     </main>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
+        // Configure PDF.js worker
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        
         let selectedFile = null;
         let selectedFormat = 'docx';
 
@@ -1027,10 +1031,12 @@
         async function getPageCount(file) {
             try {
                 const arrayBuffer = await file.arrayBuffer();
-                const pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
-                const pageCount = pdfDoc.getPageCount();
+                const uint8Array = new Uint8Array(arrayBuffer);
+                const pdf = await pdfjsLib.getDocument({data: uint8Array}).promise;
+                const pageCount = pdf.numPages;
                 document.getElementById('pageCount').textContent = pageCount;
             } catch (error) {
+                console.error('Error getting page count:', error);
                 document.getElementById('pageCount').textContent = 'Unable to detect';
             }
         }
@@ -1106,28 +1112,39 @@
                 updateProgress(10, 'Reading PDF file...');
                 
                 const arrayBuffer = await selectedFile.arrayBuffer();
-                updateProgress(30, 'Extracting text content...');
+                const uint8Array = new Uint8Array(arrayBuffer);
                 
-                // Load PDF document
-                const pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
-                const pages = pdfDoc.getPages();
+                updateProgress(30, 'Loading PDF document...');
+                
+                // Load PDF document with PDF.js
+                const pdf = await pdfjsLib.getDocument({data: uint8Array}).promise;
+                const numPages = pdf.numPages;
                 
                 let extractedText = '';
-                let currentProgress = 30;
                 
                 // Extract text from each page
-                for (let i = 0; i < pages.length; i++) {
-                    updateProgress(30 + (i / pages.length) * 40, `Processing page ${i + 1} of ${pages.length}...`);
+                for (let i = 1; i <= numPages; i++) {
+                    updateProgress(30 + (i / numPages) * 50, `Processing page ${i} of ${numPages}...`);
                     
-                    // Simulate text extraction (in real implementation, use proper PDF text extraction)
-                    const pageText = await extractTextFromPage(pages[i], i + 1);
-                    extractedText += pageText + '\n\n';
+                    const page = await pdf.getPage(i);
+                    const textContent = await page.getTextContent();
+                    
+                    // Extract text items and join them
+                    const pageText = textContent.items
+                        .map(item => item.str)
+                        .join(' ')
+                        .replace(/\s+/g, ' ')
+                        .trim();
+                    
+                    if (pageText) {
+                        extractedText += `\n\n--- Page ${i} ---\n\n${pageText}`;
+                    }
                     
                     // Small delay to show progress
-                    await new Promise(resolve => setTimeout(resolve, 100));
+                    await new Promise(resolve => setTimeout(resolve, 50));
                 }
                 
-                updateProgress(80, 'Generating Word document...');
+                updateProgress(85, 'Generating Word document...');
                 
                 // Generate Word document
                 const wordDocument = generateWordDocument(extractedText, selectedFile.name, selectedFormat);
@@ -1140,40 +1157,64 @@
                 }, 500);
                 
                 // Track conversion success
-                gtag('event', 'conversion_complete', {
-                    'event_category': 'PDF Converter',
-                    'event_label': 'PDF to Word Success',
-                    'value': pages.length
-                });
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'conversion_complete', {
+                        'event_category': 'PDF Converter',
+                        'event_label': 'PDF to Word Success',
+                        'value': numPages
+                    });
+                }
                 
             } catch (error) {
                 console.error('Conversion error:', error);
-                showError('Conversion failed. Please try again or check if your PDF is valid.');
+                showError('Conversion failed. Please ensure the PDF file is valid and not password-protected.');
                 
                 // Track conversion error
-                gtag('event', 'conversion_error', {
-                    'event_category': 'PDF Converter',
-                    'event_label': 'PDF to Word Error'
-                });
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'conversion_error', {
+                        'event_category': 'PDF Converter',
+                        'event_label': 'PDF to Word Error'
+                    });
+                }
             }
         }
 
-        // Extract text from PDF page (simplified version)
-        async function extractTextFromPage(page, pageNumber) {
-            // This is a simplified version. In a real implementation,
-            // you would use proper PDF text extraction libraries
-            try {
-                // For demo purposes, return placeholder text
-                return `Content from page ${pageNumber}\n\nThis is extracted text from your PDF document. In a real implementation, this would contain the actual text, formatting, and structure from your PDF file.\n\nThe conversion process preserves:\n- Original formatting\n- Tables and lists\n- Images and graphics\n- Text styling\n\nThis demo shows the conversion workflow.`;
-            } catch (error) {
-                return `[Unable to extract text from page ${pageNumber}]`;
-            }
-        }
 
-        // Generate Word document (simplified)
+        // Generate Word document in RTF format
         function generateWordDocument(text, originalName, format) {
-            // Create a simple HTML-based Word document
-            const wordContent = `
+            if (format === 'docx' || format === 'doc') {
+                // Create RTF content that can be opened by Word
+                const rtfContent = `{\rtf1\ansi\deff0 {\fonttbl {\f0 Times New Roman;}{\f1 Arial;}}
+{\colortbl;\red0\green0\blue0;\red0\green0\blue255;}
+\f0\fs24
+
+{\b\fs28\cf2 Document Converted from PDF}\par\par
+
+{\b Original file:} ${originalName}\par
+{\b Converted on:} ${new Date().toLocaleDateString()}\par
+{\b Conversion tool:} ToolSlap PDF to Word Converter\par\par
+
+\line\line
+
+${text.split('\n\n').map(paragraph => {
+    if (paragraph.trim()) {
+        return paragraph.trim().replace(/\n/g, '\\line ') + '\\par\\par';
+    }
+    return '';
+}).join('')}
+
+\line\line
+
+{\i\fs18 Document converted using ToolSlap - https://toolslap.online}
+}`;
+
+                const blob = new Blob([rtfContent], {
+                    type: format === 'docx' ? 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' : 'application/msword'
+                });
+                return blob;
+            } else {
+                // Fallback to HTML format
+                const wordContent = `
                 <!DOCTYPE html>
                 <html>
                 <head>
@@ -1297,21 +1338,22 @@
             document.getElementById('conversionOptions').after(convertBtn);
             
             // Show convert button when file is selected
-            const originalHandleFileSelection = window.handleFileSelection;
-            window.handleFileSelection = function(input) {
-                originalHandleFileSelection(input);
-                if (input.files[0]) {
+            const fileInput = document.getElementById('pdfFile');
+            fileInput.addEventListener('change', function() {
+                if (this.files[0]) {
                     convertBtn.style.display = 'inline-block';
                 }
-            };
+            });
         });
 
         // Track page view
-        gtag('event', 'page_view', {
-            'page_title': 'PDF to Word Converter',
-            'page_location': window.location.href,
-            'content_group1': 'PDF Tools'
-        });
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'page_view', {
+                'page_title': 'PDF to Word Converter',
+                'page_location': window.location.href,
+                'content_group1': 'PDF Tools'
+            });
+        }
     </script>
 </body>
 </html>
