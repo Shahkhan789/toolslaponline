@@ -1,8 +1,64 @@
+# ToolSlap.online robots.txt
+# Welcome search engines! We want you to index everything.
+
 User-agent: *
 Allow: /
 
-# Sitemap location
+# Allow all major search engine bots with optimized crawl delays
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 2
+
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 2
+
+# Social media bots
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Disallow sensitive or unnecessary files
+Disallow: /api-config.js
+Disallow: /api-config.example.js
+Disallow: /*.example.js
+Disallow: /temp/
+Disallow: /tmp/
+Disallow: /logs/
+Disallow: /admin/
+Disallow: /private/
+
+# Allow important directories
+Allow: /images/
+Allow: /css/
+Allow: /js/
+Allow: /fonts/
+Allow: /blog/
+Allow: /tools/
+
+# Sitemap locations
 Sitemap: https://toolslap.online/sitemap.xml
 
-# Crawl-delay for respectful crawling
-Crawl-delay: 1
+# Host directive (helps with canonicalization)
+Host: https://toolslap.online

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0">
-    <meta name="description" content="Free SEO Blog Post Generator - Create 2,500-3,000 word, plagiarism-free, SEO-optimized articles with EEAT principles for Google rankings.">
+    <meta name="description" content="Free Groq AI-powered SEO Blog Post Generator - Create 2,500-3,000 word, plagiarism-free, SEO-optimized articles with EEAT principles for Google rankings.">
     <meta name="keywords" content="SEO blog generator, article writer, content generator, EEAT optimization, Google ranking, blog post creator">
     <title>SEO Blog Post Generator - ToolSlap</title>
     
@@ -450,13 +450,17 @@
         <div class="tool-header">
             <h1 class="tool-title">📝 SEO Blog Post Generator</h1>
             <p class="tool-description">
-                Create 2,500-3,000 word, plagiarism-free, SEO-optimized blog posts with Google EEAT principles. 
+                Create 2,500-3,000 word, plagiarism-free, SEO-optimized blog posts with Google EEAT principles using Groq AI. 
                 Generate engaging, human-like content that ranks on Google Search with proper structure and research-backed insights.
             </p>
         </div>
 
         <div class="success-message" id="successMessage"></div>
         <div class="error-message" id="errorMessage"></div>
+        
+        <div class="api-notice" id="apiNotice" style="background: rgba(255, 193, 7, 0.2); color: #ffc107; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 1px solid rgba(255, 193, 7, 0.3); display: none;">
+            ⚠️ To use Groq AI generation, please configure your API key in the <a href="set-api-keys.html" style="color: #ffc107; text-decoration: underline;">API Settings</a>.
+        </div>
 
         <div class="generator-layout">
             <div class="input-section">
@@ -537,7 +541,7 @@
                 </div>
 
                 <button class="generate-btn" id="generateBtn" onclick="generateBlogPost()">
-                    🚀 Generate SEO Blog Post
+                    🤖 Generate with Groq AI
                 </button>
             </div>
 
@@ -546,9 +550,9 @@
                 
                 <div class="output-content" id="outputContent">
                     <div class="output-placeholder">
-                        Your SEO-optimized blog post will appear here...
+                        Your AI-generated SEO blog post will appear here...
                         <br><br>
-                        📝 Fill in the topic and configuration options, then click "Generate SEO Blog Post" to create your article.
+                        🤖 Fill in the topic and configuration options, then click "Generate with Groq AI" to create your article.
                     </div>
                 </div>
 
@@ -598,9 +602,20 @@
         </div>
 
         <div class="features-section">
-            <h2 class="section-title">Why Use Our SEO Blog Generator?</h2>
+            <h2 class="section-title">Why Use Our Groq AI-Powered SEO Blog Generator?</h2>
             
             <div class="features-grid">
+                <div class="feature-card">
+                    <h3>🤖 Powered by Groq AI</h3>
+                    <p>Leverages advanced Groq AI technology for lightning-fast, high-quality content generation that surpasses traditional AI models.</p>
+                    <ul class="feature-list">
+                        <li>Ultra-fast generation speed</li>
+                        <li>Advanced language understanding</li>
+                        <li>Context-aware content creation</li>
+                        <li>Natural, human-like writing</li>
+                    </ul>
+                </div>
+                
                 <div class="feature-card">
                     <h3>🎯 Google EEAT Optimization</h3>
                     <p>Every article follows Google's Experience, Expertise, Authoritativeness, and Trustworthiness guidelines for better rankings.</p>
@@ -651,9 +666,16 @@
         </div>
     </div>
 
+    <!-- Include API Configuration -->
+    <script src="api-config.js"></script>
+    
     <script>
         let currentArticle = '';
         let generationInProgress = false;
+        
+        // Groq API configuration
+        const GROQ_API_ENDPOINT = 'https://api.groq.com/openai/v1/chat/completions';
+        const GROQ_MODEL = 'llama3-8b-8192'; // Fast and efficient model for content generation
 
         // Article templates and structures
         const articleStructures = {
@@ -708,23 +730,183 @@
             generationInProgress = true;
             const generateBtn = document.getElementById('generateBtn');
             generateBtn.disabled = true;
-            generateBtn.textContent = '🔄 Generating...';
+                generateBtn.textContent = '🔄 Generating with Groq...';
 
             try {
+                // Check if API key is available
+                if (!window.getApiKey || !getApiKey('groq')) {
+                    showError('Groq API key not configured. Please set up your API key first.');
+                    return;
+                }
+                
                 showProgress();
-                await simulateArticleGeneration(topic);
-                showSuccess('SEO blog post generated successfully!');
+                await generateArticleWithGroq(topic);
+                showSuccess('SEO blog post generated successfully with Groq AI!');
             } catch (error) {
-                showError('Failed to generate article. Please try again.');
+                showError('Failed to generate article: ' + (error.message || 'Please try again.'));
                 console.error('Generation error:', error);
             } finally {
                 generationInProgress = false;
                 generateBtn.disabled = false;
-                generateBtn.textContent = '🚀 Generate SEO Blog Post';
+                generateBtn.textContent = '🤖 Generate with Groq AI';
                 hideProgress();
             }
         }
 
+        async function generateArticleWithGroq(topic) {
+            const targetAudience = document.getElementById('targetAudience').value;
+            const tone = document.getElementById('tone').value;
+            const wordCount = parseInt(document.getElementById('wordCount').value);
+            const keywords = document.getElementById('keywords').value.split(',').map(k => k.trim()).filter(k => k);
+            
+            // Get selected SEO features
+            const seoFeatures = {
+                metaTitle: document.getElementById('metaTitle').checked,
+                headingStructure: document.getElementById('headingStructure').checked,
+                featuredSnippets: document.getElementById('featuredSnippets').checked,
+                lsiKeywords: document.getElementById('lsiKeywords').checked,
+                eeatPrinciples: document.getElementById('eeatPrinciples').checked,
+                expertInsights: document.getElementById('expertInsights').checked
+            };
+            
+            updateProgressText('Connecting to Groq AI...');
+            updateProgress(10);
+            
+            // Create the comprehensive prompt for Groq
+            const prompt = createBlogPrompt(topic, targetAudience, tone, wordCount, keywords, seoFeatures);
+            
+            updateProgressText('Generating article with Groq AI...');
+            updateProgress(20);
+            
+            try {
+                const article = await callGroqAPI(prompt);
+                
+                updateProgressText('Processing and formatting article...');
+                updateProgress(80);
+                
+                // Display the article
+                document.getElementById('outputContent').innerHTML = `<div style="white-space: pre-wrap; line-height: 1.8;">${article}</div>`;
+                currentArticle = article;
+                
+                updateProgressText('Calculating SEO metrics...');
+                updateProgress(90);
+                
+                // Update statistics
+                updateStats(article, keywords);
+                
+                updateProgress(100);
+                updateProgressText('Article generation complete!');
+                
+            } catch (error) {
+                throw new Error('Groq API Error: ' + error.message);
+            }
+        }
+        
+        function createBlogPrompt(topic, audience, tone, wordCount, keywords, seoFeatures) {
+            const currentYear = new Date().getFullYear();
+            
+            let prompt = `You are an expert SEO content writer. Create a comprehensive, ${wordCount}-word blog post about "${topic}". 
+
+IMPORTANT REQUIREMENTS:
+- Target audience: ${audience}
+- Writing tone: ${tone}
+- Word count: ${wordCount} words (this is crucial)
+- Current year: ${currentYear}
+
+SEO REQUIREMENTS:`;
+
+            if (seoFeatures.metaTitle) {
+                prompt += `\n- Include SEO meta title and description at the top`;
+            }
+            if (seoFeatures.headingStructure) {
+                prompt += `\n- Use proper H2, H3, H4 heading structure with at least 8-10 headings`;
+            }
+            if (seoFeatures.featuredSnippets) {
+                prompt += `\n- Include FAQ section optimized for featured snippets`;
+            }
+            if (seoFeatures.lsiKeywords) {
+                prompt += `\n- Naturally integrate LSI keywords related to the topic`;
+            }
+            if (seoFeatures.eeatPrinciples) {
+                prompt += `\n- Follow Google EEAT principles (Experience, Expertise, Authoritativeness, Trustworthiness)`;
+            }
+            if (seoFeatures.expertInsights) {
+                prompt += `\n- Include expert quotes and insights (create realistic expert names and quotes)`;
+            }
+
+            if (keywords.length > 0) {
+                prompt += `\n\nKEYWORDS TO INCLUDE: ${keywords.join(', ')}`;
+            }
+
+            prompt += `\n\nCONTENT STRUCTURE:
+1. SEO Meta tags (if enabled)
+2. Compelling title with year
+3. Engaging introduction with hook
+4. Well-structured main content with multiple sections
+5. Real-world examples and case studies
+6. Expert tips and best practices
+7. Common mistakes to avoid
+8. Actionable conclusion
+9. FAQ section (if enabled)
+
+WRITING STYLE:
+- Human-like, engaging content that doesn't sound robotic
+- Use storytelling and real-world examples
+- Include statistics and data points
+- Short paragraphs for better readability
+- Conversational yet professional
+- Avoid AI detection patterns
+
+IMPORTANT: Make sure the article is exactly ${wordCount} words. Do not use placeholder text. Write complete, valuable content throughout.`;
+
+            return prompt;
+        }
+        
+        async function callGroqAPI(prompt) {
+            const apiKey = getApiKey('groq');
+            if (!apiKey) {
+                throw new Error('Groq API key not found');
+            }
+            
+            const response = await fetch(GROQ_API_ENDPOINT, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${apiKey}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model: GROQ_MODEL,
+                    messages: [
+                        {
+                            role: 'system',
+                            content: 'You are an expert SEO content writer who creates comprehensive, engaging, and optimized blog posts. Always follow the exact word count requirements and create human-like content.'
+                        },
+                        {
+                            role: 'user',
+                            content: prompt
+                        }
+                    ],
+                    max_tokens: 8000,
+                    temperature: 0.7,
+                    top_p: 0.9
+                })
+            });
+            
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(errorData.error?.message || `HTTP ${response.status}: ${response.statusText}`);
+            }
+            
+            const data = await response.json();
+            
+            if (!data.choices || !data.choices[0] || !data.choices[0].message) {
+                throw new Error('Invalid response format from Groq API');
+            }
+            
+            return data.choices[0].message.content;
+        }
+        
+        // Keep the old function as fallback (renamed)
         async function simulateArticleGeneration(topic) {
             const targetAudience = document.getElementById('targetAudience').value;
             const tone = document.getElementById('tone').value;
@@ -1234,9 +1416,9 @@ Flexibility is key. Regular monitoring allows you to identify issues early and m
             currentArticle = '';
             document.getElementById('outputContent').innerHTML = `
                 <div class="output-placeholder">
-                    Your SEO-optimized blog post will appear here...
+                    Your AI-generated SEO blog post will appear here...
                     <br><br>
-                    📝 Fill in the topic and configuration options, then click "Generate SEO Blog Post" to create your article.
+                    🤖 Fill in the topic and configuration options, then click "Generate with Groq AI" to create your article.
                 </div>
             `;
             
@@ -1272,6 +1454,13 @@ Flexibility is key. Regular monitoring allows you to identify issues early and m
         window.addEventListener('load', function() {
             document.getElementById('topic').value = 'Digital Marketing Strategies for Small Business Growth';
             document.getElementById('keywords').value = 'digital marketing, small business, online growth, social media marketing, SEO optimization, content strategy';
+            
+            // Check if API key is configured
+            setTimeout(() => {
+                if (!window.getApiKey || !getApiKey('groq')) {
+                    document.getElementById('apiNotice').style.display = 'block';
+                }
+            }, 1000);
         });
     </script>
 </body>
