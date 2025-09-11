@@ -624,22 +624,35 @@
         // Extract transcript using YouTube API v3
         async function extractTranscript(videoId) {
             try {
-                // Get API key from configuration
+                // Force real YouTube API usage - try multiple sources
+                console.log('=== STARTING YOUTUBE TRANSCRIPT EXTRACTION ===');
                 console.log('Checking for API key function:', typeof window.getApiKey);
-                let apiKey = window.getApiKey ? window.getApiKey('youtube') : null;
+                console.log('Window.API_CONFIG available:', typeof window.API_CONFIG);
                 
-                // Try to get from environment if config file isn't loaded
-                if (!apiKey) {
-                    console.log('API key not found from config file');
-                    const envKey = localStorage.getItem('youtube_api_key') || sessionStorage.getItem('youtube_api_key');
-                    if (envKey) {
-                        console.log('Using environment API key');
-                        apiKey = envKey;
+                let apiKey = null;
+                
+                // Try method 1: Direct config access
+                if (window.API_CONFIG && window.API_CONFIG.YOUTUBE_API_KEY) {
+                    apiKey = window.API_CONFIG.YOUTUBE_API_KEY;
+                    console.log('✅ Got YouTube API key from window.API_CONFIG');
+                }
+                // Try method 2: Function call
+                else if (window.getApiKey) {
+                    apiKey = window.getApiKey('youtube');
+                    console.log('✅ Got YouTube API key from getApiKey function');
+                }
+                // Try method 3: localStorage
+                else {
+                    apiKey = localStorage.getItem('youtube_api_key') || sessionStorage.getItem('youtube_api_key');
+                    if (apiKey) {
+                        console.log('✅ Got YouTube API key from localStorage');
                     }
                 }
                 
-                console.log('YouTube API key available:', apiKey ? 'Yes' : 'No');
+                console.log('Final YouTube API key check:', apiKey ? '✅ FOUND' : '❌ NOT FOUND');
+                
                 if (!apiKey) {
+                    console.error('❌ NO YOUTUBE API KEY - Will use fallback');
                     throw new Error('YouTube API key not configured');
                 }
                 

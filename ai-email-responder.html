@@ -567,22 +567,36 @@
 
         // Generate AI response using Groq API
         async function generateAIResponse(customerEmail, template, tone) {
-            // Get API key from configuration
+            // Force real API usage - try multiple sources
+            console.log('=== STARTING AI EMAIL GENERATION ===');
             console.log('Checking for API key function:', typeof window.getApiKey);
-            const apiKey = window.getApiKey ? window.getApiKey('groq') : null;
-            console.log('API key available:', apiKey ? 'Yes' : 'No');
+            console.log('Window.API_CONFIG available:', typeof window.API_CONFIG);
+            
+            let apiKey = null;
+            
+            // Try method 1: Direct config access
+            if (window.API_CONFIG && window.API_CONFIG.GROQ_API_KEY) {
+                apiKey = window.API_CONFIG.GROQ_API_KEY;
+                console.log('✅ Got API key from window.API_CONFIG');
+            }
+            // Try method 2: Function call
+            else if (window.getApiKey) {
+                apiKey = window.getApiKey('groq');
+                console.log('✅ Got API key from getApiKey function');
+            }
+            // Try method 3: localStorage
+            else {
+                apiKey = localStorage.getItem('groq_api_key') || sessionStorage.getItem('groq_api_key');
+                if (apiKey) {
+                    console.log('✅ Got API key from localStorage');
+                }
+            }
+            
+            console.log('Final API key check:', apiKey ? '✅ FOUND' : '❌ NOT FOUND');
             
             if (!apiKey) {
-                // Try to get from environment or fail gracefully
-                console.log('API key not found from config file');
-                const envKey = localStorage.getItem('groq_api_key') || sessionStorage.getItem('groq_api_key');
-                if (envKey) {
-                    console.log('Using environment API key');
-                    apiKey = envKey;
-                } else {
-                    console.error('No API key available. Please configure your API key.');
-                    throw new Error('API key not configured. Please add your API key to api-config.js');
-                }
+                console.error('❌ NO API KEY AVAILABLE - Will use fallback');
+                throw new Error('No API key configured');
             }
             
             return await makeGroqAPICall(customerEmail, template, tone, apiKey);
