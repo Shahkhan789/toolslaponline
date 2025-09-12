@@ -627,7 +627,7 @@
         // Website Builder Functionality
         class WebsiteBuilder {
             constructor() {
-                this.apiUrl = 'http://localhost:8001';
+                this.apiUrl = window.location.hostname === 'localhost' ? 'http://localhost:8001' : 'https://your-username.github.io/toolslap';
                 this.isConnected = false;
                 this.isGenerating = false;
                 this.generatedCode = '';
