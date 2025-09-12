@@ -30,9 +30,14 @@ import aiofiles
 from cachetools import TTLCache
 
 # Add Qwen path to sys.path
-qwen_path = r"C:\Users\Saif Pc\Desktop\New folder\Qwen"
-if qwen_path not in sys.path:
+qwen_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Qwen')
+if not os.path.exists(qwen_path):
+    qwen_path = os.path.join(os.path.expanduser('~'), 'Qwen')
+
+if qwen_path not in sys.path and os.path.exists(qwen_path):
     sys.path.append(qwen_path)
+else:
+    logger.warning(f"Qwen path not found at {qwen_path}. Please install Qwen or update the path.")
 
 try:
     from transformers import AutoModelForCausalLM, AutoTokenizer
