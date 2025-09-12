@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free JavaScript Minifier & Beautifier - Minify and format JavaScript code with error detection. Online JS optimizer tool.">
+    <meta name="keywords" content="javascript minifier, js beautifier, js optimizer, minify javascript, format javascript, js compressor">
+    <title>JavaScript Minifier - ToolSlap</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1E1E2F 0%, #2B2D42 100%);
+            color: #EAEAEA;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2B2D42 0%, #3A3D5B 100%);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 20px rgba(255, 215, 0, 0.1);
+        }
+
+        .logo {
+            color: #FFD700;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .tool-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .tool-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tool-description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .processor-section {
+            background: rgba(58, 61, 91, 0.3);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #FFD700;
+            margin-bottom: 25px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .controls-section {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #1E1E2F;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 215, 0, 0.2);
+            color: #FFD700;
+            border: 1px solid #FFD700;
+        }
+
+        .btn-secondary:hover {
+            background: #FFD700;
+            color: #1E1E2F;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .editor-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .editor-panel {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 2px solid rgba(255, 215, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .editor-header {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .editor-title {
+            color: #FFD700;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .editor-info {
+            color: #CCCCCC;
+            font-size: 0.9rem;
+        }
+
+        .editor-textarea {
+            width: 100%;
+            height: 400px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border: none;
+            color: #EAEAEA;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            resize: vertical;
+            line-height: 1.5;
+        }
+
+        .editor-textarea:focus {
+            outline: none;
+        }
+
+        .editor-textarea.readonly {
+            background: rgba(0, 0, 0, 0.2);
+            color: #FFD700;
+            user-select: all;
+        }
+
+        .stats-section {
+            background: rgba(58, 61, 91, 0.3);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #FFD700;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #EAEAEA;
+            font-size: 0.9rem;
+        }
+
+        .stat-change {
+            font-size: 0.8rem;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        .stat-change.positive {
+            color: #28a745;
+        }
+
+        .stat-change.negative {
+            color: #dc3545;
+        }
+
+        .error-section {
+            background: rgba(220, 53, 69, 0.1);
+            border: 2px solid rgba(220, 53, 69, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: none;
+        }
+
+        .error-title {
+            color: #dc3545;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .error-list {
+            color: #EAEAEA;
+            list-style: none;
+        }
+
+        .error-item {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(220, 53, 69, 0.2);
+        }
+
+        .error-item:last-child {
+            border-bottom: none;
+        }
+
+        .options-section {
+            background: rgba(58, 61, 91, 0.3);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .option-group {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .option-title {
+            color: #FFD700;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .checkbox-field {
+            width: 18px;
+            height: 18px;
+            accent-color: #FFD700;
+        }
+
+        .checkbox-label {
+            color: #EAEAEA;
+            font-size: 0.95rem;
+            cursor: pointer;
+        }
+
+        .examples-section {
+            background: rgba(58, 61, 91, 0.3);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .example-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .example-item:hover {
+            background: rgba(255, 215, 0, 0.1);
+            border-color: #FFD700;
+        }
+
+        .example-title {
+            color: #FFD700;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .example-description {
+            color: #EAEAEA;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .example-code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            color: #FFA500;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .info-section {
+            background: rgba(58, 61, 91, 0.3);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .info-card h3 {
+            color: #FFD700;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .info-card p {
+            color: #EAEAEA;
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        @media (max-width: 768px) {
+            .tool-title {
+                font-size: 2rem;
+            }
+
+            .editor-section {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .controls-section {
+                justify-content: center;
+            }
+
+            .editor-textarea {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">ToolSlap</a>
+    </header>
+
+    <div class="container">
+        <div class="tool-header">
+            <h1 class="tool-title">⚡ JavaScript Minifier</h1>
+            <p class="tool-description">
+                Minify and beautify JavaScript code with advanced compression statistics and error detection. 
+                Optimize your scripts for production or format them for better readability.
+            </p>
+        </div>
+
+        <div class="processor-section">
+            <h2 class="section-title">⚙️ JavaScript Processor</h2>
+            
+            <div class="controls-section">
+                <button class="btn" onclick="minifyJS()">🗜️ Minify JavaScript</button>
+                <button class="btn" onclick="beautifyJS()">🎨 Beautify JavaScript</button>
+                <button class="btn btn-secondary" onclick="validateJS()">✅ Validate JS</button>
+                <button class="btn btn-secondary" onclick="copyOutput()">📋 Copy Output</button>
+                <button class="btn btn-secondary" onclick="downloadJS()">💾 Download</button>
+                <button class="btn btn-secondary" onclick="clearAll()">🗑️ Clear All</button>
+            </div>
+
+            <div class="editor-section">
+                <div class="editor-panel">
+                    <div class="editor-header">
+                        <div class="editor-title">📝 Input JavaScript</div>
+                        <div class="editor-info" id="inputInfo">0 characters</div>
+                    </div>
+                    <textarea class="editor-textarea" id="inputJS" placeholder="Paste your JavaScript code here..."
+                              oninput="updateInputInfo()" onpaste="setTimeout(updateInputInfo, 10)"></textarea>
+                </div>
+
+                <div class="editor-panel">
+                    <div class="editor-header">
+                        <div class="editor-title">✨ Processed JavaScript</div>
+                        <div class="editor-info" id="outputInfo">0 characters</div>
+                    </div>
+                    <textarea class="editor-textarea readonly" id="outputJS" placeholder="Processed JavaScript will appear here..." readonly></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="error-section" id="errorSection">
+            <div class="error-title">
+                ⚠️ JavaScript Validation Errors
+            </div>
+            <ul class="error-list" id="errorList"></ul>
+        </div>
+
+        <div class="stats-section">
+            <h2 class="section-title">📊 Compression Statistics</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" id="originalSize">0</div>
+                    <div class="stat-label">Original Size (bytes)</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="processedSize">0</div>
+                    <div class="stat-label">Processed Size (bytes)</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="compressionRatio">0%</div>
+                    <div class="stat-label">Compression Ratio</div>
+                    <div class="stat-change" id="compressionChange">No change</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="savedBytes">0</div>
+                    <div class="stat-label">Bytes Saved</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="originalLines">0</div>
+                    <div class="stat-label">Original Lines</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="processedLines">0</div>
+                    <div class="stat-label">Processed Lines</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="options-section">
+            <h2 class="section-title">🔧 Minification Options</h2>
+            
+            <div class="options-grid">
+                <div class="option-group">
+                    <div class="option-title">Whitespace & Comments</div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" class="checkbox-field" id="removeComments" checked>
+                        <label class="checkbox-label" for="removeComments">Remove comments</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" class="checkbox-field" id="removeWhitespace" checked>
+                        <label class="checkbox-label" for="removeWhitespace">Remove extra whitespace</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" class="checkbox-field" id="preserveNewlines">
+                        <label class="checkbox-label" for="preserveNewlines">Preserve some newlines</label>
+                    </div>
+                </div>
+
+                <div class="option-group">
+                    <div class="option-title">Code Optimization</div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" class="checkbox-field" id="shortenVariables">
+                        <label class="checkbox-label" for="shortenVariables">Shorten variable names</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" class="checkbox-field" id="removeConsole" checked>
+                        <label class="checkbox-label" for="removeConsole">Remove console statements</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" class="checkbox-field" id="optimizeStrings">
+                        <label class="checkbox-label" for="optimizeStrings">Optimize string quotes</label>
+                    </div>
+                </div>
+
+                <div class="option-group">
+                    <div class="option-title">Safety Options</div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" class="checkbox-field" id="preserveSemicolons" checked>
+                        <label class="checkbox-label" for="preserveSemicolons">Preserve semicolons</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" class="checkbox-field" id="preserveStrict" checked>
+                        <label class="checkbox-label" for="preserveStrict">Preserve "use strict"</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" class="checkbox-field" id="safeMode" checked>
+                        <label class="checkbox-label" for="safeMode">Safe mode (conservative)</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="examples-section">
+            <h2 class="section-title">💡 JavaScript Examples</h2>
+            <div class="examples-grid">
+                <div class="example-item" onclick="loadExample('basic')">
+                    <div class="example-title">Basic Functions</div>
+                    <div class="example-description">Simple JavaScript functions and variables</div>
+                    <div class="example-code">function calculateSum(a, b) { return a + b; }</div>
+                </div>
+                
+                <div class="example-item" onclick="loadExample('async')">
+                    <div class="example-title">Async/Await</div>
+                    <div class="example-description">Modern asynchronous JavaScript patterns</div>
+                    <div class="example-code">async function fetchData() { ... }</div>
+                </div>
+                
+                <div class="example-item" onclick="loadExample('class')">
+                    <div class="example-title">ES6 Classes</div>
+                    <div class="example-description">Modern JavaScript class definitions</div>
+                    <div class="example-code">class Calculator { ... }</div>
+                </div>
+                
+                <div class="example-item" onclick="loadExample('dom')">
+                    <div class="example-title">DOM Manipulation</div>
+                    <div class="example-description">JavaScript for web page interaction</div>
+                    <div class="example-code">document.getElementById('myButton')...</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h2 class="section-title">📚 JavaScript Optimization Information</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>🗜️ Minification</h3>
+                    <p>Reduces JavaScript file size by removing whitespace, comments, and unnecessary characters. Critical for improving website load times.</p>
+                </div>
+                <div class="info-card">
+                    <h3>🎨 Beautification</h3>
+                    <p>Formats JavaScript code with proper indentation and spacing for better readability during development and debugging.</p>
+                </div>
+                <div class="info-card">
+                    <h3>✅ Validation</h3>
+                    <p>Checks JavaScript syntax for errors before processing. Helps identify issues that could break your application.</p>
+                </div>
+                <div class="info-card">
+                    <h3>⚡ Performance</h3>
+                    <p>Smaller JavaScript files download faster, improving user experience. Essential for mobile users and slow connections.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="notification" id="notification">
+        JavaScript processed successfully! 🎉
+    </div>
+
+    <script>
+        const examples = {
+            basic: `// Basic JavaScript Functions Example
+function calculateSum(a, b) {
+    return a + b;
+}
+
+function calculateProduct(a, b) {
+    return a * b;
+}
+
+// Variables and constants
+const PI = 3.14159;
+let radius = 5;
+var area = PI * radius * radius;
+
+// Array operations
+const numbers = [1, 2, 3, 4, 5];
+const doubled = numbers.map(n => n * 2);
+const sum = numbers.reduce((acc, n) => acc + n, 0);
+
+console.log('Area:', area);
+console.log('Doubled:', doubled);
+console.log('Sum:', sum);`,
+
+            async: `// Async/Await JavaScript Example
+async function fetchUserData(userId) {
+    try {
+        const response = await fetch(\`/api/users/\${userId}\`);
+        
+        if (!response.ok) {
+            throw new Error(\`HTTP error! status: \${response.status}\`);
+        }
+        
+        const userData = await response.json();
+        return userData;
+    } catch (error) {
+        console.error('Error fetching user data:', error);
+        throw error;
+    }
+}
+
+async function displayUserProfile(userId) {
+    try {
+        const user = await fetchUserData(userId);
+        
+        document.getElementById('userName').textContent = user.name;
+        document.getElementById('userEmail').textContent = user.email;
+        
+        console.log('Profile updated for:', user.name);
+    } catch (error) {
+        document.getElementById('errorMessage').textContent = 'Failed to load user profile';
+    }
+}
+
+// Promise-based alternative
+function fetchDataWithPromise(url) {
+    return fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            console.log('Data received:', data);
+            return data;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}`,
+
+            class: `// ES6 Classes JavaScript Example
+class Calculator {
+    constructor(precision = 2) {
+        this.precision = precision;
+        this.history = [];
+    }
+    
+    add(a, b) {
+        const result = this.roundResult(a + b);
+        this.addToHistory('add', a, b, result);
+        return result;
+    }
+    
+    subtract(a, b) {
+        const result = this.roundResult(a - b);
+        this.addToHistory('subtract', a, b, result);
+        return result;
+    }
+    
+    multiply(a, b) {
+        const result = this.roundResult(a * b);
+        this.addToHistory('multiply', a, b, result);
+        return result;
+    }
+    
+    divide(a, b) {
+        if (b === 0) {
+            throw new Error('Division by zero is not allowed');
+        }
+        
+        const result = this.roundResult(a / b);
+        this.addToHistory('divide', a, b, result);
+        return result;
+    }
+    
+    roundResult(value) {
+        return Math.round(value * Math.pow(10, this.precision)) / Math.pow(10, this.precision);
+    }
+    
+    addToHistory(operation, a, b, result) {
+        this.history.push({
+            operation,
+            operands: [a, b],
+            result,
+            timestamp: new Date()
+        });
+    }
+    
+    getHistory() {
+        return [...this.history];
+    }
+    
+    clearHistory() {
+        this.history = [];
+    }
+}
+
+// Usage
+const calc = new Calculator(3);
+console.log(calc.add(2.555, 3.777));
+console.log(calc.multiply(4, 2.5));
+console.log(calc.getHistory());`,
+
+            dom: `// DOM Manipulation JavaScript Example
+document.addEventListener('DOMContentLoaded', function() {
+    // Get elements
+    const button = document.getElementById('myButton');
+    const input = document.getElementById('textInput');
+    const output = document.getElementById('output');
+    const itemList = document.getElementById('itemList');
+    
+    // Button click handler
+    button.addEventListener('click', function() {
+        const inputValue = input.value.trim();
+        
+        if (inputValue) {
+            addItemToList(inputValue);
+            input.value = '';
+            updateCounter();
+        } else {
+            showError('Please enter some text');
+        }
+    });
+    
+    // Add item to list
+    function addItemToList(text) {
+        const listItem = document.createElement('li');
+        listItem.className = 'list-item';
+        
+        const itemText = document.createElement('span');
+        itemText.textContent = text;
+        
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.className = 'delete-btn';
+        deleteButton.addEventListener('click', function() {
+            listItem.remove();
+            updateCounter();
+        });
+        
+        listItem.appendChild(itemText);
+        listItem.appendChild(deleteButton);
+        itemList.appendChild(listItem);
+        
+        // Add animation
+        listItem.style.opacity = '0';
+        listItem.style.transform = 'translateY(-10px)';
+        
+        setTimeout(() => {
+            listItem.style.transition = 'all 0.3s ease';
+            listItem.style.opacity = '1';
+            listItem.style.transform = 'translateY(0)';
+        }, 10);
+    }
+    
+    // Update item counter
+    function updateCounter() {
+        const count = itemList.children.length;
+        output.textContent = \`Total items: \${count}\`;
+    }
+    
+    // Show error message
+    function showError(message) {
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message';
+        errorDiv.textContent = message;
+        
+        document.body.appendChild(errorDiv);
+        
+        setTimeout(() => {
+            errorDiv.remove();
+        }, 3000);
+    }
+    
+    // Initialize counter
+    updateCounter();
+});`
+        };
+
+        function updateInputInfo() {
+            const input = document.getElementById('inputJS').value;
+            const length = input.length;
+            const lines = input.split('\n').length;
+            document.getElementById('inputInfo').textContent = `${length} characters, ${lines} lines`;
+        }
+
+        function updateOutputInfo() {
+            const output = document.getElementById('outputJS').value;
+            const length = output.length;
+            const lines = output.split('\n').length;
+            document.getElementById('outputInfo').textContent = `${length} characters, ${lines} lines`;
+        }
+
+        function minifyJS() {
+            const input = document.getElementById('inputJS').value;
+            
+            if (!input.trim()) {
+                showNotification('Please enter some JavaScript code to minify', 'error');
+                return;
+            }
+
+            try {
+                let minified = input;
+
+                // Remove comments if enabled
+                if (document.getElementById('removeComments').checked) {
+                    // Remove single-line comments
+                    minified = minified.replace(/\/\/.*$/gm, '');
+                    // Remove multi-line comments
+                    minified = minified.replace(/\/\*[\s\S]*?\*\//g, '');
+                }
+
+                // Remove console statements if enabled
+                if (document.getElementById('removeConsole').checked) {
+                    minified = minified.replace(/console\.(log|warn|error|info|debug)\s*\([^)]*\)\s*;?/g, '');
+                }
+
+                // Remove extra whitespace if enabled
+                if (document.getElementById('removeWhitespace').checked) {
+                    if (!document.getElementById('preserveNewlines').checked) {
+                        minified = minified.replace(/\s+/g, ' ');
+                    } else {
+                        minified = minified.replace(/[ \t]+/g, ' ');
+                        minified = minified.replace(/\n\s+/g, '\n');
+                    }
+                    
+                    // Clean up around operators and punctuation
+                    minified = minified.replace(/\s*([{}();,=+\-*/<>!&|])\s*/g, '$1');
+                    minified = minified.replace(/\s*:\s*/g, ':');
+                }
+
+                // Optimize string quotes if enabled
+                if (document.getElementById('optimizeStrings').checked) {
+                    // Convert double quotes to single where beneficial
+                    minified = minified.replace(/"([^"\\]*)"/g, function(match, content) {
+                        if (content.includes("'")) return match;
+                        return "'" + content + "'";
+                    });
+                }
+
+                // Basic variable name shortening (very simple implementation)
+                if (document.getElementById('shortenVariables').checked && !document.getElementById('safeMode').checked) {
+                    // This is a very basic implementation - real minifiers do much more sophisticated analysis
+                    const commonLongNames = ['variable', 'function', 'element', 'document', 'window'];
+                    const shortNames = ['v', 'f', 'e', 'd', 'w'];
+                    
+                    commonLongNames.forEach((longName, index) => {
+                        if (minified.includes(longName) && !minified.includes(shortNames[index])) {
+                            const regex = new RegExp('\\b' + longName + '\\b', 'g');
+                            minified = minified.replace(regex, shortNames[index]);
+                        }
+                    });
+                }
+
+                // Preserve semicolons if enabled, otherwise remove unnecessary ones
+                if (!document.getElementById('preserveSemicolons').checked) {
+                    minified = minified.replace(/;(\s*[}\]])/g, '$1');
+                }
+
+                // Final cleanup
+                minified = minified.trim();
+                
+                document.getElementById('outputJS').value = minified;
+                updateStats('minify');
+                hideErrors();
+                showNotification('JavaScript minified successfully!');
+
+            } catch (error) {
+                showError('Error minifying JavaScript: ' + error.message);
+            }
+        }
+
+        function beautifyJS() {
+            const input = document.getElementById('inputJS').value;
+            
+            if (!input.trim()) {
+                showNotification('Please enter some JavaScript code to beautify', 'error');
+                return;
+            }
+
+            try {
+                let beautified = input;
+                
+                // First, normalize whitespace
+                beautified = beautified.replace(/\s+/g, ' ');
+                
+                // Add newlines after specific characters
+                beautified = beautified.replace(/([{}]);?/g, '$1\n');
+                beautified = beautified.replace(/;(?!\s*[)}])/g, ';\n');
+                
+                // Handle function declarations and expressions
+                beautified = beautified.replace(/function\s*([^{]*)\s*{/g, 'function $1 {\n');
+                beautified = beautified.replace(/\)\s*{/g, ') {\n');
+                
+                // Handle control structures
+                beautified = beautified.replace(/\b(if|else|for|while|do|try|catch|finally)\s*\(/g, '$1 (');
+                beautified = beautified.replace(/else\s*{/g, 'else {\n');
+                
+                // Add proper indentation
+                const lines = beautified.split('\n');
+                let indentLevel = 0;
+                const indentSize = 2;
+                
+                for (let i = 0; i < lines.length; i++) {
+                    let line = lines[i].trim();
+                    
+                    // Decrease indent for closing braces
+                    if (line.startsWith('}')) {
+                        indentLevel = Math.max(0, indentLevel - 1);
+                    }
+                    
+                    // Add indentation
+                    if (line) {
+                        lines[i] = ' '.repeat(indentLevel * indentSize) + line;
+                    } else {
+                        lines[i] = '';
+                    }
+                    
+                    // Increase indent for opening braces
+                    if (line.endsWith('{')) {
+                        indentLevel++;
+                    }
+                }
+                
+                // Join lines and clean up
+                beautified = lines.join('\n');
+                
+                // Clean up extra blank lines
+                beautified = beautified.replace(/\n{3,}/g, '\n\n');
+                beautified = beautified.trim();
+                
+                document.getElementById('outputJS').value = beautified;
+                updateStats('beautify');
+                hideErrors();
+                showNotification('JavaScript beautified successfully!');
+
+            } catch (error) {
+                showError('Error beautifying JavaScript: ' + error.message);
+            }
+        }
+
+        function validateJS() {
+            const input = document.getElementById('inputJS').value;
+            
+            if (!input.trim()) {
+                showNotification('Please enter some JavaScript code to validate', 'error');
+                return;
+            }
+
+            try {
+                // Basic syntax validation using Function constructor
+                new Function(input);
+                hideErrors();
+                showNotification('JavaScript syntax is valid!');
+                
+            } catch (error) {
+                const errorMessage = `Syntax Error: ${error.message}`;
+                showError(errorMessage);
+                showNotification('JavaScript contains syntax errors', 'error');
+            }
+        }
+
+        function updateStats(action) {
+            const original = document.getElementById('inputJS').value;
+            const processed = document.getElementById('outputJS').value;
+            
+            const originalSize = new Blob([original]).size;
+            const processedSize = new Blob([processed]).size;
+            const savedBytes = originalSize - processedSize;
+            const compressionRatio = originalSize > 0 ? ((savedBytes / originalSize) * 100) : 0;
+            
+            const originalLines = original.split('\n').length;
+            const processedLines = processed.split('\n').length;
+            
+            document.getElementById('originalSize').textContent = originalSize.toLocaleString();
+            document.getElementById('processedSize').textContent = processedSize.toLocaleString();
+            document.getElementById('compressionRatio').textContent = Math.round(compressionRatio) + '%';
+            document.getElementById('savedBytes').textContent = savedBytes.toLocaleString();
+            document.getElementById('originalLines').textContent = originalLines.toLocaleString();
+            document.getElementById('processedLines').textContent = processedLines.toLocaleString();
+            
+            // Update compression change indicator
+            const changeElement = document.getElementById('compressionChange');
+            if (action === 'minify') {
+                if (savedBytes > 0) {
+                    changeElement.textContent = `Saved ${savedBytes} bytes`;
+                    changeElement.className = 'stat-change positive';
+                } else {
+                    changeElement.textContent = 'No compression';
+                    changeElement.className = 'stat-change';
+                }
+            } else {
+                if (savedBytes < 0) {
+                    changeElement.textContent = `Added ${Math.abs(savedBytes)} bytes`;
+                    changeElement.className = 'stat-change negative';
+                } else {
+                    changeElement.textContent = 'Formatted';
+                    changeElement.className = 'stat-change';
+                }
+            }
+            
+            updateOutputInfo();
+        }
+
+        function copyOutput() {
+            const output = document.getElementById('outputJS').value;
+            
+            if (!output.trim()) {
+                showNotification('No processed JavaScript to copy', 'error');
+                return;
+            }
+
+            navigator.clipboard.writeText(output).then(function() {
+                showNotification('JavaScript copied to clipboard!');
+            }, function(err) {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = output;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showNotification('JavaScript copied to clipboard!');
+            });
+        }
+
+        function downloadJS() {
+            const output = document.getElementById('outputJS').value;
+            
+            if (!output.trim()) {
+                showNotification('No processed JavaScript to download', 'error');
+                return;
+            }
+
+            const blob = new Blob([output], { type: 'application/javascript' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'processed-script.js';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+            
+            showNotification('JavaScript file downloaded!');
+        }
+
+        function clearAll() {
+            document.getElementById('inputJS').value = '';
+            document.getElementById('outputJS').value = '';
+            updateInputInfo();
+            updateOutputInfo();
+            
+            // Reset stats
+            document.getElementById('originalSize').textContent = '0';
+            document.getElementById('processedSize').textContent = '0';
+            document.getElementById('compressionRatio').textContent = '0%';
+            document.getElementById('savedBytes').textContent = '0';
+            document.getElementById('originalLines').textContent = '0';
+            document.getElementById('processedLines').textContent = '0';
+            document.getElementById('compressionChange').textContent = 'No change';
+            document.getElementById('compressionChange').className = 'stat-change';
+            
+            hideErrors();
+        }
+
+        function loadExample(type) {
+            document.getElementById('inputJS').value = examples[type];
+            updateInputInfo();
+            document.getElementById('outputJS').value = '';
+            updateOutputInfo();
+        }
+
+        function showError(message) {
+            const errorSection = document.getElementById('errorSection');
+            const errorList = document.getElementById('errorList');
+            
+            errorList.innerHTML = `<li class="error-item">${message}</li>`;
+            errorSection.style.display = 'block';
+        }
+
+        function hideErrors() {
+            document.getElementById('errorSection').style.display = 'none';
+        }
+
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.background = type === 'error' 
+                ? 'linear-gradient(45deg, #dc3545, #c82333)' 
+                : 'linear-gradient(45deg, #28a745, #20c997)';
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Initialize with example
+        window.addEventListener('load', function() {
+            loadExample('basic');
+        });
+
+        // Auto-resize textareas
+        document.querySelectorAll('.editor-textarea').forEach(textarea => {
+            textarea.addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = Math.max(400, this.scrollHeight) + 'px';
+            });
+        });
+    </script>
+</body>
+</html>

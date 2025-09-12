@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Online Tic Tac Toe Game | Play Against AI | ToolSlap</title>
+    <meta name="description" content="Play Tic Tac Toe online for free! Challenge our smart AI opponent or play with friends. Classic strategy game with multiple difficulty levels and score tracking.">
+    <meta name="keywords" content="tic tac toe, online game, free game, AI opponent, strategy game, browser game, noughts and crosses">
+    <meta name="author" content="ToolSlap">
+    <meta property="og:title" content="Free Online Tic Tac Toe Game | Play Against AI | ToolSlap">
+    <meta property="og:description" content="Play Tic Tac Toe online for free! Challenge our smart AI opponent or play with friends. Classic strategy game with multiple difficulty levels.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolslap.com/tic-tac-toe-game">
+    <meta property="og:image" content="https://toolslap.com/images/tic-tac-toe-game.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free Online Tic Tac Toe Game | Play Against AI | ToolSlap">
+    <meta name="twitter:description" content="Play Tic Tac Toe online for free! Challenge our smart AI opponent or play with friends.">
+    <link rel="canonical" href="https://toolslap.com/tic-tac-toe-game">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+        body, html {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+        .tool-header {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 4px;
+            background: #374151;
+            border-radius: 12px;
+            padding: 4px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        .game-cell {
+            aspect-ratio: 1;
+            background: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 3rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #374151;
+            position: relative;
+            overflow: hidden;
+        }
+        .game-cell:hover {
+            background: #f3f4f6;
+            transform: scale(0.95);
+        }
+        .game-cell:disabled {
+            cursor: not-allowed;
+            background: #e5e7eb;
+        }
+        .game-cell.winner {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            animation: pulse 1s infinite;
+        }
+        .player-x {
+            color: #ef4444;
+        }
+        .player-o {
+            color: #3b82f6;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.4);
+        }
+        .score-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        .score-card:hover {
+            border-color: #f59e0b;
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.1);
+        }
+        .difficulty-badge {
+            transition: all 0.3s ease;
+        }
+        .difficulty-badge.active {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+        }
+        .game-status {
+            min-height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .animate-bounce-in {
+            animation: bounceIn 0.5s ease-out;
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        @media (max-width: 768px) {
+            .game-cell { font-size: 2.5rem; }
+            .game-board { max-width: 280px; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <a href="/" class="flex items-center space-x-2">
+                        <i class="fas fa-tools text-2xl text-indigo-600"></i>
+                        <span class="text-xl font-bold text-gray-800">ToolSlap</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="/" class="text-gray-600 hover:text-indigo-600 transition duration-300">Home</a>
+                    <a href="#game-modes" class="text-gray-600 hover:text-indigo-600 transition duration-300">Game Modes</a>
+                    <a href="#how-to-play" class="text-gray-600 hover:text-indigo-600 transition duration-300">How to Play</a>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-gray-600 hover:text-indigo-600">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="tool-header text-white py-12">
+        <div class="max-w-4xl mx-auto text-center px-4">
+            <div class="mb-6">
+                <i class="fas fa-th text-5xl mb-4 opacity-90"></i>
+            </div>
+            <h1 class="text-3xl md:text-4xl font-bold mb-4">Tic Tac Toe Game</h1>
+            <p class="text-xl text-amber-100 max-w-2xl mx-auto">
+                Challenge yourself against our smart AI or play with friends. Classic strategy game with multiple difficulty levels and score tracking.
+            </p>
+        </div>
+    </header>
+
+    <!-- Main Game -->
+    <main class="max-w-6xl mx-auto py-12 px-4">
+        <!-- Game Container -->
+        <div class="bg-white rounded-2xl shadow-xl p-8 mb-12">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Play Tic Tac Toe</h2>
+                <p class="text-gray-600">Get three in a row to win!</p>
+            </div>
+
+            <!-- Game Controls -->
+            <div class="flex flex-wrap justify-center items-center gap-4 mb-8">
+                <!-- Game Mode Selection -->
+                <div class="flex items-center space-x-2">
+                    <label class="text-gray-700 font-semibold">Mode:</label>
+                    <select id="gameMode" class="border border-gray-300 rounded-lg px-3 py-2">
+                        <option value="ai">vs AI</option>
+                        <option value="human">vs Human</option>
+                    </select>
+                </div>
+
+                <!-- Difficulty Selection -->
+                <div id="difficultySection" class="flex items-center space-x-2">
+                    <label class="text-gray-700 font-semibold">Difficulty:</label>
+                    <div class="flex space-x-1">
+                        <button class="difficulty-badge active px-3 py-1 rounded-lg text-sm font-semibold" data-level="easy">Easy</button>
+                        <button class="difficulty-badge px-3 py-1 rounded-lg text-sm font-semibold bg-gray-200 text-gray-700" data-level="medium">Medium</button>
+                        <button class="difficulty-badge px-3 py-1 rounded-lg text-sm font-semibold bg-gray-200 text-gray-700" data-level="hard">Hard</button>
+                    </div>
+                </div>
+
+                <!-- Reset Button -->
+                <button id="resetBtn" class="btn-primary text-white px-6 py-2 rounded-lg font-semibold">
+                    <i class="fas fa-refresh mr-2"></i>New Game
+                </button>
+            </div>
+
+            <!-- Game Status -->
+            <div class="game-status mb-6">
+                <div id="gameStatus" class="text-lg font-semibold text-gray-800">Your turn (X)</div>
+            </div>
+
+            <!-- Game Board -->
+            <div class="game-board mb-8" id="gameBoard">
+                <button class="game-cell" data-cell="0"></button>
+                <button class="game-cell" data-cell="1"></button>
+                <button class="game-cell" data-cell="2"></button>
+                <button class="game-cell" data-cell="3"></button>
+                <button class="game-cell" data-cell="4"></button>
+                <button class="game-cell" data-cell="5"></button>
+                <button class="game-cell" data-cell="6"></button>
+                <button class="game-cell" data-cell="7"></button>
+                <button class="game-cell" data-cell="8"></button>
+            </div>
+
+            <!-- Game Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="score-card rounded-xl p-6 text-center">
+                    <div class="text-3xl font-bold text-red-500 mb-2">
+                        <span id="playerWins">0</span>
+                    </div>
+                    <div class="text-gray-600 font-semibold">You (X)</div>
+                    <div class="text-sm text-gray-500 mt-1">Wins</div>
+                </div>
+
+                <div class="score-card rounded-xl p-6 text-center">
+                    <div class="text-3xl font-bold text-gray-500 mb-2">
+                        <span id="ties">0</span>
+                    </div>
+                    <div class="text-gray-600 font-semibold">Ties</div>
+                    <div class="text-sm text-gray-500 mt-1">Games</div>
+                </div>
+
+                <div class="score-card rounded-xl p-6 text-center">
+                    <div class="text-3xl font-bold text-blue-500 mb-2">
+                        <span id="opponentWins">0</span>
+                    </div>
+                    <div class="text-gray-600 font-semibold">
+                        <span id="opponentLabel">AI (O)</span>
+                    </div>
+                    <div class="text-sm text-gray-500 mt-1">Wins</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Modes Section -->
+        <section id="game-modes" class="mb-12">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Game Modes</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Choose your challenge level and game mode</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-robot text-2xl text-amber-600"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">vs AI</h3>
+                        <p class="text-gray-600">Challenge our intelligent computer opponent</p>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                            <div>
+                                <div class="font-semibold text-green-800">Easy</div>
+                                <div class="text-sm text-green-600">AI makes random moves</div>
+                            </div>
+                            <div class="text-green-600">
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-3 bg-yellow-50 rounded-lg">
+                            <div>
+                                <div class="font-semibold text-yellow-800">Medium</div>
+                                <div class="text-sm text-yellow-600">AI blocks some winning moves</div>
+                            </div>
+                            <div class="text-yellow-600">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-3 bg-red-50 rounded-lg">
+                            <div>
+                                <div class="font-semibold text-red-800">Hard</div>
+                                <div class="text-sm text-red-600">AI plays optimally (unbeatable)</div>
+                            </div>
+                            <div class="text-red-600">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-users text-2xl text-blue-600"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">vs Human</h3>
+                        <p class="text-gray-600">Play with a friend on the same device</p>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+                            <div>
+                                <div class="font-semibold text-blue-800">Turn-based</div>
+                                <div class="text-sm text-blue-600">Players alternate turns</div>
+                            </div>
+                            <div class="text-blue-600">
+                                <i class="fas fa-sync-alt"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-3 bg-purple-50 rounded-lg">
+                            <div>
+                                <div class="font-semibold text-purple-800">Score tracking</div>
+                                <div class="text-sm text-purple-600">Keep track of wins and ties</div>
+                            </div>
+                            <div class="text-purple-600">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-3 bg-indigo-50 rounded-lg">
+                            <div>
+                                <div class="font-semibold text-indigo-800">Quick reset</div>
+                                <div class="text-sm text-indigo-600">Start new games instantly</div>
+                            </div>
+                            <div class="text-indigo-600">
+                                <i class="fas fa-fast-forward"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How to Play Section -->
+        <section id="how-to-play" class="mb-12">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">How to Play</h2>
+                <p class="text-gray-600">Master the classic strategy game</p>
+            </div>
+            
+            <div class="bg-white rounded-2xl shadow-xl p-8">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Rules</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <span class="text-amber-600 text-sm font-bold">1</span>
+                                </div>
+                                <div>
+                                    <p class="text-gray-700">Players take turns placing their marks (X or O) on a 3×3 grid.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <span class="text-amber-600 text-sm font-bold">2</span>
+                                </div>
+                                <div>
+                                    <p class="text-gray-700">The first player to get 3 marks in a row (horizontally, vertically, or diagonally) wins.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <div class="w-6 h-6 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                    <span class="text-amber-600 text-sm font-bold">3</span>
+                                </div>
+                                <div>
+                                    <p class="text-gray-700">If all 9 squares are filled and no player has 3 in a row, the game is a tie.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Strategy Tips</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-start space-x-3">
+                                <div class="text-amber-600 mt-1">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-700"><strong>Center control:</strong> The center square is the most valuable position.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <div class="text-amber-600 mt-1">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-700"><strong>Block opponents:</strong> Always block your opponent's potential winning moves.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <div class="text-amber-600 mt-1">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-700"><strong>Create forks:</strong> Set up multiple winning opportunities simultaneously.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <div class="text-amber-600 mt-1">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-700"><strong>Corner advantage:</strong> Corners are the second-best positions after center.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <div class="mb-4">
+                <a href="/" class="flex items-center justify-center space-x-2 mb-4">
+                    <i class="fas fa-tools text-2xl text-indigo-400"></i>
+                    <span class="text-xl font-bold">ToolSlap</span>
+                </a>
+                <p class="text-gray-400">Free online tools for everyone</p>
+            </div>
+            <div class="border-t border-gray-700 pt-4">
+                <p class="text-gray-400">&copy; 2024 ToolSlap. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        class TicTacToeGame {
+            constructor() {
+                this.board = Array(9).fill('');
+                this.currentPlayer = 'X';
+                this.gameMode = 'ai';
+                this.difficulty = 'easy';
+                this.gameActive = true;
+                this.scores = JSON.parse(localStorage.getItem('ticTacToeScores') || '{"player": 0, "opponent": 0, "ties": 0}');
+                this.aiPlayer = 'O';
+                this.humanPlayer = 'X';
+                
+                this.winningCombos = [
+                    [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+                    [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+                    [0, 4, 8], [2, 4, 6] // Diagonals
+                ];
+                
+                this.init();
+            }
+
+            init() {
+                this.bindEvents();
+                this.updateScoreDisplay();
+                this.updateGameStatus();
+            }
+
+            bindEvents() {
+                // Game cells
+                document.querySelectorAll('.game-cell').forEach(cell => {
+                    cell.addEventListener('click', (e) => this.handleCellClick(e));
+                });
+
+                // Game mode
+                document.getElementById('gameMode').addEventListener('change', (e) => {
+                    this.gameMode = e.target.value;
+                    this.updateOpponentLabel();
+                    this.resetGame();
+                });
+
+                // Difficulty buttons
+                document.querySelectorAll('.difficulty-badge').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        this.setDifficulty(e.target.dataset.level);
+                        this.resetGame();
+                    });
+                });
+
+                // Reset button
+                document.getElementById('resetBtn').addEventListener('click', () => this.resetGame());
+            }
+
+            handleCellClick(e) {
+                const cellIndex = parseInt(e.target.dataset.cell);
+                
+                if (!this.gameActive || this.board[cellIndex] !== '') {
+                    return;
+                }
+
+                this.makeMove(cellIndex, this.currentPlayer);
+                
+                if (this.gameActive && this.gameMode === 'ai' && this.currentPlayer === this.aiPlayer) {
+                    setTimeout(() => this.makeAIMove(), 500);
+                }
+            }
+
+            makeMove(cellIndex, player) {
+                this.board[cellIndex] = player;
+                const cell = document.querySelector(`[data-cell="${cellIndex}"]`);
+                cell.textContent = player;
+                cell.classList.add(player === 'X' ? 'player-x' : 'player-o');
+                cell.classList.add('animate-bounce-in');
+                cell.disabled = true;
+
+                if (this.checkWinner()) {
+                    this.handleGameEnd('win', player);
+                } else if (this.board.every(cell => cell !== '')) {
+                    this.handleGameEnd('tie');
+                } else {
+                    this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X';
+                    this.updateGameStatus();
+                }
+            }
+
+            makeAIMove() {
+                if (!this.gameActive) return;
+
+                let move;
+                switch (this.difficulty) {
+                    case 'easy':
+                        move = this.getRandomMove();
+                        break;
+                    case 'medium':
+                        move = this.getMediumMove();
+                        break;
+                    case 'hard':
+                        move = this.getOptimalMove();
+                        break;
+                }
+
+                if (move !== -1) {
+                    this.makeMove(move, this.aiPlayer);
+                }
+            }
+
+            getRandomMove() {
+                const availableMoves = this.board
+                    .map((cell, index) => cell === '' ? index : null)
+                    .filter(index => index !== null);
+                
+                return availableMoves.length > 0 
+                    ? availableMoves[Math.floor(Math.random() * availableMoves.length)] 
+                    : -1;
+            }
+
+            getMediumMove() {
+                // Try to win first
+                let move = this.findWinningMove(this.aiPlayer);
+                if (move !== -1) return move;
+
+                // Block player from winning (50% of the time)
+                if (Math.random() < 0.5) {
+                    move = this.findWinningMove(this.humanPlayer);
+                    if (move !== -1) return move;
+                }
+
+                // Otherwise, make a random move
+                return this.getRandomMove();
+            }
+
+            getOptimalMove() {
+                return this.minimax(this.board, this.aiPlayer).index;
+            }
+
+            findWinningMove(player) {
+                for (let i = 0; i < this.board.length; i++) {
+                    if (this.board[i] === '') {
+                        this.board[i] = player;
+                        if (this.checkWinnerFor(player)) {
+                            this.board[i] = '';
+                            return i;
+                        }
+                        this.board[i] = '';
+                    }
+                }
+                return -1;
+            }
+
+            minimax(board, player) {
+                const availableMoves = board
+                    .map((cell, index) => cell === '' ? index : null)
+                    .filter(index => index !== null);
+
+                if (this.checkWinnerFor(this.humanPlayer, board)) {
+                    return { score: -10 };
+                } else if (this.checkWinnerFor(this.aiPlayer, board)) {
+                    return { score: 10 };
+                } else if (availableMoves.length === 0) {
+                    return { score: 0 };
+                }
+
+                const moves = [];
+
+                for (let move of availableMoves) {
+                    const newBoard = [...board];
+                    newBoard[move] = player;
+
+                    const result = this.minimax(
+                        newBoard, 
+                        player === this.aiPlayer ? this.humanPlayer : this.aiPlayer
+                    );
+                    
+                    moves.push({
+                        index: move,
+                        score: result.score
+                    });
+                }
+
+                let bestMove;
+                if (player === this.aiPlayer) {
+                    let bestScore = -Infinity;
+                    for (let move of moves) {
+                        if (move.score > bestScore) {
+                            bestScore = move.score;
+                            bestMove = move;
+                        }
+                    }
+                } else {
+                    let bestScore = Infinity;
+                    for (let move of moves) {
+                        if (move.score < bestScore) {
+                            bestScore = move.score;
+                            bestMove = move;
+                        }
+                    }
+                }
+
+                return bestMove;
+            }
+
+            checkWinner() {
+                return this.checkWinnerFor(this.currentPlayer);
+            }
+
+            checkWinnerFor(player, board = this.board) {
+                return this.winningCombos.some(combo => 
+                    combo.every(index => board[index] === player)
+                );
+            }
+
+            handleGameEnd(result, winner = null) {
+                this.gameActive = false;
+                
+                if (result === 'win') {
+                    const winningCombo = this.winningCombos.find(combo => 
+                        combo.every(index => this.board[index] === winner)
+                    );
+                    
+                    if (winningCombo) {
+                        winningCombo.forEach(index => {
+                            document.querySelector(`[data-cell="${index}"]`).classList.add('winner');
+                        });
+                    }
+                    
+                    if (winner === 'X') {
+                        this.scores.player++;
+                        this.updateGameStatus(`🎉 You win!`, 'text-green-600');
+                    } else {
+                        this.scores.opponent++;
+                        const opponentName = this.gameMode === 'ai' ? 'AI' : 'Player 2';
+                        this.updateGameStatus(`${opponentName} wins!`, 'text-red-600');
+                    }
+                } else if (result === 'tie') {
+                    this.scores.ties++;
+                    this.updateGameStatus(`It's a tie!`, 'text-yellow-600');
+                }
+                
+                this.saveScores();
+                this.updateScoreDisplay();
+                
+                // Disable all cells
+                document.querySelectorAll('.game-cell').forEach(cell => {
+                    cell.disabled = true;
+                });
+                
+                // Auto-restart after 3 seconds
+                setTimeout(() => this.resetGame(), 3000);
+            }
+
+            resetGame() {
+                this.board = Array(9).fill('');
+                this.currentPlayer = 'X';
+                this.gameActive = true;
+                
+                document.querySelectorAll('.game-cell').forEach(cell => {
+                    cell.textContent = '';
+                    cell.disabled = false;
+                    cell.classList.remove('player-x', 'player-o', 'winner', 'animate-bounce-in');
+                });
+                
+                this.updateGameStatus();
+            }
+
+            setDifficulty(level) {
+                this.difficulty = level;
+                
+                document.querySelectorAll('.difficulty-badge').forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.classList.add('bg-gray-200', 'text-gray-700');
+                });
+                
+                document.querySelector(`[data-level="${level}"]`).classList.add('active');
+                document.querySelector(`[data-level="${level}"]`).classList.remove('bg-gray-200', 'text-gray-700');
+            }
+
+            updateGameStatus(message = null, className = '') {
+                const statusElement = document.getElementById('gameStatus');
+                
+                if (message) {
+                    statusElement.textContent = message;
+                    statusElement.className = `text-lg font-semibold ${className}`;
+                } else if (this.gameActive) {
+                    if (this.gameMode === 'ai') {
+                        statusElement.textContent = this.currentPlayer === 'X' ? 'Your turn (X)' : 'AI thinking...';
+                        statusElement.className = `text-lg font-semibold ${this.currentPlayer === 'X' ? 'text-red-600' : 'text-blue-600'}`;
+                    } else {
+                        statusElement.textContent = `Player ${this.currentPlayer}'s turn`;
+                        statusElement.className = `text-lg font-semibold ${this.currentPlayer === 'X' ? 'text-red-600' : 'text-blue-600'}`;
+                    }
+                }
+            }
+
+            updateOpponentLabel() {
+                const label = document.getElementById('opponentLabel');
+                label.textContent = this.gameMode === 'ai' ? 'AI (O)' : 'Player 2 (O)';
+                
+                // Show/hide difficulty section
+                const difficultySection = document.getElementById('difficultySection');
+                difficultySection.style.display = this.gameMode === 'ai' ? 'flex' : 'none';
+            }
+
+            updateScoreDisplay() {
+                document.getElementById('playerWins').textContent = this.scores.player;
+                document.getElementById('opponentWins').textContent = this.scores.opponent;
+                document.getElementById('ties').textContent = this.scores.ties;
+            }
+
+            saveScores() {
+                localStorage.setItem('ticTacToeScores', JSON.stringify(this.scores));
+            }
+        }
+
+        // Initialize the game
+        window.addEventListener('DOMContentLoaded', () => {
+            new TicTacToeGame();
+        });
+    </script>
+</body>
+</html>

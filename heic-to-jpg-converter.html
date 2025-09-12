@@ -33,6 +33,7 @@
     
     <!-- HEIC2ANY Library for HEIC conversion -->
     <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.js"></script>
     
     <!-- Schema.org structured data -->
     <script type="application/ld+json">
@@ -896,6 +897,7 @@
 
             showProcessing();
             convertedFiles = [];
+            const failedFiles = [];
             
             try {
                 const totalFiles = selectedFiles.length;
@@ -906,16 +908,22 @@
                     
                     updateProgress(progress, `Converting ${file.name}... (${i + 1}/${totalFiles})`);
                     
-                    // Simulate HEIC to JPG conversion
-                    const jpgBlob = await convertSingleFile(file);
-                    // Generate JPG filename by replacing HEIC/HEIF extension
-                    const jpgFileName = file.name.replace(/\.(heic|heif)$/i, '.jpg');
-                    
-                    convertedFiles.push({
-                        name: jpgFileName,
-                        blob: jpgBlob,
-                        originalName: file.name
-                    });
+                    try {
+                        // Convert HEIC to JPG
+                        const jpgBlob = await convertSingleFile(file);
+                        // Generate JPG filename by replacing HEIC/HEIF extension
+                        const jpgFileName = file.name.replace(/\.(heic|heif)$/i, '.jpg');
+                        
+                        convertedFiles.push({
+                            name: jpgFileName,
+                            blob: jpgBlob,
+                            originalName: file.name
+                        });
+                    } catch (fileError) {
+                        console.error(`Error converting ${file.name}:`, fileError);
+                        failedFiles.push(file.name);
+                        showError(`Failed to convert ${file.name}: ${fileError.message || 'Unknown error'}`);
+                    }
                     
                     // Small delay to show progress
                     await new Promise(resolve => setTimeout(resolve, 500));
@@ -927,7 +935,11 @@
                     showDownload();
                 }, 500);
                 
-                showSuccess(`Successfully converted ${totalFiles} HEIC files to JPG format!`);
+                if (failedFiles.length > 0) {
+                    showSuccess(`Successfully converted ${convertedFiles.length} of ${totalFiles} HEIC files to JPG format. ${failedFiles.length} file(s) failed.`);
+                } else {
+                    showSuccess(`Successfully converted all ${totalFiles} HEIC files to JPG format!`);
+                }
                 
             } catch (error) {
                 console.error('Conversion error:', error);
@@ -943,6 +955,11 @@
                     throw new Error('HEIC conversion library not loaded');
                 }
                 
+                // Check if heic2any is a function
+                if (typeof heic2any !== 'function') {
+                    throw new Error('HEIC conversion library not loaded properly');
+                }
+                
                 // Convert HEIC to JPG using heic2any
                 const jpegBlob = await heic2any({
                     blob: file,
@@ -953,6 +970,7 @@
                 return jpegBlob;
             } catch (error) {
                 console.error('HEIC conversion error:', error);
+                showError(`Failed to convert ${file.name}. ${error.message || 'Unknown error'}. Please try refreshing the page.`);
                 
                 // Fallback: create a placeholder if real conversion fails
                 return new Promise((resolve) => {

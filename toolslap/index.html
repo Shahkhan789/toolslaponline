@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ToolSlap - Free Online Tools Hub. 55+ trending tools for PDF compression, image conversion, text processing, AI generators & more. Fast, secure, no registration required.">
+    <meta name="keywords" content="online tools, compress PDF, JPG to PNG, image converter, PDF tools, JSON formatter, text converter, password generator, QR generator, free tools, web tools">
+    <meta name="author" content="ToolSlap">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="ToolSlap - Free Online Multi-Tool Hub | 55+ Tools">
+    <meta property="og:description" content="Access 55+ trending online tools including PDF compression, image conversion, AI generators, calculators & more. No registration required.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolslap.online">
+    <meta property="og:image" content="https://toolslap.online/images/toolslap-og.png">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ToolSlap - Free Online Multi-Tool Hub | 55+ Tools">
+    <meta name="twitter:description" content="Access 55+ trending online tools including PDF compression, image conversion, AI generators & more.">
+    <meta name="twitter:image" content="https://toolslap.online/images/toolslap-og.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://toolslap.online">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+    <title>ToolSlap - Free Online Tools Hub | PDF, Image, AI & Text Tools</title>
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ToolSlap",
+        "description": "Free online multi-tool hub with image converter, compressor, calculators and more",
+        "url": "https://toolslap.online",
+        "sameAs": [
+            "https://twitter.com/toolslap",
+            "https://facebook.com/toolslap"
+        ],
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://toolslap.online/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1E1E2F 0%, #2B2D42 100%);
+            color: #EAEAEA;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2B2D42 0%, #3A3D5B 100%);
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 2px 20px rgba(255, 215, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 5px;
+        }
+
+        .tagline {
+            font-size: 16px;
+            color: #EAEAEA;
+            opacity: 0.9;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 60px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .search-container {
+            max-width: 500px;
+            margin: 0 auto 40px auto;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            font-size: 16px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #EAEAEA;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: #FFD700;
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .search-input::placeholder {
+            color: rgba(234, 234, 234, 0.6);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #FFD700;
+            font-size: 18px;
+            pointer-events: none;
+        }
+
+        .search-results-counter {
+            text-align: center;
+            margin-bottom: 20px;
+            opacity: 0.8;
+            font-size: 14px;
+            color: #FFD700;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px 20px;
+            opacity: 0.8;
+        }
+
+        .no-results h3 {
+            color: #FFD700;
+            margin-bottom: 10px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .tools-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+        }
+
+        .category-header {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin: 40px 0 30px 0;
+            padding: 20px 0;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .category-title {
+            font-size: 2rem;
+            color: #FFD700;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .category-description {
+            font-size: 1.1rem;
+            color: #EAEAEA;
+            opacity: 0.8;
+            margin-bottom: 0;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+
+        .tool-card {
+            background: linear-gradient(135deg, #3A3D5B 0%, #2B2D42 100%);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transition: left 0.6s;
+        }
+
+        .tool-card:hover::before {
+            left: 100%;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.2);
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #1E1E2F;
+        }
+
+        .tool-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .tool-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .tool-card p {
+            margin-bottom: 25px;
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #1E1E2F;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .tool-card:hover .btn {
+            background: linear-gradient(45deg, #1E1E2F, #2B2D42);
+            color: #FFD700;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        .footer {
+            background: #1E1E2F;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255, 215, 0, 0.1);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: #EAEAEA;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #FFD700;
+        }
+
+        .copyright {
+            color: #888;
+            margin-top: 20px;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .category-title {
+                font-size: 1.6rem;
+            }
+
+            .category-description {
+                font-size: 1rem;
+            }
+
+            .tool-card {
+                padding: 25px;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        /* Loading animation */
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .loading {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 class="logo">ToolSlap</h1>
+        <p class="tagline">Your Ultimate Multi-Tool Hub</p>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <h1 class="hero-title">Free Online Tools for Everything</h1>
+            <p class="hero-description">55+ trending online tools for PDF compression, image conversion, text processing, AI generators, calculations & more - all in one place, completely free!</p>
+            
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search tools... (e.g., 'image', 'calculator', 'pdf')">
+                <span class="search-icon">🔍</span>
+            </div>
+        </section>
+        
+        <div id="searchCounter" class="search-results-counter" style="display: none;"></div>
+
+        <section class="tools-container" role="main">
+            <!-- Image & Media Tools -->
+            <div class="category-header">
+                <h2 class="category-title">🖼️ Image & Media Tools</h2>
+                <p class="category-description">Convert, compress, resize, and manipulate images and media files</p>
+            </div>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <span class="tool-icon">🖼️</span>
+                    <h3>Image Converter</h3>
+                    <p>Convert images between different formats instantly. Supports PNG, JPG, JPEG, WEBP, BMP, GIF, and more.</p>
+                    <a href="image-converter.html" class="btn" aria-label="Go to Image Converter Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">🗜️</span>
+                    <h3>Image Compressor</h3>
+                    <p>Reduce image file size without losing quality. Perfect for web optimization and storage saving.</p>
+                    <a href="image-compressor.html" class="btn" aria-label="Go to Image Compressor Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">✂️</span>
+                    <h3>Image Crop</h3>
+                    <p>Crop images to desired dimensions and aspect ratios. Easy-to-use online image cropping tool.</p>
+                    <a href="image-crop.html" class="btn" aria-label="Go to Image Crop Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">🖼️</span>
+                    <h3>Image Resizer</h3>
+                    <p>Resize images with custom dimensions, maintain aspect ratios, and optimize quality for web and print use.</p>
+                    <a href="image-resizer.html" class="btn" aria-label="Go to Image Resizer Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">🎥</span>
+                    <h3>Video Converter</h3>
+                    <p>Convert videos between different formats quickly. Support for MP4, AVI, MOV, and more formats.</p>
+                    <a href="video-converter.html" class="btn" aria-label="Go to Video Converter Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">🎵</span>
+                    <h3>Audio Trimmer</h3>
+                    <p>Trim and cut audio files to your desired length. Support for MP3, WAV, and other audio formats.</p>
+                    <a href="audio-trimmer.html" class="btn" aria-label="Go to Audio Trimmer Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">🖼️</span>
+                    <h3>JPG to PNG Converter</h3>
+                    <p>Convert JPG images to PNG format with transparency support. Batch conversion and background color options.</p>
+                    <a href="jpg-to-png.html" class="btn" aria-label="Go to JPG to PNG Converter Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">🖼️</span>
+                    <h3>PNG to JPG Converter</h3>
+                    <p>Convert PNG images to JPG format with quality control. Batch processing and background color selection.</p>
+                    <a href="png-to-jpg.html" class="btn" aria-label="Go to PNG to JPG Converter Tool">Use Tool</a>
+                </div>
+            </div>
+
+            <!-- Calculator & Financial Tools -->
+            <div class="category-header">
+                <h2 class="category-title">🧮 Calculator & Financial Tools</h2>
+                <p class="category-description">Calculate loans, investments, age, and various mathematical operations</p>
+            </div>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <span class="tool-icon">📅</span>
+                    <h3>Age Calculator</h3>
+                    <p>Calculate your exact age in years, months, days, hours, and minutes. Find out how old you are precisely.</p>
+                    <a href="age-calculator.html" class="btn" aria-label="Go to Age Calculator Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">💰</span>
+                    <h3>EMI Calculator</h3>
+                    <p>Calculate your loan EMI, total interest, and payment schedule. Plan your finances better.</p>
+                    <a href="emi-calculator.html" class="btn" aria-label="Go to EMI Calculator Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">📈</span>
+                    <h3>SIP Calculator</h3>
+                    <p>Calculate returns on your SIP investments. Plan your mutual fund investments effectively.</p>
+                    <a href="sip-calculator.html" class="btn" aria-label="Go to SIP Calculator Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">📏</span>
+                    <h3>Unit Converter</h3>
+                    <p>Convert between different units of measurement: length, weight, temperature, area, volume, speed, time, and energy.</p>
+                    <a href="unit-converter.html" class="btn" aria-label="Go to Unit Converter Tool">Use Tool</a>
+                </div>
+            </div>
+
+            <!-- Text & Content Tools -->
+            <div class="category-header">
+                <h2 class="category-title">📝 Text & Content Tools</h2>
+                <p class="category-description">Format, analyze, and manipulate text content with powerful tools</p>
+            </div>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <span class="tool-icon">📝</span>
+                    <h3>Text Formatter</h3>
+                    <p>Format, clean, and manipulate text. Convert case, count words, find & replace, and more.</p>
+                    <a href="text-formatter.html" class="btn" aria-label="Go to Text Formatter Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">📊</span>
+                    <h3>Word Counter Tool</h3>
+                    <p>Count words, characters, paragraphs, and analyze your text. Get reading time estimates and keyword density analysis.</p>
+                    <a href="word-counter.html" class="btn" aria-label="Go to Word Counter Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">📋</span>
+                    <h3>Text Difference Checker</h3>
+                    <p>Compare two texts side-by-side with highlighted differences, line numbers, and similarity statistics.</p>
+                    <a href="text-diff.html" class="btn" aria-label="Go to Text Difference Checker Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">📝</span>
+                    <h3>Lorem Ipsum Generator</h3>
+                    <p>Generate placeholder text in various formats and lengths. Perfect for designers, developers, and content creators.</p>
+                    <a href="lorem-generator.html" class="btn" aria-label="Go to Lorem Ipsum Generator Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">📝</span>
+                    <h3>SEO Blog Generator</h3>
+                    <p>Create 2,500-3,000 word, SEO-optimized articles with EEAT principles. Generate human-like content that ranks on Google.</p>
+                    <a href="blog-generator.html" class="btn" aria-label="Go to SEO Blog Generator Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">📝</span>
+                    <h3>Notes App</h3>
+                    <p>Simple, fast, and secure note-taking with markdown support. Your notes are saved locally and never leave your browser.</p>
+                    <a href="notes-app.html" class="btn" aria-label="Go to Notes App Tool">Use Tool</a>
+                </div>
+            </div>
+
+            <!-- Developer Tools -->
+            <div class="category-header">
+                <h2 class="category-title">💻 Developer Tools</h2>
+                <p class="category-description">Code formatting, validation, and development utilities for programmers</p>
+            </div>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <span class="tool-icon">📋</span>
+                    <h3>JSON Formatter</h3>
+                    <p>Format, validate, and beautify JSON data with syntax highlighting and error detection. Perfect for API development.</p>
+                    <a href="json-formatter.html" class="btn" aria-label="Go to JSON Formatter Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">🌐</span>
+                    <h3>HTML Online Viewer</h3>
+                    <p>Write or paste HTML, CSS, and JavaScript with instant preview in a secure sandbox. Export as a single HTML file.</p>
+                    <a href="html-viewer.html" class="btn" aria-label="Go to HTML Online Viewer Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">🗜️</span>
+                    <h3>CSS Minifier</h3>
+                    <p>Minify and compress CSS files to reduce file size. Remove comments, whitespace, and optimize your stylesheets.</p>
+                    <a href="css-minifier.html" class="btn" aria-label="Go to CSS Minifier Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">⚡</span>
+                    <h3>JavaScript Minifier</h3>
+                    <p>Minify JavaScript files to reduce size and improve loading speed. Compress JS code while preserving functionality.</p>
+                    <a href="js-minifier.html" class="btn" aria-label="Go to JavaScript Minifier Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">🌈</span>
+                    <h3>CSS Gradient Generator</h3>
+                    <p>Create stunning linear and radial gradients with live preview. Generate CSS code and copy to your projects instantly.</p>
+                    <a href="gradient-generator.html" class="btn" aria-label="Go to CSS Gradient Generator Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">🔑</span>
+                    <h3>UUID Generator</h3>
+                    <p>Generate and validate UUIDs (v1, v4) with bulk generation, multiple formats, and export functionality for developers.</p>
+                    <a href="uuid-generator.html" class="btn" aria-label="Go to UUID Generator Tool">Use Tool</a>
+                </div>
+            </div>
+
+            <!-- Converter & Format Tools -->
+            <div class="category-header">
+                <h2 class="category-title">🔄 Converter & Format Tools</h2>
+                <p class="category-description">Convert between different file formats and data types</p>
+            </div>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <span class="tool-icon">📄</span>
+                    <h3>PDF to HTML Converter</h3>
+                    <p>Convert PDF files to HTML format online for free. Extract text, preserve formatting, and get clean HTML code ready for web use.</p>
+                    <a href="pdf-to-html-converter.html" class="btn" aria-label="Go to PDF to HTML Converter Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">📊</span>
+                    <h3>PDF to CSV Converter</h3>
+                    <p>Extract tables and data from PDF files and convert them to CSV format. Perfect for data analysis and spreadsheet import.</p>
+                    <a href="pdf-to-csv-converter.html" class="btn" aria-label="Go to PDF to CSV Converter Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">📄</span>
+                    <h3>Markdown to HTML</h3>
+                    <p>Convert Markdown text to HTML with live preview and syntax highlighting. Perfect for developers and content creators.</p>
+                    <a href="markdown-converter.html" class="btn" aria-label="Go to Markdown to HTML Converter Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">🔤</span>
+                    <h3>Base64 Encoder</h3>
+                    <p>Encode and decode text, URLs, or files to/from Base64 format. Supports batch processing and multiple formats.</p>
+                    <a href="base64-encoder.html" class="btn" aria-label="Go to Base64 Encoder Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">🗜️</span>
+                    <h3>Compress PDF</h3>
+                    <p>Reduce PDF file size by up to 90% while maintaining quality. Choose compression levels and batch processing support.</p>
+                    <a href="compress-pdf.html" class="btn" aria-label="Go to Compress PDF Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">🔄</span>
+                    <h3>Case Converter</h3>
+                    <p>Convert text between different cases: uppercase, lowercase, title case, camel case, snake case, and more formats.</p>
+                    <a href="case-converter.html" class="btn" aria-label="Go to Case Converter Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">📄</span>
+                    <h3>Merge PDF Files</h3>
+                    <p>Combine multiple PDF files into one document. Drag & drop support with custom page ordering and preview.</p>
+                    <a href="merge-pdf.html" class="btn" aria-label="Go to Merge PDF Files Tool">Use Tool</a>
+                </div>
+            </div>
+
+            <!-- Security & Privacy Tools -->
+            <div class="category-header">
+                <h2 class="category-title">🔐 Security & Privacy Tools</h2>
+                <p class="category-description">Generate passwords, create hashes, and secure your data</p>
+            </div>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <span class="tool-icon">🔐</span>
+                    <h3>Password Generator</h3>
+                    <p>Generate strong, secure passwords with custom length and character combinations.</p>
+                    <a href="password-generator.html" class="btn" aria-label="Go to Password Generator Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">🔐</span>
+                    <h3>Hash Generator</h3>
+                    <p>Generate secure hashes from text or files using MD5, SHA1, SHA256, SHA512, and more algorithms.</p>
+                    <a href="hash-generator.html" class="btn" aria-label="Go to Hash Generator Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">🌎</span>
+                    <h3>IP Address Lookup</h3>
+                    <p>Discover your IP address, location, ISP information, and network details instantly. Check for VPN/proxy detection.</p>
+                    <a href="ip-lookup.html" class="btn" aria-label="Go to IP Address Lookup Tool">Use Tool</a>
+                </div>
+            </div>
+
+            <!-- QR Code & Link Tools -->
+            <div class="category-header">
+                <h2 class="category-title">📊 QR Code & Link Tools</h2>
+                <p class="category-description">Create, scan, and manage QR codes and links</p>
+            </div>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <span class="tool-icon">📊</span>
+                    <h3>QR Code Generator</h3>
+                    <p>Create custom QR codes for URLs, text, contact info, and more. Download in various formats.</p>
+                    <a href="qr-generator.html" class="btn" aria-label="Go to QR Code Generator Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">📱</span>
+                    <h3>QR Code Scanner</h3>
+                    <p>Scan QR codes from images or use your camera to decode QR codes instantly. Fast, accurate, and secure scanning.</p>
+                    <a href="qr-scanner.html" class="btn" aria-label="Go to QR Code Scanner Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">📶</span>
+                    <h3>WiFi QR Generator</h3>
+                    <p>Create QR codes for WiFi networks with password, security type, and hidden network support. Easy wireless sharing.</p>
+                    <a href="wifi-qr-generator.html" class="btn" aria-label="Go to WiFi QR Generator Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">🔗</span>
+                    <h3>URL Shortener</h3>
+                    <p>Create short, memorable links with QR codes and track clicks. Perfect for social media and marketing campaigns.</p>
+                    <a href="url-shortener.html" class="btn" aria-label="Go to URL Shortener Tool">Use Tool</a>
+                </div>
+            </div>
+
+            <!-- Design & Creative Tools -->
+            <div class="category-header">
+                <h2 class="category-title">🎨 Design & Creative Tools</h2>
+                <p class="category-description">Color tools, visual aids, and creative utilities for designers</p>
+            </div>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <span class="tool-icon">🎨</span>
+                    <h3>Color Picker</h3>
+                    <p>Pick colors, generate palettes, convert between formats. Perfect for designers and developers.</p>
+                    <a href="color-picker.html" class="btn" aria-label="Go to Color Picker Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">📸</span>
+                    <h3>Website Screenshot Tool</h3>
+                    <p>Capture high-quality screenshots of any website instantly. Perfect for documentation, presentations, and social media content creation.</p>
+                    <a href="screenshot-tool.html" class="btn" aria-label="Go to Website Screenshot Tool">Use Tool</a>
+                </div>
+            </div>
+
+            <!-- Utility & Miscellaneous Tools -->
+            <div class="category-header">
+                <h2 class="category-title">🛠️ Utility & Miscellaneous Tools</h2>
+                <p class="category-description">Random generators, games, and other useful utilities</p>
+            </div>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <span class="tool-icon">🎲</span>
+                    <h3>Random Number Generator</h3>
+                    <p>Generate random numbers with custom ranges, decimals, unique values, and statistical analysis. Perfect for games and testing.</p>
+                    <a href="random-number.html" class="btn" aria-label="Go to Random Number Generator Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">🎬</span>
+                    <h3>YouTube Downloader</h3>
+                    <p>Download YouTube videos in multiple formats and qualities. Fast, free, and no registration required for your convenience.</p>
+                    <a href="youtube-downloader.html" class="btn" aria-label="Go to YouTube Video Downloader Tool">Use Tool</a>
+                </div>
+                <div class="tool-card">
+                    <span class="tool-icon">🎮</span>
+                    <h3>Tic Tac Toe Game</h3>
+                    <p>Challenge yourself against our smart AI or play with friends. Classic strategy game with multiple difficulty levels and score tracking.</p>
+                    <a href="tic-tac-toe-game.html" class="btn" aria-label="Go to Tic Tac Toe Game">Play Game</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="about.html">About</a>
+            <a href="tools.html">All Tools</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="terms-of-service.html">Terms of Service</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <p class="copyright">&copy; 2025 ToolSlap. All rights reserved. Made with ❤️ for the community.</p>
+    </footer>
+
+    <script>
+        // Add loading animation while tools load
+        document.addEventListener('DOMContentLoaded', function() {
+            const toolCards = document.querySelectorAll('.tool-card');
+            
+            // Animate cards on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            toolCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+                observer.observe(card);
+            });
+
+            // Add click tracking for analytics (placeholder)
+            toolCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    const toolName = this.querySelector('h3').textContent;
+                    console.log(`Tool clicked: ${toolName}`);
+                    // Add your analytics code here
+                });
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const searchCounter = document.getElementById('searchCounter');
+        const toolsContainer = document.querySelector('.tools-container');
+        const allToolCards = document.querySelectorAll('.tool-card');
+        
+        // Store original tools data for searching
+        const toolsData = Array.from(allToolCards).map(card => {
+            return {
+                element: card,
+                title: card.querySelector('h3').textContent.toLowerCase(),
+                description: card.querySelector('p').textContent.toLowerCase(),
+                keywords: card.querySelector('h3').textContent.toLowerCase().split(' ').concat(
+                    card.querySelector('p').textContent.toLowerCase().match(/\b\w+\b/g) || []
+                ).join(' ')
+            };
+        });
+        
+        function performSearch(query) {
+            const searchTerm = query.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                // Show all tools
+                allToolCards.forEach(card => {
+                    card.classList.remove('hidden');
+                });
+                searchCounter.style.display = 'none';
+                removeNoResultsMessage();
+                return;
+            }
+            
+            let visibleCount = 0;
+            
+            toolsData.forEach(tool => {
+                const isMatch = tool.title.includes(searchTerm) || 
+                               tool.description.includes(searchTerm) ||
+                               tool.keywords.includes(searchTerm);
+                
+                if (isMatch) {
+                    tool.element.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    tool.element.classList.add('hidden');
+                }
+            });
+            
+            // Update counter
+            if (visibleCount > 0) {
+                searchCounter.textContent = `Found ${visibleCount} tool${visibleCount !== 1 ? 's' : ''} matching "${query}"`;
+                searchCounter.style.display = 'block';
+                removeNoResultsMessage();
+            } else {
+                searchCounter.style.display = 'none';
+                showNoResultsMessage(query);
+            }
+        }
+        
+        function showNoResultsMessage(query) {
+            removeNoResultsMessage();
+            
+            const noResultsDiv = document.createElement('div');
+            noResultsDiv.className = 'no-results';
+            noResultsDiv.id = 'noResultsMessage';
+            noResultsDiv.innerHTML = `
+                <h3>🔍 No tools found</h3>
+                <p>No tools match your search for "${query}"</p>
+                <p>Try searching for:</p>
+                <ul style="list-style: none; padding: 0; margin-top: 15px;">
+                    <li>• "image" for image tools</li>
+                    <li>• "calculator" for calculation tools</li>
+                    <li>• "converter" for conversion tools</li>
+                    <li>• "generator" for generation tools</li>
+                    <li>• "pdf" for PDF tools</li>
+                </ul>
+            `;
+            
+            toolsContainer.insertAdjacentElement('afterend', noResultsDiv);
+        }
+        
+        function removeNoResultsMessage() {
+            const existingMessage = document.getElementById('noResultsMessage');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+        }
+        
+        // Real-time search as user types
+        searchInput.addEventListener('input', function(e) {
+            performSearch(e.target.value);
+        });
+        
+        // Clear search on Escape key
+        searchInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                e.target.value = '';
+                performSearch('');
+                e.target.blur();
+            }
+        });
+        
+        // Focus search input with Ctrl/Cmd + K
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                searchInput.focus();
+            }
+        });
+
+        // Service Worker registration for PWA capabilities
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                    console.log('ServiceWorker registration successful');
+                }, function(err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
+</body>
+</html>

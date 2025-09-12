@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convert PNG to JPG Online - Free PNG to JPEG Converter | ToolSlap</title>
+    <meta name="description" content="Convert PNG images to JPG format online for free. High-quality image conversion with custom quality settings. No file size limits, secure browser-based processing.">
+    <meta name="keywords" content="PNG to JPG, convert PNG to JPEG, image converter, PNG converter, image format conversion, online converter, free image conversion">
+    <link rel="canonical" href="https://toolslap.online/png-to-jpg.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Free PNG to JPG Converter Online">
+    <meta property="og:description" content="Convert PNG images to JPG format with high quality. Fast, secure, and completely free.">
+    <meta property="og:url" content="https://toolslap.online/png-to-jpg.html">
+    <meta property="og:image" content="https://toolslap.online/images/png-to-jpg-og.png">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PNG to JPG Converter">
+    <meta name="twitter:description" content="Convert PNG images to JPG format online. Free, fast, and secure.">
+    <meta name="twitter:image" content="https://toolslap.online/images/png-to-jpg-og.png">
+    
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "PNG to JPG Converter",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Web",
+        "url": "https://toolslap.online/png-to-jpg.html",
+        "description": "Convert PNG images to JPG format online with customizable quality settings.",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://toolslap.online/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Image Tools",
+                "item": "https://toolslap.online/#image-tools"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "PNG to JPG",
+                "item": "https://toolslap.online/png-to-jpg.html"
+            }
+        ]
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Why convert PNG to JPG?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "JPG files are smaller than PNG files, making them ideal for web use, email attachments, and saving storage space while maintaining good image quality."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Will I lose image quality when converting PNG to JPG?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "JPG uses lossy compression, so there may be a slight quality loss. However, our converter allows you to adjust quality settings to balance file size and image quality."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I convert multiple PNG files at once?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, you can select and convert multiple PNG files to JPG format in a single batch operation."
+                }
+            }
+        ]
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .breadcrumb {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .breadcrumb a {
+            color: #4facfe;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4facfe;
+        }
+
+        .main-content {
+            padding: 40px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .tool-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        .upload-area {
+            border: 3px dashed #4facfe;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            background: #f0f8ff;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .upload-area:hover {
+            border-color: #00f2fe;
+            background: #e6f7ff;
+        }
+
+        .upload-area.dragover {
+            border-color: #00f2fe;
+            background: #d4fffb;
+            transform: scale(1.02);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: #4facfe;
+            margin-bottom: 20px;
+        }
+
+        .upload-text {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .upload-subtext {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .controls {
+            background: #f0f8ff;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        .control-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .quality-slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .quality-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #4facfe;
+            cursor: pointer;
+        }
+
+        .quality-value {
+            display: inline-block;
+            margin-left: 10px;
+            font-weight: bold;
+            color: #4facfe;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+        }
+
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .preview-item {
+            background: #fff;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .preview-image {
+            width: 100%;
+            max-width: 200px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .preview-info {
+            margin-bottom: 15px;
+        }
+
+        .preview-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .preview-size {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .info-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        .info-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .info-section h3 {
+            color: #4facfe;
+            margin: 25px 0 15px 0;
+            font-size: 1.3rem;
+        }
+
+        .info-section p, .info-section li {
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature {
+            background: #f0f8ff;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            border-left: 4px solid #4facfe;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: #4facfe;
+            margin-bottom: 15px;
+        }
+
+        .feature h4 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .faq {
+            margin-top: 30px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            background: #f0f8ff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            background: #4facfe;
+            color: white;
+            padding: 15px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question:hover {
+            background: #00f2fe;
+        }
+
+        .faq-answer {
+            padding: 20px;
+            display: none;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .faq-answer.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .main-content {
+                padding: 20px 10px;
+            }
+            
+            .hero, .tool-container, .info-section {
+                padding: 20px;
+            }
+            
+            .features, .preview-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="/">Home</a> > <a href="/#image-tools">Image Tools</a> > PNG to JPG
+            </nav>
+            <h1 class="logo">ToolSlap</h1>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="hero">
+            <h1>Convert PNG to JPG Online</h1>
+            <p class="subtitle">Transform PNG images to JPG format with customizable quality settings. Fast, secure, and free.</p>
+        </section>
+
+        <section class="tool-container">
+            <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+                <div class="upload-icon">🖼️</div>
+                <div class="upload-text">Click to select PNG files or drag them here</div>
+                <div class="upload-subtext">Supports multiple file selection</div>
+            </div>
+            
+            <input type="file" id="fileInput" class="file-input" accept=".png,image/png" multiple>
+            
+            <div class="controls">
+                <div class="control-group">
+                    <label for="qualitySlider">JPG Quality: <span class="quality-value" id="qualityValue">90%</span></label>
+                    <input type="range" id="qualitySlider" class="quality-slider" min="10" max="100" value="90">
+                    <div style="font-size: 12px; color: #666; margin-top: 5px;">
+                        Higher quality = larger file size, Lower quality = smaller file size
+                    </div>
+                </div>
+            </div>
+            
+            <div id="previewGrid" class="preview-grid"></div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <button id="convertBtn" class="btn" disabled>Convert to JPG</button>
+                <button id="downloadAllBtn" class="btn" style="display: none;">Download All</button>
+                <button id="clearBtn" class="btn" style="background: #666;">Clear All</button>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2>PNG to JPG Converter Features</h2>
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🔧</div>
+                    <h4>Quality Control</h4>
+                    <p>Adjust compression quality from 10% to 100% to balance file size and image quality</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <h4>Batch Processing</h4>
+                    <p>Convert multiple PNG files to JPG format simultaneously</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔒</div>
+                    <h4>Privacy First</h4>
+                    <p>All conversion happens in your browser - files never leave your device</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📱</div>
+                    <h4>Cross-Platform</h4>
+                    <p>Works on desktop, tablet, and mobile devices</p>
+                </div>
+            </div>
+
+            <h3>When to Convert PNG to JPG</h3>
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🌐</div>
+                    <h4>Web Optimization</h4>
+                    <p>JPG files load faster on websites due to smaller file sizes</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📧</div>
+                    <h4>Email Attachments</h4>
+                    <p>Smaller JPG files are easier to share via email</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">💾</div>
+                    <h4>Storage Space</h4>
+                    <p>Save disk space by converting large PNG files to compressed JPG</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📤</div>
+                    <h4>Social Media</h4>
+                    <p>Most social platforms prefer JPG format for photos</p>
+                </div>
+            </div>
+
+            <div class="faq">
+                <h3>Frequently Asked Questions</h3>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Why convert PNG to JPG?
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        JPG files are typically 60-80% smaller than PNG files, making them ideal for web use, email attachments, and saving storage space. JPG is also more widely supported across different platforms and devices.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Will I lose image quality when converting PNG to JPG?
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        JPG uses lossy compression, so there may be a slight quality loss. However, our converter allows you to adjust quality settings. At 90% quality, the difference is barely noticeable to the human eye while significantly reducing file size.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Can I convert multiple PNG files at once?
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes! You can select multiple PNG files and convert them all to JPG format in one go. Each file will be processed individually with your chosen quality settings.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        What happens to transparent backgrounds?
+                        <span>+</span>
+                    </div>
+                    <div class="faq-answer">
+                        JPG format doesn't support transparency. When converting PNG files with transparent backgrounds, the transparent areas will be replaced with white background. If you need transparency, consider keeping the PNG format.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let selectedFiles = [];
+        let convertedFiles = [];
+        const fileInput = document.getElementById('fileInput');
+        const previewGrid = document.getElementById('previewGrid');
+        const convertBtn = document.getElementById('convertBtn');
+        const downloadAllBtn = document.getElementById('downloadAllBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const uploadArea = document.querySelector('.upload-area');
+        const qualitySlider = document.getElementById('qualitySlider');
+        const qualityValue = document.getElementById('qualityValue');
+
+        // Event listeners
+        fileInput.addEventListener('change', handleFiles);
+        convertBtn.addEventListener('click', convertFiles);
+        downloadAllBtn.addEventListener('click', downloadAllFiles);
+        clearBtn.addEventListener('click', clearAll);
+        qualitySlider.addEventListener('input', updateQualityValue);
+
+        // Drag and drop handlers
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const files = Array.from(e.dataTransfer.files).filter(file => file.type === 'image/png');
+            if (files.length > 0) {
+                addFiles(files);
+            }
+        });
+
+        function updateQualityValue() {
+            qualityValue.textContent = qualitySlider.value + '%';
+        }
+
+        function handleFiles(e) {
+            const files = Array.from(e.target.files);
+            addFiles(files);
+        }
+
+        function addFiles(files) {
+            files.forEach(file => {
+                if (file.type === 'image/png') {
+                    selectedFiles.push({
+                        file: file,
+                        id: Date.now() + Math.random(),
+                        converted: false
+                    });
+                }
+            });
+            updatePreview();
+            updateButtons();
+        }
+
+        function updatePreview() {
+            previewGrid.innerHTML = '';
+            selectedFiles.forEach((fileObj, index) => {
+                const previewItem = document.createElement('div');
+                previewItem.className = 'preview-item';
+                
+                const img = document.createElement('img');
+                img.className = 'preview-image';
+                img.src = URL.createObjectURL(fileObj.file);
+                
+                previewItem.innerHTML = `
+                    <img src="${img.src}" class="preview-image" alt="Preview">
+                    <div class="preview-info">
+                        <div class="preview-name">${fileObj.file.name}</div>
+                        <div class="preview-size">${formatFileSize(fileObj.file.size)}</div>
+                        ${fileObj.converted ? '<div style="color: green; font-weight: bold;">✓ Converted</div>' : ''}
+                    </div>
+                    <button class="btn btn-danger" onclick="removeFile(${index})" style="font-size: 12px; padding: 6px 12px;">Remove</button>
+                    ${fileObj.converted ? `<button class="btn" onclick="downloadFile(${index})" style="font-size: 12px; padding: 6px 12px;">Download</button>` : ''}
+                `;
+                
+                previewGrid.appendChild(previewItem);
+            });
+        }
+
+        function removeFile(index) {
+            selectedFiles.splice(index, 1);
+            updatePreview();
+            updateButtons();
+        }
+
+        function clearAll() {
+            selectedFiles = [];
+            convertedFiles = [];
+            fileInput.value = '';
+            updatePreview();
+            updateButtons();
+        }
+
+        function updateButtons() {
+            convertBtn.disabled = selectedFiles.length === 0;
+            downloadAllBtn.style.display = convertedFiles.length > 0 ? 'inline-block' : 'none';
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        async function convertFiles() {
+            convertBtn.disabled = true;
+            convertBtn.textContent = 'Converting...';
+            
+            const quality = parseFloat(qualitySlider.value) / 100;
+            
+            for (let i = 0; i < selectedFiles.length; i++) {
+                if (!selectedFiles[i].converted) {
+                    try {
+                        const convertedBlob = await convertPngToJpg(selectedFiles[i].file, quality);
+                        const fileName = selectedFiles[i].file.name.replace('.png', '.jpg');
+                        
+                        convertedFiles.push({
+                            blob: convertedBlob,
+                            name: fileName,
+                            originalIndex: i
+                        });
+                        
+                        selectedFiles[i].converted = true;
+                    } catch (error) {
+                        console.error('Error converting file:', error);
+                    }
+                }
+            }
+            
+            convertBtn.disabled = false;
+            convertBtn.textContent = 'Convert to JPG';
+            updatePreview();
+            updateButtons();
+        }
+
+        function convertPngToJpg(file, quality) {
+            return new Promise((resolve) => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                const img = new Image();
+                
+                img.onload = () => {
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    
+                    // Fill with white background (JPG doesn't support transparency)
+                    ctx.fillStyle = 'white';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    
+                    // Draw the image
+                    ctx.drawImage(img, 0, 0);
+                    
+                    canvas.toBlob(resolve, 'image/jpeg', quality);
+                };
+                
+                img.src = URL.createObjectURL(file);
+            });
+        }
+
+        function downloadFile(index) {
+            const convertedFile = convertedFiles.find(cf => cf.originalIndex === index);
+            if (convertedFile) {
+                const url = URL.createObjectURL(convertedFile.blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = convertedFile.name;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }
+        }
+
+        function downloadAllFiles() {
+            convertedFiles.forEach(file => {
+                const url = URL.createObjectURL(file.blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = file.name;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+        }
+
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('span');
+            
+            if (answer.classList.contains('active')) {
+                answer.classList.remove('active');
+                icon.textContent = '+';
+            } else {
+                // Close all other FAQs
+                document.querySelectorAll('.faq-answer').forEach(faq => {
+                    faq.classList.remove('active');
+                });
+                document.querySelectorAll('.faq-question span').forEach(span => {
+                    span.textContent = '+';
+                });
+                
+                // Open clicked FAQ
+                answer.classList.add('active');
+                icon.textContent = '-';
+            }
+        }
+    </script>
+</body>
+</html>

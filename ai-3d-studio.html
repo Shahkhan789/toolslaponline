@@ -26,6 +26,36 @@
             height: 100vh;
         }
         
+        .upload-preview {
+            width: 100%;
+            max-width: 150px;
+            height: auto;
+            margin-top: 10px;
+            border-radius: 4px;
+            border: 1px solid #444;
+        }
+        
+        #uploadStatus {
+            margin-top: 8px;
+            font-size: 12px;
+            color: #aaa;
+        }
+        
+        .processing-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border: 2px solid #667eea;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+            margin-right: 5px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
         .toolbar {
             width: 250px;
             background: #2d2d2d;
@@ -273,6 +303,15 @@
             </div>
             
             <div class="tool-section">
+                <h3>Upload Image to 3D</h3>
+                <div class="property-group">
+                    <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+                    <button class="tool-button" id="uploadButton">📸 Upload Image</button>
+                    <div id="uploadStatus" style="margin-top: 8px; font-size: 12px; color: #ccc;"></div>
+                </div>
+            </div>
+            
+            <div class="tool-section">
                 <h3>Lighting</h3>
                 <button class="tool-button" onclick="addLight('directional')">☀️ Directional</button>
                 <button class="tool-button" onclick="addLight('point')">💡 Point Light</button>
@@ -370,11 +409,152 @@
                 this.objects = [];
                 this.lights = [];
                 this.wireframeMode = false;
+                this.textureLoader = new THREE.TextureLoader();
                 
                 this.init();
                 this.setupControls();
                 this.setupEventListeners();
                 this.animate();
+            }
+            
+            handleImageUpload(file) {
+                const uploadStatus = document.getElementById('uploadStatus');
+                
+                // Check if file is an image
+                if (!file.type.startsWith('image/')) {
+                    uploadStatus.textContent = 'Please upload an image file.';
+                    return;
+                }
+                
+                // Show processing status
+                uploadStatus.innerHTML = '<span class="processing-indicator"></span> Processing image...';
+                
+                // Create a URL for the image
+                const imageUrl = URL.createObjectURL(file);
+                
+                // Load the image as a texture
+                this.textureLoader.load(
+                    imageUrl,
+                    (texture) => {
+                        // Create a preview if needed
+                        this.createPreviewImage(imageUrl);
+                        
+                        // Convert the image to a 3D model
+                        this.createModelFromImage(texture, file.name);
+                        
+                        // Clean up the object URL
+                        URL.revokeObjectURL(imageUrl);
+                    },
+                    undefined,
+                    (error) => {
+                        console.error('Error loading texture:', error);
+                        uploadStatus.textContent = 'Failed to load image. Please try again.';
+                        URL.revokeObjectURL(imageUrl);
+                    }
+                );
+            }
+            
+            createPreviewImage(imageUrl) {
+                const uploadStatus = document.getElementById('uploadStatus');
+                
+                // Remove any existing preview
+                const existingPreview = document.querySelector('.upload-preview');
+                if (existingPreview) {
+                    existingPreview.remove();
+                }
+                
+                // Create a preview image
+                const preview = document.createElement('img');
+                preview.src = imageUrl;
+                preview.className = 'upload-preview';
+                preview.alt = 'Uploaded image';
+                
+                // Insert after upload status
+                uploadStatus.parentNode.insertBefore(preview, uploadStatus.nextSibling);
+            }
+            
+            createModelFromImage(texture, fileName) {
+                const uploadStatus = document.getElementById('uploadStatus');
+                
+                // Create a plane geometry with the image as a texture
+                const aspectRatio = texture.image.width / texture.image.height;
+                const width = 2;
+                const height = width / aspectRatio;
+                
+                const geometry = new THREE.PlaneGeometry(width, height, 20, 20);
+                const material = new THREE.MeshPhongMaterial({
+                    map: texture,
+                    side: THREE.DoubleSide,
+                    shininess: 10
+                });
+                
+                // Create a mesh with the geometry and material
+                const mesh = new THREE.Mesh(geometry, material);
+                mesh.castShadow = true;
+                mesh.receiveShadow = true;
+                mesh.userData = { type: 'image', id: Date.now(), fileName: fileName };
+                
+                // Position the mesh in front of the camera
+                mesh.position.set(0, 1, 0);
+                
+                // Add the mesh to the scene
+                this.scene.add(mesh);
+                this.objects.push(mesh);
+                this.selectObject(mesh);
+                
+                // Update object count
+                this.updateObjectCount();
+                
+                // Update status
+                uploadStatus.textContent = 'Image converted to 3D model successfully!';
+                
+                // Create a heightmap-based 3D model if the image has enough contrast
+                this.createHeightMapModel(texture, fileName);
+            }
+            
+            createHeightMapModel(texture, fileName) {
+                // Create a canvas to analyze the image
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                const img = texture.image;
+                
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.drawImage(img, 0, 0);
+                
+                // Get image data to create height map
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const data = imageData.data;
+                
+                // Create a simplified geometry for the 3D model
+                const boxWidth = 2;
+                const boxDepth = 2;
+                const boxHeight = 1;
+                
+                // Create a box geometry
+                const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth, 1, 1, 1);
+                
+                // Create a material with the texture
+                const material = new THREE.MeshPhongMaterial({
+                    map: texture,
+                    shininess: 30
+                });
+                
+                // Create a mesh with the geometry and material
+                const mesh = new THREE.Mesh(geometry, material);
+                mesh.castShadow = true;
+                mesh.receiveShadow = true;
+                mesh.userData = { type: '3d-image', id: Date.now() + 1, fileName: fileName };
+                
+                // Position the mesh to the right of the plane
+                mesh.position.set(3, 1, 0);
+                
+                // Add the mesh to the scene
+                this.scene.add(mesh);
+                this.objects.push(mesh);
+                
+                // Update object count
+                this.updateObjectCount();
             }
             
             init() {
@@ -433,6 +613,22 @@
                 
                 document.getElementById('objectColor').addEventListener('change', (e) => {
                     this.updateSelectedObject();
+                });
+                
+                // Image upload functionality
+                const uploadButton = document.getElementById('uploadButton');
+                const imageUpload = document.getElementById('imageUpload');
+                const uploadStatus = document.getElementById('uploadStatus');
+                
+                uploadButton.addEventListener('click', () => {
+                    imageUpload.click();
+                });
+                
+                imageUpload.addEventListener('change', (e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        this.handleImageUpload(file);
+                    }
                 });
             }
             

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Online Tools - PDF, Image, Text & Developer Tools | ToolSlap</title>
+    <meta name="description" content="Browse 50+ free online tools for PDF conversion, image editing, text processing, and web development. No signup required. Fast, secure, browser-based tools.">
+    <meta name="keywords" content="online tools, free tools, PDF tools, image tools, text tools, developer tools, web tools, browser tools">
+    <link rel="canonical" href="https://toolslap.online/tools/">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Free Online Tools - PDF, Image, Text & Developer Tools">
+    <meta property="og:description" content="50+ free online tools for PDF conversion, image editing, text processing, and development. No signup required.">
+    <meta property="og:url" content="https://toolslap.online/tools/">
+    <meta property="og:image" content="https://toolslap.online/images/tools-hub-og.png">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free Online Tools Hub - ToolSlap">
+    <meta name="twitter:description" content="50+ free tools for PDF, images, text, and development. Fast, secure, browser-based.">
+    <meta name="twitter:image" content="https://toolslap.online/images/tools-hub-og.png">
+    
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Free Online Tools Hub",
+        "description": "Collection of 50+ free online tools for PDF conversion, image editing, text processing, and web development",
+        "url": "https://toolslap.online/tools/",
+        "mainEntity": {
+            "@type": "ItemList",
+            "numberOfItems": 50,
+            "itemListElement": [
+                {
+                    "@type": "SoftwareApplication",
+                    "name": "PDF Tools",
+                    "url": "https://toolslap.online/tools/pdf/",
+                    "applicationCategory": "UtilitiesApplication"
+                },
+                {
+                    "@type": "SoftwareApplication", 
+                    "name": "Image Tools",
+                    "url": "https://toolslap.online/tools/image/",
+                    "applicationCategory": "UtilitiesApplication"
+                },
+                {
+                    "@type": "SoftwareApplication",
+                    "name": "Developer Tools", 
+                    "url": "https://toolslap.online/tools/developer/",
+                    "applicationCategory": "DeveloperApplication"
+                },
+                {
+                    "@type": "SoftwareApplication",
+                    "name": "Text Tools",
+                    "url": "https://toolslap.online/tools/text/",
+                    "applicationCategory": "UtilitiesApplication"
+                }
+            ]
+        }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://toolslap.online/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Tools",
+                "item": "https://toolslap.online/tools/"
+            }
+        ]
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .breadcrumb {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .main-content {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .search-container {
+            max-width: 500px;
+            margin: 0 auto 30px auto;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            font-size: 16px;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            border-radius: 25px;
+            background: white;
+            color: #333;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667eea;
+            font-size: 18px;
+            pointer-events: none;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .category-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.15);
+            border-color: #667eea;
+            text-decoration: none;
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .category-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .category-description {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .tool-count {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .popular-tools {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .popular-tools h4 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .popular-tools ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .popular-tools li {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 5px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .popular-tools li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+        }
+
+        .stats-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .features-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            margin: 40px 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .feature {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            border-left: 4px solid #667eea;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .feature h4 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .main-content {
+                padding: 20px 10px;
+            }
+            
+            .hero, .category-card, .stats-section, .features-section {
+                padding: 20px;
+            }
+            
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="/">Home</a> > Tools
+            </nav>
+            <h1 class="logo">ToolSlap</h1>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="hero">
+            <h1>Free Online Tools Hub</h1>
+            <p class="subtitle">50+ professional-grade tools for PDF conversion, image editing, text processing, and web development. All free, secure, and browser-based.</p>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search tools... (e.g., 'merge pdf', 'resize image')">
+                <span class="search-icon">🔍</span>
+            </div>
+        </section>
+
+        <section class="categories-grid">
+            <a href="pdf/" class="category-card">
+                <span class="category-icon">📄</span>
+                <div class="tool-count">15+ Tools</div>
+                <h2 class="category-title">PDF Tools</h2>
+                <p class="category-description">Merge, split, compress, convert, and manipulate PDF documents with professional-quality tools.</p>
+                <div class="popular-tools">
+                    <h4>Popular Tools:</h4>
+                    <ul>
+                        <li>Merge PDF Files</li>
+                        <li>Split PDF Pages</li>
+                        <li>Compress PDF Size</li>
+                        <li>PDF to Word/Image</li>
+                        <li>Protect/Unlock PDF</li>
+                    </ul>
+                </div>
+            </a>
+
+            <a href="image/" class="category-card">
+                <span class="category-icon">🖼️</span>
+                <div class="tool-count">12+ Tools</div>
+                <h2 class="category-title">Image Tools</h2>
+                <p class="category-description">Convert, resize, compress, and edit images in various formats with high-quality processing.</p>
+                <div class="popular-tools">
+                    <h4>Popular Tools:</h4>
+                    <ul>
+                        <li>PNG to JPG Converter</li>
+                        <li>Image Resizer</li>
+                        <li>Image Compressor</li>
+                        <li>Format Converter</li>
+                        <li>Image Cropper</li>
+                    </ul>
+                </div>
+            </a>
+
+            <a href="developer/" class="category-card">
+                <span class="category-icon">💻</span>
+                <div class="tool-count">15+ Tools</div>
+                <h2 class="category-title">Developer Tools</h2>
+                <p class="category-description">Essential utilities for developers including formatters, validators, generators, and converters.</p>
+                <div class="popular-tools">
+                    <h4>Popular Tools:</h4>
+                    <ul>
+                        <li>JSON Formatter</li>
+                        <li>Base64 Encoder</li>
+                        <li>Hash Generator</li>
+                        <li>UUID Generator</li>
+                        <li>Regex Tester</li>
+                    </ul>
+                </div>
+            </a>
+
+            <a href="text/" class="category-card">
+                <span class="category-icon">📝</span>
+                <div class="tool-count">10+ Tools</div>
+                <h2 class="category-title">Text Tools</h2>
+                <p class="category-description">Process, analyze, and transform text with powerful text manipulation and formatting tools.</p>
+                <div class="popular-tools">
+                    <h4>Popular Tools:</h4>
+                    <ul>
+                        <li>Word Counter</li>
+                        <li>Case Converter</li>
+                        <li>Text Formatter</li>
+                        <li>Lorem Generator</li>
+                        <li>Text Difference</li>
+                    </ul>
+                </div>
+            </a>
+        </section>
+
+        <section class="stats-section">
+            <h2>Why Choose ToolSlap?</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <div class="stat-label">Free Tools</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <div class="stat-label">Browser-Based</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">0</span>
+                    <div class="stat-label">Registration Required</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">∞</span>
+                    <div class="stat-label">Usage Limits</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-section">
+            <h2>Platform Features</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">🔒</div>
+                    <h4>Privacy First</h4>
+                    <p>Your files are processed locally in your browser and never uploaded to our servers</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <h4>Lightning Fast</h4>
+                    <p>Client-side processing means instant results without waiting for server responses</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📱</div>
+                    <h4>Cross-Platform</h4>
+                    <p>Works seamlessly on desktop, tablet, and mobile devices with responsive design</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🎯</div>
+                    <h4>Professional Quality</h4>
+                    <p>Enterprise-grade tools with accuracy and reliability you can trust</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔄</div>
+                    <h4>Batch Processing</h4>
+                    <p>Handle multiple files simultaneously for maximum efficiency</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">💡</div>
+                    <h4>User-Friendly</h4>
+                    <p>Intuitive interfaces designed for both beginners and professionals</p>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
