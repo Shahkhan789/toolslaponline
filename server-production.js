@@ -58,7 +58,7 @@ class ProductionServer {
         // Enhanced CORS configuration
         this.app.use(cors({
             origin: process.env.NODE_ENV === 'production' 
-                ? ['https://toolslap.online', 'https://www.toolslap.online']
+                ? ['https://toolslap.online']
                 : true,
             credentials: true
         }));

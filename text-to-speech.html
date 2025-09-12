@@ -700,6 +700,10 @@
                     <i class="fas fa-play"></i>
                     Convert to Speech
                 </button>
+                <button class="btn-secondary" onclick="previewVoice()" id="previewBtn">
+                    <i class="fas fa-headphones"></i>
+                    Preview Voice
+                </button>
                 <button class="btn-secondary" onclick="stopSpeech()" id="stopBtn" style="display: none;">
                     <i class="fas fa-stop"></i>
                     Stop
@@ -934,7 +938,174 @@
                 isConverting = false;
             }
         }
+        
+        // Function to apply voice settings to an utterance
+        function applyVoiceSettings(utterance, voiceSelect, emotion) {
+            // Apply emotional adjustments
+            const pitch = parseFloat(document.getElementById('pitchRange').value);
+            const speed = parseFloat(document.getElementById('speedRange').value);
+            
+            switch(emotion) {
+                case 'happy':
+                    utterance.pitch = Math.min(2.0, pitch * 1.2);
+                    utterance.rate = Math.min(2.0, speed * 1.1);
+                    break;
+                case 'calm':
+                    utterance.pitch = Math.max(0.5, pitch * 0.9);
+                    utterance.rate = Math.max(0.5, speed * 0.9);
+                    break;
+                case 'excited':
+                    utterance.pitch = Math.min(2.0, pitch * 1.3);
+                    utterance.rate = Math.min(2.0, speed * 1.2);
+                    break;
+                case 'professional':
+                    utterance.pitch = pitch * 0.95;
+                    utterance.rate = speed * 0.95;
+                    break;
+                case 'friendly':
+                    utterance.pitch = Math.min(2.0, pitch * 1.1);
+                    break;
+                case 'dramatic':
+                    utterance.pitch = Math.min(2.0, pitch * 1.4);
+                    utterance.rate = Math.max(0.5, speed * 0.8);
+                    break;
+            }
 
+            // Get available voices and apply advanced voice mapping
+            const voices = speechSynthesis.getVoices();
+            if (voices.length > 0) {
+                let selectedVoice = null;
+                
+                // Advanced voice character mapping with enhanced selection
+                const voiceMapping = {
+                    // English Premium Voices
+                    'cherry': { gender: 'female', keywords: ['samantha', 'anna', 'zira'], preference: 'warm' },
+                    'ethan': { gender: 'male', keywords: ['david', 'mark', 'male'], preference: 'professional' },
+                    'chelsie': { gender: 'female', keywords: ['susan', 'linda', 'female'], preference: 'friendly' },
+                    'serena': { gender: 'female', keywords: ['hazel', 'zira', 'female'], preference: 'elegant' },
+                    'alex': { gender: 'male', keywords: ['alex', 'male'], preference: 'young' },
+                    'sophia': { gender: 'female', keywords: ['sophia', 'female'], preference: 'mature' },
+                    'marcus': { gender: 'male', keywords: ['male'], preference: 'deep' },
+                    'emma': { gender: 'female', keywords: ['female'], preference: 'clear' },
+                    'james': { gender: 'male', keywords: ['male'], preference: 'british', lang: 'en-GB' },
+                    'olivia': { gender: 'female', keywords: ['female'], preference: 'southern' },
+                    
+                    // Chinese Voices
+                    'dylan-beijing': { gender: 'male', keywords: ['male'], lang: 'zh-CN' },
+                    'jada-shanghai': { gender: 'female', keywords: ['female'], lang: 'zh-CN' },
+                    'sunny-sichuan': { gender: 'female', keywords: ['female'], lang: 'zh-CN' },
+                    'wei': { gender: 'male', keywords: ['male'], lang: 'zh-CN' },
+                    'ling': { gender: 'female', keywords: ['female'], lang: 'zh-CN' },
+                    
+                    // International Voices
+                    'antonio': { gender: 'male', keywords: ['male'], lang: 'es-ES' },
+                    'maria': { gender: 'female', keywords: ['female'], lang: 'es-ES' },
+                    'pierre': { gender: 'male', keywords: ['male'], lang: 'fr-FR' },
+                    'camille': { gender: 'female', keywords: ['female'], lang: 'fr-FR' },
+                    'hans': { gender: 'male', keywords: ['male'], lang: 'de-DE' },
+                    'greta': { gender: 'female', keywords: ['female'], lang: 'de-DE' },
+                    'giovanni': { gender: 'male', keywords: ['male'], lang: 'it-IT' },
+                    'bianca': { gender: 'female', keywords: ['female'], lang: 'it-IT' },
+                    'hiroshi': { gender: 'male', keywords: ['male'], lang: 'ja-JP' },
+                    'yuki': { gender: 'female', keywords: ['female'], lang: 'ja-JP' }
+                };
+                
+                const mapping = voiceMapping[voiceSelect];
+                if (mapping) {
+                    // First try to find voice by specific language if specified
+                    if (mapping.lang) {
+                        selectedVoice = voices.find(voice => 
+                            voice.lang.includes(mapping.lang.split('-')[0]) &&
+                            (voice.name.toLowerCase().includes(mapping.gender) || 
+                             (voice.gender && voice.gender.toLowerCase() === mapping.gender) ||
+                             mapping.keywords.some(keyword => voice.name.toLowerCase().includes(keyword)))
+                        );
+                    }
+                    
+                    // Fallback to gender-based selection
+                    if (!selectedVoice) {
+                        selectedVoice = voices.find(voice => 
+                            (voice.name.toLowerCase().includes(mapping.gender) || 
+                             (voice.gender && voice.gender.toLowerCase() === mapping.gender) ||
+                             mapping.keywords.some(keyword => voice.name.toLowerCase().includes(keyword))) &&
+                            voice.lang.startsWith(utterance.lang.split('-')[0])
+                        );
+                    }
+                    
+                    // Final fallback
+                    if (!selectedVoice) {
+                        selectedVoice = voices.find(voice => 
+                            voice.name.toLowerCase().includes(mapping.gender) ||
+                            (voice.gender && voice.gender.toLowerCase() === mapping.gender)
+                        );
+                    }
+                } else {
+                    // Handle standard voices
+                    switch(voiceSelect) {
+                        case 'male':
+                            selectedVoice = voices.find(voice => 
+                                voice.name.toLowerCase().includes('male') ||
+                                (voice.gender && voice.gender.toLowerCase() === 'male')
+                            );
+                            break;
+                        case 'female':
+                            selectedVoice = voices.find(voice => 
+                                voice.name.toLowerCase().includes('female') ||
+                                (voice.gender && voice.gender.toLowerCase() === 'female')
+                            );
+                            break;
+                        default:
+                            selectedVoice = voices.find(voice => voice.lang === utterance.lang);
+                    }
+                }
+                
+                if (selectedVoice) {
+                    utterance.voice = selectedVoice;
+                } else {
+                    // Fallback to language-based voice selection
+                    selectedVoice = voices.find(voice => voice.lang.startsWith(utterance.lang.split('-')[0]));
+                    if (selectedVoice) utterance.voice = selectedVoice;
+                }
+            }
+        }
+
+        // Live preview function
+        function previewVoice() {
+            const text = document.getElementById('textInput').value.trim();
+            if (!text) return;
+            
+            // Get just the first 20 words for preview
+            const previewText = text.split(' ').slice(0, 20).join(' ') + (text.split(' ').length > 20 ? '...' : '');
+            
+            // Stop any current speech
+            speechSynthesis.cancel();
+            
+            const utterance = new SpeechSynthesisUtterance(previewText);
+            
+            // Get settings
+            const voiceSelect = document.getElementById('voiceSelect').value;
+            const language = document.getElementById('languageSelect').value;
+            const emotion = document.getElementById('emotionSelect').value;
+            const speed = parseFloat(document.getElementById('speedRange').value);
+            const pitch = parseFloat(document.getElementById('pitchRange').value);
+            const volume = parseFloat(document.getElementById('volumeRange').value);
+            
+            // Apply basic settings
+            utterance.lang = language.includes('-') ? language.split('-')[0] + '-' + language.split('-')[1] : language;
+            utterance.rate = speed;
+            utterance.pitch = pitch;
+            utterance.volume = volume;
+            
+            // Apply voice and emotional settings
+            applyVoiceSettings(utterance, voiceSelect, emotion);
+            
+            // Show preview indicator
+            showSuccess('Playing voice preview...');
+            
+            // Speak the preview
+            speechSynthesis.speak(utterance);
+        }
+        
         // Convert using Web Speech API
         async function convertWithWebSpeechAPI(text) {
             return new Promise((resolve, reject) => {
@@ -957,129 +1128,12 @@
                 utterance.pitch = pitch;
                 utterance.volume = volume;
 
-                // Apply emotional adjustments
-                switch(emotion) {
-                    case 'happy':
-                        utterance.pitch = Math.min(2.0, pitch * 1.2);
-                        utterance.rate = Math.min(2.0, speed * 1.1);
-                        break;
-                    case 'calm':
-                        utterance.pitch = Math.max(0.5, pitch * 0.9);
-                        utterance.rate = Math.max(0.5, speed * 0.9);
-                        break;
-                    case 'excited':
-                        utterance.pitch = Math.min(2.0, pitch * 1.3);
-                        utterance.rate = Math.min(2.0, speed * 1.2);
-                        break;
-                    case 'professional':
-                        utterance.pitch = pitch * 0.95;
-                        utterance.rate = speed * 0.95;
-                        break;
-                    case 'friendly':
-                        utterance.pitch = Math.min(2.0, pitch * 1.1);
-                        break;
-                    case 'dramatic':
-                        utterance.pitch = Math.min(2.0, pitch * 1.4);
-                        utterance.rate = Math.max(0.5, speed * 0.8);
-                        break;
-                }
-
-                // Get available voices and apply advanced voice mapping
-                const voices = speechSynthesis.getVoices();
-                if (voices.length > 0) {
-                    let selectedVoice = null;
-                    
-                    // Advanced voice character mapping with enhanced selection
-                    const voiceMapping = {
-                        // English Premium Voices
-                        'cherry': { gender: 'female', keywords: ['samantha', 'anna', 'zira'], preference: 'warm' },
-                        'ethan': { gender: 'male', keywords: ['david', 'mark', 'male'], preference: 'professional' },
-                        'chelsie': { gender: 'female', keywords: ['susan', 'linda', 'female'], preference: 'friendly' },
-                        'serena': { gender: 'female', keywords: ['hazel', 'zira', 'female'], preference: 'elegant' },
-                        'alex': { gender: 'male', keywords: ['alex', 'male'], preference: 'young' },
-                        'sophia': { gender: 'female', keywords: ['sophia', 'female'], preference: 'mature' },
-                        'marcus': { gender: 'male', keywords: ['male'], preference: 'deep' },
-                        'emma': { gender: 'female', keywords: ['female'], preference: 'clear' },
-                        'james': { gender: 'male', keywords: ['male'], preference: 'british', lang: 'en-GB' },
-                        'olivia': { gender: 'female', keywords: ['female'], preference: 'southern' },
-                        
-                        // Chinese Voices
-                        'dylan-beijing': { gender: 'male', keywords: ['male'], lang: 'zh-CN' },
-                        'jada-shanghai': { gender: 'female', keywords: ['female'], lang: 'zh-CN' },
-                        'sunny-sichuan': { gender: 'female', keywords: ['female'], lang: 'zh-CN' },
-                        'wei': { gender: 'male', keywords: ['male'], lang: 'zh-CN' },
-                        'ling': { gender: 'female', keywords: ['female'], lang: 'zh-CN' },
-                        
-                        // International Voices
-                        'antonio': { gender: 'male', keywords: ['male'], lang: 'es-ES' },
-                        'maria': { gender: 'female', keywords: ['female'], lang: 'es-ES' },
-                        'pierre': { gender: 'male', keywords: ['male'], lang: 'fr-FR' },
-                        'camille': { gender: 'female', keywords: ['female'], lang: 'fr-FR' },
-                        'hans': { gender: 'male', keywords: ['male'], lang: 'de-DE' },
-                        'greta': { gender: 'female', keywords: ['female'], lang: 'de-DE' },
-                        'giovanni': { gender: 'male', keywords: ['male'], lang: 'it-IT' },
-                        'bianca': { gender: 'female', keywords: ['female'], lang: 'it-IT' },
-                        'hiroshi': { gender: 'male', keywords: ['male'], lang: 'ja-JP' },
-                        'yuki': { gender: 'female', keywords: ['female'], lang: 'ja-JP' }
-                    };
-                    
-                    const mapping = voiceMapping[voiceSelect];
-                    if (mapping) {
-                        // First try to find voice by specific language if specified
-                        if (mapping.lang) {
-                            selectedVoice = voices.find(voice => 
-                                voice.lang.includes(mapping.lang.split('-')[0]) &&
-                                (voice.name.toLowerCase().includes(mapping.gender) || 
-                                 (voice.gender && voice.gender.toLowerCase() === mapping.gender) ||
-                                 mapping.keywords.some(keyword => voice.name.toLowerCase().includes(keyword)))
-                            );
-                        }
-                        
-                        // Fallback to gender-based selection
-                        if (!selectedVoice) {
-                            selectedVoice = voices.find(voice => 
-                                (voice.name.toLowerCase().includes(mapping.gender) || 
-                                 (voice.gender && voice.gender.toLowerCase() === mapping.gender) ||
-                                 mapping.keywords.some(keyword => voice.name.toLowerCase().includes(keyword))) &&
-                                voice.lang.startsWith(utterance.lang.split('-')[0])
-                            );
-                        }
-                        
-                        // Final fallback
-                        if (!selectedVoice) {
-                            selectedVoice = voices.find(voice => 
-                                voice.name.toLowerCase().includes(mapping.gender) ||
-                                (voice.gender && voice.gender.toLowerCase() === mapping.gender)
-                            );
-                        }
-                    } else {
-                        // Handle standard voices
-                        switch(voiceSelect) {
-                            case 'male':
-                                selectedVoice = voices.find(voice => 
-                                    voice.name.toLowerCase().includes('male') ||
-                                    (voice.gender && voice.gender.toLowerCase() === 'male')
-                                );
-                                break;
-                            case 'female':
-                                selectedVoice = voices.find(voice => 
-                                    voice.name.toLowerCase().includes('female') ||
-                                    (voice.gender && voice.gender.toLowerCase() === 'female')
-                                );
-                                break;
-                            default:
-                                selectedVoice = voices.find(voice => voice.lang === utterance.lang);
-                        }
-                    }
-                    
-                    if (selectedVoice) {
-                        utterance.voice = selectedVoice;
-                        showSuccess(`Using ${selectedVoice.name} voice (${emotion} tone)`);
-                    } else {
-                        // Fallback to language-based voice selection
-                        selectedVoice = voices.find(voice => voice.lang.startsWith(utterance.lang.split('-')[0]));
-                        if (selectedVoice) utterance.voice = selectedVoice;
-                    }
+                // Apply voice and emotional settings
+                applyVoiceSettings(utterance, voiceSelect, emotion);
+                
+                // Show success message with selected voice
+                if (utterance.voice) {
+                    showSuccess(`Using ${utterance.voice.name} voice (${emotion} tone)`);
                 }
 
                 utterance.onstart = () => {
