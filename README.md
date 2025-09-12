@@ -3,8 +3,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js Version](https://img.shields.io/badge/Node.js-16%2B-green.svg)](https://nodejs.org/)
 [![Python Version](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://python.org/)
+[![Mobile Friendly](https://img.shields.io/badge/Mobile-Friendly-brightgreen.svg)](https://toolslap.com)
 
-**ToolSlap** is a comprehensive collection of 60+ professional-grade online tools powered by advanced AI technology. From image enhancement to 3D modeling, vocal separation to content generation - all running directly in your browser with privacy-first design.
+**ToolSlap** is a comprehensive collection of 60+ professional-grade online tools powered by advanced AI technology. From image enhancement to 3D modeling, vocal separation to content generation - all running directly in your browser with privacy-first design. All tools are fully responsive and mobile-friendly.
 
 ## 🌟 Featured AI Tools
 
