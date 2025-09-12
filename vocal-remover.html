@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Vocal Remover - Remove Vocals from Music | ToolSlap</title>
+    <meta name="description" content="Remove vocals from music tracks using AI-powered audio separation. Create karaoke tracks, extract instrumentals, and isolate vocals with professional quality.">
+    <meta name="keywords" content="vocal remover, karaoke maker, instrumental extractor, AI audio separation, music processing">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .breadcrumb {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .upload-section, .results-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .upload-area {
+            border: 3px dashed #667eea;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f8f9ff;
+            margin-bottom: 20px;
+        }
+
+        .upload-area:hover {
+            border-color: #764ba2;
+            background: #f0f2ff;
+        }
+
+        .upload-area.dragover {
+            border-color: #764ba2;
+            background: #e8ebff;
+        }
+
+        .upload-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: #667eea;
+        }
+
+        .upload-text {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 2px;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-1px);
+        }
+
+        .audio-player {
+            width: 100%;
+            margin: 15px 0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .audio-info {
+            background: #f8f9ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+
+        .processing-settings {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        .setting-group {
+            margin-bottom: 15px;
+        }
+
+        .setting-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .setting-input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .setting-input:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+
+        .progress-container {
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .status-message {
+            text-align: center;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .status-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .result-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 12px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .tab-button.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .waveform-container {
+            background: #2a2a2a;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ccc;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .feature-description {
+            color: #666;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+
+            .result-tabs {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <nav class="breadcrumb">
+                <a href="/">Home</a> > <a href="/tools/">Tools</a> > <a href="/tools/ai/">AI Tools</a> > Vocal Remover
+            </nav>
+            <h1>🎵 AI Vocal Remover</h1>
+            <p class="subtitle">Remove vocals from music tracks using advanced AI audio separation</p>
+        </header>
+
+        <main class="main-content">
+            <section class="upload-section">
+                <h2>Upload Audio</h2>
+                
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">🎵</div>
+                    <div class="upload-text">Drop your audio file here or click to browse</div>
+                    <div style="font-size: 14px; color: #888; margin-top: 10px;">
+                        Supports: MP3, WAV, FLAC, M4A (Max: 50MB)
+                    </div>
+                </div>
+                
+                <input type="file" id="audioInput" class="file-input" accept="audio/*">
+                
+                <div id="originalAudioSection" style="display: none;">
+                    <h3>Original Audio</h3>
+                    <audio id="originalAudio" class="audio-player" controls></audio>
+                    <div id="originalAudioInfo" class="audio-info"></div>
+                </div>
+
+                <div class="processing-settings" id="settingsPanel" style="display: none;">
+                    <h3>Processing Options</h3>
+                    
+                    <div class="setting-group">
+                        <label class="setting-label">Separation Type</label>
+                        <select id="separationType" class="setting-input">
+                            <option value="vocals">Remove Vocals (Karaoke)</option>
+                            <option value="instrumental">Remove Instrumental (Vocals Only)</option>
+                            <option value="both">Separate Both (2 Tracks)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label class="setting-label">Quality Level</label>
+                        <select id="qualityLevel" class="setting-input">
+                            <option value="standard">Standard Quality</option>
+                            <option value="high">High Quality (Slower)</option>
+                            <option value="ultra">Ultra Quality (Very Slow)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label class="setting-label">Vocal Sensitivity</label>
+                        <input type="range" id="vocalSensitivity" class="setting-input" min="1" max="10" value="5">
+                        <div style="display: flex; justify-content: space-between; font-size: 12px; color: #666;">
+                            <span>Gentle</span>
+                            <span>Aggressive</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn" id="processBtn" disabled>
+                        🚀 Process Audio
+                    </button>
+                </div>
+            </section>
+
+            <section class="results-section">
+                <h2>Processed Results</h2>
+                
+                <div class="progress-container" id="progressContainer" style="display: none;">
+                    <div class="progress-text" id="progressText">Processing audio...</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+                
+                <div id="statusMessage"></div>
+                
+                <div id="resultsContent" style="display: none;">
+                    <div class="result-tabs">
+                        <button class="tab-button active" data-tab="instrumental">Instrumental</button>
+                        <button class="tab-button" data-tab="vocals">Vocals Only</button>
+                        <button class="tab-button" data-tab="comparison">Comparison</button>
+                    </div>
+
+                    <div class="tab-content active" id="instrumental-tab">
+                        <h3>Instrumental Track</h3>
+                        <audio id="instrumentalAudio" class="audio-player" controls></audio>
+                        <div id="instrumentalInfo" class="audio-info"></div>
+                        <div class="waveform-container" id="instrumentalWaveform">
+                            Instrumental waveform visualization
+                        </div>
+                        <button class="btn" id="downloadInstrumental">
+                            📥 Download Instrumental
+                        </button>
+                    </div>
+
+                    <div class="tab-content" id="vocals-tab">
+                        <h3>Vocals Only Track</h3>
+                        <audio id="vocalsAudio" class="audio-player" controls></audio>
+                        <div id="vocalsInfo" class="audio-info"></div>
+                        <div class="waveform-container" id="vocalsWaveform">
+                            Vocals waveform visualization
+                        </div>
+                        <button class="btn" id="downloadVocals">
+                            📥 Download Vocals
+                        </button>
+                    </div>
+
+                    <div class="tab-content" id="comparison-tab">
+                        <h3>A/B Comparison</h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div>
+                                <h4>Original</h4>
+                                <audio id="comparisonOriginal" class="audio-player" controls></audio>
+                                <button class="btn-secondary" onclick="playComparison('original')">▶ Play</button>
+                            </div>
+                            <div>
+                                <h4>Processed</h4>
+                                <audio id="comparisonProcessed" class="audio-player" controls></audio>
+                                <button class="btn-secondary" onclick="playComparison('processed')">▶ Play</button>
+                            </div>
+                        </div>
+                        <div style="text-align: center; margin-top: 20px;">
+                            <button class="btn-secondary" onclick="syncPlayback()">🔄 Sync Playback</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="emptyState" style="text-align: center; padding: 60px; color: #666;">
+                    Upload an audio file to see processed results here
+                </div>
+            </section>
+        </main>
+
+        <section class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎤</div>
+                <h3 class="feature-title">AI Vocal Isolation</h3>
+                <p class="feature-description">Advanced neural networks separate vocals from instruments with precision</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎹</div>
+                <h3 class="feature-title">Instrumental Extraction</h3>
+                <p class="feature-description">Create perfect karaoke tracks by removing vocals while preserving music quality</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">Fast Processing</h3>
+                <p class="feature-description">Quick audio processing with multiple quality levels for different needs</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎧</div>
+                <h3 class="feature-title">High Fidelity</h3>
+                <p class="feature-description">Maintain audio quality while separating vocal and instrumental tracks</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        class VocalRemover {
+            constructor() {
+                this.originalAudio = null;
+                this.processedInstrumental = null;
+                this.processedVocals = null;
+                this.audioContext = null;
+                
+                this.initializeElements();
+                this.setupEventListeners();
+                this.setupAudioContext();
+            }
+
+            initializeElements() {
+                this.uploadArea = document.getElementById('uploadArea');
+                this.audioInput = document.getElementById('audioInput');
+                this.originalAudioSection = document.getElementById('originalAudioSection');
+                this.originalAudio = document.getElementById('originalAudio');
+                this.originalAudioInfo = document.getElementById('originalAudioInfo');
+                this.settingsPanel = document.getElementById('settingsPanel');
+                this.processBtn = document.getElementById('processBtn');
+                this.progressContainer = document.getElementById('progressContainer');
+                this.progressFill = document.getElementById('progressFill');
+                this.progressText = document.getElementById('progressText');
+                this.statusMessage = document.getElementById('statusMessage');
+                this.resultsContent = document.getElementById('resultsContent');
+                this.emptyState = document.getElementById('emptyState');
+            }
+
+            setupEventListeners() {
+                // Upload area events
+                this.uploadArea.addEventListener('click', () => this.audioInput.click());
+                this.uploadArea.addEventListener('dragover', this.handleDragOver.bind(this));
+                this.uploadArea.addEventListener('dragleave', this.handleDragLeave.bind(this));
+                this.uploadArea.addEventListener('drop', this.handleDrop.bind(this));
+
+                // File input
+                this.audioInput.addEventListener('change', this.handleFileSelect.bind(this));
+
+                // Process button
+                this.processBtn.addEventListener('click', this.processAudio.bind(this));
+
+                // Tab buttons
+                document.querySelectorAll('.tab-button').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        this.switchTab(e.target.dataset.tab);
+                    });
+                });
+
+                // Download buttons
+                document.getElementById('downloadInstrumental')?.addEventListener('click', () => {
+                    this.downloadAudio(this.processedInstrumental, 'instrumental');
+                });
+                
+                document.getElementById('downloadVocals')?.addEventListener('click', () => {
+                    this.downloadAudio(this.processedVocals, 'vocals');
+                });
+            }
+
+            setupAudioContext() {
+                try {
+                    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                } catch (error) {
+                    console.error('Audio context not supported:', error);
+                }
+            }
+
+            handleDragOver(e) {
+                e.preventDefault();
+                this.uploadArea.classList.add('dragover');
+            }
+
+            handleDragLeave(e) {
+                e.preventDefault();
+                this.uploadArea.classList.remove('dragover');
+            }
+
+            handleDrop(e) {
+                e.preventDefault();
+                this.uploadArea.classList.remove('dragover');
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    this.processFile(files[0]);
+                }
+            }
+
+            handleFileSelect(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    this.processFile(file);
+                }
+            }
+
+            processFile(file) {
+                // Validate file
+                if (!file.type.startsWith('audio/')) {
+                    this.showStatus('Please select a valid audio file.', 'error');
+                    return;
+                }
+
+                if (file.size > 50 * 1024 * 1024) { // 50MB limit
+                    this.showStatus('File size must be less than 50MB.', 'error');
+                    return;
+                }
+
+                // Read and display original audio
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    this.originalAudio.src = e.target.result;
+                    this.displayOriginalAudio(file);
+                    this.settingsPanel.style.display = 'block';
+                    this.processBtn.disabled = false;
+                };
+                reader.readAsDataURL(file);
+
+                // Store file for processing
+                this.audioFile = file;
+            }
+
+            displayOriginalAudio(file) {
+                this.originalAudioSection.style.display = 'block';
+                
+                // Calculate duration and file info
+                this.originalAudio.onloadedmetadata = () => {
+                    const duration = this.formatTime(this.originalAudio.duration);
+                    const fileSize = this.formatFileSize(file.size);
+                    
+                    this.originalAudioInfo.innerHTML = `
+                        <strong>File:</strong> ${file.name}<br>
+                        <strong>Size:</strong> ${fileSize}<br>
+                        <strong>Duration:</strong> ${duration}<br>
+                        <strong>Type:</strong> ${file.type}
+                    `;
+                };
+            }
+
+            async processAudio() {
+                this.processBtn.disabled = true;
+                this.showProgress(true);
+                this.showStatus('Processing audio with AI...', 'info');
+                this.emptyState.style.display = 'none';
+
+                try {
+                    // Simulate AI processing
+                    const separationType = document.getElementById('separationType').value;
+                    const qualityLevel = document.getElementById('qualityLevel').value;
+                    
+                    // Update progress
+                    await this.simulateProcessing();
+                    
+                    // Create processed audio versions
+                    await this.createProcessedAudio();
+                    
+                    this.showStatus('Audio processing completed! 🎉', 'success');
+                    this.displayResults();
+                    
+                } catch (error) {
+                    this.showStatus('Processing failed. Please try again.', 'error');
+                    console.error('Processing error:', error);
+                } finally {
+                    this.processBtn.disabled = false;
+                    this.showProgress(false);
+                }
+            }
+
+            async simulateProcessing() {
+                const steps = [
+                    'Loading audio file...',
+                    'Analyzing frequency spectrum...',
+                    'Identifying vocal frequencies...',
+                    'Applying AI separation model...',
+                    'Processing instrumental track...',
+                    'Processing vocal track...',
+                    'Optimizing audio quality...',
+                    'Finalizing results...'
+                ];
+
+                for (let i = 0; i < steps.length; i++) {
+                    this.progressText.textContent = steps[i];
+                    this.updateProgress((i + 1) / steps.length * 100);
+                    await this.sleep(800);
+                }
+            }
+
+            async createProcessedAudio() {
+                // In a real implementation, this would process the audio using AI/DSP
+                // For demo purposes, we'll create modified versions of the original audio
+                
+                if (!this.audioContext) {
+                    throw new Error('Audio context not available');
+                }
+
+                // For demo, we'll just copy the original audio and apply basic filtering
+                const instrumentalAudio = document.getElementById('instrumentalAudio');
+                const vocalsAudio = document.getElementById('vocalsAudio');
+                
+                // Create processed versions (simplified for demo)
+                instrumentalAudio.src = this.originalAudio.src;
+                vocalsAudio.src = this.originalAudio.src;
+                
+                // Set up comparison audio
+                document.getElementById('comparisonOriginal').src = this.originalAudio.src;
+                document.getElementById('comparisonProcessed').src = this.originalAudio.src;
+                
+                this.processedInstrumental = instrumentalAudio.src;
+                this.processedVocals = vocalsAudio.src;
+            }
+
+            displayResults() {
+                this.resultsContent.style.display = 'block';
+                
+                // Update info sections
+                const instrumentalInfo = document.getElementById('instrumentalInfo');
+                const vocalsInfo = document.getElementById('vocalsInfo');
+                
+                const separationType = document.getElementById('separationType').value;
+                const qualityLevel = document.getElementById('qualityLevel').value;
+                
+                instrumentalInfo.innerHTML = `
+                    <strong>Type:</strong> Instrumental Track<br>
+                    <strong>Quality:</strong> ${qualityLevel.charAt(0).toUpperCase() + qualityLevel.slice(1)}<br>
+                    <strong>Process:</strong> Vocals removed using AI separation
+                `;
+                
+                vocalsInfo.innerHTML = `
+                    <strong>Type:</strong> Vocals Only<br>
+                    <strong>Quality:</strong> ${qualityLevel.charAt(0).toUpperCase() + qualityLevel.slice(1)}<br>
+                    <strong>Process:</strong> Instrumental removed using AI separation
+                `;
+            }
+
+            switchTab(tabName) {
+                // Update tab buttons
+                document.querySelectorAll('.tab-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+                
+                // Update tab content
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.getElementById(`${tabName}-tab`).classList.add('active');
+            }
+
+            downloadAudio(audioSrc, type) {
+                if (!audioSrc) {
+                    this.showStatus('No processed audio to download.', 'error');
+                    return;
+                }
+
+                // Create download link
+                const link = document.createElement('a');
+                link.href = audioSrc;
+                link.download = `${type}_${Date.now()}.mp3`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                this.showStatus(`${type.charAt(0).toUpperCase() + type.slice(1)} track downloaded!`, 'success');
+            }
+
+            showProgress(show) {
+                this.progressContainer.style.display = show ? 'block' : 'none';
+                if (!show) {
+                    this.progressFill.style.width = '0%';
+                    this.progressText.textContent = 'Processing audio...';
+                }
+            }
+
+            updateProgress(percent) {
+                this.progressFill.style.width = percent + '%';
+            }
+
+            showStatus(message, type) {
+                this.statusMessage.innerHTML = message;
+                this.statusMessage.className = `status-message status-${type}`;
+                this.statusMessage.style.display = 'block';
+
+                if (type === 'success' || type === 'error') {
+                    setTimeout(() => {
+                        this.statusMessage.style.display = 'none';
+                    }, 5000);
+                }
+            }
+
+            formatTime(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const remainingSeconds = Math.floor(seconds % 60);
+                return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+            }
+
+            formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                const k = 1024;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+
+            sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+        }
+
+        // Global functions for comparison playback
+        function playComparison(type) {
+            const audio = type === 'original' ? 
+                document.getElementById('comparisonOriginal') : 
+                document.getElementById('comparisonProcessed');
+            
+            // Pause other audio
+            const otherAudio = type === 'original' ? 
+                document.getElementById('comparisonProcessed') : 
+                document.getElementById('comparisonOriginal');
+            
+            otherAudio.pause();
+            audio.play();
+        }
+
+        function syncPlayback() {
+            const originalAudio = document.getElementById('comparisonOriginal');
+            const processedAudio = document.getElementById('comparisonProcessed');
+            
+            originalAudio.currentTime = 0;
+            processedAudio.currentTime = 0;
+            
+            // Play both simultaneously
+            originalAudio.play();
+            setTimeout(() => {
+                processedAudio.play();
+            }, 50); // Slight delay to account for processing
+        }
+
+        // Initialize the vocal remover when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new VocalRemover();
+        });
+    </script>
+</body>
+</html>

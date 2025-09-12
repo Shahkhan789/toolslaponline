@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Thumbnail Creator - ToolSlap</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .workspace {
+            display: grid;
+            grid-template-columns: 300px 1fr 300px;
+            gap: 30px;
+            min-height: 600px;
+        }
+        
+        .sidebar {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .sidebar h3 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.1em;
+            border-bottom: 1px solid #e1e5e9;
+            padding-bottom: 8px;
+        }
+        
+        .template-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .template-card {
+            aspect-ratio: 16/9;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+        
+        .template-card:hover {
+            border-color: #667eea;
+            transform: scale(1.05);
+        }
+        
+        .template-card.active {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+        
+        .template-preview {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+            text-align: center;
+            padding: 5px;
+        }
+        
+        .canvas-area {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        #thumbnailCanvas {
+            max-width: 100%;
+            max-height: 100%;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tools-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .tool-section {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .tool-section h4 {
+            margin-bottom: 12px;
+            color: #333;
+            font-size: 0.95em;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 4px;
+            font-size: 12px;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn.small {
+            padding: 6px 12px;
+            font-size: 11px;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+            font-weight: 600;
+            font-size: 12px;
+        }
+        
+        .input-group input,
+        .input-group select,
+        .input-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid #e1e5e9;
+            border-radius: 6px;
+            font-size: 12px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .input-group input:focus,
+        .input-group select:focus,
+        .input-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .input-group textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+        
+        .color-group {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+        
+        .color-swatch {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .color-swatch:hover {
+            transform: scale(1.1);
+        }
+        
+        .color-swatch.active {
+            border-color: #333;
+            transform: scale(1.1);
+        }
+        
+        .upload-btn {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .upload-btn input {
+            position: absolute;
+            left: -9999px;
+        }
+        
+        .layer-item {
+            background: #f8f9fa;
+            border: 1px solid #e1e5e9;
+            border-radius: 6px;
+            padding: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .layer-item:hover {
+            background: #e9ecef;
+        }
+        
+        .layer-item.active {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+        
+        .layer-name {
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .layer-controls {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .layer-btn {
+            width: 20px;
+            height: 20px;
+            padding: 0;
+            font-size: 10px;
+            border-radius: 50%;
+        }
+        
+        .export-section {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #e1e5e9;
+        }
+        
+        .resolution-selector {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .resolution-btn {
+            flex: 1;
+            padding: 6px;
+            background: #f8f9fa;
+            color: #666;
+            border: 1px solid #e1e5e9;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 11px;
+            transition: all 0.3s ease;
+        }
+        
+        .resolution-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        @media (max-width: 1200px) {
+            .workspace {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .sidebar {
+                order: 2;
+            }
+            
+            .canvas-area {
+                order: 1;
+            }
+            
+            .tools-panel {
+                order: 3;
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            
+            .tool-section {
+                flex: 1;
+                min-width: 200px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .template-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📺 YouTube Thumbnail Creator</h1>
+            <p>Create stunning YouTube thumbnails with professional templates and AI-powered enhancements</p>
+        </div>
+        
+        <div class="workspace">
+            <!-- Templates Sidebar -->
+            <div class="sidebar">
+                <h3>📱 Templates</h3>
+                <div class="template-grid" id="templateGrid">
+                    <div class="template-card active" data-template="gaming">
+                        <div class="template-preview">🎮 GAMING</div>
+                    </div>
+                    <div class="template-card" data-template="tech">
+                        <div class="template-preview">💻 TECH</div>
+                    </div>
+                    <div class="template-card" data-template="lifestyle">
+                        <div class="template-preview">✨ LIFESTYLE</div>
+                    </div>
+                    <div class="template-card" data-template="business">
+                        <div class="template-preview">💼 BUSINESS</div>
+                    </div>
+                    <div class="template-card" data-template="education">
+                        <div class="template-preview">🎓 EDUCATION</div>
+                    </div>
+                    <div class="template-card" data-template="music">
+                        <div class="template-preview">🎵 MUSIC</div>
+                    </div>
+                </div>
+                
+                <h3>📄 Layers</h3>
+                <div id="layersList">
+                    <div class="layer-item active" data-layer="background">
+                        <span class="layer-name">Background</span>
+                        <div class="layer-controls">
+                            <button class="btn layer-btn">👁</button>
+                            <button class="btn layer-btn">🗑</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn small" onclick="addTextLayer()">+ Add Text</button>
+                <button class="btn small" onclick="addImageLayer()">+ Add Image</button>
+            </div>
+            
+            <!-- Canvas Area -->
+            <div class="canvas-area">
+                <canvas id="thumbnailCanvas" width="1280" height="720"></canvas>
+            </div>
+            
+            <!-- Tools Panel -->
+            <div class="tools-panel">
+                <div class="tool-section">
+                    <h4>🎨 Customize</h4>
+                    <div class="input-group">
+                        <label>Title Text</label>
+                        <textarea id="titleText" placeholder="Enter your YouTube title...">AMAZING VIDEO TITLE!</textarea>
+                    </div>
+                    <div class="input-group">
+                        <label>Font Family</label>
+                        <select id="fontFamily">
+                            <option value="Inter">Inter</option>
+                            <option value="Arial Black">Arial Black</option>
+                            <option value="Impact">Impact</option>
+                            <option value="Helvetica">Helvetica</option>
+                            <option value="Georgia">Georgia</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Font Size</label>
+                        <input type="range" id="fontSize" min="20" max="120" value="60">
+                    </div>
+                </div>
+                
+                <div class="tool-section">
+                    <h4>🎨 Colors</h4>
+                    <div class="input-group">
+                        <label>Text Color</label>
+                        <div class="color-group">
+                            <div class="color-swatch active" data-color="#FFFFFF" style="background: #FFFFFF; border: 1px solid #ccc;"></div>
+                            <div class="color-swatch" data-color="#FF0000" style="background: #FF0000;"></div>
+                            <div class="color-swatch" data-color="#00FF00" style="background: #00FF00;"></div>
+                            <div class="color-swatch" data-color="#0080FF" style="background: #0080FF;"></div>
+                            <div class="color-swatch" data-color="#FFD700" style="background: #FFD700;"></div>
+                            <div class="color-swatch" data-color="#FF69B4" style="background: #FF69B4;"></div>
+                        </div>
+                        <input type="color" id="customColor" style="margin-top: 8px;">
+                    </div>
+                    <div class="input-group">
+                        <label>Background</label>
+                        <div class="color-group">
+                            <div class="color-swatch active" data-bg="#667eea" style="background: linear-gradient(135deg, #667eea, #764ba2);"></div>
+                            <div class="color-swatch" data-bg="#FF6B6B" style="background: linear-gradient(135deg, #FF6B6B, #4ECDC4);"></div>
+                            <div class="color-swatch" data-bg="#45B7D1" style="background: linear-gradient(135deg, #45B7D1, #96CEB4);"></div>
+                            <div class="color-swatch" data-bg="#FFA726" style="background: linear-gradient(135deg, #FFA726, #FF7043);"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tool-section">
+                    <h4>🖼️ Images</h4>
+                    <div class="upload-btn">
+                        <button class="btn">📤 Upload Image</button>
+                        <input type="file" id="imageUpload" accept="image/*">
+                    </div>
+                    <button class="btn" onclick="generateAIImage()">🤖 Generate AI Image</button>
+                    <div class="input-group">
+                        <label>AI Image Prompt</label>
+                        <textarea id="aiPrompt" placeholder="Describe the image you want..."></textarea>
+                    </div>
+                </div>
+                
+                <div class="tool-section">
+                    <h4>✨ Effects</h4>
+                    <button class="btn small" onclick="addShadow()">➕ Drop Shadow</button>
+                    <button class="btn small" onclick="addOutline()">🔲 Outline</button>
+                    <button class="btn small" onclick="addGradient()">🌈 Gradient</button>
+                    <button class="btn small" onclick="addEmoji()">😀 Add Emoji</button>
+                </div>
+                
+                <div class="export-section">
+                    <h4>💾 Export</h4>
+                    <div class="resolution-selector">
+                        <div class="resolution-btn active" data-res="1280x720">HD</div>
+                        <div class="resolution-btn" data-res="1920x1080">FHD</div>
+                        <div class="resolution-btn" data-res="2560x1440">2K</div>
+                    </div>
+                    <button class="btn" onclick="downloadThumbnail()">📥 Download PNG</button>
+                    <button class="btn" onclick="downloadThumbnailJPG()">📥 Download JPG</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class ThumbnailCreator {
+            constructor() {
+                this.canvas = document.getElementById('thumbnailCanvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.currentTemplate = 'gaming';
+                this.currentTextColor = '#FFFFFF';
+                this.currentBgGradient = ['#667eea', '#764ba2'];
+                this.layers = [];
+                this.selectedLayer = null;
+                this.apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+                    ? 'http://localhost:8001' 
+                    : window.location.origin;
+                
+                this.init();
+                this.setupEventListeners();
+                this.drawCanvas();
+            }
+            
+            init() {
+                // Initialize with default background layer
+                this.layers.push({
+                    id: 'background',
+                    type: 'background',
+                    gradient: this.currentBgGradient,
+                    visible: true
+                });
+                
+                this.selectedLayer = this.layers[0];
+            }
+            
+            setupEventListeners() {
+                // Template selection
+                document.querySelectorAll('.template-card').forEach(card => {
+                    card.addEventListener('click', (e) => {
+                        document.querySelectorAll('.template-card').forEach(c => c.classList.remove('active'));
+                        card.classList.add('active');
+                        this.currentTemplate = card.dataset.template;
+                        this.applyTemplate();
+                    });
+                });
+                
+                // Text input
+                document.getElementById('titleText').addEventListener('input', () => this.drawCanvas());
+                document.getElementById('fontFamily').addEventListener('change', () => this.drawCanvas());
+                document.getElementById('fontSize').addEventListener('input', () => this.drawCanvas());
+                
+                // Color selection
+                document.querySelectorAll('[data-color]').forEach(swatch => {
+                    swatch.addEventListener('click', (e) => {
+                        document.querySelectorAll('[data-color]').forEach(s => s.classList.remove('active'));
+                        swatch.classList.add('active');
+                        this.currentTextColor = swatch.dataset.color;
+                        this.drawCanvas();
+                    });
+                });
+                
+                document.querySelectorAll('[data-bg]').forEach(swatch => {
+                    swatch.addEventListener('click', (e) => {
+                        document.querySelectorAll('[data-bg]').forEach(s => s.classList.remove('active'));
+                        swatch.classList.add('active');
+                        this.updateBackgroundGradient(swatch.dataset.bg);
+                        this.drawCanvas();
+                    });
+                });
+                
+                // Custom color picker
+                document.getElementById('customColor').addEventListener('change', (e) => {
+                    this.currentTextColor = e.target.value;
+                    this.drawCanvas();
+                });
+                
+                // Image upload
+                document.getElementById('imageUpload').addEventListener('change', (e) => {
+                    this.handleImageUpload(e);
+                });
+                
+                // Resolution selection
+                document.querySelectorAll('.resolution-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        document.querySelectorAll('.resolution-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        this.updateCanvasSize(btn.dataset.res);
+                    });
+                });
+            }
+            
+            applyTemplate() {
+                const templates = {
+                    gaming: {
+                        title: "EPIC GAMING MOMENT!",
+                        gradient: ['#FF6B6B', '#4ECDC4'],
+                        font: 'Arial Black'
+                    },
+                    tech: {
+                        title: "AMAZING TECH REVIEW",
+                        gradient: ['#667eea', '#764ba2'],
+                        font: 'Inter'
+                    },
+                    lifestyle: {
+                        title: "LIFE CHANGING TIPS",
+                        gradient: ['#FFA726', '#FF7043'],
+                        font: 'Georgia'
+                    },
+                    business: {
+                        title: "BUSINESS SUCCESS",
+                        gradient: ['#45B7D1', '#96CEB4'],
+                        font: 'Helvetica'
+                    },
+                    education: {
+                        title: "LEARN SOMETHING NEW",
+                        gradient: ['#A8E6CF', '#7FDBFF'],
+                        font: 'Inter'
+                    },
+                    music: {
+                        title: "AMAZING MUSIC VIDEO",
+                        gradient: ['#FF69B4', '#9B59B6'],
+                        font: 'Impact'
+                    }
+                };
+                
+                const template = templates[this.currentTemplate];
+                if (template) {
+                    document.getElementById('titleText').value = template.title;
+                    document.getElementById('fontFamily').value = template.font;
+                    this.currentBgGradient = template.gradient;
+                    this.updateBackgroundLayer();
+                    this.drawCanvas();
+                }
+            }
+            
+            updateBackgroundGradient(colorKey) {
+                const gradients = {
+                    '#667eea': ['#667eea', '#764ba2'],
+                    '#FF6B6B': ['#FF6B6B', '#4ECDC4'],
+                    '#45B7D1': ['#45B7D1', '#96CEB4'],
+                    '#FFA726': ['#FFA726', '#FF7043']
+                };
+                
+                this.currentBgGradient = gradients[colorKey] || ['#667eea', '#764ba2'];
+                this.updateBackgroundLayer();
+            }
+            
+            updateBackgroundLayer() {
+                const bgLayer = this.layers.find(l => l.type === 'background');
+                if (bgLayer) {
+                    bgLayer.gradient = this.currentBgGradient;
+                }
+            }
+            
+            drawCanvas() {
+                // Clear canvas
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                // Draw layers in order
+                this.layers.forEach(layer => {
+                    if (layer.visible) {
+                        this.drawLayer(layer);
+                    }
+                });
+            }
+            
+            drawLayer(layer) {
+                switch (layer.type) {
+                    case 'background':
+                        this.drawBackground(layer);
+                        break;
+                    case 'text':
+                        this.drawText(layer);
+                        break;
+                    case 'image':
+                        this.drawImage(layer);
+                        break;
+                }
+            }
+            
+            drawBackground(layer) {
+                const gradient = this.ctx.createLinearGradient(0, 0, this.canvas.width, this.canvas.height);
+                gradient.addColorStop(0, layer.gradient[0]);
+                gradient.addColorStop(1, layer.gradient[1]);
+                
+                this.ctx.fillStyle = gradient;
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                // Add pattern overlay for texture
+                this.ctx.globalAlpha = 0.1;
+                this.drawPattern();
+                this.ctx.globalAlpha = 1;
+            }
+            
+            drawPattern() {
+                const patternSize = 50;
+                this.ctx.strokeStyle = '#FFFFFF';
+                this.ctx.lineWidth = 1;
+                
+                for (let x = 0; x < this.canvas.width; x += patternSize) {
+                    for (let y = 0; y < this.canvas.height; y += patternSize) {
+                        this.ctx.strokeRect(x, y, patternSize, patternSize);
+                    }
+                }
+            }
+            
+            drawText(layer) {
+                const text = layer.text || document.getElementById('titleText').value;
+                const fontSize = layer.fontSize || document.getElementById('fontSize').value;
+                const fontFamily = layer.fontFamily || document.getElementById('fontFamily').value;
+                const color = layer.color || this.currentTextColor;
+                
+                this.ctx.font = `bold ${fontSize}px ${fontFamily}`;
+                this.ctx.textAlign = 'center';
+                this.ctx.textBaseline = 'middle';
+                
+                // Draw text shadow
+                this.ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
+                this.ctx.shadowBlur = 4;
+                this.ctx.shadowOffsetX = 3;
+                this.ctx.shadowOffsetY = 3;
+                
+                // Draw text outline
+                this.ctx.strokeStyle = '#000000';
+                this.ctx.lineWidth = 4;
+                this.ctx.strokeText(text, this.canvas.width / 2, this.canvas.height / 2);
+                
+                // Draw main text
+                this.ctx.fillStyle = color;
+                this.ctx.fillText(text, this.canvas.width / 2, this.canvas.height / 2);
+                
+                // Reset shadow
+                this.ctx.shadowColor = 'transparent';
+            }
+            
+            drawImage(layer) {
+                if (layer.image && layer.image.complete) {
+                    const x = layer.x || 0;
+                    const y = layer.y || 0;
+                    const width = layer.width || layer.image.width;
+                    const height = layer.height || layer.image.height;
+                    
+                    this.ctx.drawImage(layer.image, x, y, width, height);
+                }
+            }
+            
+            handleImageUpload(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const img = new Image();
+                        img.onload = () => {
+                            this.addImageLayer(img);
+                        };
+                        img.src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+            
+            addImageLayer(image) {
+                const layer = {
+                    id: 'image_' + Date.now(),
+                    type: 'image',
+                    image: image,
+                    x: 50,
+                    y: 50,
+                    width: Math.min(300, image.width),
+                    height: Math.min(200, image.height),
+                    visible: true
+                };
+                
+                this.layers.push(layer);
+                this.updateLayersList();
+                this.drawCanvas();
+            }
+            
+            addTextLayer() {
+                const layer = {
+                    id: 'text_' + Date.now(),
+                    type: 'text',
+                    text: 'New Text',
+                    fontSize: 40,
+                    fontFamily: 'Inter',
+                    color: '#FFFFFF',
+                    x: this.canvas.width / 2,
+                    y: this.canvas.height / 3,
+                    visible: true
+                };
+                
+                this.layers.push(layer);
+                this.updateLayersList();
+                this.drawCanvas();
+            }
+            
+            updateLayersList() {
+                const layersList = document.getElementById('layersList');
+                layersList.innerHTML = '';
+                
+                this.layers.forEach((layer, index) => {
+                    const layerElement = document.createElement('div');
+                    layerElement.className = 'layer-item';
+                    layerElement.dataset.layerId = layer.id;
+                    
+                    layerElement.innerHTML = `
+                        <span class="layer-name">${layer.type.charAt(0).toUpperCase() + layer.type.slice(1)}</span>
+                        <div class="layer-controls">
+                            <button class="btn layer-btn" onclick="toggleLayerVisibility('${layer.id}')">👁</button>
+                            <button class="btn layer-btn" onclick="deleteLayer('${layer.id}')">🗑</button>
+                        </div>
+                    `;
+                    
+                    layersList.appendChild(layerElement);
+                });
+            }
+            
+            updateCanvasSize(resolution) {
+                const [width, height] = resolution.split('x').map(Number);
+                this.canvas.width = width;
+                this.canvas.height = height;
+                this.drawCanvas();
+            }
+            
+            async generateAIImage() {
+                const prompt = document.getElementById('aiPrompt').value;
+                if (!prompt) {
+                    alert('Please enter a prompt for the AI image');
+                    return;
+                }
+                
+                try {
+                    const response = await fetch(`${this.apiUrl}/api/generate-image`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            prompt: prompt,
+                            style: 'thumbnail',
+                            size: '512x512'
+                        })
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (response.ok && result.image_url) {
+                        const img = new Image();
+                        img.crossOrigin = 'anonymous';
+                        img.onload = () => {
+                            this.addImageLayer(img);
+                        };
+                        img.src = result.image_url;
+                    } else {
+                        alert('Failed to generate AI image: ' + (result.error || 'Unknown error'));
+                    }
+                } catch (error) {
+                    console.error('AI image generation error:', error);
+                    alert('Error generating AI image. Please try again.');
+                }
+            }
+            
+            downloadThumbnail() {
+                const link = document.createElement('a');
+                link.download = `youtube_thumbnail_${Date.now()}.png`;
+                link.href = this.canvas.toDataURL();
+                link.click();
+            }
+            
+            downloadThumbnailJPG() {
+                const link = document.createElement('a');
+                link.download = `youtube_thumbnail_${Date.now()}.jpg`;
+                link.href = this.canvas.toDataURL('image/jpeg', 0.9);
+                link.click();
+            }
+        }
+        
+        // Global functions
+        let thumbnailCreator;
+        
+        function addTextLayer() {
+            thumbnailCreator.addTextLayer();
+        }
+        
+        function addImageLayer() {
+            document.getElementById('imageUpload').click();
+        }
+        
+        function toggleLayerVisibility(layerId) {
+            const layer = thumbnailCreator.layers.find(l => l.id === layerId);
+            if (layer) {
+                layer.visible = !layer.visible;
+                thumbnailCreator.drawCanvas();
+            }
+        }
+        
+        function deleteLayer(layerId) {
+            thumbnailCreator.layers = thumbnailCreator.layers.filter(l => l.id !== layerId);
+            thumbnailCreator.updateLayersList();
+            thumbnailCreator.drawCanvas();
+        }
+        
+        function generateAIImage() {
+            thumbnailCreator.generateAIImage();
+        }
+        
+        function downloadThumbnail() {
+            thumbnailCreator.downloadThumbnail();
+        }
+        
+        function downloadThumbnailJPG() {
+            thumbnailCreator.downloadThumbnailJPG();
+        }
+        
+        function addShadow() {
+            // Add shadow effect logic
+            alert('Shadow effect added!');
+        }
+        
+        function addOutline() {
+            // Add outline effect logic
+            alert('Outline effect added!');
+        }
+        
+        function addGradient() {
+            // Add gradient effect logic
+            alert('Gradient effect added!');
+        }
+        
+        function addEmoji() {
+            const emojis = ['😀', '🔥', '💯', '⚡', '🚀', '💎', '🎉', '👍'];
+            const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+            
+            const currentText = document.getElementById('titleText').value;
+            document.getElementById('titleText').value = currentText + ' ' + randomEmoji;
+            thumbnailCreator.drawCanvas();
+        }
+        
+        // Initialize the thumbnail creator
+        document.addEventListener('DOMContentLoaded', () => {
+            thumbnailCreator = new ThumbnailCreator();
+        });
+    </script>
+</body>
+</html>

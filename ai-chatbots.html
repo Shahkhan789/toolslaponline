@@ -555,6 +555,11 @@
                 this.temperatureValue = document.getElementById('temperatureValue');
                 this.maxLength = document.getElementById('maxLength');
                 
+                // Configure API URL based on environment
+                this.apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+                    ? 'http://localhost:8001' 
+                    : window.location.origin;
+                
                 this.conversationHistory = [];
                 this.isConnected = false;
                 
@@ -591,13 +596,14 @@
             
             async checkConnection() {
                 try {
-                    const response = await fetch('/health');
+                    const response = await fetch(`${this.apiUrl}/health`);
                     if (response.ok) {
                         this.setConnected(true);
                     } else {
                         this.setConnected(false);
                     }
                 } catch (error) {
+                    console.log('Connection check failed:', error.message);
                     this.setConnected(false);
                 }
             }
@@ -634,7 +640,7 @@
                     
                     if (this.isConnected) {
                         // Try real API call
-                        const apiResponse = await fetch('/api/chat', {
+                        const apiResponse = await fetch(`${this.apiUrl}/api/chat`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'

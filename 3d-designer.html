@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Model Designer - Web-based 3D Modeling Tool | ToolSlap</title>
+    <meta name="description" content="Create and edit 3D models with our professional web-based designer. Built with Three.js for advanced 3D modeling, sculpting, and design in your browser.">
+    <meta name="keywords" content="3D modeling, 3D design, Three.js, web-based 3D, 3D editor, model creator">
+    
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/exporters/STLExporter.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #1a1a1a;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 10px 20px;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn.active {
+            background: linear-gradient(45deg, #764ba2, #667eea);
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 60px;
+            width: 250px;
+            height: calc(100vh - 60px);
+            background: rgba(0, 0, 0, 0.9);
+            border-right: 1px solid #333;
+            z-index: 999;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .sidebar-section {
+            margin-bottom: 25px;
+        }
+
+        .sidebar-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #667eea;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+        }
+
+        .shape-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .shape-btn {
+            background: #2a2a2a;
+            border: 2px solid #444;
+            border-radius: 8px;
+            padding: 12px 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-size: 12px;
+            color: #ccc;
+        }
+
+        .shape-btn:hover {
+            border-color: #667eea;
+            background: #333;
+        }
+
+        .shape-btn.active {
+            border-color: #667eea;
+            background: #667eea20;
+            color: #667eea;
+        }
+
+        .control-group {
+            margin-bottom: 15px;
+        }
+
+        .control-label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #ccc;
+        }
+
+        .control-input {
+            width: 100%;
+            padding: 8px;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .control-input:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+
+        .color-input {
+            width: 100%;
+            height: 40px;
+            border: 1px solid #444;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .viewport {
+            position: fixed;
+            left: 250px;
+            top: 60px;
+            right: 0;
+            bottom: 0;
+            background: #2a2a2a;
+        }
+
+        #canvas-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        .properties-panel {
+            position: fixed;
+            right: 0;
+            top: 60px;
+            width: 280px;
+            height: calc(100vh - 60px);
+            background: rgba(0, 0, 0, 0.9);
+            border-left: 1px solid #333;
+            z-index: 999;
+            overflow-y: auto;
+            padding: 20px;
+            display: none;
+        }
+
+        .properties-panel.active {
+            display: block;
+        }
+
+        .info-panel {
+            position: fixed;
+            bottom: 0;
+            left: 250px;
+            right: 0;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.9);
+            border-top: 1px solid #333;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            color: #ccc;
+            z-index: 999;
+        }
+
+        .status-item {
+            margin-right: 20px;
+        }
+
+        .export-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .modal-content {
+            background: #2a2a2a;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #444;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #667eea;
+        }
+
+        .export-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .export-btn {
+            background: #2a2a2a;
+            border: 2px solid #444;
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .export-btn:hover {
+            border-color: #667eea;
+            background: #333;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+            
+            .viewport {
+                left: 200px;
+            }
+            
+            .info-panel {
+                left: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">ToolSlap 3D Designer</div>
+        <div class="toolbar">
+            <button class="btn" id="newBtn">📄 New</button>
+            <button class="btn" id="saveBtn">💾 Save</button>
+            <button class="btn" id="loadBtn">📁 Load</button>
+            <button class="btn" id="exportBtn">📤 Export</button>
+            <button class="btn" id="propertiesBtn">⚙️ Properties</button>
+            <button class="btn" id="helpBtn">❓ Help</button>
+        </div>
+    </header>
+
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <h3 class="sidebar-title">Primitives</h3>
+            <div class="shape-grid">
+                <div class="shape-btn" data-shape="box">
+                    📦<br>Cube
+                </div>
+                <div class="shape-btn" data-shape="sphere">
+                    🔵<br>Sphere
+                </div>
+                <div class="shape-btn" data-shape="cylinder">
+                    🔷<br>Cylinder
+                </div>
+                <div class="shape-btn" data-shape="cone">
+                    🔺<br>Cone
+                </div>
+                <div class="shape-btn" data-shape="plane">
+                    ⬜<br>Plane
+                </div>
+                <div class="shape-btn" data-shape="torus">
+                    🍩<br>Torus
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-section">
+            <h3 class="sidebar-title">Transform</h3>
+            <div class="control-group">
+                <label class="control-label">Position X</label>
+                <input type="range" class="control-input" id="posX" min="-10" max="10" step="0.1" value="0">
+            </div>
+            <div class="control-group">
+                <label class="control-label">Position Y</label>
+                <input type="range" class="control-input" id="posY" min="-10" max="10" step="0.1" value="0">
+            </div>
+            <div class="control-group">
+                <label class="control-label">Position Z</label>
+                <input type="range" class="control-input" id="posZ" min="-10" max="10" step="0.1" value="0">
+            </div>
+        </div>
+
+        <div class="sidebar-section">
+            <h3 class="sidebar-title">Scale</h3>
+            <div class="control-group">
+                <label class="control-label">Scale X</label>
+                <input type="range" class="control-input" id="scaleX" min="0.1" max="5" step="0.1" value="1">
+            </div>
+            <div class="control-group">
+                <label class="control-label">Scale Y</label>
+                <input type="range" class="control-input" id="scaleY" min="0.1" max="5" step="0.1" value="1">
+            </div>
+            <div class="control-group">
+                <label class="control-label">Scale Z</label>
+                <input type="range" class="control-input" id="scaleZ" min="0.1" max="5" step="0.1" value="1">
+            </div>
+        </div>
+
+        <div class="sidebar-section">
+            <h3 class="sidebar-title">Material</h3>
+            <div class="control-group">
+                <label class="control-label">Color</label>
+                <input type="color" class="color-input" id="materialColor" value="#667eea">
+            </div>
+            <div class="control-group">
+                <label class="control-label">Material Type</label>
+                <select class="control-input" id="materialType">
+                    <option value="standard">Standard</option>
+                    <option value="basic">Basic</option>
+                    <option value="phong">Phong</option>
+                    <option value="lambert">Lambert</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Wireframe</label>
+                <input type="checkbox" id="wireframe" class="control-input">
+            </div>
+        </div>
+    </aside>
+
+    <main class="viewport">
+        <div id="canvas-container"></div>
+    </main>
+
+    <aside class="properties-panel" id="propertiesPanel">
+        <h3 class="sidebar-title">Object Properties</h3>
+        <div id="objectProperties">
+            <p>Select an object to view properties</p>
+        </div>
+    </aside>
+
+    <div class="info-panel">
+        <div class="status-item">Objects: <span id="objectCount">0</span></div>
+        <div class="status-item">Selected: <span id="selectedObject">None</span></div>
+        <div class="status-item">Camera: <span id="cameraPos">X: 0, Y: 0, Z: 5</span></div>
+        <div class="status-item">FPS: <span id="fps">60</span></div>
+    </div>
+
+    <!-- Export Modal -->
+    <div class="export-modal" id="exportModal">
+        <div class="modal-content">
+            <h2 class="modal-title">Export 3D Model</h2>
+            <div class="export-options">
+                <button class="export-btn" onclick="exportModel('stl')">
+                    📐 STL Format<br>
+                    <small>For 3D printing</small>
+                </button>
+                <button class="export-btn" onclick="exportModel('obj')">
+                    🎯 OBJ Format<br>
+                    <small>Universal format</small>
+                </button>
+                <button class="export-btn" onclick="exportModel('json')">
+                    📋 JSON Format<br>
+                    <small>Three.js format</small>
+                </button>
+            </div>
+            <button class="btn" onclick="closeExportModal()" style="width: 100%;">Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        class ThreeDDesigner {
+            constructor() {
+                this.scene = new THREE.Scene();
+                this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                this.renderer = new THREE.WebGLRenderer({ antialias: true });
+                this.controls = null;
+                this.selectedObject = null;
+                this.objects = [];
+                this.raycaster = new THREE.Raycaster();
+                this.mouse = new THREE.Vector2();
+                
+                this.init();
+                this.setupEventListeners();
+                this.animate();
+            }
+
+            init() {
+                // Setup renderer
+                const container = document.getElementById('canvas-container');
+                this.renderer.setSize(container.clientWidth, container.clientHeight);
+                this.renderer.setClearColor(0x2a2a2a);
+                this.renderer.shadowMap.enabled = true;
+                this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+                container.appendChild(this.renderer.domElement);
+
+                // Setup camera
+                this.camera.position.set(0, 5, 10);
+                this.camera.lookAt(0, 0, 0);
+
+                // Setup controls
+                this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
+                this.controls.enableDamping = true;
+                this.controls.dampingFactor = 0.25;
+
+                // Setup scene
+                this.setupLights();
+                this.setupGrid();
+
+                // Handle window resize
+                window.addEventListener('resize', () => this.onWindowResize());
+            }
+
+            setupLights() {
+                // Ambient light
+                const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
+                this.scene.add(ambientLight);
+
+                // Directional light
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+                directionalLight.position.set(10, 10, 5);
+                directionalLight.castShadow = true;
+                directionalLight.shadow.mapSize.width = 2048;
+                directionalLight.shadow.mapSize.height = 2048;
+                this.scene.add(directionalLight);
+            }
+
+            setupGrid() {
+                const gridHelper = new THREE.GridHelper(20, 20, 0x444444, 0x444444);
+                this.scene.add(gridHelper);
+
+                const axesHelper = new THREE.AxesHelper(5);
+                this.scene.add(axesHelper);
+            }
+
+            setupEventListeners() {
+                // Shape buttons
+                document.querySelectorAll('.shape-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const shape = e.currentTarget.dataset.shape;
+                        this.addPrimitive(shape);
+                        this.updateActiveShapeButton(e.currentTarget);
+                    });
+                });
+
+                // Transform controls
+                const transformInputs = ['posX', 'posY', 'posZ', 'scaleX', 'scaleY', 'scaleZ'];
+                transformInputs.forEach(id => {
+                    const input = document.getElementById(id);
+                    input.addEventListener('input', () => this.updateSelectedObject());
+                });
+
+                // Material controls
+                document.getElementById('materialColor').addEventListener('change', () => this.updateMaterial());
+                document.getElementById('materialType').addEventListener('change', () => this.updateMaterial());
+                document.getElementById('wireframe').addEventListener('change', () => this.updateMaterial());
+
+                // Toolbar buttons
+                document.getElementById('newBtn').addEventListener('click', () => this.newScene());
+                document.getElementById('saveBtn').addEventListener('click', () => this.saveScene());
+                document.getElementById('loadBtn').addEventListener('click', () => this.loadScene());
+                document.getElementById('exportBtn').addEventListener('click', () => this.showExportModal());
+                document.getElementById('propertiesBtn').addEventListener('click', () => this.toggleProperties());
+                document.getElementById('helpBtn').addEventListener('click', () => this.showHelp());
+
+                // Mouse events for object selection
+                this.renderer.domElement.addEventListener('click', (event) => this.onMouseClick(event));
+            }
+
+            addPrimitive(type) {
+                let geometry, material, mesh;
+
+                // Create geometry based on type
+                switch (type) {
+                    case 'box':
+                        geometry = new THREE.BoxGeometry(1, 1, 1);
+                        break;
+                    case 'sphere':
+                        geometry = new THREE.SphereGeometry(0.5, 32, 32);
+                        break;
+                    case 'cylinder':
+                        geometry = new THREE.CylinderGeometry(0.5, 0.5, 1, 32);
+                        break;
+                    case 'cone':
+                        geometry = new THREE.ConeGeometry(0.5, 1, 32);
+                        break;
+                    case 'plane':
+                        geometry = new THREE.PlaneGeometry(1, 1);
+                        break;
+                    case 'torus':
+                        geometry = new THREE.TorusGeometry(0.5, 0.2, 16, 100);
+                        break;
+                    default:
+                        geometry = new THREE.BoxGeometry(1, 1, 1);
+                }
+
+                // Create material
+                material = new THREE.MeshStandardMaterial({ 
+                    color: 0x667eea,
+                    roughness: 0.5,
+                    metalness: 0.1
+                });
+
+                // Create mesh
+                mesh = new THREE.Mesh(geometry, material);
+                mesh.castShadow = true;
+                mesh.receiveShadow = true;
+                mesh.userData = { type: type, id: Date.now() };
+
+                // Position new objects slightly offset
+                const offset = this.objects.length * 0.2;
+                mesh.position.set(offset, 0, offset);
+
+                this.scene.add(mesh);
+                this.objects.push(mesh);
+                this.selectObject(mesh);
+                this.updateObjectCount();
+            }
+
+            selectObject(object) {
+                // Deselect previous object
+                if (this.selectedObject && this.selectedObject.material.emissive) {
+                    this.selectedObject.material.emissive.setHex(0x000000);
+                }
+
+                // Select new object
+                this.selectedObject = object;
+                if (object) {
+                    object.material.emissive.setHex(0x444444);
+                    this.updateTransformInputs();
+                    this.updateSelectedObjectInfo();
+                } else {
+                    this.updateSelectedObjectInfo();
+                }
+            }
+
+            updateTransformInputs() {
+                if (!this.selectedObject) return;
+
+                const pos = this.selectedObject.position;
+                const scale = this.selectedObject.scale;
+
+                document.getElementById('posX').value = pos.x.toFixed(1);
+                document.getElementById('posY').value = pos.y.toFixed(1);
+                document.getElementById('posZ').value = pos.z.toFixed(1);
+                document.getElementById('scaleX').value = scale.x.toFixed(1);
+                document.getElementById('scaleY').value = scale.y.toFixed(1);
+                document.getElementById('scaleZ').value = scale.z.toFixed(1);
+            }
+
+            updateSelectedObject() {
+                if (!this.selectedObject) return;
+
+                const posX = parseFloat(document.getElementById('posX').value);
+                const posY = parseFloat(document.getElementById('posY').value);
+                const posZ = parseFloat(document.getElementById('posZ').value);
+                const scaleX = parseFloat(document.getElementById('scaleX').value);
+                const scaleY = parseFloat(document.getElementById('scaleY').value);
+                const scaleZ = parseFloat(document.getElementById('scaleZ').value);
+
+                this.selectedObject.position.set(posX, posY, posZ);
+                this.selectedObject.scale.set(scaleX, scaleY, scaleZ);
+            }
+
+            updateMaterial() {
+                if (!this.selectedObject) return;
+
+                const color = document.getElementById('materialColor').value;
+                const type = document.getElementById('materialType').value;
+                const wireframe = document.getElementById('wireframe').checked;
+
+                // Create new material based on type
+                let material;
+                switch (type) {
+                    case 'basic':
+                        material = new THREE.MeshBasicMaterial();
+                        break;
+                    case 'phong':
+                        material = new THREE.MeshPhongMaterial();
+                        break;
+                    case 'lambert':
+                        material = new THREE.MeshLambertMaterial();
+                        break;
+                    default:
+                        material = new THREE.MeshStandardMaterial();
+                }
+
+                material.color.setHex(parseInt(color.replace('#', '0x')));
+                material.wireframe = wireframe;
+                material.emissive.setHex(0x444444); // Keep selection highlight
+
+                this.selectedObject.material = material;
+            }
+
+            onMouseClick(event) {
+                const rect = this.renderer.domElement.getBoundingClientRect();
+                this.mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+                this.mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+                this.raycaster.setFromCamera(this.mouse, this.camera);
+                const intersects = this.raycaster.intersectObjects(this.objects);
+
+                if (intersects.length > 0) {
+                    this.selectObject(intersects[0].object);
+                } else {
+                    this.selectObject(null);
+                }
+            }
+
+            updateActiveShapeButton(activeBtn) {
+                document.querySelectorAll('.shape-btn').forEach(btn => btn.classList.remove('active'));
+                activeBtn.classList.add('active');
+            }
+
+            updateObjectCount() {
+                document.getElementById('objectCount').textContent = this.objects.length;
+            }
+
+            updateSelectedObjectInfo() {
+                const selectedSpan = document.getElementById('selectedObject');
+                if (this.selectedObject) {
+                    selectedSpan.textContent = `${this.selectedObject.userData.type} (${this.selectedObject.userData.id})`;
+                } else {
+                    selectedSpan.textContent = 'None';
+                }
+            }
+
+            newScene() {
+                // Clear all objects
+                this.objects.forEach(obj => this.scene.remove(obj));
+                this.objects = [];
+                this.selectedObject = null;
+                this.updateObjectCount();
+                this.updateSelectedObjectInfo();
+            }
+
+            saveScene() {
+                const sceneData = {
+                    objects: this.objects.map(obj => ({
+                        type: obj.userData.type,
+                        position: obj.position,
+                        scale: obj.scale,
+                        rotation: obj.rotation,
+                        material: {
+                            color: obj.material.color.getHex(),
+                            wireframe: obj.material.wireframe
+                        }
+                    }))
+                };
+
+                const blob = new Blob([JSON.stringify(sceneData, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `3d-scene-${Date.now()}.json`;
+                a.click();
+                URL.revokeObjectURL(url);
+            }
+
+            loadScene() {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = '.json';
+                input.onchange = (e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (event) => {
+                            try {
+                                const sceneData = JSON.parse(event.target.result);
+                                this.loadSceneData(sceneData);
+                            } catch (error) {
+                                alert('Error loading scene file');
+                            }
+                        };
+                        reader.readAsText(file);
+                    }
+                };
+                input.click();
+            }
+
+            loadSceneData(sceneData) {
+                this.newScene(); // Clear current scene
+                
+                sceneData.objects.forEach(objData => {
+                    this.addPrimitive(objData.type);
+                    const lastObject = this.objects[this.objects.length - 1];
+                    
+                    lastObject.position.copy(objData.position);
+                    lastObject.scale.copy(objData.scale);
+                    lastObject.rotation.copy(objData.rotation);
+                    lastObject.material.color.setHex(objData.material.color);
+                    lastObject.material.wireframe = objData.material.wireframe;
+                });
+            }
+
+            showExportModal() {
+                document.getElementById('exportModal').style.display = 'flex';
+            }
+
+            toggleProperties() {
+                const panel = document.getElementById('propertiesPanel');
+                panel.classList.toggle('active');
+            }
+
+            showHelp() {
+                alert(`3D Designer Controls:
+                
+Left Click: Select object
+Mouse + Drag: Rotate camera
+Mouse Wheel: Zoom
+Right Click + Drag: Pan camera
+
+Keyboard Shortcuts:
+N - New scene
+S - Save scene
+L - Load scene
+E - Export
+Delete - Remove selected object
+                
+Use the sidebar to add primitives and modify selected objects.`);
+            }
+
+            onWindowResize() {
+                const container = document.getElementById('canvas-container');
+                this.camera.aspect = container.clientWidth / container.clientHeight;
+                this.camera.updateProjectionMatrix();
+                this.renderer.setSize(container.clientWidth, container.clientHeight);
+            }
+
+            animate() {
+                requestAnimationFrame(() => this.animate());
+                
+                this.controls.update();
+                
+                // Update camera position display
+                const pos = this.camera.position;
+                document.getElementById('cameraPos').textContent = 
+                    `X: ${pos.x.toFixed(1)}, Y: ${pos.y.toFixed(1)}, Z: ${pos.z.toFixed(1)}`;
+                
+                this.renderer.render(this.scene, this.camera);
+            }
+        }
+
+        // Export functions
+        function exportModel(format) {
+            // This would implement actual export functionality
+            // For now, we'll show a simple message
+            alert(`Exporting in ${format.toUpperCase()} format...`);
+            closeExportModal();
+        }
+
+        function closeExportModal() {
+            document.getElementById('exportModal').style.display = 'none';
+        }
+
+        // Initialize the 3D Designer when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new ThreeDDesigner();
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (event) => {
+            if (event.ctrlKey) {
+                switch (event.key) {
+                    case 'n':
+                        event.preventDefault();
+                        document.getElementById('newBtn').click();
+                        break;
+                    case 's':
+                        event.preventDefault();
+                        document.getElementById('saveBtn').click();
+                        break;
+                    case 'o':
+                        event.preventDefault();
+                        document.getElementById('loadBtn').click();
+                        break;
+                    case 'e':
+                        event.preventDefault();
+                        document.getElementById('exportBtn').click();
+                        break;
+                }
+            }
+            
+            if (event.key === 'Delete' && window.designer && window.designer.selectedObject) {
+                // Remove selected object
+                window.designer.scene.remove(window.designer.selectedObject);
+                const index = window.designer.objects.indexOf(window.designer.selectedObject);
+                if (index > -1) {
+                    window.designer.objects.splice(index, 1);
+                }
+                window.designer.selectedObject = null;
+                window.designer.updateObjectCount();
+                window.designer.updateSelectedObjectInfo();
+            }
+        });
+    </script>
+</body>
+</html>

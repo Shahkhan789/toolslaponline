@@ -1,17 +1,76 @@
-# ToolSlap - Free Online Tools Hub
+# 🚀 ToolSlap - Advanced AI-Powered Online Tools Suite
 
-## 🚀 SEO-Optimized Online Tools Platform
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Node.js Version](https://img.shields.io/badge/Node.js-16%2B-green.svg)](https://nodejs.org/)
+[![Python Version](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://python.org/)
 
-ToolSlap is a comprehensive collection of free online tools designed to rank highly in search engines. Built with modern SEO best practices, performance optimization, and user experience in mind.
+**ToolSlap** is a comprehensive collection of 60+ professional-grade online tools powered by advanced AI technology. From image enhancement to 3D modeling, vocal separation to content generation - all running directly in your browser with privacy-first design.
 
-### 🎯 Features
+## 🌟 Featured AI Tools
 
-- **50+ High-Traffic Tools** - Carefully selected based on search volume and competition
-- **SEO Optimized** - Schema.org markup, OpenGraph, Twitter Cards, optimized meta tags
-- **Lightning Fast** - Client-side processing for maximum speed
-- **Privacy First** - No file uploads, all processing happens in your browser
+### 🎨 **AI Image Enhancer**
+- **AI-powered upscaling** (2x, 4x enhancement levels)
+- **Smart noise reduction** with quality preservation
+- **Multiple enhancement types** (Photo, Art, Face, General)
+- **Before/after comparison** with real-time preview
+- **Batch processing** support
+
+### 🎭 **3D Model Designer**
+- **Professional 3D workspace** built with Three.js
+- **Real-time editing** with transform controls
+- **Material editor** (colors, textures, wireframes)
+- **Primitive shapes library** (cube, sphere, cylinder, cone, torus)
+- **Export formats**: STL (3D printing), OBJ, JSON
+- **Scene management** (save/load projects)
+
+### 🎵 **AI Vocal Remover**
+- **Advanced audio separation** using AI algorithms
+- **Create karaoke tracks** (remove vocals)
+- **Extract vocals only** (remove instruments)
+- **Quality controls** (Standard, High, Ultra)
+- **A/B comparison** playback
+- **Format support**: MP3, WAV, FLAC, M4A
+
+### 📺 **YouTube Thumbnail Creator**
+- **Professional design templates** (Gaming, Tech, Vlog, Tutorial)
+- **Advanced text editor** (fonts, colors, strokes, effects)
+- **Preset styles** (Clickbait, Minimalist, Bold & Bright)
+- **Canvas-based editing** with undo/redo
+- **Perfect dimensions** (1280x720) for YouTube
+- **Drag & drop image upload**
+
+### 🖼️ **AI Text-to-Image Generator**
+- **Multiple art styles** (Photorealistic, Anime, Digital Art, Abstract)
+- **Advanced prompt engineering** with suggestions
+- **Batch generation** (1-4 images per request)
+- **Customizable dimensions** and aspect ratios
+- **Fine-tuning controls** (CFG scale, steps, creativity level)
+- **Negative prompts** support
+
+### 🎯 Key Features
+
+- **60+ Professional Tools** - AI-powered and traditional tools
+- **Privacy First** - Client-side processing, no data uploads
+- **24/7 Uptime** - Production server with automatic restart
+- **SEO Optimized** - Schema.org markup, OpenGraph, meta tags
 - **Mobile Responsive** - Works perfectly on all devices
-- **GitHub Pages Ready** - Automatic deployment configured
+- **High Performance** - Lightning fast processing and results
+
+## 🛠️ Tool Categories
+
+### 🤖 **AI Tools** (12+ Tools)
+- AI Image Enhancer
+- 3D Model Designer  
+- AI Vocal Remover
+- YouTube Thumbnail Creator
+- AI Text-to-Image Generator
+- AI Chat Assistant
+- AI Code Generator
+- AI Content Writer
+- AI Art Generator
+- AI Language Translator
+- AI Voice Cloner
+- AI Background Remover
 
 ### 📊 Top High-Volume Tools Included
 
@@ -43,20 +102,61 @@ ToolSlap is a comprehensive collection of free online tools designed to rank hig
 - Meta Tag Generator - SEO tools
 - Password Generator - Security focused
 
-### 🔧 Deployment to GitHub Pages
+## 🚀 Quick Start
+
+### Prerequisites
+- **Node.js 16+** ([Download](https://nodejs.org/))
+- **Python 3.8+** ([Download](https://python.org/)) - for AI features
+- **Git** ([Download](https://git-scm.com/))
+
+### Installation
+
+1. **Clone the repository**
+```bash
+git clone https://github.com/yourusername/toolslap.git
+cd toolslap
+```
+
+2. **Install dependencies**
+```bash
+npm install
+```
+
+3. **Install Python dependencies** (for AI features)
+```bash
+pip install -r requirements.txt
+```
+
+4. **Start development server**
+```bash
+npm start
+```
+
+### 🌐 Production Deployment (24/7)
+
+For production deployment with 24/7 uptime:
+
+1. **Windows**: Double-click `start-production.bat`
+2. **Linux/Mac**: Run `npm run start:production`
+
+The production server includes:
+- **Automatic restart** on crashes
+- **Cluster mode** for multi-core utilization
+- **Health monitoring** and logging
+- **Graceful shutdown** handling
+- **PM2 process management**
+
+### 🔧 GitHub Deployment
 
 #### Step 1: Repository Setup
 
 ```bash
-# Initialize git repository
-git init
+# Add all new files
 git add .
-git commit -m "Initial commit: SEO-optimized ToolSlap platform"
+git commit -m "Add AI tools: Image Enhancer, 3D Designer, Vocal Remover, Thumbnail Creator, Text-to-Image"
 
-# Add your GitHub repository as remote
-git remote add origin https://github.com/yourusername/toolslap.git
-git branch -M main
-git push -u origin main
+# Push to your repository
+git push origin main
 ```
 
 #### Step 2: GitHub Pages Configuration
