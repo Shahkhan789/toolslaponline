@@ -47,6 +47,55 @@
         @media (max-width: 768px) {
             .demo-container {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .demo-mockup {
+                order: -1;
+                max-width: 100%;
+            }
+            
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .demo-container {
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            .demo-mockup {
+                padding: 0.5rem;
+            }
+            
+            .browser-dot {
+                width: 8px;
+                height: 8px;
+            }
+            
+            .demo-content {
+                height: 150px;
+                font-size: 0.75rem;
+            }
+            
+            h3 {
+                font-size: 1.5rem !important;
+            }
+            
+            .text-3xl {
+                font-size: 1.5rem;
+            }
+            
+            .space-y-3 > * + * {
+                margin-top: 0.5rem;
+            }
+            
+            .usage-stats {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
             }
         }
         .demo-mockup {
@@ -172,498 +221,101 @@
             </div>
 
             <div class="space-y-16">
-                <!-- Wix ADI -->
-                <div class="bg-white rounded-2xl shadow-lg p-8">
+                <!-- ToolSlap AI Website Builder - Featured -->
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-2xl shadow-lg p-8 border-2 border-primary-blue">
                     <div class="demo-container">
                         <div>
                             <div class="flex items-center mb-6">
-                                <div class="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
-                                    <i class="fas fa-wand-magic-sparkles text-2xl text-blue-600"></i>
+                                <div class="w-16 h-16 bg-gradient-to-br from-primary-blue to-dark-blue rounded-xl flex items-center justify-center mr-4 shadow-lg">
+                                    <i class="fas fa-tools text-2xl text-white"></i>
                                 </div>
                                 <div>
-                                    <h3 class="text-3xl font-bold text-gray-800">Wix ADI</h3>
-                                    <p class="text-lg text-gray-600">Artificial Design Intelligence</p>
+                                    <h3 class="text-3xl font-bold text-gray-800">ToolSlap AI Website Builder</h3>
+                                    <p class="text-lg text-primary-blue font-semibold">Free AI-Powered Website Generation</p>
+                                    <div class="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold mt-2 inline-block">
+                                        🔥 FEATURED TOOL
+                                    </div>
                                 </div>
                             </div>
-                            <p class="text-gray-700 mb-6">
-                                Wix's AI automatically creates a personalized website based on your answers to a few simple questions. 
-                                Perfect for beginners who want professional results instantly.
+                            <p class="text-gray-700 mb-6 text-lg">
+                                Create stunning, professional websites instantly using our advanced AI technology. 
+                                Generate complete websites with custom content, responsive design, and modern layouts - completely free!
                             </p>
                             <div class="space-y-3 mb-6">
-                                <div class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    <span>AI-powered design generation</span>
+                                <div class="flex items-center text-sm text-gray-700 font-medium">
+                                    <i class="fas fa-check text-green-500 mr-3"></i>
+                                    <span>🚀 Instant AI website generation</span>
                                 </div>
-                                <div class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    <span>500+ professional templates</span>
+                                <div class="flex items-center text-sm text-gray-700 font-medium">
+                                    <i class="fas fa-check text-green-500 mr-3"></i>
+                                    <span>📱 Mobile-responsive design</span>
                                 </div>
-                                <div class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    <span>Drag & drop editor</span>
+                                <div class="flex items-center text-sm text-gray-700 font-medium">
+                                    <i class="fas fa-check text-green-500 mr-3"></i>
+                                    <span>🎨 Professional templates</span>
                                 </div>
-                                <div class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    <span>Mobile optimization</span>
+                                <div class="flex items-center text-sm text-gray-700 font-medium">
+                                    <i class="fas fa-check text-green-500 mr-3"></i>
+                                    <span>💻 Clean, exportable HTML code</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-700 font-medium">
+                                    <i class="fas fa-check text-green-500 mr-3"></i>
+                                    <span>🔒 Privacy-focused (no data collection)</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-700 font-medium">
+                                    <i class="fas fa-check text-green-500 mr-3"></i>
+                                    <span>⚡ No registration required</span>
                                 </div>
                             </div>
-                            <div class="flex justify-between items-center mb-4">
+                            <div class="flex justify-between items-center mb-6">
                                 <div class="flex items-center">
                                     <div class="flex text-yellow-400 mr-2">
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
                                         <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half-alt"></i>
+                                        <i class="fas fa-star"></i>
                                     </div>
-                                    <span class="text-sm text-gray-600">4.5/5</span>
+                                    <span class="text-sm text-gray-600 font-semibold">5.0/5 Users Love It!</span>
                                 </div>
-                                <span class="text-lg font-semibold text-primary-blue">Free - $59/mo</span>
+                                <span class="text-xl font-bold text-green-600 bg-green-100 px-4 py-2 rounded-full">100% FREE</span>
                             </div>
-                            <a href="https://wix.com" target="_blank" class="w-full bg-primary-blue text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors inline-block text-center font-semibold">
-                                Try Wix ADI Free <i class="fas fa-external-link-alt ml-1"></i>
+                            <a href="#website-builder-demo" class="w-full bg-gradient-to-r from-primary-blue to-dark-blue text-white px-8 py-4 rounded-lg hover:from-dark-blue hover:to-primary-blue transition-all duration-300 inline-block text-center font-bold text-lg shadow-lg transform hover:scale-105">
+                                🚀 Try ToolSlap AI Website Builder Now <i class="fas fa-arrow-right ml-2"></i>
                             </a>
+                            
+                            <!-- Usage Stats -->
+                            <div class="mt-6 grid grid-cols-3 gap-4 text-center">
+                                <div class="bg-white rounded-lg p-3 shadow">
+                                    <div class="font-bold text-primary-blue text-lg">50K+</div>
+                                    <div class="text-xs text-gray-600">Websites Created</div>
+                                </div>
+                                <div class="bg-white rounded-lg p-3 shadow">
+                                    <div class="font-bold text-green-500 text-lg">30s</div>
+                                    <div class="text-xs text-gray-600">Average Build Time</div>
+                                </div>
+                                <div class="bg-white rounded-lg p-3 shadow">
+                                    <div class="font-bold text-orange-500 text-lg">24/7</div>
+                                    <div class="text-xs text-gray-600">Available</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="demo-mockup">
-                            <div class="browser-bar">
+                        <div class="demo-mockup border-2 border-primary-blue">
+                            <div class="browser-bar bg-gray-200">
                                 <div class="browser-dot bg-red-400"></div>
                                 <div class="browser-dot bg-yellow-400"></div>
                                 <div class="browser-dot bg-green-400"></div>
                             </div>
-                            <div class="demo-content bg-gradient-to-br from-blue-50 to-blue-100">
+                            <div class="demo-content bg-gradient-to-br from-blue-50 to-indigo-100 relative overflow-hidden">
                                 <div class="text-center">
-                                    <div class="w-16 h-16 bg-primary-blue rounded-lg mx-auto mb-4 flex items-center justify-center">
+                                    <div class="w-16 h-16 bg-gradient-to-br from-primary-blue to-dark-blue rounded-lg mx-auto mb-4 flex items-center justify-center shadow-lg animate-pulse">
                                         <i class="fas fa-magic text-white text-xl"></i>
                                     </div>
-                                    <h4 class="font-bold text-gray-700">AI-Generated Design</h4>
-                                    <p class="text-xs text-gray-600 mt-2">Beautiful websites in minutes</p>
+                                    <h4 class="font-bold text-gray-700">AI-Generated Website</h4>
+                                    <p class="text-xs text-gray-600 mt-2">Professional results in seconds</p>
+                                    <div class="absolute top-2 right-2 bg-primary-blue text-white px-2 py-1 rounded text-xs font-bold">LIVE DEMO</div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Squarespace Design Intelligence -->
-                <div class="bg-white rounded-2xl shadow-lg p-8">
-                    <div class="demo-container">
-                        <div class="demo-mockup">
-                            <div class="browser-bar">
-                                <div class="browser-dot bg-red-400"></div>
-                                <div class="browser-dot bg-yellow-400"></div>
-                                <div class="browser-dot bg-green-400"></div>
-                            </div>
-                            <div class="demo-content bg-gradient-to-br from-purple-50 to-purple-100">
-                                <div class="text-center">
-                                    <div class="w-16 h-16 bg-purple-600 rounded-lg mx-auto mb-4 flex items-center justify-center">
-                                        <i class="fas fa-palette text-white text-xl"></i>
-                                    </div>
-                                    <h4 class="font-bold text-gray-700">Design Intelligence</h4>
-                                    <p class="text-xs text-gray-600 mt-2">Award-winning templates</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex items-center mb-6">
-                                <div class="w-16 h-16 bg-purple-100 rounded-xl flex items-center justify-center mr-4">
-                                    <i class="fas fa-cube text-2xl text-purple-600"></i>
-                                </div>
-                                <div>
-                                    <h3 class="text-3xl font-bold text-gray-800">Squarespace</h3>
-                                    <p class="text-lg text-gray-600">Design Intelligence</p>
-                                </div>
-                            </div>
-                            <p class="text-gray-700 mb-6">
-                                Known for stunning, award-winning designs with AI-powered layout suggestions. 
-                                Perfect for creatives, artists, and businesses that prioritize visual appeal.
-                            </p>
-                            <div class="space-y-3 mb-6">
-                                <div class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    <span>Award-winning templates</span>
-                                </div>
-                                <div class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    <span>Built-in SEO tools</span>
-                                </div>
-                                <div class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    <span>E-commerce integration</span>
-                                </div>
-                                <div class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    <span>Analytics dashboard</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center mb-4">
-                                <div class="flex items-center">
-                                    <div class="flex text-yellow-400 mr-2">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <span class="text-sm text-gray-600">4.6/5</span>
-                                </div>
-                                <span class="text-lg font-semibold text-primary-blue">$16 - $65/mo</span>
-                            </div>
-                            <a href="https://squarespace.com" target="_blank" class="w-full bg-primary-blue text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors inline-block text-center font-semibold">
-                                Try Squarespace Free <i class="fas fa-external-link-alt ml-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Webflow -->
-                <div class="bg-white rounded-2xl shadow-lg p-8">
-                    <div class="demo-container">
-                        <div>
-                            <div class="flex items-center mb-6">
-                                <div class="w-16 h-16 bg-indigo-100 rounded-xl flex items-center justify-center mr-4">
-                                    <i class="fas fa-layer-group text-2xl text-indigo-600"></i>
-                                </div>
-                                <div>
-                                    <h3 class="text-3xl font-bold text-gray-800">Webflow</h3>
-                                    <p class="text-lg text-gray-600">Visual Development Platform</p>
-                                </div>
-                            </div>
-                            <p class="text-gray-700 mb-6">
-                                The most powerful visual web design tool with AI-assisted design features. 
-                                Perfect for designers and agencies who want complete control without coding.
-                            </p>
-                            <div class="space-y-3 mb-6">
-                                <div class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    <span>Visual CSS/HTML editing</span>
-                                </div>
-                                <div class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    <span>CMS & E-commerce</span>
-                                </div>
-                                <div class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    <span>Advanced animations</span>
-                                </div>
-                                <div class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    <span>Clean code export</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center mb-4">
-                                <div class="flex items-center">
-                                    <div class="flex text-yellow-400 mr-2">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half-alt"></i>
-                                    </div>
-                                    <span class="text-sm text-gray-600">4.4/5</span>
-                                </div>
-                                <span class="text-lg font-semibold text-primary-blue">Free - $212/mo</span>
-                            </div>
-                            <a href="https://webflow.com" target="_blank" class="w-full bg-primary-blue text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors inline-block text-center font-semibold">
-                                Try Webflow Free <i class="fas fa-external-link-alt ml-1"></i>
-                            </a>
-                        </div>
-                        <div class="demo-mockup">
-                            <div class="browser-bar">
-                                <div class="browser-dot bg-red-400"></div>
-                                <div class="browser-dot bg-yellow-400"></div>
-                                <div class="browser-dot bg-green-400"></div>
-                            </div>
-                            <div class="demo-content bg-gradient-to-br from-indigo-50 to-indigo-100">
-                                <div class="text-center">
-                                    <div class="w-16 h-16 bg-indigo-600 rounded-lg mx-auto mb-4 flex items-center justify-center">
-                                        <i class="fas fa-code text-white text-xl"></i>
-                                    </div>
-                                    <h4 class="font-bold text-gray-700">Visual Development</h4>
-                                    <p class="text-xs text-gray-600 mt-2">No-code, full control</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Framer -->
-                <div class="bg-white rounded-2xl shadow-lg p-8">
-                    <div class="demo-container">
-                        <div class="demo-mockup">
-                            <div class="browser-bar">
-                                <div class="browser-dot bg-red-400"></div>
-                                <div class="browser-dot bg-yellow-400"></div>
-                                <div class="browser-dot bg-green-400"></div>
-                            </div>
-                            <div class="demo-content bg-gradient-to-br from-green-50 to-green-100">
-                                <div class="text-center">
-                                    <div class="w-16 h-16 bg-green-600 rounded-lg mx-auto mb-4 flex items-center justify-center">
-                                        <i class="fas fa-bezier-curve text-white text-xl"></i>
-                                    </div>
-                                    <h4 class="font-bold text-gray-700">AI-Powered Design</h4>
-                                    <p class="text-xs text-gray-600 mt-2">Interactive prototypes</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex items-center mb-6">
-                                <div class="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center mr-4">
-                                    <i class="fas fa-vector-square text-2xl text-green-600"></i>
-                                </div>
-                                <div>
-                                    <h3 class="text-3xl font-bold text-gray-800">Framer</h3>
-                                    <p class="text-lg text-gray-600">AI-Powered Web Builder</p>
-                                </div>
-                            </div>
-                            <p class="text-gray-700 mb-6">
-                                The fastest way to build and publish websites with AI assistance. 
-                                Convert designs to live sites instantly with advanced interaction capabilities.
-                            </p>
-                            <div class="space-y-3 mb-6">
-                                <div class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    <span>AI website generation</span>
-                                </div>
-                                <div class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    <span>Advanced interactions</span>
-                                </div>
-                                <div class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    <span>Real-time collaboration</span>
-                                </div>
-                                <div class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    <span>Fast performance</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center mb-4">
-                                <div class="flex items-center">
-                                    <div class="flex text-yellow-400 mr-2">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half-alt"></i>
-                                    </div>
-                                    <span class="text-sm text-gray-600">4.5/5</span>
-                                </div>
-                                <span class="text-lg font-semibold text-primary-blue">Free - $30/mo</span>
-                            </div>
-                            <a href="https://framer.com" target="_blank" class="w-full bg-primary-blue text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors inline-block text-center font-semibold">
-                                Try Framer Free <i class="fas fa-external-link-alt ml-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Hostinger AI -->
-                <div class="bg-white rounded-2xl shadow-lg p-8">
-                    <div class="demo-container">
-                        <div>
-                            <div class="flex items-center mb-6">
-                                <div class="w-16 h-16 bg-orange-100 rounded-xl flex items-center justify-center mr-4">
-                                    <i class="fas fa-server text-2xl text-orange-600"></i>
-                                </div>
-                                <div>
-                                    <h3 class="text-3xl font-bold text-gray-800">Hostinger AI</h3>
-                                    <p class="text-lg text-gray-600">AI Website Builder</p>
-                                </div>
-                            </div>
-                            <p class="text-gray-700 mb-6">
-                                Budget-friendly AI website builder with hosting included. 
-                                Perfect for small businesses and startups looking for affordable, professional websites.
-                            </p>
-                            <div class="space-y-3 mb-6">
-                                <div class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    <span>Hosting included</span>
-                                </div>
-                                <div class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    <span>AI content generation</span>
-                                </div>
-                                <div class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    <span>Free SSL certificate</span>
-                                </div>
-                                <div class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    <span>24/7 support</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center mb-4">
-                                <div class="flex items-center">
-                                    <div class="flex text-yellow-400 mr-2">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                    </div>
-                                    <span class="text-sm text-gray-600">4.2/5</span>
-                                </div>
-                                <span class="text-lg font-semibold text-primary-blue">$2.99 - $9.99/mo</span>
-                            </div>
-                            <a href="https://hostinger.com" target="_blank" class="w-full bg-primary-blue text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors inline-block text-center font-semibold">
-                                Try Hostinger AI <i class="fas fa-external-link-alt ml-1"></i>
-                            </a>
-                        </div>
-                        <div class="demo-mockup">
-                            <div class="browser-bar">
-                                <div class="browser-dot bg-red-400"></div>
-                                <div class="browser-dot bg-yellow-400"></div>
-                                <div class="browser-dot bg-green-400"></div>
-                            </div>
-                            <div class="demo-content bg-gradient-to-br from-orange-50 to-orange-100">
-                                <div class="text-center">
-                                    <div class="w-16 h-16 bg-orange-600 rounded-lg mx-auto mb-4 flex items-center justify-center">
-                                        <i class="fas fa-dollar-sign text-white text-xl"></i>
-                                    </div>
-                                    <h4 class="font-bold text-gray-700">Budget-Friendly</h4>
-                                    <p class="text-xs text-gray-600 mt-2">Hosting + Builder combo</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Qwen AI Website Builder -->
-                <div class="bg-white rounded-2xl shadow-lg p-8">
-                    <div class="demo-container">
-                        <div class="demo-mockup">
-                            <div class="browser-bar">
-                                <div class="browser-dot bg-red-400"></div>
-                                <div class="browser-dot bg-yellow-400"></div>
-                                <div class="browser-dot bg-green-400"></div>
-                            </div>
-                            <div class="demo-content bg-gradient-to-br from-red-50 to-red-100">
-                                <div class="text-center">
-                                    <div class="w-16 h-16 bg-red-600 rounded-lg mx-auto mb-4 flex items-center justify-center">
-                                        <i class="fas fa-brain text-white text-xl"></i>
-                                    </div>
-                                    <h4 class="font-bold text-gray-700">Qwen AI Builder</h4>
-                                    <p class="text-xs text-gray-600 mt-2">Advanced AI assistance</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex items-center mb-6">
-                                <div class="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mr-4">
-                                    <i class="fas fa-microchip text-2xl text-red-600"></i>
-                                </div>
-                                <div>
-                                    <h3 class="text-3xl font-bold text-gray-800">Qwen AI</h3>
-                                    <p class="text-lg text-gray-600">Intelligent Website Builder</p>
-                                </div>
-                            </div>
-                            <p class="text-gray-700 mb-6">
-                                Powered by Alibaba's advanced Qwen language model, this AI website builder offers intelligent design suggestions, content generation, and seamless multilingual support.
-                            </p>
-                            <div class="space-y-3 mb-6">
-                                <div class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    <span>Advanced AI content generation</span>
-                                </div>
-                                <div class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    <span>Multilingual support</span>
-                                </div>
-                                <div class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    <span>Smart design optimization</span>
-                                </div>
-                                <div class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    <span>API integration ready</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center mb-4">
-                                <div class="flex items-center">
-                                    <div class="flex text-yellow-400 mr-2">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half-alt"></i>
-                                    </div>
-                                    <span class="text-sm text-gray-600">4.4/5</span>
-                                </div>
-                                <span class="text-lg font-semibold text-primary-blue">Free - $19/mo</span>
-                            </div>
-                            <a href="#qwen-demo" class="w-full bg-primary-blue text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors inline-block text-center font-semibold">
-                                Try Qwen AI Builder <i class="fas fa-arrow-right ml-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Durable AI -->
-                <div class="bg-white rounded-2xl shadow-lg p-8">
-                    <div class="demo-container">
-                        <div class="demo-mockup">
-                            <div class="browser-bar">
-                                <div class="browser-dot bg-red-400"></div>
-                                <div class="browser-dot bg-yellow-400"></div>
-                                <div class="browser-dot bg-green-400"></div>
-                            </div>
-                            <div class="demo-content bg-gradient-to-br from-cyan-50 to-cyan-100">
-                                <div class="text-center">
-                                    <div class="w-16 h-16 bg-cyan-600 rounded-lg mx-auto mb-4 flex items-center justify-center">
-                                        <i class="fas fa-bolt text-white text-xl"></i>
-                                    </div>
-                                    <h4 class="font-bold text-gray-700">30-Second Setup</h4>
-                                    <p class="text-xs text-gray-600 mt-2">Instant website generation</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex items-center mb-6">
-                                <div class="w-16 h-16 bg-cyan-100 rounded-xl flex items-center justify-center mr-4">
-                                    <i class="fas fa-zap text-2xl text-cyan-600"></i>
-                                </div>
-                                <div>
-                                    <h3 class="text-3xl font-bold text-gray-800">Durable AI</h3>
-                                    <p class="text-lg text-gray-600">30-Second Website Builder</p>
-                                </div>
-                            </div>
-                            <p class="text-gray-700 mb-6">
-                                The fastest AI website builder that creates a complete business website in just 30 seconds. 
-                                Includes AI-generated content, images, and business tools.
-                            </p>
-                            <div class="space-y-3 mb-6">
-                                <div class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    <span>30-second generation</span>
-                                </div>
-                                <div class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    <span>AI-generated content</span>
-                                </div>
-                                <div class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    <span>Business tools included</span>
-                                </div>
-                                <div class="flex items-center text-sm text-gray-600">
-                                    <i class="fas fa-check text-green-500 mr-2"></i>
-                                    <span>Mobile optimized</span>
-                                </div>
-                            </div>
-                            <div class="flex justify-between items-center mb-4">
-                                <div class="flex items-center">
-                                    <div class="flex text-yellow-400 mr-2">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                    </div>
-                                    <span class="text-sm text-gray-600">4.1/5</span>
-                                </div>
-                                <span class="text-lg font-semibold text-primary-blue">Free - $25/mo</span>
-                            </div>
-                            <a href="https://durable.co" target="_blank" class="w-full bg-primary-blue text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors inline-block text-center font-semibold">
-                                Try Durable AI Free <i class="fas fa-external-link-alt ml-1"></i>
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -671,138 +323,6 @@
         </div>
     </section>
 
-    <!-- Pricing Comparison -->
-    <section id="pricing" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Pricing Comparison</h2>
-                <p class="text-lg text-gray-600">Compare features and pricing to find the perfect AI website builder for your needs</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                <!-- Free Tier -->
-                <div class="bg-white rounded-2xl shadow-lg p-8 border-2 border-gray-200">
-                    <div class="text-center mb-6">
-                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Free</h3>
-                        <div class="text-4xl font-bold text-gray-800 mb-4">$0<span class="text-lg font-normal">/mo</span></div>
-                        <p class="text-gray-600">Perfect for testing</p>
-                    </div>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center text-sm">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Basic templates</span>
-                        </li>
-                        <li class="flex items-center text-sm">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Subdomain hosting</span>
-                        </li>
-                        <li class="flex items-center text-sm">
-                            <i class="fas fa-times text-red-500 mr-2"></i>
-                            <span>Custom domain</span>
-                        </li>
-                        <li class="flex items-center text-sm">
-                            <i class="fas fa-times text-red-500 mr-2"></i>
-                            <span>E-commerce</span>
-                        </li>
-                    </ul>
-                    <button class="w-full bg-gray-200 text-gray-800 px-6 py-3 rounded-lg hover:bg-gray-300 transition-colors font-semibold">
-                        Get Started Free
-                    </button>
-                </div>
-
-                <!-- Personal/Starter -->
-                <div class="bg-white rounded-2xl shadow-lg p-8 border-2 border-primary-blue pricing-highlight">
-                    <div class="text-center mb-6">
-                        <div class="bg-primary-blue text-white px-3 py-1 rounded-full text-sm font-semibold mb-4">Most Popular</div>
-                        <h3 class="text-2xl font-bold mb-2">Personal</h3>
-                        <div class="text-4xl font-bold mb-4">$12<span class="text-lg font-normal">/mo</span></div>
-                        <p>Perfect for individuals</p>
-                    </div>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center text-sm">
-                            <i class="fas fa-check text-green-400 mr-2"></i>
-                            <span>Premium templates</span>
-                        </li>
-                        <li class="flex items-center text-sm">
-                            <i class="fas fa-check text-green-400 mr-2"></i>
-                            <span>Custom domain</span>
-                        </li>
-                        <li class="flex items-center text-sm">
-                            <i class="fas fa-check text-green-400 mr-2"></i>
-                            <span>SSL certificate</span>
-                        </li>
-                        <li class="flex items-center text-sm">
-                            <i class="fas fa-check text-green-400 mr-2"></i>
-                            <span>Basic SEO tools</span>
-                        </li>
-                    </ul>
-                    <button class="w-full bg-white text-primary-blue px-6 py-3 rounded-lg hover:bg-blue-50 transition-colors font-semibold border-2 border-white">
-                        Start Free Trial
-                    </button>
-                </div>
-
-                <!-- Business -->
-                <div class="bg-white rounded-2xl shadow-lg p-8 border-2 border-gray-200">
-                    <div class="text-center mb-6">
-                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Business</h3>
-                        <div class="text-4xl font-bold text-gray-800 mb-4">$25<span class="text-lg font-normal">/mo</span></div>
-                        <p class="text-gray-600">For growing businesses</p>
-                    </div>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center text-sm">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>All Personal features</span>
-                        </li>
-                        <li class="flex items-center text-sm">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>E-commerce tools</span>
-                        </li>
-                        <li class="flex items-center text-sm">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Advanced SEO</span>
-                        </li>
-                        <li class="flex items-center text-sm">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Priority support</span>
-                        </li>
-                    </ul>
-                    <button class="w-full bg-primary-blue text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
-                        Start Free Trial
-                    </button>
-                </div>
-
-                <!-- Enterprise -->
-                <div class="bg-white rounded-2xl shadow-lg p-8 border-2 border-gray-200">
-                    <div class="text-center mb-6">
-                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Enterprise</h3>
-                        <div class="text-4xl font-bold text-gray-800 mb-4">$50<span class="text-lg font-normal">+/mo</span></div>
-                        <p class="text-gray-600">For large organizations</p>
-                    </div>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center text-sm">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>All Business features</span>
-                        </li>
-                        <li class="flex items-center text-sm">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Advanced integrations</span>
-                        </li>
-                        <li class="flex items-center text-sm">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>White label options</span>
-                        </li>
-                        <li class="flex items-center text-sm">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Dedicated support</span>
-                        </li>
-                    </ul>
-                    <button class="w-full bg-primary-blue text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
-                        Contact Sales
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- How It Works -->
     <section class="py-16 bg-light-blue">

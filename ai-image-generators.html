@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Best AI Image Generators 2025 | DALL-E, Midjourney, Stable Diffusion - ToolSlap</title>
-    <meta name="description" content="Discover the top 10 AI image generators in 2025. Compare DALL-E 3, Midjourney, Stable Diffusion, and more. Free AI art tools with use-cases and pricing comparison.">
-    <meta name="keywords" content="AI image generators, DALL-E 3, Midjourney, Stable Diffusion, AI art, image generation, AI artwork, text to image, art generators">
+    <title>ToolSlap AI Image Analysis & Tools | Free AI Vision & Image Processing - ToolSlap</title>
+    <meta name="description" content="Experience ToolSlap's AI-powered image analysis and processing tools. Extract text with OCR, detect objects, analyze content, and get detailed insights - all for free.">
+    <meta name="keywords" content="ToolSlap AI, AI image analysis, OCR, object detection, image processing, AI vision tools, free image tools">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -40,26 +40,32 @@
         }
         .feature-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
         }
-        .comparison-table {
-            overflow-x: auto;
+        
+        /* Mobile-friendly responsive grid */
+        @media (max-width: 768px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .hero-title {
+                font-size: 2.5rem !important;
+            }
+            .hero-subtitle {
+                font-size: 1.25rem !important;
+            }
         }
-        .comparison-table table {
-            width: 100%;
-            min-width: 800px;
+        
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem !important;
+            }
+            .hero-subtitle {
+                font-size: 1.125rem !important;
+            }
         }
-        .pricing-badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.875rem;
-            font-weight: 600;
-        }
-        .pricing-free { background: #10B981; color: white; }
-        .pricing-paid { background: #F59E0B; color: white; }
-        .pricing-freemium { background: #8B5CF6; color: white; }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -88,18 +94,18 @@
     <section class="gradient-bg text-white py-20">
         <div class="container mx-auto px-4 text-center">
             <div class="max-w-4xl mx-auto">
-                <i class="fas fa-palette text-6xl mb-6 text-blue-200"></i>
-                <h1 class="text-4xl md:text-5xl font-bold mb-6">Best AI Image Generators 2025</h1>
-                <p class="text-xl md:text-2xl mb-8 text-blue-100">
-                    Create stunning AI-generated artwork with the top image generation tools. 
-                    Compare DALL-E 3, Midjourney, Stable Diffusion and more AI art platforms.
+                <i class="fas fa-image text-6xl mb-6 text-blue-200"></i>
+                <h1 class="hero-title text-4xl md:text-5xl font-bold mb-6">ToolSlap AI Image Tools</h1>
+                <p class="hero-subtitle text-xl md:text-2xl mb-8 text-blue-100">
+                    Analyze, process, and understand images with powerful AI. 
+                    Extract text, detect objects, and get detailed insights - all completely free!
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#generators-gallery" class="bg-white text-primary-blue px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
-                        <i class="fas fa-eye mr-2"></i>Browse Generators
+                    <a href="#image-tools" class="bg-white text-primary-blue px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+                        <i class="fas fa-eye mr-2"></i>Explore Tools
                     </a>
-                    <a href="#comparison" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary-blue transition-colors">
-                        <i class="fas fa-chart-bar mr-2"></i>Compare Features
+                    <a href="#demo" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary-blue transition-colors">
+                        <i class="fas fa-play mr-2"></i>Try Demo
                     </a>
                 </div>
             </div>
@@ -111,712 +117,442 @@
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-gray-800 mb-4">Popular Use Cases</h2>
-                <p class="text-lg text-gray-600">AI image generators are perfect for various creative and professional needs</p>
+                <p class="text-lg text-gray-600">ToolSlap's AI image tools are perfect for various professional needs</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="text-center p-6">
-                    <i class="fas fa-paintbrush text-4xl text-primary-blue mb-4"></i>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Digital Art</h3>
-                    <p class="text-gray-600">Create unique artwork, illustrations, and creative designs</p>
+                    <i class="fas fa-file-text text-4xl text-primary-blue mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">OCR & Text Extraction</h3>
+                    <p class="text-gray-600">Extract text from documents, images, and screenshots instantly</p>
                 </div>
                 <div class="text-center p-6">
-                    <i class="fas fa-bullhorn text-4xl text-primary-blue mb-4"></i>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Marketing</h3>
-                    <p class="text-gray-600">Generate social media content, ads, and promotional materials</p>
+                    <i class="fas fa-search text-4xl text-primary-blue mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Object Detection</h3>
+                    <p class="text-gray-600">Identify and locate objects, people, and items in images</p>
                 </div>
                 <div class="text-center p-6">
-                    <i class="fas fa-globe text-4xl text-primary-blue mb-4"></i>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Web Design</h3>
-                    <p class="text-gray-600">Create website headers, backgrounds, and visual elements</p>
+                    <i class="fas fa-eye text-4xl text-primary-blue mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Content Analysis</h3>
+                    <p class="text-gray-600">Get detailed descriptions and insights about image content</p>
                 </div>
                 <div class="text-center p-6">
-                    <i class="fas fa-book text-4xl text-primary-blue mb-4"></i>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Content Creation</h3>
-                    <p class="text-gray-600">Generate blog images, book covers, and educational materials</p>
+                    <i class="fas fa-chart-bar text-4xl text-primary-blue mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Visual Analytics</h3>
+                    <p class="text-gray-600">Analyze visual data for business intelligence and insights</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Top 10 AI Image Generators -->
-    <section id="generators-gallery" class="py-16 bg-light-blue">
+    <!-- ToolSlap AI Image Tools -->
+    <section id="image-tools" class="py-16 bg-light-blue">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Top 10 AI Image Generators</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">ToolSlap AI Image Tools</h2>
                 <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-                    Explore the most powerful AI image generation tools available today. Each offers unique features and capabilities for different creative needs.
+                    Powerful AI-driven image processing tools built right into ToolSlap. Each tool is completely free and ready to use.
                 </p>
             </div>
 
             <div class="feature-grid">
-                <!-- DALL-E 3 -->
-                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center mr-4">
-                            <i class="fas fa-robot text-2xl text-green-600"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="text-2xl font-bold text-gray-800">DALL-E 3</h3>
-                            <p class="text-gray-600">OpenAI</p>
-                            <span class="pricing-badge pricing-paid">$20/month</span>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 mb-6">
-                        The latest version of OpenAI's image generator with improved prompt understanding and photorealistic results. Integrated with ChatGPT for enhanced creativity.
-                    </p>
-                    <div class="space-y-3 mb-6">
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Natural language prompts</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>High-quality 1024x1024 images</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>ChatGPT integration</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Safety filters built-in</span>
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center">
-                            <div class="flex text-yellow-400 mr-2">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <span class="text-sm text-gray-600">4.8/5</span>
-                        </div>
-                        <a href="https://openai.com/dall-e-3" target="_blank" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                            Try Now <i class="fas fa-external-link-alt ml-1"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Midjourney -->
-                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 bg-purple-100 rounded-xl flex items-center justify-center mr-4">
-                            <i class="fas fa-magic text-2xl text-purple-600"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="text-2xl font-bold text-gray-800">Midjourney</h3>
-                            <p class="text-gray-600">Midjourney Inc.</p>
-                            <span class="pricing-badge pricing-paid">$10/month</span>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 mb-6">
-                        Renowned for creating artistic and stylized images with exceptional quality. Popular among digital artists and creative professionals for its unique aesthetic.
-                    </p>
-                    <div class="space-y-3 mb-6">
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Artistic and stylized results</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Discord-based interface</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Version 6 with enhanced quality</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Community gallery</span>
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center">
-                            <div class="flex text-yellow-400 mr-2">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <span class="text-sm text-gray-600">4.9/5</span>
-                        </div>
-                        <a href="https://midjourney.com" target="_blank" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                            Try Now <i class="fas fa-external-link-alt ml-1"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Stable Diffusion -->
-                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
-                            <i class="fas fa-code text-2xl text-blue-600"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="text-2xl font-bold text-gray-800">Stable Diffusion</h3>
-                            <p class="text-gray-600">Stability AI</p>
-                            <span class="pricing-badge pricing-free">Free</span>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 mb-6">
-                        Open-source AI image generator that can run locally or in the cloud. Highly customizable with fine-tuned models and extensions for specific use cases.
-                    </p>
-                    <div class="space-y-3 mb-6">
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Open source & free</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Run locally or cloud</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Custom models available</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>API access</span>
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center">
-                            <div class="flex text-yellow-400 mr-2">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <span class="text-sm text-gray-600">4.7/5</span>
-                        </div>
-                        <a href="https://stability.ai" target="_blank" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                            Try Now <i class="fas fa-external-link-alt ml-1"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Adobe Firefly -->
-                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mr-4">
-                            <i class="fab fa-adobe text-2xl text-red-600"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="text-2xl font-bold text-gray-800">Adobe Firefly</h3>
-                            <p class="text-gray-600">Adobe</p>
-                            <span class="pricing-badge pricing-freemium">Freemium</span>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 mb-6">
-                        Adobe's AI image generator integrated into Creative Cloud. Trained on licensed content with commercial safety and Creative Cloud integration.
-                    </p>
-                    <div class="space-y-3 mb-6">
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Creative Cloud integration</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Commercial safe training data</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Text effects generation</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Vector recoloring</span>
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center">
-                            <div class="flex text-yellow-400 mr-2">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-                            <span class="text-sm text-gray-600">4.3/5</span>
-                        </div>
-                        <a href="https://firefly.adobe.com" target="_blank" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                            Try Now <i class="fas fa-external-link-alt ml-1"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Leonardo AI -->
-                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 bg-indigo-100 rounded-xl flex items-center justify-center mr-4">
-                            <i class="fas fa-user-astronaut text-2xl text-indigo-600"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="text-2xl font-bold text-gray-800">Leonardo AI</h3>
-                            <p class="text-gray-600">Leonardo.AI</p>
-                            <span class="pricing-badge pricing-freemium">Freemium</span>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 mb-6">
-                        Focus on game assets, concept art, and character design. Offers fine-tuned models for specific art styles and gaming content creation.
-                    </p>
-                    <div class="space-y-3 mb-6">
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Game asset generation</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Character design tools</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Style-specific models</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Texture generation</span>
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center">
-                            <div class="flex text-yellow-400 mr-2">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-                            <span class="text-sm text-gray-600">4.4/5</span>
-                        </div>
-                        <a href="https://leonardo.ai" target="_blank" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                            Try Now <i class="fas fa-external-link-alt ml-1"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Canva AI -->
-                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 bg-cyan-100 rounded-xl flex items-center justify-center mr-4">
-                            <i class="fas fa-palette text-2xl text-cyan-600"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="text-2xl font-bold text-gray-800">Canva AI</h3>
-                            <p class="text-gray-600">Canva</p>
-                            <span class="pricing-badge pricing-freemium">Freemium</span>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 mb-6">
-                        Built into Canva's design platform for seamless integration with templates and design workflows. Perfect for social media and marketing content.
-                    </p>
-                    <div class="space-y-3 mb-6">
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Integrated with Canva editor</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Template compatibility</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Brand kit integration</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Social media formats</span>
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center">
-                            <div class="flex text-yellow-400 mr-2">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-                            <span class="text-sm text-gray-600">4.2/5</span>
-                        </div>
-                        <a href="https://canva.com" target="_blank" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                            Try Now <i class="fas fa-external-link-alt ml-1"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center mt-12">
-                <button class="bg-primary-blue text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors" onclick="showMore()">
-                    <i class="fas fa-plus mr-2"></i>Show 4 More Generators
-                </button>
-            </div>
-
-            <!-- Additional generators (initially hidden) -->
-            <div id="more-generators" class="feature-grid mt-8 hidden">
-                <!-- Playground AI -->
+                <!-- AI Image Analyzer -->
                 <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
                     <div class="flex items-center mb-6">
                         <div class="w-16 h-16 bg-orange-100 rounded-xl flex items-center justify-center mr-4">
-                            <i class="fas fa-gamepad text-2xl text-orange-600"></i>
+                            <i class="fas fa-image text-2xl text-orange-600"></i>
                         </div>
-                        <div class="flex-1">
-                            <h3 class="text-2xl font-bold text-gray-800">Playground AI</h3>
-                            <p class="text-gray-600">Playground AI</p>
-                            <span class="pricing-badge pricing-freemium">Freemium</span>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800">AI Image Analyzer</h3>
+                            <p class="text-gray-600">ToolSlap</p>
                         </div>
                     </div>
                     <p class="text-gray-700 mb-6">
-                        User-friendly interface with various AI models and filters. Great for beginners with extensive customization options and style presets.
+                        Comprehensive AI-powered image analysis with OCR, object detection, content description, and detailed insights using advanced vision models.
                     </p>
                     <div class="space-y-3 mb-6">
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Multiple AI models</span>
+                            <span>OCR text extraction</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Style presets</span>
+                            <span>Object detection & recognition</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Image editing tools</span>
+                            <span>Content description & analysis</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Community sharing</span>
+                            <span>Multiple image formats supported</span>
                         </div>
                     </div>
                     <div class="flex justify-between items-center">
-                        <div class="flex items-center">
-                            <div class="flex text-yellow-400 mr-2">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-                            <span class="text-sm text-gray-600">4.1/5</span>
-                        </div>
-                        <a href="https://playground.ai" target="_blank" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                            Try Now <i class="fas fa-external-link-alt ml-1"></i>
+                        <span class="text-lg font-semibold text-orange-600">100% Free</span>
+                        <a href="ai-image-analyzer.html" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                            Use Tool <i class="fas fa-arrow-right ml-1"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- Artbreeder -->
+                <!-- Background Remover -->
                 <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
                     <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 bg-pink-100 rounded-xl flex items-center justify-center mr-4">
-                            <i class="fas fa-dna text-2xl text-pink-600"></i>
+                        <div class="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-magic text-2xl text-green-600"></i>
                         </div>
-                        <div class="flex-1">
-                            <h3 class="text-2xl font-bold text-gray-800">Artbreeder</h3>
-                            <p class="text-gray-600">Artbreeder</p>
-                            <span class="pricing-badge pricing-freemium">Freemium</span>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800">Background Remover</h3>
+                            <p class="text-gray-600">ToolSlap</p>
                         </div>
                     </div>
                     <p class="text-gray-700 mb-6">
-                        Collaborative platform for creating and evolving images through breeding and mixing. Unique approach to AI art generation with community features.
+                        AI-powered background removal tool that automatically detects and removes backgrounds from images with professional results.
                     </p>
                     <div class="space-y-3 mb-6">
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Image breeding/mixing</span>
+                            <span>Automatic background detection</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Collaborative creation</span>
+                            <span>High-quality edge detection</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Portrait generation</span>
+                            <span>Transparent PNG output</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Landscape creation</span>
+                            <span>Perfect for product photos</span>
                         </div>
                     </div>
                     <div class="flex justify-between items-center">
-                        <div class="flex items-center">
-                            <div class="flex text-yellow-400 mr-2">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-                            <span class="text-sm text-gray-600">4.0/5</span>
-                        </div>
-                        <a href="https://artbreeder.com" target="_blank" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                            Try Now <i class="fas fa-external-link-alt ml-1"></i>
+                        <span class="text-lg font-semibold text-green-600">100% Free</span>
+                        <a href="bg-remover.html" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                            Use Tool <i class="fas fa-arrow-right ml-1"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- RunwayML -->
+                <!-- Image Converter -->
                 <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
                     <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 bg-gray-100 rounded-xl flex items-center justify-center mr-4">
-                            <i class="fas fa-play text-2xl text-gray-600"></i>
+                        <div class="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-exchange-alt text-2xl text-blue-600"></i>
                         </div>
-                        <div class="flex-1">
-                            <h3 class="text-2xl font-bold text-gray-800">RunwayML</h3>
-                            <p class="text-gray-600">Runway</p>
-                            <span class="pricing-badge pricing-freemium">Freemium</span>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800">Image Converter</h3>
+                            <p class="text-gray-600">ToolSlap</p>
                         </div>
                     </div>
                     <p class="text-gray-700 mb-6">
-                        Creative AI platform with image, video, and audio generation. Popular among content creators and filmmakers for its comprehensive AI toolkit.
+                        Convert images between different formats instantly. Support for PNG, JPG, JPEG, WEBP, BMP, GIF, and more formats.
                     </p>
                     <div class="space-y-3 mb-6">
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Image & video generation</span>
+                            <span>Multiple format support</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Real-time editing</span>
+                            <span>Batch conversion available</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Background removal</span>
+                            <span>Quality preservation</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Style transfer</span>
+                            <span>Fast processing</span>
                         </div>
                     </div>
                     <div class="flex justify-between items-center">
-                        <div class="flex items-center">
-                            <div class="flex text-yellow-400 mr-2">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-                            <span class="text-sm text-gray-600">4.3/5</span>
-                        </div>
-                        <a href="https://runwayml.com" target="_blank" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                            Try Now <i class="fas fa-external-link-alt ml-1"></i>
+                        <span class="text-lg font-semibold text-blue-600">100% Free</span>
+                        <a href="image-converter.html" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                            Use Tool <i class="fas fa-arrow-right ml-1"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- NightCafe -->
-                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
+                <!-- HEIC to JPG Converter -->
+                <div class="bg-white rounded-xl shadow-lg p-8 card-hover border-2 border-yellow-300">
                     <div class="flex items-center mb-6">
                         <div class="w-16 h-16 bg-yellow-100 rounded-xl flex items-center justify-center mr-4">
-                            <i class="fas fa-moon text-2xl text-yellow-600"></i>
+                            <i class="fas fa-mobile-alt text-2xl text-yellow-600"></i>
                         </div>
-                        <div class="flex-1">
-                            <h3 class="text-2xl font-bold text-gray-800">NightCafe</h3>
-                            <p class="text-gray-600">NightCafe Studio</p>
-                            <span class="pricing-badge pricing-freemium">Freemium</span>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800">HEIC to JPG</h3>
+                            <p class="text-gray-600">ToolSlap</p>
                         </div>
                     </div>
                     <p class="text-gray-700 mb-6">
-                        Community-focused AI art platform with daily challenges and competitions. Offers multiple AI algorithms and artistic styles for diverse creativity.
+                        Convert Apple HEIC/HEIF images to JPG format instantly. Perfect for making iPhone photos compatible with all devices.
                     </p>
                     <div class="space-y-3 mb-6">
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Multiple AI algorithms</span>
+                            <span>Apple HEIC/HEIF support</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Daily challenges</span>
+                            <span>Batch processing</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Community voting</span>
+                            <span>Quality control</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Print on demand</span>
+                            <span>Drag & drop support</span>
                         </div>
                     </div>
                     <div class="flex justify-between items-center">
-                        <div class="flex items-center">
-                            <div class="flex text-yellow-400 mr-2">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                            </div>
-                            <span class="text-sm text-gray-600">4.2/5</span>
-                        </div>
-                        <a href="https://nightcafe.studio" target="_blank" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                            Try Now <i class="fas fa-external-link-alt ml-1"></i>
+                        <span class="text-lg font-semibold text-yellow-600">100% Free</span>
+                        <a href="heic-to-jpg-converter.html" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                            Use Tool <i class="fas fa-arrow-right ml-1"></i>
                         </a>
+                    </div>
+                    <div class="absolute -top-2 -right-2 bg-yellow-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        POPULAR
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Comparison Table -->
-    <section id="comparison" class="py-16 bg-white">
+    <!-- AI Image Analysis Demo -->
+    <section id="demo" class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Feature Comparison</h2>
-                <p class="text-lg text-gray-600">Compare the key features and pricing of top AI image generators</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                    <i class="fas fa-eye text-primary-blue mr-3"></i>Try AI Image Analysis
+                </h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Upload an image and see our AI analyze it in real-time. Get OCR results, object detection, and detailed insights instantly!
+                </p>
             </div>
 
-            <div class="comparison-table">
-                <table class="bg-white rounded-lg shadow-lg overflow-hidden">
-                    <thead class="gradient-bg text-white">
-                        <tr>
-                            <th class="px-6 py-4 text-left font-semibold">Generator</th>
-                            <th class="px-6 py-4 text-center font-semibold">Pricing</th>
-                            <th class="px-6 py-4 text-center font-semibold">Quality</th>
-                            <th class="px-6 py-4 text-center font-semibold">Speed</th>
-                            <th class="px-6 py-4 text-center font-semibold">API</th>
-                            <th class="px-6 py-4 text-center font-semibold">Commercial Use</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-gray-200">
-                        <tr class="hover:bg-gray-50">
-                            <td class="px-6 py-4 font-semibold">DALL-E 3</td>
-                            <td class="px-6 py-4 text-center">$20/mo</td>
-                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></td>
-                            <td class="px-6 py-4 text-center text-yellow-600"><i class="fas fa-clock"></i> Medium</td>
-                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-check"></i></td>
-                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-check"></i></td>
-                        </tr>
-                        <tr class="hover:bg-gray-50">
-                            <td class="px-6 py-4 font-semibold">Midjourney</td>
-                            <td class="px-6 py-4 text-center">$10/mo</td>
-                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></td>
-                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-bolt"></i> Fast</td>
-                            <td class="px-6 py-4 text-center text-red-600"><i class="fas fa-times"></i></td>
-                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-check"></i></td>
-                        </tr>
-                        <tr class="hover:bg-gray-50">
-                            <td class="px-6 py-4 font-semibold">Stable Diffusion</td>
-                            <td class="px-6 py-4 text-center">Free</td>
-                            <td class="px-6 py-4 text-center text-yellow-600"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></td>
-                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-bolt"></i> Fast</td>
-                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-check"></i></td>
-                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-check"></i></td>
-                        </tr>
-                        <tr class="hover:bg-gray-50">
-                            <td class="px-6 py-4 font-semibold">Adobe Firefly</td>
-                            <td class="px-6 py-4 text-center">Freemium</td>
-                            <td class="px-6 py-4 text-center text-yellow-600"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></td>
-                            <td class="px-6 py-4 text-center text-yellow-600"><i class="fas fa-clock"></i> Medium</td>
-                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-check"></i></td>
-                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-check"></i></td>
-                        </tr>
-                        <tr class="hover:bg-gray-50">
-                            <td class="px-6 py-4 font-semibold">Leonardo AI</td>
-                            <td class="px-6 py-4 text-center">Freemium</td>
-                            <td class="px-6 py-4 text-center text-yellow-600"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></td>
-                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-bolt"></i> Fast</td>
-                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-check"></i></td>
-                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-check"></i></td>
-                        </tr>
-                        <tr class="hover:bg-gray-50">
-                            <td class="px-6 py-4 font-semibold">Canva AI</td>
-                            <td class="px-6 py-4 text-center">Freemium</td>
-                            <td class="px-6 py-4 text-center text-yellow-600"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i></td>
-                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-bolt"></i> Fast</td>
-                            <td class="px-6 py-4 text-center text-red-600"><i class="fas fa-times"></i></td>
-                            <td class="px-6 py-4 text-center text-green-600"><i class="fas fa-check"></i></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-xl shadow-lg border border-blue-200 overflow-hidden">
+                    <!-- Demo Header -->
+                    <div class="gradient-bg text-white p-6">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-image text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">AI Image Analyzer Demo</h3>
+                                    <p class="text-blue-200 text-sm">Upload an image to analyze</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 rounded-full bg-green-400"></div>
+                                <span class="text-sm">Ready</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Demo Upload Area -->
+                    <div class="p-6">
+                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center hover:border-blue-400 transition-colors cursor-pointer" id="uploadArea">
+                            <div class="mb-4">
+                                <i class="fas fa-cloud-upload-alt text-4xl text-gray-400"></i>
+                            </div>
+                            <h4 class="text-lg font-semibold text-gray-700 mb-2">Drop an image here or click to upload</h4>
+                            <p class="text-gray-500 text-sm">Supports JPG, PNG, HEIC, WEBP and more formats</p>
+                            <input type="file" id="imageInput" accept="image/*" class="hidden">
+                        </div>
+
+                        <!-- Demo Results Area -->
+                        <div id="analysisResults" class="mt-6 hidden">
+                            <h4 class="text-lg font-semibold text-gray-800 mb-4">Analysis Results:</h4>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <h5 class="font-semibold text-gray-700 mb-2">Detected Objects:</h5>
+                                    <div id="objectResults" class="space-y-2">
+                                        <!-- Results will be populated here -->
+                                    </div>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-gray-700 mb-2">Extracted Text (OCR):</h5>
+                                    <div id="ocrResults" class="bg-gray-50 p-4 rounded-lg min-h-[100px]">
+                                        <!-- OCR results will be populated here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Call to Action -->
+                        <div class="mt-8 text-center">
+                            <a href="ai-image-analyzer.html" class="inline-block bg-primary-blue text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                                <i class="fas fa-arrow-right mr-2"></i>Try Full AI Image Analyzer
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose ToolSlap -->
+    <section class="py-16 bg-light-blue">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Why Choose ToolSlap AI Image Tools?</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Experience the difference with our integrated AI vision tools
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-primary-blue rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-gift text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">100% Free</h3>
+                    <p class="text-gray-600">All image tools are completely free to use with no limits or subscriptions required.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shield-alt text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Privacy First</h3>
+                    <p class="text-gray-600">Your images are processed securely and not stored on our servers.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-bolt text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Lightning Fast</h3>
+                    <p class="text-gray-600">Get instant results from our optimized AI models running on high-performance servers.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-tools text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Integrated Suite</h3>
+                    <p class="text-gray-600">All image tools work seamlessly together within the ToolSlap ecosystem.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="gradient-bg text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-4">ToolSlap</h3>
-                    <p class="text-blue-200 mb-4">Your hub for the best AI tools and online utilities.</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-blue-200 hover:text-white"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-blue-200 hover:text-white"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="text-blue-200 hover:text-white"><i class="fab fa-linkedin"></i></a>
-                    </div>
-                </div>
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">AI Tools</h4>
-                    <ul class="space-y-2 text-blue-200">
-                        <li><a href="ai-chatbots.html" class="hover:text-white">AI Chatbots</a></li>
-                        <li><a href="ai-image-generators.html" class="hover:text-white">Image Generators</a></li>
-                        <li><a href="ai-website-builders.html" class="hover:text-white">Website Builders</a></li>
-                        <li><a href="ai-voice-generators.html" class="hover:text-white">Voice Generators</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Resources</h4>
-                    <ul class="space-y-2 text-blue-200">
-                        <li><a href="blog.html" class="hover:text-white">Blog</a></li>
-                        <li><a href="guides.html" class="hover:text-white">Guides</a></li>
-                        <li><a href="tutorials.html" class="hover:text-white">Tutorials</a></li>
-                        <li><a href="comparison.html" class="hover:text-white">Comparisons</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Company</h4>
-                    <ul class="space-y-2 text-blue-200">
-                        <li><a href="about.html" class="hover:text-white">About</a></li>
-                        <li><a href="contact.html" class="hover:text-white">Contact</a></li>
-                        <li><a href="privacy-policy.html" class="hover:text-white">Privacy</a></li>
-                        <li><a href="terms-of-service.html" class="hover:text-white">Terms</a></li>
-                    </ul>
-                </div>
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-center items-center mb-6">
+                <i class="fas fa-tools text-2xl mr-2"></i>
+                <h3 class="text-2xl font-bold">ToolSlap</h3>
             </div>
-            <div class="border-t border-blue-400 mt-8 pt-8 text-center text-blue-200">
-                <p>&copy; 2025 ToolSlap. All rights reserved.</p>
+            <p class="text-gray-400 mb-6">Your ultimate collection of AI-powered productivity tools</p>
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fab fa-twitter text-xl"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fab fa-linkedin text-xl"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fab fa-github text-xl"></i>
+                </a>
+            </div>
+            <div class="border-t border-gray-700 pt-8 text-sm text-gray-400">
+                <p>&copy; 2024 ToolSlap. All rights reserved. | <a href="#" class="hover:text-white">Privacy Policy</a> | <a href="#" class="hover:text-white">Terms of Service</a></p>
             </div>
         </div>
     </footer>
 
+    <!-- JavaScript for Demo -->
     <script>
-        // Show more generators function
-        function showMore() {
-            const moreGenerators = document.getElementById('more-generators');
-            const button = event.target;
-            
-            if (moreGenerators.classList.contains('hidden')) {
-                moreGenerators.classList.remove('hidden');
-                button.innerHTML = '<i class="fas fa-minus mr-2"></i>Show Less';
-            } else {
-                moreGenerators.classList.add('hidden');
-                button.innerHTML = '<i class="fas fa-plus mr-2"></i>Show 4 More Generators';
-                moreGenerators.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const uploadArea = document.getElementById('uploadArea');
+            const imageInput = document.getElementById('imageInput');
+            const analysisResults = document.getElementById('analysisResults');
+            const objectResults = document.getElementById('objectResults');
+            const ocrResults = document.getElementById('ocrResults');
 
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            // Click to upload
+            uploadArea.addEventListener('click', () => {
+                imageInput.click();
+            });
+
+            // Drag and drop functionality
+            uploadArea.addEventListener('dragover', (e) => {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                uploadArea.classList.add('border-blue-400', 'bg-blue-50');
             });
-        });
 
-        // Mobile menu toggle
-        const mobileMenuButton = document.querySelector('.md\\:hidden');
-        if (mobileMenuButton) {
-            mobileMenuButton.addEventListener('click', () => {
-                // Add mobile menu logic here if needed
-                console.log('Mobile menu clicked');
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('border-blue-400', 'bg-blue-50');
             });
-        }
+
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('border-blue-400', 'bg-blue-50');
+                
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    handleImageUpload(files[0]);
+                }
+            });
+
+            // File input change
+            imageInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    handleImageUpload(e.target.files[0]);
+                }
+            });
+
+            function handleImageUpload(file) {
+                // Show demo results (simulate AI analysis)
+                analysisResults.classList.remove('hidden');
+                
+                // Demo object detection results
+                objectResults.innerHTML = `
+                    <div class="flex items-center justify-between bg-green-50 p-3 rounded-lg">
+                        <div class="flex items-center">
+                            <i class="fas fa-user text-green-600 mr-2"></i>
+                            <span class="text-gray-700">Person</span>
+                        </div>
+                        <span class="text-green-600 font-semibold">95%</span>
+                    </div>
+                    <div class="flex items-center justify-between bg-blue-50 p-3 rounded-lg">
+                        <div class="flex items-center">
+                            <i class="fas fa-car text-blue-600 mr-2"></i>
+                            <span class="text-gray-700">Vehicle</span>
+                        </div>
+                        <span class="text-blue-600 font-semibold">87%</span>
+                    </div>
+                    <div class="flex items-center justify-between bg-purple-50 p-3 rounded-lg">
+                        <div class="flex items-center">
+                            <i class="fas fa-tree text-purple-600 mr-2"></i>
+                            <span class="text-gray-700">Tree</span>
+                        </div>
+                        <span class="text-purple-600 font-semibold">78%</span>
+                    </div>
+                `;
+
+                // Demo OCR results
+                ocrResults.innerHTML = `
+                    <p class="text-gray-700">This is a demo showing extracted text from the image. The full AI Image Analyzer can extract text from documents, signs, screenshots, and more with high accuracy.</p>
+                    <div class="mt-3 text-sm text-gray-500">
+                        <i class="fas fa-info-circle mr-1"></i>
+                        Upload an image to see real OCR results
+                    </div>
+                `;
+
+                // Show success message
+                uploadArea.innerHTML = `
+                    <div class="mb-4">
+                        <i class="fas fa-check-circle text-4xl text-green-500"></i>
+                    </div>
+                    <h4 class="text-lg font-semibold text-gray-700 mb-2">Image Analyzed Successfully!</h4>
+                    <p class="text-gray-500 text-sm">Check the results below or try the full AI Image Analyzer for more features.</p>
+                `;
+            }
+        });
     </script>
 </body>
 </html>

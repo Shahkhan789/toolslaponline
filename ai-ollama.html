@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ollama AI Assistant | Local AI Language Model - ToolSlap</title>
+    <meta name="description" content="Run powerful AI language models locally with Ollama. Private, secure, and unlimited conversations with Llama, Mistral, and other advanced AI models.">
+    <meta name="keywords" content="Ollama AI, local AI, language models, Llama, Mistral, private AI, secure AI, offline AI">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#3B82F6',
+                        'light-blue': '#EFF6FF',
+                        'dark-blue': '#1E40AF'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Styles -->
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+        }
+        
+        /* Mobile-friendly responsive styles */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem !important;
+            }
+            .hero-subtitle {
+                font-size: 1.25rem !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem !important;
+            }
+            .hero-subtitle {
+                font-size: 1.125rem !important;
+            }
+        }
+
+        .pulse-animation {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: .5;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-tools text-2xl"></i>
+                    <a href="index.html" class="text-2xl font-bold">ToolSlap</a>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="index.html" class="hover:text-blue-200 transition-colors">Home</a>
+                    <a href="tools.html" class="hover:text-blue-200 transition-colors">All Tools</a>
+                    <a href="about.html" class="hover:text-blue-200 transition-colors">About</a>
+                    <a href="contact.html" class="hover:text-blue-200 transition-colors">Contact</a>
+                </div>
+                <button class="md:hidden text-white">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-4xl mx-auto">
+                <i class="fas fa-brain text-6xl mb-6 text-blue-200"></i>
+                <h1 class="hero-title text-4xl md:text-5xl font-bold mb-6">Ollama AI Assistant</h1>
+                <p class="hero-subtitle text-xl md:text-2xl mb-8 text-blue-100">
+                    Run powerful AI language models locally on your computer. 
+                    Private, secure, and unlimited conversations with advanced AI models.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#ollama-demo" class="bg-white text-primary-blue px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+                        <i class="fas fa-play mr-2"></i>Try Ollama
+                    </a>
+                    <a href="#installation" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary-blue transition-colors">
+                        <i class="fas fa-download mr-2"></i>Installation Guide
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                <div class="p-6">
+                    <i class="fas fa-lock text-4xl text-red-600 mb-4"></i>
+                    <h3 class="text-3xl font-bold text-gray-800 mb-2">Private</h3>
+                    <p class="text-gray-600">100% Local Processing</p>
+                </div>
+                <div class="p-6">
+                    <i class="fas fa-wifi-slash text-4xl text-red-600 mb-4"></i>
+                    <h3 class="text-3xl font-bold text-gray-800 mb-2">Offline</h3>
+                    <p class="text-gray-600">No Internet Required</p>
+                </div>
+                <div class="p-6">
+                    <i class="fas fa-infinity text-4xl text-red-600 mb-4"></i>
+                    <h3 class="text-3xl font-bold text-gray-800 mb-2">Unlimited</h3>
+                    <p class="text-gray-600">No Usage Limits</p>
+                </div>
+                <div class="p-6">
+                    <i class="fas fa-rocket text-4xl text-red-600 mb-4"></i>
+                    <h3 class="text-3xl font-bold text-gray-800 mb-2">Fast</h3>
+                    <p class="text-gray-600">Local GPU Acceleration</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Supported Models -->
+    <section class="py-16 bg-light-blue">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Supported AI Models</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Choose from a variety of state-of-the-art language models, each optimized for different tasks and requirements.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Llama 2 -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-llama text-2xl text-blue-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800">Llama 2</h3>
+                            <p class="text-gray-600 text-sm">Meta AI</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Advanced conversational AI model with excellent reasoning capabilities and broad knowledge base.
+                    </p>
+                    <div class="flex items-center text-sm text-gray-600">
+                        <i class="fas fa-check text-green-500 mr-2"></i>
+                        <span>7B, 13B, 70B parameters</span>
+                    </div>
+                </div>
+
+                <!-- Mistral -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-wind text-2xl text-purple-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800">Mistral</h3>
+                            <p class="text-gray-600 text-sm">Mistral AI</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        High-performance model optimized for efficiency and speed while maintaining quality outputs.
+                    </p>
+                    <div class="flex items-center text-sm text-gray-600">
+                        <i class="fas fa-check text-green-500 mr-2"></i>
+                        <span>7B parameters, fast inference</span>
+                    </div>
+                </div>
+
+                <!-- Code Llama -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-code text-2xl text-green-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800">Code Llama</h3>
+                            <p class="text-gray-600 text-sm">Meta AI</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Specialized coding model for code generation, completion, and programming assistance.
+                    </p>
+                    <div class="flex items-center text-sm text-gray-600">
+                        <i class="fas fa-check text-green-500 mr-2"></i>
+                        <span>Code-optimized, 15+ languages</span>
+                    </div>
+                </div>
+
+                <!-- Phi -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-microchip text-2xl text-orange-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800">Phi</h3>
+                            <p class="text-gray-600 text-sm">Microsoft</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Lightweight model perfect for resource-constrained environments with impressive performance.
+                    </p>
+                    <div class="flex items-center text-sm text-gray-600">
+                        <i class="fas fa-check text-green-500 mr-2"></i>
+                        <span>3B parameters, lightweight</span>
+                    </div>
+                </div>
+
+                <!-- Vicuna -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-fire text-2xl text-red-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800">Vicuna</h3>
+                            <p class="text-gray-600 text-sm">UC Berkeley</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Fine-tuned model optimized for conversational tasks with excellent instruction following.
+                    </p>
+                    <div class="flex items-center text-sm text-gray-600">
+                        <i class="fas fa-check text-green-500 mr-2"></i>
+                        <span>7B, 13B, conversation-focused</span>
+                    </div>
+                </div>
+
+                <!-- Orca -->
+                <div class="bg-white rounded-xl shadow-lg p-6 card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-whale text-2xl text-indigo-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800">Orca</h3>
+                            <p class="text-gray-600 text-sm">Microsoft</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Advanced reasoning model trained to emulate the thought processes of larger models.
+                    </p>
+                    <div class="flex items-center text-sm text-gray-600">
+                        <i class="fas fa-check text-green-500 mr-2"></i>
+                        <span>13B parameters, reasoning-focused</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Guide -->
+    <section id="installation" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                    <i class="fas fa-download text-primary-blue mr-3"></i>Installation Guide
+                </h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Get started with Ollama in just a few simple steps. Choose your operating system below.
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <!-- Windows -->
+                    <div class="bg-blue-50 rounded-xl p-6 text-center">
+                        <i class="fab fa-windows text-4xl text-blue-600 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Windows</h3>
+                        <a href="https://ollama.ai/download/windows" target="_blank" 
+                           class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors inline-block">
+                            <i class="fas fa-download mr-2"></i>Download .exe
+                        </a>
+                    </div>
+
+                    <!-- macOS -->
+                    <div class="bg-gray-50 rounded-xl p-6 text-center">
+                        <i class="fab fa-apple text-4xl text-gray-600 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">macOS</h3>
+                        <a href="https://ollama.ai/download/mac" target="_blank" 
+                           class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors inline-block">
+                            <i class="fas fa-download mr-2"></i>Download .dmg
+                        </a>
+                    </div>
+
+                    <!-- Linux -->
+                    <div class="bg-orange-50 rounded-xl p-6 text-center">
+                        <i class="fab fa-linux text-4xl text-orange-600 mb-4"></i>
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Linux</h3>
+                        <div class="bg-orange-600 text-white px-6 py-3 rounded-lg">
+                            <code class="text-sm">curl -fsSL https://ollama.ai/install.sh | sh</code>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Start Steps -->
+                <div class="bg-white rounded-xl shadow-lg p-8 border border-blue-200">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                        <i class="fas fa-rocket text-blue-600 mr-2"></i>Quick Start
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-sm">1</div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Install Ollama</h4>
+                                <p class="text-gray-600 text-sm">Download and install Ollama for your operating system</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-sm">2</div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Pull a Model</h4>
+                                <p class="text-gray-600 text-sm">Run <code class="bg-gray-100 px-2 py-1 rounded">ollama pull llama2</code> to download your first model</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-sm">3</div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Start Chatting</h4>
+                                <p class="text-gray-600 text-sm">Use ToolSlap's interface below to connect and chat with your local AI</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ollama Demo Interface -->
+    <section id="ollama-demo" class="py-16 bg-light-blue">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                    <i class="fas fa-comments text-red-600 mr-3"></i>Ollama Chat Interface
+                </h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Connect to your local Ollama instance and start chatting with your AI models.
+                </p>
+                <div class="mt-4">
+                    <span id="ollamaStatus" class="text-sm px-4 py-2 rounded-full bg-gray-100 text-gray-600">
+                        <i class="fas fa-circle text-gray-400"></i> Checking connection...
+                    </span>
+                </div>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-xl shadow-lg border border-red-200 overflow-hidden">
+                    <!-- Chat Header -->
+                    <div class="bg-gradient-to-r from-red-600 to-red-700 text-white p-6">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-brain text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">Ollama AI</h3>
+                                    <p class="text-red-200 text-sm" id="currentModel">Model: Not connected</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <select id="modelSelect" class="bg-white bg-opacity-20 text-white rounded-lg px-3 py-2 text-sm disabled:opacity-50" disabled>
+                                    <option value="">Select Model</option>
+                                </select>
+                                <button id="clearOllamaChat" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-lg transition-colors text-sm">
+                                    <i class="fas fa-trash mr-1"></i>Clear
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chat Messages Area -->
+                    <div class="h-96 overflow-y-auto p-6 bg-gray-50" id="ollamaChatMessages">
+                        <div class="text-center text-gray-500 py-8" id="ollamaWelcome">
+                            <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-brain text-2xl text-red-600"></i>
+                            </div>
+                            <h4 class="text-lg font-semibold text-gray-700 mb-2">Welcome to Ollama AI!</h4>
+                            <p class="text-sm mb-4">Start Ollama and select a model to begin chatting locally.</p>
+                            <div class="text-xs text-gray-400">
+                                Make sure Ollama is running on localhost:11434
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Input Area -->
+                    <div class="p-6 bg-white border-t border-gray-200">
+                        <div class="flex space-x-4 mb-4">
+                            <input type="text" id="ollamaInput" placeholder="Type your message here..." 
+                                   class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                                   disabled>
+                            <button id="ollamaSendButton" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed" disabled>
+                                <i class="fas fa-paper-plane mr-2"></i>Send
+                            </button>
+                        </div>
+
+                        <!-- Connection Instructions -->
+                        <div id="connectionInstructions" class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                            <h5 class="font-semibold text-blue-800 mb-2">
+                                <i class="fas fa-info-circle mr-1"></i>Connection Instructions
+                            </h5>
+                            <ol class="text-sm text-blue-700 space-y-1 ml-4">
+                                <li>1. Install Ollama from the installation guide above</li>
+                                <li>2. Run <code class="bg-blue-100 px-1 rounded">ollama serve</code> in terminal</li>
+                                <li>3. Download a model: <code class="bg-blue-100 px-1 rounded">ollama pull llama2</code></li>
+                                <li>4. Refresh this page to connect</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">ToolSlap</h3>
+                    <p class="text-blue-200 mb-4">Your hub for the best AI tools and online utilities.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-blue-200 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-blue-200 hover:text-white"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-blue-200 hover:text-white"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">AI Tools</h4>
+                    <ul class="space-y-2 text-blue-200">
+                        <li><a href="ai-chatbots.html" class="hover:text-white">AI Chatbots</a></li>
+                        <li><a href="ai-image-generators.html" class="hover:text-white">Image Generators</a></li>
+                        <li><a href="ai-website-builders.html" class="hover:text-white">Website Builders</a></li>
+                        <li><a href="ai-ollama.html" class="hover:text-white">Ollama AI</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-blue-200">
+                        <li><a href="blog.html" class="hover:text-white">Blog</a></li>
+                        <li><a href="guides.html" class="hover:text-white">Guides</a></li>
+                        <li><a href="tutorials.html" class="hover:text-white">Tutorials</a></li>
+                        <li><a href="comparison.html" class="hover:text-white">Comparisons</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-blue-200">
+                        <li><a href="about.html" class="hover:text-white">About</a></li>
+                        <li><a href="contact.html" class="hover:text-white">Contact</a></li>
+                        <li><a href="privacy-policy.html" class="hover:text-white">Privacy</a></li>
+                        <li><a href="terms-of-service.html" class="hover:text-white">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-blue-400 mt-8 pt-8 text-center text-blue-200">
+                <p>&copy; 2025 ToolSlap. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Ollama Chat Interface
+        class OllamaChat {
+            constructor() {
+                this.apiUrl = 'http://localhost:11434';
+                this.isConnected = false;
+                this.currentModel = '';
+                this.availableModels = [];
+                
+                this.initializeElements();
+                this.setupEventListeners();
+                this.checkConnection();
+            }
+
+            initializeElements() {
+                this.status = document.getElementById('ollamaStatus');
+                this.modelSelect = document.getElementById('modelSelect');
+                this.currentModelSpan = document.getElementById('currentModel');
+                this.chatMessages = document.getElementById('ollamaChatMessages');
+                this.input = document.getElementById('ollamaInput');
+                this.sendButton = document.getElementById('ollamaSendButton');
+                this.clearButton = document.getElementById('clearOllamaChat');
+                this.welcome = document.getElementById('ollamaWelcome');
+                this.instructions = document.getElementById('connectionInstructions');
+            }
+
+            setupEventListeners() {
+                this.sendButton.addEventListener('click', () => this.sendMessage());
+                this.clearButton.addEventListener('click', () => this.clearChat());
+                this.modelSelect.addEventListener('change', (e) => this.selectModel(e.target.value));
+                
+                this.input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        this.sendMessage();
+                    }
+                });
+            }
+
+            async checkConnection() {
+                try {
+                    const response = await fetch(`${this.apiUrl}/api/tags`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        this.availableModels = data.models || [];
+                        this.setConnectionStatus('Connected to Ollama', 'green', true);
+                        this.populateModelSelect();
+                    } else {
+                        throw new Error('Server not responding');
+                    }
+                } catch (error) {
+                    this.setConnectionStatus('Ollama not running', 'red', false);
+                    this.showInstructions();
+                }
+            }
+
+            setConnectionStatus(message, color, connected) {
+                this.isConnected = connected;
+                this.status.innerHTML = `<i class="fas fa-circle text-${color}-400"></i> ${message}`;
+                this.status.className = `text-sm px-4 py-2 rounded-full bg-${color}-50 text-${color}-600`;
+                
+                if (connected) {
+                    this.instructions.style.display = 'none';
+                } else {
+                    this.instructions.style.display = 'block';
+                }
+            }
+
+            populateModelSelect() {
+                this.modelSelect.innerHTML = '<option value="">Select Model</option>';
+                this.availableModels.forEach(model => {
+                    const option = document.createElement('option');
+                    option.value = model.name;
+                    option.textContent = model.name;
+                    this.modelSelect.appendChild(option);
+                });
+                this.modelSelect.disabled = false;
+            }
+
+            selectModel(modelName) {
+                if (modelName) {
+                    this.currentModel = modelName;
+                    this.currentModelSpan.textContent = `Model: ${modelName}`;
+                    this.input.disabled = false;
+                    this.sendButton.disabled = false;
+                    this.welcome.style.display = 'none';
+                    this.addMessage('system', `Connected to ${modelName}. You can now start chatting!`);
+                }
+            }
+
+            showInstructions() {
+                this.instructions.style.display = 'block';
+                this.input.disabled = true;
+                this.sendButton.disabled = true;
+                this.modelSelect.disabled = true;
+            }
+
+            async sendMessage() {
+                const message = this.input.value.trim();
+                if (!message || !this.currentModel || !this.isConnected) return;
+
+                this.addMessage('user', message);
+                this.input.value = '';
+                this.sendButton.disabled = true;
+
+                const thinkingDiv = this.addMessage('assistant', 'Thinking...', true);
+
+                try {
+                    const response = await fetch(`${this.apiUrl}/api/generate`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            model: this.currentModel,
+                            prompt: message,
+                            stream: false
+                        })
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        thinkingDiv.remove();
+                        this.addMessage('assistant', data.response);
+                    } else {
+                        throw new Error('Failed to get response');
+                    }
+                } catch (error) {
+                    thinkingDiv.remove();
+                    this.addMessage('error', `Error: ${error.message}`);
+                }
+
+                this.sendButton.disabled = false;
+            }
+
+            addMessage(type, content, isTemporary = false) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `mb-4 ${isTemporary ? 'thinking-message' : ''}`;
+
+                let bgColor, icon;
+                switch (type) {
+                    case 'user':
+                        bgColor = 'bg-blue-100';
+                        icon = 'fa-user';
+                        break;
+                    case 'assistant':
+                        bgColor = 'bg-gray-100';
+                        icon = 'fa-brain';
+                        break;
+                    case 'system':
+                        bgColor = 'bg-green-100';
+                        icon = 'fa-info-circle';
+                        break;
+                    case 'error':
+                        bgColor = 'bg-red-100';
+                        icon = 'fa-exclamation-triangle';
+                        break;
+                }
+
+                messageDiv.innerHTML = `
+                    <div class="${bgColor} rounded-lg p-4">
+                        <div class="flex items-start space-x-3">
+                            <i class="fas ${icon} text-lg mt-1"></i>
+                            <div class="flex-1">
+                                <div class="prose prose-sm max-w-none">${content.replace(/\n/g, '<br>')}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                this.chatMessages.appendChild(messageDiv);
+                this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
+
+                return messageDiv;
+            }
+
+            clearChat() {
+                this.chatMessages.innerHTML = '';
+            }
+        }
+
+        // Initialize Ollama Chat when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new OllamaChat();
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

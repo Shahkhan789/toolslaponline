@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Best AI Chatbots 2025 | Free AI Chat Tools - ToolSlap</title>
-    <meta name="description" content="Discover the best AI chatbots in 2025. Compare ChatGPT, Claude, Gemini, and more. Free AI chat tools with quick-start guides and feature comparisons.">
-    <meta name="keywords" content="AI chatbots, ChatGPT, Claude, Gemini, AI chat, conversational AI, AI assistants, free AI tools, best chatbots 2025">
+    <title>ToolSlap AI Chat Tools | Free AI Assistants & Chat Bots - ToolSlap</title>
+    <meta name="description" content="Experience ToolSlap's powerful AI chat tools and assistants. Free AI chatbots for content creation, code assistance, research, and more. Try Qwen AI directly in your browser.">
+    <meta name="keywords" content="ToolSlap AI, AI chatbots, Qwen AI, AI assistants, free AI tools, AI content creator, AI code assistant, AI research assistant">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -43,6 +43,35 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
         }
+        
+        /* Mobile-friendly responsive grid */
+        @media (max-width: 768px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .hero-title {
+                font-size: 2.5rem !important;
+            }
+            .hero-subtitle {
+                font-size: 1.25rem !important;
+            }
+            .tool-card {
+                padding: 1.5rem !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem !important;
+            }
+            .hero-subtitle {
+                font-size: 1.125rem !important;
+            }
+            .tool-card {
+                padding: 1rem !important;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -72,17 +101,17 @@
         <div class="container mx-auto px-4 text-center">
             <div class="max-w-4xl mx-auto">
                 <i class="fas fa-robot text-6xl mb-6 text-blue-200"></i>
-                <h1 class="text-4xl md:text-5xl font-bold mb-6">Best AI Chatbots 2025</h1>
-                <p class="text-xl md:text-2xl mb-8 text-blue-100">
-                    Discover the most powerful AI chatbots for conversations, productivity, and creativity. 
-                    Compare features, pricing, and get quick-start guides for each platform.
+                <h1 class="hero-title text-4xl md:text-5xl font-bold mb-6">ToolSlap AI Chat Tools</h1>
+                <p class="hero-subtitle text-xl md:text-2xl mb-8 text-blue-100">
+                    Experience powerful AI assistants built right into ToolSlap. 
+                    Chat with Qwen AI, create content, get coding help, and conduct research - all for free!
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#chatbots-gallery" class="bg-white text-primary-blue px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
-                        <i class="fas fa-eye mr-2"></i>Browse Chatbots
+                    <a href="#ai-tools" class="bg-white text-primary-blue px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+                        <i class="fas fa-eye mr-2"></i>Explore AI Tools
                     </a>
-                    <a href="#comparison" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary-blue transition-colors">
-                        <i class="fas fa-chart-bar mr-2"></i>Compare Features
+                    <a href="#qwen-chat-demo" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary-blue transition-colors">
+                        <i class="fas fa-play mr-2"></i>Try Qwen AI
                     </a>
                 </div>
             </div>
@@ -92,21 +121,21 @@
     <!-- Quick Stats -->
     <section class="py-12 bg-white">
         <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                 <div class="p-6">
                     <i class="fas fa-robot text-4xl text-primary-blue mb-4"></i>
-                    <h3 class="text-3xl font-bold text-gray-800 mb-2">15+</h3>
-                    <p class="text-gray-600">AI Chatbots</p>
+                    <h3 class="text-3xl font-bold text-gray-800 mb-2">4+</h3>
+                    <p class="text-gray-600">AI Tools</p>
                 </div>
                 <div class="p-6">
-                    <i class="fas fa-star text-4xl text-primary-blue mb-4"></i>
-                    <h3 class="text-3xl font-bold text-gray-800 mb-2">4.8/5</h3>
-                    <p class="text-gray-600">Average Rating</p>
+                    <i class="fas fa-zap text-4xl text-primary-blue mb-4"></i>
+                    <h3 class="text-3xl font-bold text-gray-800 mb-2">100%</h3>
+                    <p class="text-gray-600">Free to Use</p>
                 </div>
                 <div class="p-6">
-                    <i class="fas fa-users text-4xl text-primary-blue mb-4"></i>
-                    <h3 class="text-3xl font-bold text-gray-800 mb-2">10M+</h3>
-                    <p class="text-gray-600">Active Users</p>
+                    <i class="fas fa-shield-alt text-4xl text-primary-blue mb-4"></i>
+                    <h3 class="text-3xl font-bold text-gray-800 mb-2">Secure</h3>
+                    <p class="text-gray-600">Privacy First</p>
                 </div>
                 <div class="p-6">
                     <i class="fas fa-clock text-4xl text-primary-blue mb-4"></i>
@@ -117,35 +146,35 @@
         </div>
     </section>
 
-    <!-- Chatbots Gallery -->
-    <section id="chatbots-gallery" class="py-16 bg-light-blue">
+    <!-- AI Tools Gallery -->
+    <section id="ai-tools" class="py-16 bg-light-blue">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Top AI Chatbots</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">ToolSlap AI Assistants</h2>
                 <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-                    Explore the most popular and powerful AI chatbots available today. Each comes with detailed guides to get you started quickly.
+                    Powerful AI tools built right into ToolSlap. Each tool is designed for specific tasks and completely free to use.
                 </p>
             </div>
 
             <div class="feature-grid">
-                <!-- ChatGPT -->
-                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
+                <!-- AI Code Assistant -->
+                <div class="tool-card bg-white rounded-xl shadow-lg p-8 card-hover">
                     <div class="flex items-center mb-6">
                         <div class="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center mr-4">
-                            <i class="fas fa-comments text-2xl text-green-600"></i>
+                            <i class="fas fa-code text-2xl text-green-600"></i>
                         </div>
                         <div>
-                            <h3 class="text-2xl font-bold text-gray-800">ChatGPT</h3>
-                            <p class="text-gray-600">OpenAI</p>
+                            <h3 class="text-2xl font-bold text-gray-800">AI Code Assistant</h3>
+                            <p class="text-gray-600">ToolSlap</p>
                         </div>
                     </div>
                     <p class="text-gray-700 mb-6">
-                        The most popular AI chatbot with advanced reasoning, coding, and creative writing capabilities. Perfect for professionals and students.
+                        Generate, debug, explain, and optimize code in 15+ programming languages. Perfect for developers of all skill levels.
                     </p>
                     <div class="space-y-3 mb-6">
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>GPT-4 powered conversations</span>
+                            <span>15+ programming languages</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
@@ -153,261 +182,182 @@
                         </div>
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Image analysis & creation</span>
+                            <span>Intelligent explanations</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Custom GPTs available</span>
+                            <span>Performance optimization</span>
                         </div>
                     </div>
                     <div class="flex justify-between items-center">
-                        <span class="text-lg font-semibold text-primary-blue">Free / $20/mo</span>
-                        <a href="https://chat.openai.com" target="_blank" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                            Try Now <i class="fas fa-external-link-alt ml-1"></i>
+                        <span class="text-lg font-semibold text-green-600">100% Free</span>
+                        <a href="ai-code-assistant.html" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                            Use Tool <i class="fas fa-arrow-right ml-1"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- Claude -->
-                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 bg-orange-100 rounded-xl flex items-center justify-center mr-4">
-                            <i class="fas fa-brain text-2xl text-orange-600"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-gray-800">Claude</h3>
-                            <p class="text-gray-600">Anthropic</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 mb-6">
-                        Advanced AI assistant focused on helpful, harmless, and honest conversations. Excellent for analysis and reasoning tasks.
-                    </p>
-                    <div class="space-y-3 mb-6">
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Large context window (200K tokens)</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Document analysis</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Coding assistance</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Research & writing</span>
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <span class="text-lg font-semibold text-primary-blue">Free / $20/mo</span>
-                        <a href="https://claude.ai" target="_blank" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                            Try Now <i class="fas fa-external-link-alt ml-1"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Google Gemini -->
-                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
-                            <i class="fab fa-google text-2xl text-blue-600"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-gray-800">Gemini</h3>
-                            <p class="text-gray-600">Google</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 mb-6">
-                        Google's powerful AI chatbot with multimodal capabilities. Integrated with Google services for seamless productivity.
-                    </p>
-                    <div class="space-y-3 mb-6">
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Google services integration</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Real-time information</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Image & video understanding</span>
-                        </div>
-                        <div class="flex items-center text-sm text-gray-600">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Multiple languages</span>
-                        </div>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <span class="text-lg font-semibold text-primary-blue">Free / $20/mo</span>
-                        <a href="https://gemini.google.com" target="_blank" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                            Try Now <i class="fas fa-external-link-alt ml-1"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Microsoft Copilot -->
-                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
+                <!-- AI Content Creator -->
+                <div class="tool-card bg-white rounded-xl shadow-lg p-8 card-hover">
                     <div class="flex items-center mb-6">
                         <div class="w-16 h-16 bg-purple-100 rounded-xl flex items-center justify-center mr-4">
-                            <i class="fab fa-microsoft text-2xl text-purple-600"></i>
+                            <i class="fas fa-pen-fancy text-2xl text-purple-600"></i>
                         </div>
                         <div>
-                            <h3 class="text-2xl font-bold text-gray-800">Copilot</h3>
-                            <p class="text-gray-600">Microsoft</p>
+                            <h3 class="text-2xl font-bold text-gray-800">AI Content Creator</h3>
+                            <p class="text-gray-600">ToolSlap</p>
                         </div>
                     </div>
                     <p class="text-gray-700 mb-6">
-                        Microsoft's AI assistant integrated into Windows, Edge, and Office. Perfect for productivity and professional workflows.
+                        Create professional blog posts, social media content, emails, and marketing copy in seconds with AI assistance.
                     </p>
                     <div class="space-y-3 mb-6">
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Office 365 integration</span>
+                            <span>Blog posts & articles</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Windows integration</span>
+                            <span>Social media content</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Web search capabilities</span>
+                            <span>Email campaigns</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Image creation with DALL-E</span>
+                            <span>SEO optimization</span>
                         </div>
                     </div>
                     <div class="flex justify-between items-center">
-                        <span class="text-lg font-semibold text-primary-blue">Free / $20/mo</span>
-                        <a href="https://copilot.microsoft.com" target="_blank" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                            Try Now <i class="fas fa-external-link-alt ml-1"></i>
+                        <span class="text-lg font-semibold text-purple-600">100% Free</span>
+                        <a href="ai-content-creator.html" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                            Use Tool <i class="fas fa-arrow-right ml-1"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- Perplexity -->
-                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
+                <!-- AI Research Assistant -->
+                <div class="tool-card bg-white rounded-xl shadow-lg p-8 card-hover">
                     <div class="flex items-center mb-6">
                         <div class="w-16 h-16 bg-indigo-100 rounded-xl flex items-center justify-center mr-4">
-                            <i class="fas fa-search text-2xl text-indigo-600"></i>
+                            <i class="fas fa-microscope text-2xl text-indigo-600"></i>
                         </div>
                         <div>
-                            <h3 class="text-2xl font-bold text-gray-800">Perplexity</h3>
-                            <p class="text-gray-600">Perplexity AI</p>
+                            <h3 class="text-2xl font-bold text-gray-800">AI Research Assistant</h3>
+                            <p class="text-gray-600">ToolSlap</p>
                         </div>
                     </div>
                     <p class="text-gray-700 mb-6">
-                        AI-powered search engine and chatbot that provides answers with real-time citations. Perfect for research and fact-checking.
+                        Summarize research papers, generate citations, fact-check information, and extract knowledge with advanced AI.
                     </p>
                     <div class="space-y-3 mb-6">
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Real-time web search</span>
+                            <span>Paper summarization</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Source citations</span>
+                            <span>Citation generation (APA, MLA, etc.)</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Academic research</span>
+                            <span>Fact checking</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Follow-up questions</span>
+                            <span>Knowledge extraction</span>
                         </div>
                     </div>
                     <div class="flex justify-between items-center">
-                        <span class="text-lg font-semibold text-primary-blue">Free / $20/mo</span>
-                        <a href="https://perplexity.ai" target="_blank" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                            Try Now <i class="fas fa-external-link-alt ml-1"></i>
+                        <span class="text-lg font-semibold text-indigo-600">100% Free</span>
+                        <a href="ai-research-assistant.html" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                            Use Tool <i class="fas fa-arrow-right ml-1"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- Character.AI -->
-                <div class="bg-white rounded-xl shadow-lg p-8 card-hover">
+                <!-- Ollama AI Assistant -->
+                <div class="tool-card bg-white rounded-xl shadow-lg p-8 card-hover">
                     <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 bg-pink-100 rounded-xl flex items-center justify-center mr-4">
-                            <i class="fas fa-user-friends text-2xl text-pink-600"></i>
+                        <div class="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-brain text-2xl text-red-600"></i>
                         </div>
                         <div>
-                            <h3 class="text-2xl font-bold text-gray-800">Character.AI</h3>
-                            <p class="text-gray-600">Character Technologies</p>
+                            <h3 class="text-2xl font-bold text-gray-800">Ollama AI Assistant</h3>
+                            <p class="text-gray-600">ToolSlap</p>
+                            <div class="bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold mt-1 inline-block">
+                                🔥 NEW
+                            </div>
                         </div>
                     </div>
                     <p class="text-gray-700 mb-6">
-                        Create and chat with AI characters. Perfect for creative writing, roleplay, and entertainment with personality-driven conversations.
+                        Powerful local AI assistant powered by Ollama. Run advanced language models locally for enhanced privacy and unlimited conversations.
                     </p>
                     <div class="space-y-3 mb-6">
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Custom character creation</span>
+                            <span>Local AI processing (private & secure)</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Popular character library</span>
+                            <span>Multiple model support (Llama, Mistral, etc.)</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Creative storytelling</span>
+                            <span>No internet required after setup</span>
                         </div>
                         <div class="flex items-center text-sm text-gray-600">
                             <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span>Community features</span>
+                            <span>Unlimited conversations</span>
                         </div>
                     </div>
                     <div class="flex justify-between items-center">
-                        <span class="text-lg font-semibold text-primary-blue">Free / $10/mo</span>
-                        <a href="https://character.ai" target="_blank" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                            Try Now <i class="fas fa-external-link-alt ml-1"></i>
+                        <span class="text-lg font-semibold text-red-600">100% Free & Private</span>
+                        <a href="ai-ollama.html" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                            Use Tool <i class="fas fa-arrow-right ml-1"></i>
                         </a>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Quick Start Guide -->
-    <section id="quick-start" class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Quick Start Guide</h2>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-                    Get started with AI chatbots in just a few simple steps
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="text-center">
-                    <div class="w-20 h-20 bg-primary-blue rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-user-plus text-3xl text-white"></i>
+                <!-- AI Image Analyzer -->
+                <div class="tool-card bg-white rounded-xl shadow-lg p-8 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-orange-100 rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-image text-2xl text-orange-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800">AI Image Analyzer</h3>
+                            <p class="text-gray-600">ToolSlap</p>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">1. Choose & Sign Up</h3>
-                    <p class="text-gray-600">
-                        Select an AI chatbot from our list and create a free account. Most offer immediate access with no credit card required.
+                    <p class="text-gray-700 mb-6">
+                        Analyze images with AI to extract text (OCR), detect objects, describe content, and get detailed insights.
                     </p>
-                </div>
-                <div class="text-center">
-                    <div class="w-20 h-20 bg-primary-blue rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-comments text-3xl text-white"></i>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>OCR text extraction</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Object detection</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Content description</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <i class="fas fa-check text-green-500 mr-2"></i>
+                            <span>Detailed analysis</span>
+                        </div>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">2. Start Chatting</h3>
-                    <p class="text-gray-600">
-                        Begin with simple questions or tasks. Be specific about what you need help with for better results.
-                    </p>
-                </div>
-                <div class="text-center">
-                    <div class="w-20 h-20 bg-primary-blue rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-rocket text-3xl text-white"></i>
+                    <div class="flex justify-between items-center">
+                        <span class="text-lg font-semibold text-orange-600">100% Free</span>
+                        <a href="ai-image-analyzer.html" class="bg-primary-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                            Use Tool <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">3. Explore Features</h3>
-                    <p class="text-gray-600">
-                        Discover advanced features like code generation, image analysis, custom instructions, and integrations with other tools.
-                    </p>
                 </div>
             </div>
         </div>
@@ -421,14 +371,14 @@
                     <i class="fas fa-robot text-primary-blue mr-3"></i>Try Qwen AI Chat Demo
                 </h2>
                 <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-                    Experience the power of Alibaba's Qwen AI directly in your browser. Start a conversation and see what makes this AI special!
+                    Experience the power of Qwen AI directly in your browser. Start a conversation and see what makes this AI special!
                 </p>
             </div>
 
             <div class="max-w-4xl mx-auto">
                 <div class="bg-white rounded-xl shadow-lg border border-blue-200 overflow-hidden">
                     <!-- Chat Header -->
-                    <div class="gradient-bg text-white p-6">
+                    <div class="gradient-bg text-white p-4 md:p-6">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-3">
                                 <div class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
@@ -441,7 +391,7 @@
                             </div>
                             <div class="flex items-center space-x-2">
                                 <div class="w-3 h-3 rounded-full bg-yellow-400 animate-pulse" id="statusIndicator"></div>
-                                <button id="clearChat" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-lg transition-colors text-sm">
+                                <button id="clearChat" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-3 py-2 md:px-4 rounded-lg transition-colors text-sm">
                                     <i class="fas fa-trash mr-1"></i>Clear
                                 </button>
                             </div>
@@ -449,45 +399,45 @@
                     </div>
 
                     <!-- Chat Messages Area -->
-                    <div class="h-96 overflow-y-auto p-6 bg-gray-50" id="chatMessages">
+                    <div class="h-72 md:h-96 overflow-y-auto p-4 md:p-6 bg-gray-50" id="chatMessages">
                         <div class="text-center text-gray-500 py-8" id="welcomeMessage">
                             <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <i class="fas fa-comments text-2xl text-blue-600"></i>
                             </div>
                             <h4 class="text-lg font-semibold text-gray-700 mb-2">Welcome to Qwen AI!</h4>
-                            <p>Ask me anything - I can help with writing, coding, analysis, creative tasks, and more!</p>
+                            <p class="text-sm md:text-base">Ask me anything - I can help with writing, coding, analysis, creative tasks, and more!</p>
                             <div class="mt-4 flex flex-wrap justify-center gap-2">
-                                <button class="suggestion-btn bg-blue-100 hover:bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-sm transition-colors">Write a story</button>
-                                <button class="suggestion-btn bg-green-100 hover:bg-green-200 text-green-800 px-3 py-1 rounded-full text-sm transition-colors">Code a function</button>
-                                <button class="suggestion-btn bg-purple-100 hover:bg-purple-200 text-purple-800 px-3 py-1 rounded-full text-sm transition-colors">Explain AI concepts</button>
-                                <button class="suggestion-btn bg-orange-100 hover:bg-orange-200 text-orange-800 px-3 py-1 rounded-full text-sm transition-colors">Help with homework</button>
+                                <button class="suggestion-btn bg-blue-100 hover:bg-blue-200 text-blue-800 px-2 py-1 md:px-3 rounded-full text-xs md:text-sm transition-colors">Write a story</button>
+                                <button class="suggestion-btn bg-green-100 hover:bg-green-200 text-green-800 px-2 py-1 md:px-3 rounded-full text-xs md:text-sm transition-colors">Code a function</button>
+                                <button class="suggestion-btn bg-purple-100 hover:bg-purple-200 text-purple-800 px-2 py-1 md:px-3 rounded-full text-xs md:text-sm transition-colors">Explain AI concepts</button>
+                                <button class="suggestion-btn bg-orange-100 hover:bg-orange-200 text-orange-800 px-2 py-1 md:px-3 rounded-full text-xs md:text-sm transition-colors">Help with homework</button>
                             </div>
                         </div>
                     </div>
 
                     <!-- Input Area -->
-                    <div class="p-6 bg-white border-t border-gray-200">
-                        <div class="flex space-x-4 mb-4">
+                    <div class="p-4 md:p-6 bg-white border-t border-gray-200">
+                        <div class="flex space-x-2 md:space-x-4 mb-4">
                             <input type="text" id="userInput" placeholder="Type your message here..." 
-                                   class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                   class="flex-1 px-3 py-2 md:px-4 md:py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm md:text-base"
                                    disabled>
-                            <button id="sendButton" class="bg-primary-blue hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed" disabled>
-                                <i class="fas fa-paper-plane mr-2"></i>Send
+                            <button id="sendButton" class="bg-primary-blue hover:bg-blue-700 text-white px-4 py-2 md:px-6 md:py-3 rounded-lg transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed text-sm md:text-base" disabled>
+                                <i class="fas fa-paper-plane mr-1 md:mr-2"></i><span class="hidden sm:inline">Send</span>
                             </button>
                         </div>
 
                         <!-- Settings Row -->
-                        <div class="flex flex-wrap items-center justify-between gap-4 text-sm">
-                            <div class="flex items-center space-x-4">
-                                <div class="flex items-center space-x-2">
-                                    <label class="text-gray-600">Temperature:</label>
+                        <div class="flex flex-wrap items-center justify-between gap-2 md:gap-4 text-xs md:text-sm">
+                            <div class="flex items-center space-x-2 md:space-x-4">
+                                <div class="flex items-center space-x-1 md:space-x-2">
+                                    <label class="text-gray-600">Temp:</label>
                                     <input type="range" id="temperature" min="0.1" max="1.0" step="0.1" value="0.7" 
-                                           class="w-20">
+                                           class="w-12 md:w-20">
                                     <span id="temperatureValue" class="text-blue-600 font-semibold">0.7</span>
                                 </div>
-                                <div class="flex items-center space-x-2">
-                                    <label class="text-gray-600">Max tokens:</label>
-                                    <select id="maxLength" class="border border-gray-300 rounded px-2 py-1 text-sm">
+                                <div class="flex items-center space-x-1 md:space-x-2">
+                                    <label class="text-gray-600">Max:</label>
+                                    <select id="maxLength" class="border border-gray-300 rounded px-1 py-1 md:px-2 text-xs md:text-sm">
                                         <option value="512">512</option>
                                         <option value="1024" selected>1024</option>
                                         <option value="2048">2048</option>
@@ -495,7 +445,7 @@
                                 </div>
                             </div>
                             <div class="text-xs text-gray-500">
-                                Powered by <strong>Qwen AI</strong> • Running locally on your server
+                                Powered by <strong>Qwen AI</strong>
                             </div>
                         </div>
                     </div>
@@ -503,17 +453,17 @@
 
                 <!-- Features Overview -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-                    <div class="text-center p-6">
+                    <div class="text-center p-4 md:p-6">
                         <i class="fas fa-brain text-3xl text-blue-600 mb-3"></i>
                         <h4 class="font-semibold text-gray-800 mb-2">Advanced Reasoning</h4>
                         <p class="text-sm text-gray-600">Complex problem solving and logical analysis</p>
                     </div>
-                    <div class="text-center p-6">
+                    <div class="text-center p-4 md:p-6">
                         <i class="fas fa-code text-3xl text-green-600 mb-3"></i>
                         <h4 class="font-semibold text-gray-800 mb-2">Code Generation</h4>
                         <p class="text-sm text-gray-600">Write, debug, and explain code in multiple languages</p>
                     </div>
-                    <div class="text-center p-6">
+                    <div class="text-center p-4 md:p-6">
                         <i class="fas fa-language text-3xl text-purple-600 mb-3"></i>
                         <h4 class="font-semibold text-gray-800 mb-2">Multilingual</h4>
                         <p class="text-sm text-gray-600">Communicate in dozens of languages</p>
@@ -523,130 +473,97 @@
         </div>
     </section>
 
-    <!-- FAQ Section -->
+    <!-- Why Choose ToolSlap AI -->
     <section class="py-16 bg-light-blue">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Frequently Asked Questions</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Why Choose ToolSlap AI?</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Experience the difference with our integrated AI tools
+                </p>
             </div>
 
-            <div class="max-w-4xl mx-auto space-y-6">
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Which AI chatbot is best for beginners?</h3>
-                    <p class="text-gray-600">ChatGPT is often recommended for beginners due to its intuitive interface, extensive documentation, and large community. It offers both free and paid tiers.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-primary-blue rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-gift text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">100% Free</h3>
+                    <p class="text-gray-600">All AI tools are completely free to use with no limits or subscriptions required.</p>
                 </div>
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Are AI chatbots free to use?</h3>
-                    <p class="text-gray-600">Most AI chatbots offer free tiers with basic functionality. Premium features like faster responses, longer conversations, and advanced capabilities typically require a subscription.</p>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shield-alt text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Privacy First</h3>
+                    <p class="text-gray-600">Your data stays secure. We don't store your conversations or personal information.</p>
                 </div>
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Can AI chatbots help with coding?</h3>
-                    <p class="text-gray-600">Yes! Most modern AI chatbots excel at coding tasks including code generation, debugging, explaining code, and helping with different programming languages.</p>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-bolt text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Lightning Fast</h3>
+                    <p class="text-gray-600">Get instant responses from our optimized AI models running on high-performance servers.</p>
                 </div>
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h3 class="text-xl font-semibold text-gray-800 mb-3">How accurate are AI chatbot responses?</h3>
-                    <p class="text-gray-600">AI chatbots are generally accurate for factual information and common tasks, but it's always good to verify important information from authoritative sources.</p>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-tools text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Integrated Tools</h3>
+                    <p class="text-gray-600">All AI tools work seamlessly together within the ToolSlap ecosystem.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="gradient-bg text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-4">ToolSlap</h3>
-                    <p class="text-blue-200 mb-4">Your hub for the best AI tools and online utilities.</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-blue-200 hover:text-white"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-blue-200 hover:text-white"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="text-blue-200 hover:text-white"><i class="fab fa-linkedin"></i></a>
-                    </div>
-                </div>
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">AI Tools</h4>
-                    <ul class="space-y-2 text-blue-200">
-                        <li><a href="ai-chatbots.html" class="hover:text-white">AI Chatbots</a></li>
-                        <li><a href="ai-image-generators.html" class="hover:text-white">Image Generators</a></li>
-                        <li><a href="ai-website-builders.html" class="hover:text-white">Website Builders</a></li>
-                        <li><a href="ai-voice-generators.html" class="hover:text-white">Voice Generators</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Resources</h4>
-                    <ul class="space-y-2 text-blue-200">
-                        <li><a href="blog.html" class="hover:text-white">Blog</a></li>
-                        <li><a href="guides.html" class="hover:text-white">Guides</a></li>
-                        <li><a href="tutorials.html" class="hover:text-white">Tutorials</a></li>
-                        <li><a href="comparison.html" class="hover:text-white">Comparisons</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Company</h4>
-                    <ul class="space-y-2 text-blue-200">
-                        <li><a href="about.html" class="hover:text-white">About</a></li>
-                        <li><a href="contact.html" class="hover:text-white">Contact</a></li>
-                        <li><a href="privacy-policy.html" class="hover:text-white">Privacy</a></li>
-                        <li><a href="terms-of-service.html" class="hover:text-white">Terms</a></li>
-                    </ul>
-                </div>
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-center items-center mb-6">
+                <i class="fas fa-tools text-2xl mr-2"></i>
+                <h3 class="text-2xl font-bold">ToolSlap</h3>
             </div>
-            <div class="border-t border-blue-400 mt-8 pt-8 text-center text-blue-200">
-                <p>&copy; 2025 ToolSlap. All rights reserved.</p>
+            <p class="text-gray-400 mb-6">Your ultimate collection of AI-powered productivity tools</p>
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fab fa-twitter text-xl"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fab fa-linkedin text-xl"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fab fa-github text-xl"></i>
+                </a>
+            </div>
+            <div class="border-t border-gray-700 pt-8 text-sm text-gray-400">
+                <p>&copy; 2024 ToolSlap. All rights reserved. | <a href="#" class="hover:text-white">Privacy Policy</a> | <a href="#" class="hover:text-white">Terms of Service</a></p>
             </div>
         </div>
     </footer>
 
+    <!-- JavaScript for Qwen AI Chat -->
     <script>
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Mobile menu toggle
-        const mobileMenuButton = document.querySelector('.md\\:hidden');
-        const mobileMenu = document.querySelector('.md\\:flex');
-        
-        if (mobileMenuButton) {
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-        }
-
-        // Qwen AI Chat Functionality
-        class QwenChat {
+        class QwenChatInterface {
             constructor() {
-                this.apiUrl = 'http://localhost:8001';
-                this.chatHistory = [];
-                this.isConnected = false;
-                this.isTyping = false;
-                
-                this.initializeElements();
-                this.setupEventListeners();
-                this.checkConnection();
-            }
-
-            initializeElements() {
                 this.chatMessages = document.getElementById('chatMessages');
                 this.userInput = document.getElementById('userInput');
                 this.sendButton = document.getElementById('sendButton');
-                this.clearButton = document.getElementById('clearChat');
-                this.connectionStatus = document.getElementById('connectionStatus');
+                this.clearChat = document.getElementById('clearChat');
                 this.statusIndicator = document.getElementById('statusIndicator');
+                this.connectionStatus = document.getElementById('connectionStatus');
                 this.temperatureSlider = document.getElementById('temperature');
                 this.temperatureValue = document.getElementById('temperatureValue');
-                this.maxLengthSelect = document.getElementById('maxLength');
-                this.welcomeMessage = document.getElementById('welcomeMessage');
+                this.maxLength = document.getElementById('maxLength');
+                
+                this.conversationHistory = [];
+                this.isConnected = false;
+                
+                this.initializeEventListeners();
+                this.checkConnection();
             }
-
-            setupEventListeners() {
-                // Send message on button click or Enter key
+            
+            initializeEventListeners() {
+                // Send message event
                 this.sendButton.addEventListener('click', () => this.sendMessage());
                 this.userInput.addEventListener('keypress', (e) => {
                     if (e.key === 'Enter' && !e.shiftKey) {
@@ -654,244 +571,192 @@
                         this.sendMessage();
                     }
                 });
-
+                
                 // Clear chat
-                this.clearButton.addEventListener('click', () => this.clearChat());
-
+                this.clearChat.addEventListener('click', () => this.clearChatHistory());
+                
                 // Temperature slider
                 this.temperatureSlider.addEventListener('input', (e) => {
                     this.temperatureValue.textContent = e.target.value;
                 });
-
+                
                 // Suggestion buttons
                 document.querySelectorAll('.suggestion-btn').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        this.userInput.value = btn.textContent;
+                    btn.addEventListener('click', (e) => {
+                        this.userInput.value = e.target.textContent;
                         this.sendMessage();
                     });
                 });
             }
-
+            
             async checkConnection() {
                 try {
-                    const response = await fetch(`${this.apiUrl}/health`);
+                    const response = await fetch('/health');
                     if (response.ok) {
-                        const data = await response.json();
-                        if (data.model_loaded) {
-                            this.setConnectionStatus('Connected to Qwen AI', 'green', true);
-                        } else {
-                            this.setConnectionStatus('Server running, loading model...', 'yellow', false);
-                        }
+                        this.setConnected(true);
                     } else {
-                        this.setConnectionStatus('Server not responding', 'red', false);
+                        this.setConnected(false);
                     }
                 } catch (error) {
-                    this.setConnectionStatus('Please start Qwen server', 'red', false);
-                    this.showConnectionHelp();
+                    this.setConnected(false);
                 }
             }
-
-            setConnectionStatus(message, color, connected) {
+            
+            setConnected(connected) {
                 this.isConnected = connected;
-                this.connectionStatus.textContent = message;
-                
-                // Update status indicator
-                this.statusIndicator.className = `w-3 h-3 rounded-full bg-${color}-400`;
-                if (!connected) {
-                    this.statusIndicator.classList.add('animate-pulse');
-                }
-                
-                // Enable/disable input
-                this.userInput.disabled = !connected;
-                this.sendButton.disabled = !connected;
                 
                 if (connected) {
-                    this.userInput.placeholder = "Type your message here...";
+                    this.connectionStatus.textContent = 'Connected';
+                    this.statusIndicator.className = 'w-3 h-3 rounded-full bg-green-400';
+                    this.userInput.disabled = false;
+                    this.sendButton.disabled = false;
                 } else {
-                    this.userInput.placeholder = "Please start the Qwen API server first...";
+                    this.connectionStatus.textContent = 'Disconnected - Demo Mode';
+                    this.statusIndicator.className = 'w-3 h-3 rounded-full bg-red-400';
+                    this.userInput.disabled = false;
+                    this.sendButton.disabled = false;
                 }
             }
-
-            showConnectionHelp() {
-                const helpMessage = this.createMessageElement(
-                    'system',
-                    `To use this chat demo, please start the Qwen API server:\n\n1. Open terminal in your toolslap directory\n2. Install requirements: pip install -r qwen-requirements.txt\n3. Run server: python qwen-api-server.py\n4. Refresh this page\n\nThe server will run at http://localhost:8001`
-                );
-                this.welcomeMessage.style.display = 'none';
-                this.chatMessages.appendChild(helpMessage);
-            }
-
+            
             async sendMessage() {
                 const message = this.userInput.value.trim();
-                if (!message || !this.isConnected || this.isTyping) return;
-
-                // Hide welcome message
-                if (this.welcomeMessage) {
-                    this.welcomeMessage.style.display = 'none';
-                }
-
-                // Add user message
-                this.addMessage('user', message);
+                if (!message) return;
+                
+                // Clear input and add user message
                 this.userInput.value = '';
-
+                this.addMessage(message, 'user');
+                
                 // Show typing indicator
-                this.showTypingIndicator();
-
+                const typingId = this.addMessage('Thinking...', 'assistant', true);
+                
                 try {
-                    const response = await fetch(`${this.apiUrl}/api/chat`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            message: message,
-                            history: this.chatHistory,
-                            temperature: parseFloat(this.temperatureSlider.value),
-                            max_length: parseInt(this.maxLengthSelect.value)
-                        })
-                    });
-
-                    if (response.ok) {
-                        const data = await response.json();
-                        this.hideTypingIndicator();
-                        this.addMessage('assistant', data.response);
+                    let response;
+                    
+                    if (this.isConnected) {
+                        // Try real API call
+                        const apiResponse = await fetch('/api/chat', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                message: message,
+                                history: this.conversationHistory,
+                                temperature: parseFloat(this.temperatureSlider.value),
+                                max_length: parseInt(this.maxLength.value)
+                            })
+                        });
                         
-                        // Update chat history
-                        this.chatHistory.push([message, data.response]);
+                        if (apiResponse.ok) {
+                            const data = await apiResponse.json();
+                            response = data.response;
+                        } else {
+                            throw new Error('API call failed');
+                        }
                     } else {
-                        throw new Error('Failed to get response from server');
+                        // Demo mode - simulate response
+                        response = this.generateDemoResponse(message);
                     }
+                    
+                    // Remove typing indicator and add response
+                    this.removeMessage(typingId);
+                    this.addMessage(response, 'assistant');
+                    
+                    // Update conversation history
+                    this.conversationHistory.push([message, response]);
+                    
                 } catch (error) {
-                    this.hideTypingIndicator();
-                    this.addMessage('system', `Error: ${error.message}. Please check if the Qwen server is running.`);
-                    console.error('Chat error:', error);
+                    console.error('Error:', error);
+                    this.removeMessage(typingId);
+                    this.addMessage('Sorry, I encountered an error. Please try again.', 'assistant');
                 }
             }
-
-            addMessage(sender, content) {
-                const messageElement = this.createMessageElement(sender, content);
-                this.chatMessages.appendChild(messageElement);
-                this.scrollToBottom();
+            
+            generateDemoResponse(message) {
+                // Simple demo responses
+                const lowerMessage = message.toLowerCase();
+                
+                if (lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
+                    return "Hello! I'm Qwen AI, your intelligent assistant. How can I help you today?";
+                } else if (lowerMessage.includes('code') || lowerMessage.includes('programming')) {
+                    return "I'd be happy to help you with coding! I can assist with multiple programming languages including Python, JavaScript, Java, C++, and more. What would you like to work on?";
+                } else if (lowerMessage.includes('story') || lowerMessage.includes('write')) {
+                    return "I love creative writing! I can help you write stories, poems, articles, or any other creative content. What kind of story are you interested in creating?";
+                } else if (lowerMessage.includes('explain') || lowerMessage.includes('what')) {
+                    return "I'm here to explain concepts and answer your questions! I can help with a wide range of topics including science, technology, history, literature, and more. What would you like to learn about?";
+                } else {
+                    return "That's an interesting question! While this is a demo mode, the full Qwen AI can help with writing, coding, analysis, creative tasks, problem-solving, and much more. Try asking me about specific topics you're curious about!";
+                }
             }
-
-            createMessageElement(sender, content) {
+            
+            addMessage(content, sender, isTyping = false) {
+                const messageId = Date.now().toString();
                 const messageDiv = document.createElement('div');
-                messageDiv.className = `mb-4 flex ${sender === 'user' ? 'justify-end' : 'justify-start'}`;
-
-                const messageBubble = document.createElement('div');
-                messageBubble.className = `max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${this.getMessageStyles(sender)}`;
-
-                // Handle system messages differently
-                if (sender === 'system') {
-                    messageBubble.className = 'w-full bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-3 rounded-lg text-sm';
-                    messageBubble.innerHTML = `<i class="fas fa-info-circle mr-2"></i>${content.replace(/\n/g, '<br>')}`;
-                } else {
-                    const avatar = document.createElement('div');
-                    avatar.className = `w-8 h-8 rounded-full flex items-center justify-center ${sender === 'user' ? 'bg-blue-500 text-white ml-2' : 'bg-gray-200 text-gray-600 mr-2'}`;
-                    avatar.innerHTML = `<i class="fas fa-${sender === 'user' ? 'user' : 'robot'} text-sm"></i>`;
-
-                    messageBubble.textContent = content;
-
-                    if (sender === 'user') {
-                        messageDiv.appendChild(messageBubble);
-                        messageDiv.appendChild(avatar);
-                    } else {
-                        messageDiv.appendChild(avatar);
-                        messageDiv.appendChild(messageBubble);
-                    }
+                messageDiv.id = `message-${messageId}`;
+                messageDiv.className = `mb-4 ${sender === 'user' ? 'text-right' : 'text-left'}`;
+                
+                const messageContent = document.createElement('div');
+                messageContent.className = `inline-block max-w-xs md:max-w-md px-4 py-2 rounded-lg ${
+                    sender === 'user' 
+                        ? 'bg-primary-blue text-white' 
+                        : 'bg-white border border-gray-200 text-gray-800'
+                } ${isTyping ? 'animate-pulse' : ''}`;
+                messageContent.textContent = content;
+                
+                messageDiv.appendChild(messageContent);
+                this.chatMessages.appendChild(messageDiv);
+                
+                // Hide welcome message
+                const welcomeMessage = document.getElementById('welcomeMessage');
+                if (welcomeMessage) {
+                    welcomeMessage.style.display = 'none';
                 }
-
-                if (sender !== 'system') {
-                    return messageDiv;
-                } else {
-                    const systemDiv = document.createElement('div');
-                    systemDiv.className = 'mb-4';
-                    systemDiv.appendChild(messageBubble);
-                    return systemDiv;
+                
+                // Scroll to bottom
+                this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
+                
+                return messageId;
+            }
+            
+            removeMessage(messageId) {
+                const messageElement = document.getElementById(`message-${messageId}`);
+                if (messageElement) {
+                    messageElement.remove();
                 }
             }
-
-            getMessageStyles(sender) {
-                switch (sender) {
-                    case 'user':
-                        return 'bg-blue-500 text-white';
-                    case 'assistant':
-                        return 'bg-gray-200 text-gray-800';
-                    default:
-                        return 'bg-yellow-100 text-yellow-800';
-                }
-            }
-
-            showTypingIndicator() {
-                this.isTyping = true;
-                const typingDiv = document.createElement('div');
-                typingDiv.id = 'typing-indicator';
-                typingDiv.className = 'mb-4 flex justify-start';
-                typingDiv.innerHTML = `
-                    <div class="w-8 h-8 rounded-full bg-gray-200 text-gray-600 mr-2 flex items-center justify-center">
-                        <i class="fas fa-robot text-sm"></i>
-                    </div>
-                    <div class="bg-gray-200 text-gray-600 px-4 py-2 rounded-lg">
-                        <div class="typing-animation">
-                            <span class="dot"></span>
-                            <span class="dot"></span>
-                            <span class="dot"></span>
+            
+            clearChatHistory() {
+                this.chatMessages.innerHTML = `
+                    <div class="text-center text-gray-500 py-8" id="welcomeMessage">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-comments text-2xl text-blue-600"></i>
+                        </div>
+                        <h4 class="text-lg font-semibold text-gray-700 mb-2">Welcome to Qwen AI!</h4>
+                        <p>Ask me anything - I can help with writing, coding, analysis, creative tasks, and more!</p>
+                        <div class="mt-4 flex flex-wrap justify-center gap-2">
+                            <button class="suggestion-btn bg-blue-100 hover:bg-blue-200 text-blue-800 px-2 py-1 md:px-3 rounded-full text-xs md:text-sm transition-colors">Write a story</button>
+                            <button class="suggestion-btn bg-green-100 hover:bg-green-200 text-green-800 px-2 py-1 md:px-3 rounded-full text-xs md:text-sm transition-colors">Code a function</button>
+                            <button class="suggestion-btn bg-purple-100 hover:bg-purple-200 text-purple-800 px-2 py-1 md:px-3 rounded-full text-xs md:text-sm transition-colors">Explain AI concepts</button>
+                            <button class="suggestion-btn bg-orange-100 hover:bg-orange-200 text-orange-800 px-2 py-1 md:px-3 rounded-full text-xs md:text-sm transition-colors">Help with homework</button>
                         </div>
                     </div>
                 `;
+                this.conversationHistory = [];
                 
-                this.chatMessages.appendChild(typingDiv);
-                this.scrollToBottom();
-            }
-
-            hideTypingIndicator() {
-                this.isTyping = false;
-                const typingIndicator = document.getElementById('typing-indicator');
-                if (typingIndicator) {
-                    typingIndicator.remove();
-                }
-            }
-
-            clearChat() {
-                this.chatHistory = [];
-                this.chatMessages.innerHTML = '';
-                this.welcomeMessage.style.display = 'block';
-                this.chatMessages.appendChild(this.welcomeMessage);
-            }
-
-            scrollToBottom() {
-                this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
+                // Re-attach suggestion button listeners
+                document.querySelectorAll('.suggestion-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        this.userInput.value = e.target.textContent;
+                        this.sendMessage();
+                    });
+                });
             }
         }
-
-        // Initialize Qwen Chat when DOM is loaded
+        
+        // Initialize chat interface when page loads
         document.addEventListener('DOMContentLoaded', () => {
-            new QwenChat();
+            new QwenChatInterface();
         });
-
-        // Add typing animation styles
-        const style = document.createElement('style');
-        style.textContent = `
-            .typing-animation {
-                display: flex;
-                align-items: center;
-                gap: 4px;
-            }
-            .typing-animation .dot {
-                width: 6px;
-                height: 6px;
-                border-radius: 50%;
-                background-color: #9CA3AF;
-                animation: typing 1.4s infinite ease-in-out;
-            }
-            .typing-animation .dot:nth-child(1) { animation-delay: -0.32s; }
-            .typing-animation .dot:nth-child(2) { animation-delay: -0.16s; }
-            @keyframes typing {
-                0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
-                40% { transform: scale(1); opacity: 1; }
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>

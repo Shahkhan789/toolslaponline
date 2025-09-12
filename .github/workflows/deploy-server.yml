@@ -1,0 +1,75 @@
+name: Deploy ToolSlap AI Server
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x, 20.x]
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Test server startup
+      run: |
+        timeout 30s npm start &
+        sleep 10
+        curl -f http://localhost:8001/health || exit 1
+        pkill -f "node server.js" || true
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Create deployment package
+      run: |
+        mkdir -p deploy
+        cp -r *.js *.json *.html *.css images/ deploy/ 2>/dev/null || true
+        cd deploy
+        npm install --production
+        zip -r ../toolslap-server.zip .
+    
+    - name: Deploy to GitHub Pages (Static Files)
+      uses: peaceiris/actions-gh-pages@v3
+      if: github.ref == 'refs/heads/main'
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./
+        exclude_assets: 'node_modules,*.zip,server.js,package*.json,.github'
+    
+    # Uncomment and configure for actual server deployment
+    # - name: Deploy to Railway/Heroku/Vercel
+    #   run: |
+    #     echo "Configure your preferred hosting service here"
+    #     # Railway: railway up
+    #     # Heroku: git push heroku main  
+    #     # Vercel: vercel --prod

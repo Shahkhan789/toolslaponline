@@ -815,6 +815,155 @@
                 font-size: 0.7rem;
             }
         }
+
+        /* Mobile-responsive AI Tools Carousel */
+        .ai-tools-carousel {
+            margin: 40px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel-container {
+            display: flex;
+            transition: transform 0.3s ease;
+            gap: 20px;
+        }
+
+        .carousel-item {
+            min-width: 300px;
+            flex-shrink: 0;
+        }
+
+        .carousel-prev, .carousel-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,215,0,0.8);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            color: #1E1E2F;
+            font-size: 16px;
+            font-weight: bold;
+            z-index: 10;
+        }
+
+        .carousel-prev {
+            left: 10px;
+        }
+
+        .carousel-next {
+            right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .carousel-item {
+                min-width: 250px;
+            }
+            
+            .carousel-prev, .carousel-next {
+                width: 35px;
+                height: 35px;
+                font-size: 14px;
+            }
+            
+            .carousel-prev {
+                left: 5px;
+            }
+            
+            .carousel-next {
+                right: 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .carousel-item {
+                min-width: 90vw !important;
+                max-width: 300px;
+            }
+            
+            .carousel-container {
+                gap: 10px;
+                padding: 0 10px;
+            }
+            
+            .carousel-prev, .carousel-next {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+                background: rgba(255,215,0,0.95);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                border: 2px solid rgba(255,255,255,0.8);
+                z-index: 20;
+            }
+            
+            .carousel-prev {
+                left: 2px;
+            }
+            
+            .carousel-next {
+                right: 2px;
+            }
+            
+            .ai-tools-carousel h3 {
+                font-size: 1.3rem !important;
+                margin-bottom: 15px !important;
+            }
+            
+            .ai-tools-carousel .tool-card {
+                padding: 20px !important;
+                margin: 0 5px;
+                min-height: auto !important;
+            }
+            
+            .ai-tools-carousel .tool-card h3 {
+                font-size: 1.2rem !important;
+                line-height: 1.3 !important;
+                margin-bottom: 10px !important;
+            }
+            
+            .ai-tools-carousel .tool-card p {
+                font-size: 0.9rem !important;
+                line-height: 1.4 !important;
+                margin-bottom: 15px !important;
+            }
+            
+            .ai-tools-carousel .tool-card .btn {
+                padding: 12px 20px !important;
+                font-size: 0.95rem !important;
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Touch-friendly improvements */
+        .carousel-prev, .carousel-next {
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .carousel-prev:active, .carousel-next:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        /* Swipe gesture support for mobile */
+        .carousel-container {
+            touch-action: pan-y;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        @media (max-width: 768px) {
+            .carousel-container {
+                scroll-snap-type: x mandatory;
+            }
+            
+            .carousel-item {
+                scroll-snap-align: start;
+            }
+        }
     </style>
 </head>
 <body>
@@ -884,6 +1033,7 @@
                             <div class="category-title-dropdown">🤖 AI Tools</div>
                             <div class="category-tools">
                                 <a href="ai-content-creator.html" class="dropdown-tool" style="background: rgba(255, 215, 0, 0.1); color: #FFD700;">AI Content Creator</a>
+                                <a href="ai-research-assistant.html" class="dropdown-tool" style="background: rgba(255, 215, 0, 0.1); color: #FFD700;">AI Research Assistant</a>
                                 <a href="ai-code-assistant.html" class="dropdown-tool" style="background: rgba(255, 215, 0, 0.1); color: #FFD700;">AI Code Assistant</a>
                                 <a href="ai-image-analyzer.html" class="dropdown-tool" style="background: rgba(255, 215, 0, 0.1); color: #FFD700;">AI Image Analyzer</a>
                                 <a href="ai-chatbots.html" class="dropdown-tool" style="background: rgba(255, 215, 0, 0.1); color: #FFD700;">AI Chatbots</a>
@@ -973,11 +1123,11 @@
     <main>
         <section class="hero-section">
             <h1 class="hero-title">Free Online Tools for Everything</h1>
-            <p class="hero-description">Access 80+ trending online tools including ✨ NEW AI Content Creator Suite, 🆕 AI Code Assistant, advanced AI Image Analyzer, AI Chatbots (ChatGPT, Claude), AI Image Generators (DALL-E 3, Midjourney), AI Website Builders (Qwen AI, Webflow), AI Voice Generators, AI Translators, HEIC to JPG converter, Word to PDF, and more. No registration required!</p>
+            <p class="hero-description">Access 80+ trending online tools including 🔬 NEW AI Research Assistant, ✨ AI Content Creator Suite, 🆕 AI Code Assistant, advanced AI Image Analyzer, AI Chatbots (ChatGPT, Claude), AI Image Generators (DALL-E 3, Midjourney), AI Website Builders (Qwen AI, Webflow), AI Voice Generators, AI Translators, HEIC to JPG converter, Word to PDF, and more. No registration required!</p>
             
             <!-- SEO Keywords Section -->
             <div class="keywords-highlight" style="margin: 30px auto; max-width: 700px; font-size: 0.9rem; opacity: 0.8; text-align: center;">
-                <strong>🔥 Hot Tools:</strong> ✨ NEW: AI Content Creator (Blog, Social Media, Marketing), 🆕 AI Code Assistant (Generate, Debug, Optimize), AI Image Analyzer (OCR, Object Detection), AI Chatbots (ChatGPT, Claude), AI Image Generators (DALL-E 3, Midjourney), AI Website Builders (Qwen AI), AI Voice Generators, AI Translators, AI Text to Speech, HEIC to JPG Converter, Word to PDF, PDF Compressor, Background Remover, and more!
+                <strong>🔥 Hot Tools:</strong> 🔬 NEW: AI Research Assistant (Summarize Papers, Citations, Fact-Check), ✨ AI Content Creator (Blog, Social Media, Marketing), 🆕 AI Code Assistant (Generate, Debug, Optimize), AI Image Analyzer (OCR, Object Detection), AI Chatbots (ChatGPT, Claude), AI Image Generators (DALL-E 3, Midjourney), AI Website Builders (Qwen AI), AI Voice Generators, AI Translators, AI Text to Speech, HEIC to JPG Converter, Word to PDF, PDF Compressor, Background Remover, and more!
             </div>
             
             <div class="search-container">
@@ -991,14 +1141,36 @@
             <h2 class="most-used-title">⚡ Most Used Tools</h2>
             <p class="most-used-subtitle">Quick access to our 8 most popular tools used daily by millions</p>
             <div class="quick-tools-grid">
-                <a href="text-to-speech.html" class="quick-tool-card">
+                <a href="ai-code-assistant.html" class="quick-tool-card">
                     <span class="popular-badge">Hot</span>
+                    <div class="quick-tool-icon">💻</div>
+                    <div class="quick-tool-name">AI Code Assistant</div>
+                    <div class="quick-tool-desc">Generate, debug & optimize code</div>
+                </a>
+                <a href="ai-content-creator.html" class="quick-tool-card">
+                    <span class="popular-badge">New</span>
+                    <div class="quick-tool-icon">✍️</div>
+                    <div class="quick-tool-name">AI Content Creator</div>
+                    <div class="quick-tool-desc">Blog posts & marketing copy</div>
+                </a>
+                <a href="ai-research-assistant.html" class="quick-tool-card">
+                    <span class="popular-badge">New</span>
+                    <div class="quick-tool-icon">🔬</div>
+                    <div class="quick-tool-name">AI Research Assistant</div>
+                    <div class="quick-tool-desc">Summarize papers & citations</div>
+                </a>
+                <a href="ai-website-builders.html" class="quick-tool-card">
+                    <span class="popular-badge">🔥</span>
+                    <div class="quick-tool-icon">🌐</div>
+                    <div class="quick-tool-name">AI Website Builder</div>
+                    <div class="quick-tool-desc">Generate websites instantly</div>
+                </a>
+                <a href="text-to-speech.html" class="quick-tool-card">
                     <div class="quick-tool-icon">🎤</div>
                     <div class="quick-tool-name">AI Text to Speech</div>
                     <div class="quick-tool-desc">20+ voices, multiple languages</div>
                 </a>
                 <a href="heic-to-jpg-converter.html" class="quick-tool-card">
-                    <span class="popular-badge">New</span>
                     <div class="quick-tool-icon">📷</div>
                     <div class="quick-tool-name">HEIC to JPG</div>
                     <div class="quick-tool-desc">Apple image format converter</div>
@@ -1008,31 +1180,11 @@
                     <div class="quick-tool-name">PDF to Word</div>
                     <div class="quick-tool-desc">Editable document conversion</div>
                 </a>
-                <a href="word-to-pdf-converter.html" class="quick-tool-card">
-                    <div class="quick-tool-icon">📝</div>
-                    <div class="quick-tool-name">Word to PDF</div>
-                    <div class="quick-tool-desc">Professional PDF generation</div>
-                </a>
-                <a href="compress-pdf.html" class="quick-tool-card">
-                    <div class="quick-tool-icon">🗜️</div>
-                    <div class="quick-tool-name">Compress PDF</div>
-                    <div class="quick-tool-desc">Reduce file size efficiently</div>
-                </a>
-                <a href="bg-remover.html" class="quick-tool-card">
-                    <div class="quick-tool-icon">🎨</div>
-                    <div class="quick-tool-name">Background Remover</div>
-                    <div class="quick-tool-desc">AI-powered background removal</div>
-                </a>
-                <a href="qr-generator.html" class="quick-tool-card">
-                    <div class="quick-tool-icon">🔳</div>
-                    <div class="quick-tool-name">QR Generator</div>
-                    <div class="quick-tool-desc">Custom QR codes instantly</div>
-                </a>
-                <a href="ai-content-creator.html" class="quick-tool-card">
-                    <span class="popular-badge">New</span>
-                    <div class="quick-tool-icon">✍️</div>
-                    <div class="quick-tool-name">AI Content Creator</div>
-                    <div class="quick-tool-desc">Blog posts & marketing copy</div>
+                <a href="ai-ollama.html" class="quick-tool-card">
+                    <span class="popular-badge">🆕</span>
+                    <div class="quick-tool-icon">🧠</div>
+                    <div class="quick-tool-name">Ollama AI</div>
+                    <div class="quick-tool-desc">Local AI models & privacy</div>
                 </a>
             </div>
         </section>
@@ -1288,10 +1440,10 @@
             </div>
             
             <!-- Featured AI Tools Carousel -->
-            <div class="ai-tools-carousel" style="margin: 40px 0; overflow: hidden; position: relative;">
+            <div class="ai-tools-carousel">
                 <h3 style="text-align: center; color: #FFD700; font-size: 1.5rem; margin-bottom: 20px; font-weight: 600;">🌟 Featured AI Tools</h3>
-                <div class="carousel-container" style="display: flex; transition: transform 0.3s ease; gap: 20px;" id="aiCarousel">
-                    <div class="carousel-item" style="min-width: 300px; flex-shrink: 0;">
+                <div class="carousel-container" id="aiCarousel">
+                    <div class="carousel-item">
                         <div class="tool-card" style="background: linear-gradient(135deg, #FF6B6B 0%, #FF5722 100%); color: white; border: 2px solid #FF6B6B; height: 200px;">
                             <span class="tool-icon" style="color: white; font-size: 2rem;">🖼️</span>
                             <h3 style="color: white; font-size: 1.2rem;">AI Image Analyzer</h3>
@@ -1300,34 +1452,7 @@
                             <div style="position: absolute; top: 8px; right: 8px; background: #FFD700; color: #1E1E2F; padding: 2px 6px; border-radius: 10px; font-size: 8px; font-weight: bold;">🆕 NEW</div>
                         </div>
                     </div>
-                    <div class="carousel-item" style="min-width: 300px; flex-shrink: 0;">
-                        <div class="tool-card" style="background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%); color: white; border: 2px solid #3B82F6; height: 200px;">
-                            <span class="tool-icon" style="color: white; font-size: 2rem;">💬</span>
-                            <h3 style="color: white; font-size: 1.2rem;">AI Chatbots Hub</h3>
-                            <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.9rem;">Compare ChatGPT, Claude, Gemini. Direct links and feature comparisons.</p>
-                            <a href="ai-chatbots.html" class="btn" style="background: white; color: #3B82F6; padding: 8px 16px; font-size: 0.9rem;" aria-label="Explore AI Chatbots">Chat Now</a>
-                            <div style="position: absolute; top: 8px; right: 8px; background: #FF6B6B; color: white; padding: 2px 6px; border-radius: 10px; font-size: 8px; font-weight: bold;">🔥 HOT</div>
-                        </div>
-                    </div>
-                    <div class="carousel-item" style="min-width: 300px; flex-shrink: 0;">
-                        <div class="tool-card" style="background: linear-gradient(135deg, #10B981 0%, #059669 100%); color: white; border: 2px solid #10B981; height: 200px;">
-                            <span class="tool-icon" style="color: white; font-size: 2rem;">🎨</span>
-                            <h3 style="color: white; font-size: 1.2rem;">AI Image Generators</h3>
-                            <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.9rem;">DALL-E 3, Midjourney, Stable Diffusion demos and guides.</p>
-                            <a href="ai-image-generators.html" class="btn" style="background: white; color: #10B981; padding: 8px 16px; font-size: 0.9rem;" aria-label="Try AI Image Generators">Create Art</a>
-                            <div style="position: absolute; top: 8px; right: 8px; background: #8B5CF6; color: white; padding: 2px 6px; border-radius: 10px; font-size: 8px; font-weight: bold;">✨ POPULAR</div>
-                        </div>
-                    </div>
-                    <div class="carousel-item" style="min-width: 300px; flex-shrink: 0;">
-                        <div class="tool-card" style="background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%); color: white; border: 2px solid #F59E0B; height: 200px;">
-                            <span class="tool-icon" style="color: white; font-size: 2rem;">🎤</span>
-                            <h3 style="color: white; font-size: 1.2rem;">AI Voice Generators</h3>
-                            <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.9rem;">ElevenLabs, Qwen AI Voice, and more text-to-speech tools.</p>
-                            <a href="ai-voice-generators.html" class="btn" style="background: white; color: #F59E0B; padding: 8px 16px; font-size: 0.9rem;" aria-label="Generate AI Voices">Voice Now</a>
-                            <div style="position: absolute; top: 8px; right: 8px; background: #06B6D4; color: white; padding: 2px 6px; border-radius: 10px; font-size: 8px; font-weight: bold;">🎵 AUDIO</div>
-                        </div>
-                    </div>
-                    <div class="carousel-item" style="min-width: 300px; flex-shrink: 0;">
+                    <div class="carousel-item">
                         <div class="tool-card" style="background: linear-gradient(135deg, #22C55E 0%, #15803D 100%); color: white; border: 2px solid #22C55E; height: 200px;">
                             <span class="tool-icon" style="color: white; font-size: 2rem;">💻</span>
                             <h3 style="color: white; font-size: 1.2rem;">AI Code Assistant</h3>
@@ -1336,7 +1461,7 @@
                             <div style="position: absolute; top: 8px; right: 8px; background: #FFD700; color: #1E1E2F; padding: 2px 6px; border-radius: 10px; font-size: 8px; font-weight: bold;">🆕 NEW</div>
                         </div>
                     </div>
-                    <div class="carousel-item" style="min-width: 300px; flex-shrink: 0;">
+                    <div class="carousel-item">
                         <div class="tool-card" style="background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%); color: white; border: 2px solid #2563EB; height: 200px;">
                             <span class="tool-icon" style="color: white; font-size: 2rem;">✍️</span>
                             <h3 style="color: white; font-size: 1.2rem;">AI Content Creator</h3>
@@ -1345,9 +1470,27 @@
                             <div style="position: absolute; top: 8px; right: 8px; background: #10B981; color: white; padding: 2px 6px; border-radius: 10px; font-size: 8px; font-weight: bold;">✨ NEW</div>
                         </div>
                     </div>
+                    <div class="carousel-item">
+                        <div class="tool-card" style="background: linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%); color: white; border: 2px solid #7C3AED; height: 200px;">
+                            <span class="tool-icon" style="color: white; font-size: 2rem;">🔬</span>
+                            <h3 style="color: white; font-size: 1.2rem;">AI Research Assistant</h3>
+                            <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.9rem;">Summarize papers, generate citations, fact-check with AI.</p>
+                            <a href="ai-research-assistant.html" class="btn" style="background: white; color: #7C3AED; padding: 8px 16px; font-size: 0.9rem;" aria-label="AI Research Assistant">Research Now</a>
+                            <div style="position: absolute; top: 8px; right: 8px; background: #FFD700; color: #1E1E2F; padding: 2px 6px; border-radius: 10px; font-size: 8px; font-weight: bold;">🔬 NEW</div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="tool-card" style="background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%); color: white; border: 2px solid #3B82F6; height: 200px;">
+                            <span class="tool-icon" style="color: white; font-size: 2rem;">💬</span>
+                            <h3 style="color: white; font-size: 1.2rem;">AI Chatbots Hub</h3>
+                            <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.9rem;">Experience ToolSlap's own AI chatbots and assistants.</p>
+                            <a href="ai-chatbots.html" class="btn" style="background: white; color: #3B82F6; padding: 8px 16px; font-size: 0.9rem;" aria-label="Explore AI Chatbots">Chat Now</a>
+                            <div style="position: absolute; top: 8px; right: 8px; background: #FF6B6B; color: white; padding: 2px 6px; border-radius: 10px; font-size: 8px; font-weight: bold;">🔥 HOT</div>
+                        </div>
+                    </div>
                 </div>
-                <button class="carousel-prev" onclick="moveCarousel(-1)" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(255,215,0,0.8); border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; color: #1E1E2F; font-size: 16px; font-weight: bold;">‹</button>
-                <button class="carousel-next" onclick="moveCarousel(1)" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(255,215,0,0.8); border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; color: #1E1E2F; font-size: 16px; font-weight: bold;">›</button>
+                <button class="carousel-prev" onclick="moveCarousel(-1)">‹</button>
+                <button class="carousel-next" onclick="moveCarousel(1)">›</button>
             </div>
             
             <!-- AI Tools Grid -->
@@ -1407,6 +1550,13 @@
                     <p style="color: rgba(255, 255, 255, 0.9);">Generate blog posts, social media content, emails, marketing copy, and SEO content in seconds with professional quality.</p>
                     <a href="ai-content-creator.html" class="btn" style="background: white; color: #2563EB;" aria-label="Create AI Content">Create Now</a>
                     <div style="position: absolute; top: 10px; right: 10px; background: #10B981; color: white; padding: 4px 8px; border-radius: 15px; font-size: 10px; font-weight: bold;">✨ NEW</div>
+                </div>
+                <div class="tool-card ai-tool" data-category="research" style="background: linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%); color: white; border: 2px solid #7C3AED;">
+                    <span class="tool-icon" style="color: white;">🔬</span>
+                    <h3 style="color: white;">AI Research Assistant</h3>
+                    <p style="color: rgba(255, 255, 255, 0.9);">Summarize research papers, generate citations, fact-check information, and extract knowledge with advanced AI.</p>
+                    <a href="ai-research-assistant.html" class="btn" style="background: white; color: #7C3AED;" aria-label="Research with AI">Research Now</a>
+                    <div style="position: absolute; top: 10px; right: 10px; background: #F59E0B; color: white; padding: 4px 8px; border-radius: 15px; font-size: 10px; font-weight: bold;">🔬 NEW</div>
                 </div>
             </div>
 
@@ -2044,6 +2194,120 @@
                         openDropdown.classList.remove('show');
                     }
                 }
+            }
+        }
+
+        // Mobile-friendly AI Tools Carousel
+        let currentCarouselIndex = 0;
+        const carousel = document.getElementById('aiCarousel');
+        const carouselItems = carousel ? carousel.querySelectorAll('.carousel-item') : [];
+        let itemsPerView = 1;
+        let maxIndex = 0;
+
+        function updateCarouselLayout() {
+            if (!carousel || carouselItems.length === 0) return;
+            
+            const screenWidth = window.innerWidth;
+            
+            // Determine how many items to show based on screen size
+            if (screenWidth >= 1200) {
+                itemsPerView = 3;
+            } else if (screenWidth >= 768) {
+                itemsPerView = 2;
+            } else {
+                itemsPerView = 1;
+            }
+            
+            maxIndex = Math.max(0, carouselItems.length - itemsPerView);
+            
+            // Adjust current index if needed
+            if (currentCarouselIndex > maxIndex) {
+                currentCarouselIndex = maxIndex;
+            }
+            
+            moveCarousel(0); // Update position without changing index
+        }
+
+        function moveCarousel(direction) {
+            if (!carousel || carouselItems.length === 0) return;
+            
+            if (direction !== 0) {
+                currentCarouselIndex += direction;
+            }
+            
+            // Wrap around for better mobile UX
+            if (currentCarouselIndex < 0) {
+                currentCarouselIndex = maxIndex;
+            } else if (currentCarouselIndex > maxIndex) {
+                currentCarouselIndex = 0;
+            }
+            
+            // Calculate the transform based on item width and gap
+            const itemWidth = carouselItems[0] ? carouselItems[0].offsetWidth : 300;
+            const gap = 20;
+            const translateX = -(currentCarouselIndex * (itemWidth + gap));
+            
+            carousel.style.transform = `translateX(${translateX}px)`;
+        }
+
+        // Initialize carousel when DOM is loaded
+        if (carousel) {
+            updateCarouselLayout();
+            
+            // Update on window resize
+            window.addEventListener('resize', () => {
+                clearTimeout(window.carouselResizeTimeout);
+                window.carouselResizeTimeout = setTimeout(updateCarouselLayout, 250);
+            });
+            
+            // Touch/swipe support for mobile
+            let startX = 0;
+            let startY = 0;
+            let isDragging = false;
+            
+            carousel.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+                isDragging = true;
+            }, { passive: true });
+            
+            carousel.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                
+                const currentX = e.touches[0].clientX;
+                const currentY = e.touches[0].clientY;
+                const diffX = startX - currentX;
+                const diffY = startY - currentY;
+                
+                // Prevent default if horizontal swipe
+                if (Math.abs(diffX) > Math.abs(diffY)) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
+            carousel.addEventListener('touchend', (e) => {
+                if (!isDragging) return;
+                
+                const endX = e.changedTouches[0].clientX;
+                const diffX = startX - endX;
+                const threshold = 50;
+                
+                if (Math.abs(diffX) > threshold) {
+                    if (diffX > 0) {
+                        moveCarousel(1); // Swipe left - next
+                    } else {
+                        moveCarousel(-1); // Swipe right - previous
+                    }
+                }
+                
+                isDragging = false;
+            }, { passive: true });
+            
+            // Auto-rotate carousel on mobile for better engagement (slower)
+            if (window.innerWidth <= 768) {
+                setInterval(() => {
+                    moveCarousel(1);
+                }, 6000);
             }
         }
 
