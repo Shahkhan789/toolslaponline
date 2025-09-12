@@ -515,7 +515,10 @@
     <script>
         class AICodeAssistant {
             constructor() {
-                this.apiUrl = 'http://localhost:8001';
+                // Configure API URL based on environment
+                this.apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+                    ? 'http://localhost:8001' 
+                    : window.location.origin;
                 this.isConnected = false;
                 this.isGenerating = false;
                 this.currentTask = 'generate';

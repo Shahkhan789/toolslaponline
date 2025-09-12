@@ -627,7 +627,10 @@
         // Website Builder Functionality
         class WebsiteBuilder {
             constructor() {
-                this.apiUrl = window.location.hostname === 'localhost' ? 'http://localhost:8001' : 'https://your-username.github.io/toolslap';
+                // Configure API URL based on environment
+                this.apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+                    ? 'http://localhost:8001' 
+                    : window.location.origin;
                 this.isConnected = false;
                 this.isGenerating = false;
                 this.generatedCode = '';
@@ -764,21 +767,22 @@ HTML Code:`;
                 const detailedPrompt = this.createDetailedPrompt(description);
 
                 try {
-                    const response = await fetch(`${this.apiUrl}/api/generate-code`, {
+                    const response = await fetch(`${this.apiUrl}/api/code/assist`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
-                            description: detailedPrompt,
+                            prompt: detailedPrompt,
+                            task_type: 'generate',
                             language: 'html',
-                            framework: 'Tailwind CSS'
+                            style: 'professional'
                         })
                     });
 
                     if (response.ok) {
                         const data = await response.json();
-                        this.displayGeneratedWebsite(data.code);
+                        this.displayGeneratedWebsite(data.generated_code || data.code);
                         this.updateCodeStats(data.code);
                     } else {
                         throw new Error('Failed to generate website');

@@ -1014,7 +1014,10 @@
         // Voice Script Generator Functionality
         class VoiceScriptGenerator {
             constructor() {
-                this.apiUrl = 'http://localhost:8001';
+                // Configure API URL based on environment
+                this.apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+                    ? 'http://localhost:8001' 
+                    : window.location.origin;
                 this.isConnected = false;
                 this.isGenerating = false;
                 this.generatedScript = '';
@@ -1140,22 +1143,23 @@
                 this.showGeneratingMessage();
 
                 try {
-                    const response = await fetch(`${this.apiUrl}/api/voice-script`, {
+                    const response = await fetch(`${this.apiUrl}/api/content/create`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
+                            content_type: 'script',
                             topic: topic,
-                            style: this.voiceStyle.value,
-                            duration: this.scriptDuration.value,
-                            voice_type: this.targetAudience.value
+                            tone: this.voiceStyle.value,
+                            length: this.scriptDuration.value,
+                            audience: this.targetAudience.value
                         })
                     });
 
                     if (response.ok) {
                         const data = await response.json();
-                        this.displayScript(data.script);
+                        this.displayScript(data.content || data.script);
                         this.updateAnalysis(data.script);
                     } else {
                         throw new Error('Failed to generate script');

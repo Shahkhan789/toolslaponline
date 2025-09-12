@@ -701,20 +701,38 @@
                 this.ctx.textAlign = 'center';
                 this.ctx.textBaseline = 'middle';
                 
-                // Draw text shadow
-                this.ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
-                this.ctx.shadowBlur = 4;
-                this.ctx.shadowOffsetX = 3;
-                this.ctx.shadowOffsetY = 3;
+                const x = this.canvas.width / 2;
+                const y = this.canvas.height / 2;
                 
-                // Draw text outline
-                this.ctx.strokeStyle = '#000000';
-                this.ctx.lineWidth = 4;
-                this.ctx.strokeText(text, this.canvas.width / 2, this.canvas.height / 2);
+                // Draw text shadow (if enabled)
+                if (layer.shadow) {
+                    this.ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
+                    this.ctx.shadowBlur = 4;
+                    this.ctx.shadowOffsetX = 3;
+                    this.ctx.shadowOffsetY = 3;
+                } else {
+                    this.ctx.shadowColor = 'transparent';
+                }
                 
-                // Draw main text
-                this.ctx.fillStyle = color;
-                this.ctx.fillText(text, this.canvas.width / 2, this.canvas.height / 2);
+                // Draw text outline (if enabled)
+                if (layer.outline) {
+                    this.ctx.strokeStyle = '#000000';
+                    this.ctx.lineWidth = 4;
+                    this.ctx.strokeText(text, x, y);
+                }
+                
+                // Draw main text with gradient (if enabled)
+                if (layer.gradient) {
+                    const gradient = this.ctx.createLinearGradient(0, y - fontSize/2, 0, y + fontSize/2);
+                    gradient.addColorStop(0, '#FFD700');
+                    gradient.addColorStop(0.5, '#FFA500');
+                    gradient.addColorStop(1, '#FF8C00');
+                    this.ctx.fillStyle = gradient;
+                } else {
+                    this.ctx.fillStyle = color;
+                }
+                
+                this.ctx.fillText(text, x, y);
                 
                 // Reset shadow
                 this.ctx.shadowColor = 'transparent';
@@ -900,18 +918,24 @@
         }
         
         function addShadow() {
-            // Add shadow effect logic
-            alert('Shadow effect added!');
+            if (thumbnailCreator.selectedText) {
+                thumbnailCreator.selectedText.shadow = !thumbnailCreator.selectedText.shadow;
+                thumbnailCreator.redrawCanvas();
+            }
         }
         
         function addOutline() {
-            // Add outline effect logic
-            alert('Outline effect added!');
+            if (thumbnailCreator.selectedText) {
+                thumbnailCreator.selectedText.outline = !thumbnailCreator.selectedText.outline;
+                thumbnailCreator.redrawCanvas();
+            }
         }
         
         function addGradient() {
-            // Add gradient effect logic
-            alert('Gradient effect added!');
+            if (thumbnailCreator.selectedText) {
+                thumbnailCreator.selectedText.gradient = !thumbnailCreator.selectedText.gradient;
+                thumbnailCreator.redrawCanvas();
+            }
         }
         
         function addEmoji() {
