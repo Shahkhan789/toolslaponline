@@ -1160,7 +1160,6 @@
                     if (response.ok) {
                         const data = await response.json();
                         this.displayScript(data.content || data.script);
-                        this.updateAnalysis(data.script);
                     } else {
                         throw new Error('Failed to generate script');
                     }

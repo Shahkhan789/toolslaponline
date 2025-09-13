@@ -1158,13 +1158,12 @@ def translate_text(text, target_lang):<br>
                     const sourceLang = languageMap[this.sourceLanguage.value] || this.sourceLanguage.value;
                     const targetLang = languageMap[this.targetLanguage.value] || this.targetLanguage.value;
 
-                    const response = await fetch(`${this.apiUrl}/api/research/assist`, {
+                    const response = await fetch(`${this.apiUrl}/api/translate`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
-                            tool: 'translator',
                             text: text,
                             source_language: sourceLang,
                             target_language: targetLang
@@ -1176,7 +1175,7 @@ def translate_text(text, target_lang):<br>
                         const endTime = Date.now();
                         const duration = endTime - startTime;
                         
-                        this.displayTranslation(data.result || data.translation, duration);
+                        this.displayTranslation(data.translation || data.result, duration);
                     } else {
                         throw new Error('Translation failed');
                     }

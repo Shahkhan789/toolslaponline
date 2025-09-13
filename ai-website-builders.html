@@ -783,7 +783,6 @@ HTML Code:`;
                     if (response.ok) {
                         const data = await response.json();
                         this.displayGeneratedWebsite(data.generated_code || data.code);
-                        this.updateCodeStats(data.code);
                     } else {
                         throw new Error('Failed to generate website');
                     }
