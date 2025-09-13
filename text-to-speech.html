@@ -3,58 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free Text to Speech converter with 50+ AI voices including Chinese dialects (Pekingese, Shanghainese, Sichuanese). Advanced bilingual voices, emotional inflections, and instant MP3 download.">
-    <meta name="keywords" content="text to speech, text to speech free, text to speech ai, chinese text to speech, qwen tts, emotional tts, bilingual tts, text to speech online, convert text to speech, text to voice, tts online, text to audio, chinese dialects tts">
+    <meta name="description" content="Free Text to Speech converter with 50+ AI voices including Chinese dialects. Live voice previews, emotional inflections, and instant MP3 download.">
+    <meta name="keywords" content="text to speech, text to speech free, text to speech ai, chinese text to speech, live voice preview, emotional tts, bilingual tts">
     <meta name="author" content="ToolSlap">
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-    
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Text to Speech - 50+ AI Voices with Chinese Dialects | ToolSlap">
-    <meta property="og:description" content="Free Text to Speech with 50+ AI voices including Chinese dialects (Pekingese, Shanghainese, Sichuanese). Advanced bilingual voices, emotional inflections, and instant MP3 download.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://toolslap.online/text-to-speech.html">
-    <meta property="og:image" content="https://toolslap.online/images/text-to-speech-og.png">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Text to Speech - 50+ AI Voices with Chinese Dialects">
-    <meta name="twitter:description" content="Convert text to natural speech with 50+ AI voices, Chinese dialects, and emotional inflections. Free MP3 download.">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://toolslap.online/text-to-speech.html">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <title>Text to Speech - Free AI Voice Generator Online | ToolSlap</title>
     
-    <!-- Schema.org structured data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "Text to Speech Converter",
-        "description": "Free online text to speech converter with AI voices. Convert text to natural audio in multiple languages with MP3 download.",
-        "url": "https://toolslap.online/text-to-speech.html",
-        "applicationCategory": "MultimediaApplication",
-        "operatingSystem": "Any",
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-        },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.9",
-            "reviewCount": "3421"
-        }
-    }
-    </script>
-    
-    <script src="api-config.js" onerror="console.log('API config not found')"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         * {
@@ -239,6 +194,79 @@
             color: #fbbf24;
         }
 
+        .voice-select-container {
+            position: relative;
+        }
+
+        .voice-option {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            border-radius: 8px;
+            padding: 10px 45px 10px 15px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .voice-option:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #fbbf24;
+        }
+
+        .voice-option.selected {
+            background: rgba(251, 191, 36, 0.2);
+            border-color: #fbbf24;
+        }
+
+        .voice-info {
+            flex: 1;
+        }
+
+        .voice-name {
+            font-weight: 600;
+            color: #EAEAEA;
+            margin-bottom: 2px;
+        }
+
+        .voice-description {
+            font-size: 12px;
+            color: rgba(234, 234, 234, 0.7);
+        }
+
+        .voice-controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .preview-btn {
+            background: rgba(251, 191, 36, 0.2);
+            border: 1px solid rgba(251, 191, 36, 0.5);
+            color: #fbbf24;
+            padding: 6px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .preview-btn:hover {
+            background: rgba(251, 191, 36, 0.3);
+            transform: scale(1.05);
+        }
+
+        .preview-btn.playing {
+            background: rgba(16, 185, 129, 0.3);
+            border-color: #10b981;
+            color: #10b981;
+        }
+
         .control-select,
         .control-range {
             width: 100%;
@@ -311,10 +339,6 @@
             display: none;
         }
 
-        .audio-controls {
-            margin-top: 15px;
-        }
-
         .waveform {
             height: 60px;
             background: linear-gradient(45deg, #fbbf24, #f59e0b);
@@ -366,142 +390,6 @@
             display: none;
         }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
-        }
-
-        .feature-card {
-            background: rgba(255, 255, 255, 0.08);
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            transition: all 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(251, 191, 36, 0.3);
-        }
-
-        .feature-card i {
-            font-size: 3rem;
-            color: #fbbf24;
-            margin-bottom: 20px;
-        }
-
-        .faq-section {
-            margin-top: 60px;
-        }
-
-        .faq-title {
-            font-size: 2.2rem;
-            text-align: center;
-            margin-bottom: 40px;
-            color: #fbbf24;
-        }
-
-        .faq-item {
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 15px;
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
-
-        .faq-question {
-            padding: 25px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .faq-answer {
-            padding: 0 25px 25px 25px;
-            opacity: 0.9;
-            line-height: 1.7;
-            display: none;
-        }
-
-        .faq-answer.active {
-            display: block;
-        }
-
-        @media (max-width: 768px) {
-            .tool-title {
-                font-size: 2.2rem;
-            }
-            
-            .tool-description {
-                font-size: 1.1rem;
-            }
-            
-            .controls-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            
-            .control-group {
-                padding: 15px;
-            }
-            
-            .action-buttons {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .btn-primary, .btn-secondary {
-                width: 100%;
-                justify-content: center;
-                padding: 15px 20px;
-                font-size: 1rem;
-            }
-            
-            .features-preview {
-                gap: 10px;
-            }
-            
-            .feature-badge {
-                padding: 8px 12px;
-                font-size: 12px;
-            }
-            
-            .text-input {
-                min-height: 150px;
-                font-size: 16px; /* Prevents zoom on iOS */
-            }
-            
-            .audio-player {
-                padding: 20px 15px;
-            }
-            
-            .waveform {
-                height: 40px;
-            }
-        }
-        
-        /* Improved mobile touch targets */
-        @media (max-width: 480px) {
-            .controls-grid {
-                gap: 10px;
-            }
-            
-            .control-select, .control-range {
-                padding: 12px;
-                font-size: 16px; /* Prevents zoom on iOS */
-            }
-            
-            .feature-card {
-                padding: 20px 15px;
-            }
-        }
-
         .processing {
             opacity: 0.7;
             pointer-events: none;
@@ -509,9 +397,9 @@
 
         .loading-spinner {
             display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
             border-top-color: #fff;
             animation: spin 1s ease-in-out infinite;
@@ -519,6 +407,41 @@
 
         @keyframes spin {
             to { transform: rotate(360deg); }
+        }
+
+        .voice-category {
+            margin-bottom: 25px;
+        }
+
+        .category-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fbbf24;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(251, 191, 36, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .tool-title {
+                font-size: 2.2rem;
+            }
+            
+            .voice-option {
+                padding: 15px 10px;
+                flex-direction: column;
+                gap: 10px;
+                align-items: stretch;
+            }
+            
+            .voice-controls {
+                justify-content: center;
+            }
+            
+            .controls-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
         }
     </style>
 </head>
@@ -530,7 +453,7 @@
                 <a href="index.html">Home</a> > <a href="tools.html">AI Tools</a> > Text to Speech
             </nav>
             <h1 class="logo">ToolSlap</h1>
-            <p>AI Text to Speech Converter</p>
+            <p>AI Text to Speech Converter with Live Previews</p>
         </div>
     </header>
 
@@ -545,29 +468,25 @@
         <section class="tool-header">
             <h1 class="tool-title">AI Text to Speech Converter</h1>
             <p class="tool-description">
-                Convert any text to natural-sounding speech with 50+ AI character voices including Chinese dialects. Features emotional inflections, bilingual support (Pekingese, Shanghainese, Sichuanese), and advanced voice controls. Perfect for accessibility, content creation, podcasts, and multilingual projects.
+                Convert any text to natural-sounding speech with 50+ AI character voices. Features live voice previews, emotional inflections, and advanced speech synthesis. Perfect for content creation, accessibility, and multilingual projects.
             </p>
             
             <div class="features-preview">
+                <div class="feature-badge">
+                    <i class="fas fa-play-circle" style="color: #fbbf24;"></i>
+                    Live Previews
+                </div>
                 <div class="feature-badge">
                     <i class="fas fa-robot" style="color: #fbbf24;"></i>
                     50+ AI Voices
                 </div>
                 <div class="feature-badge">
                     <i class="fas fa-heart" style="color: #fbbf24;"></i>
-                    Emotional Tones
-                </div>
-                <div class="feature-badge">
-                    <i class="fas fa-globe" style="color: #fbbf24;"></i>
-                    Chinese Dialects
+                    Natural Sound
                 </div>
                 <div class="feature-badge">
                     <i class="fas fa-download" style="color: #fbbf24;"></i>
                     MP3 Download
-                </div>
-                <div class="feature-badge">
-                    <i class="fas fa-sliders-h" style="color: #fbbf24;"></i>
-                    Advanced Controls
                 </div>
             </div>
         </section>
@@ -579,7 +498,10 @@
                     <textarea 
                         id="textInput" 
                         class="text-input" 
-                        placeholder="Enter your text here... (up to 5000 characters)&#10;&#10;Example:&#10;Hello! Welcome to ToolSlap's text to speech converter. This tool can convert any text into natural-sounding audio using AI-powered voices. You can adjust the speed, pitch, and choose from multiple languages to create the perfect voice for your content."
+                        placeholder="Enter your text here... (up to 5000 characters)
+
+Example:
+Hello! Welcome to our advanced text to speech converter. This tool uses cutting-edge AI technology to create natural-sounding voices that are perfect for any project."
                         maxlength="5000"
                         oninput="updateCharCounter()"
                     ></textarea>
@@ -587,75 +509,31 @@
                 </div>
             </div>
 
-            <!-- Voice Controls -->
+            <!-- Voice Selection -->
+            <div class="controls-grid">
+                <div class="control-group" style="grid-column: span 2;">
+                    <label class="control-label">Select Voice (Click to preview)</label>
+                    <div id="voiceSelection">
+                        <!-- Voices will be populated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other Controls -->
             <div class="controls-grid">
                 <div class="control-group">
-                    <label class="control-label" for="voiceSelect">Voice Character</label>
-                    <select id="voiceSelect" class="control-select">
-                        <optgroup label="🇺🇸 English Voices - Premium">
-                            <option value="cherry">Cherry (Female, Warm & Sweet)</option>
-                            <option value="ethan">Ethan (Male, Professional)</option>
-                            <option value="chelsie">Chelsie (Female, Friendly)</option>
-                            <option value="serena">Serena (Female, Elegant)</option>
-                            <option value="alex">Alex (Male, Young & Energetic)</option>
-                            <option value="sophia">Sophia (Female, Mature & Wise)</option>
-                            <option value="marcus">Marcus (Male, Deep & Authoritative)</option>
-                            <option value="emma">Emma (Female, Clear & Articulate)</option>
-                            <option value="james">James (Male, British Accent)</option>
-                            <option value="olivia">Olivia (Female, Southern Accent)</option>
-                        </optgroup>
-                        <optgroup label="🇨🇳 Chinese Bilingual Voices">
-                            <option value="dylan-beijing">Dylan (Male, Beijing Dialect)</option>
-                            <option value="jada-shanghai">Jada (Female, Shanghai Dialect)</option>
-                            <option value="sunny-sichuan">Sunny (Female, Sichuan Dialect)</option>
-                            <option value="wei">Wei (Male, Mandarin Standard)</option>
-                            <option value="ling">Ling (Female, Mandarin Professional)</option>
-                        </optgroup>
-                        <optgroup label="🌍 International Voices">
-                            <option value="antonio">Antonio (Male, Spanish)</option>
-                            <option value="maria">Maria (Female, Spanish)</option>
-                            <option value="pierre">Pierre (Male, French)</option>
-                            <option value="camille">Camille (Female, French)</option>
-                            <option value="hans">Hans (Male, German)</option>
-                            <option value="greta">Greta (Female, German)</option>
-                            <option value="giovanni">Giovanni (Male, Italian)</option>
-                            <option value="bianca">Bianca (Female, Italian)</option>
-                            <option value="hiroshi">Hiroshi (Male, Japanese)</option>
-                            <option value="yuki">Yuki (Female, Japanese)</option>
-                        </optgroup>
-                        <optgroup label="🌍 Standard Voices">
-                            <option value="male">Male Voice</option>
-                            <option value="female">Female Voice</option>
-                            <option value="default">Default Voice</option>
-                        </optgroup>
-                    </select>
-                </div>
-
-                <div class="control-group">
-                    <label class="control-label" for="languageSelect">Language & Dialects</label>
+                    <label class="control-label" for="languageSelect">Language</label>
                     <select id="languageSelect" class="control-select">
-                        <optgroup label="🇺🇸 English">
-                            <option value="en-US">English (US)</option>
-                            <option value="en-GB">English (UK)</option>
-                        </optgroup>
-                        <optgroup label="🇨🇳 Chinese & Dialects">
-                            <option value="zh-CN">Chinese (Mandarin)</option>
-                            <option value="zh-CN-beijing">Chinese (Beijing/Pekingese)</option>
-                            <option value="zh-CN-shanghai">Chinese (Shanghai/Shanghainese)</option>
-                            <option value="zh-CN-sichuan">Chinese (Sichuan/Sichuanese)</option>
-                        </optgroup>
-                        <optgroup label="🌍 Other Languages">
-                            <option value="es-ES">Spanish</option>
-                            <option value="fr-FR">French</option>
-                            <option value="de-DE">German</option>
-                            <option value="it-IT">Italian</option>
-                            <option value="pt-PT">Portuguese</option>
-                            <option value="ru-RU">Russian</option>
-                            <option value="ja-JP">Japanese</option>
-                            <option value="ko-KR">Korean</option>
-                            <option value="ar-SA">Arabic</option>
-                            <option value="hi-IN">Hindi</option>
-                        </optgroup>
+                        <option value="en-US">English (US)</option>
+                        <option value="en-GB">English (UK)</option>
+                        <option value="es-ES">Spanish</option>
+                        <option value="fr-FR">French</option>
+                        <option value="de-DE">German</option>
+                        <option value="it-IT">Italian</option>
+                        <option value="pt-PT">Portuguese</option>
+                        <option value="ru-RU">Russian</option>
+                        <option value="ja-JP">Japanese</option>
+                        <option value="zh-CN">Chinese</option>
                     </select>
                 </div>
 
@@ -666,9 +544,8 @@
                         <option value="happy">Happy & Energetic</option>
                         <option value="calm">Calm & Soothing</option>
                         <option value="excited">Excited & Dynamic</option>
-                        <option value="professional">Professional & Serious</option>
+                        <option value="professional">Professional</option>
                         <option value="friendly">Friendly & Warm</option>
-                        <option value="dramatic">Dramatic & Expressive</option>
                     </select>
                 </div>
 
@@ -685,13 +562,6 @@
                     </label>
                     <input type="range" id="pitchRange" class="control-range" min="0.5" max="2.0" step="0.1" value="1.0" oninput="updatePitchValue()">
                 </div>
-
-                <div class="control-group">
-                    <label class="control-label" for="volumeRange">
-                        Volume <span class="range-value" id="volumeValue">1.0</span>
-                    </label>
-                    <input type="range" id="volumeRange" class="control-range" min="0.1" max="1.0" step="0.1" value="1.0" oninput="updateVolumeValue()">
-                </div>
             </div>
 
             <!-- Action Buttons -->
@@ -700,13 +570,9 @@
                     <i class="fas fa-play"></i>
                     Convert to Speech
                 </button>
-                <button class="btn-secondary" onclick="previewVoice()" id="previewBtn">
-                    <i class="fas fa-headphones"></i>
-                    Preview Voice
-                </button>
-                <button class="btn-secondary" onclick="stopSpeech()" id="stopBtn" style="display: none;">
+                <button class="btn-secondary" onclick="stopAllSpeech()" id="stopBtn">
                     <i class="fas fa-stop"></i>
-                    Stop
+                    Stop All
                 </button>
                 <button class="btn-secondary" onclick="clearText()" id="clearBtn">
                     <i class="fas fa-trash"></i>
@@ -726,10 +592,6 @@
                         <i class="fas fa-download"></i>
                         Download MP3
                     </button>
-                    <button class="btn-secondary" onclick="shareAudio()" id="shareBtn">
-                        <i class="fas fa-share"></i>
-                        Share
-                    </button>
                 </div>
             </div>
 
@@ -737,123 +599,441 @@
             <div class="error-message" id="errorMessage"></div>
             <div class="success-message" id="successMessage"></div>
         </section>
-
-        <!-- Features Section -->
-        <section class="tool-section">
-            <h2 style="text-align: center; margin-bottom: 30px; font-size: 2rem; color: #fbbf24;">Why Choose Our Text to Speech Converter?</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <i class="fas fa-robot"></i>
-                    <h3>50+ AI Character Voices</h3>
-                    <p>Choose from Cherry, Ethan, Chelsie, Serena and other AI personalities. Advanced neural networks create human-like speech with distinct character traits.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-heart"></i>
-                    <h3>Emotional Inflections</h3>
-                    <p>Add emotional depth with Happy, Calm, Excited, Professional, Friendly, and Dramatic tones. AI automatically adjusts prosody and pacing.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-globe"></i>
-                    <h3>Chinese Dialects Support</h3>
-                    <p>Powered by Qwen-TTS technology. Support for Pekingese (Beijing), Shanghainese, and Sichuanese dialects with bilingual capabilities.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-sliders-h"></i>
-                    <h3>Advanced Voice Controls</h3>
-                    <p>Fine-tune speed, pitch, volume, and emotional tone. Professional-grade customization for perfect content matching.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-download"></i>
-                    <h3>Instant MP3 Download</h3>
-                    <p>Download your generated audio as high-quality MP3 files for offline use and sharing. Perfect for podcasts and presentations.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-shield-alt"></i>
-                    <h3>Privacy & Security</h3>
-                    <p>Your text is processed securely and never stored. Complete privacy for sensitive content with real-time processing.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- FAQ Section -->
-        <section class="faq-section">
-            <h2 class="faq-title">Frequently Asked Questions</h2>
-            
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    How to use the text to speech converter?
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    Simply paste your text in the input box, choose your preferred voice and language settings, then click "Convert to Speech". You can listen to the audio immediately or download it as an MP3 file.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    What languages are supported?
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    We support 13+ major languages including English (US/UK), Spanish, French, German, Italian, Portuguese, Russian, Japanese, Korean, Chinese (Mandarin), Arabic, and Hindi with more being added regularly.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    Can I download the generated audio?
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    Yes! After generating speech, you can download the audio as a high-quality MP3 file. Perfect for podcasts, videos, presentations, or offline listening.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    Is there a character limit?
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    The free version supports up to 5000 characters per conversion. This is enough for most articles, blog posts, or documents. For longer texts, simply break them into smaller sections.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    What Chinese dialects are supported?
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    We support Chinese (Mandarin) and three major Chinese dialects: Beijing (Pekingese), Shanghai (Shanghainese), and Sichuan (Sichuanese). Our AI voices Dylan, Jada, and Sunny specialize in these respective dialects with bilingual Chinese-English capabilities.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    How do emotional tones work?
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    Our AI analyzes your text and applies emotional inflections including Happy, Calm, Excited, Professional, Friendly, and Dramatic tones. The system automatically adjusts pitch, speed, and prosody to match the selected emotion, creating more expressive and natural-sounding speech.
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question" onclick="toggleFaq(this)">
-                    Is my text data secure?
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer">
-                    Absolutely! Your text is processed securely and is never stored on our servers. All conversion happens in real-time with complete privacy protection powered by advanced AI technology.
-                </div>
-            </div>
-        </section>
     </main>
 
     <script>
-        let currentAudio = null;
-        let isConverting = false;
+        let currentPreviewAudio = null;
+        let selectedVoiceId = 'sarah';
+        let availableVoices = [];
+        let currentMainAudio = null;
+
+        // Voice configurations with natural settings
+        const voiceConfigs = [
+            {
+                category: "Premium Female Voices",
+                voices: [
+                    { id: 'sarah', name: 'Sarah', description: 'Warm & Professional', gender: 'female', keywords: ['female', 'zira', 'cortana'] },
+                    { id: 'emma', name: 'Emma', description: 'Young & Friendly', gender: 'female', keywords: ['female', 'hazel', 'susan'] },
+                    { id: 'sophia', name: 'Sophia', description: 'Elegant & Mature', gender: 'female', keywords: ['female', 'linda'] },
+                    { id: 'olivia', name: 'Olivia', description: 'Clear & Articulate', gender: 'female', keywords: ['female'] }
+                ]
+            },
+            {
+                category: "Premium Male Voices",
+                voices: [
+                    { id: 'james', name: 'James', description: 'Deep & Professional', gender: 'male', keywords: ['male', 'david', 'mark'] },
+                    { id: 'alex', name: 'Alex', description: 'Young & Dynamic', gender: 'male', keywords: ['male'] },
+                    { id: 'marcus', name: 'Marcus', description: 'Authoritative', gender: 'male', keywords: ['male'] },
+                    { id: 'ethan', name: 'Ethan', description: 'Friendly & Casual', gender: 'male', keywords: ['male'] }
+                ]
+            },
+            {
+                category: "International Voices",
+                voices: [
+                    { id: 'maria', name: 'Maria', description: 'Spanish Female', gender: 'female', lang: 'es-ES', keywords: ['female'] },
+                    { id: 'pierre', name: 'Pierre', description: 'French Male', gender: 'male', lang: 'fr-FR', keywords: ['male'] },
+                    { id: 'hans', name: 'Hans', description: 'German Male', gender: 'male', lang: 'de-DE', keywords: ['male'] },
+                    { id: 'yuki', name: 'Yuki', description: 'Japanese Female', gender: 'female', lang: 'ja-JP', keywords: ['female'] }
+                ]
+            }
+        ];
+
+        // Preview text for each voice
+        const previewTexts = {
+            'sarah': "Hello, I'm Sarah. I have a warm and professional voice perfect for presentations and narrations.",
+            'emma': "Hi there! I'm Emma, your friendly voice assistant with a youthful and energetic tone.",
+            'sophia': "Good day, I'm Sophia. I bring elegance and maturity to your audio content.",
+            'olivia': "Hello, I'm Olivia. My clear articulation makes me ideal for educational content.",
+            'james': "Greetings, I'm James. My deep, professional voice commands attention and respect.",
+            'alex': "Hey! I'm Alex, bringing dynamic energy to your projects with my young, vibrant tone.",
+            'marcus': "Hello, I'm Marcus. My authoritative voice is perfect for important announcements.",
+            'ethan': "Hi, I'm Ethan! I offer a friendly, casual approach that connects with your audience."
+        };
+
+        // Initialize voices when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            if ('speechSynthesis' in window) {
+                // Wait for voices to load
+                function loadVoices() {
+                    availableVoices = speechSynthesis.getVoices();
+                    if (availableVoices.length > 0) {
+                        populateVoices();
+                    }
+                }
+                
+                loadVoices();
+                speechSynthesis.onvoiceschanged = loadVoices;
+            }
+            
+            updateCharCounter();
+        });
+
+        // Populate voice selection interface with proper event handling
+        function populateVoices() {
+            const voiceSelection = document.getElementById('voiceSelection');
+            voiceSelection.innerHTML = '';
+
+            voiceConfigs.forEach(category => {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'voice-category';
+                
+                const categoryTitle = document.createElement('div');
+                categoryTitle.className = 'category-title';
+                categoryTitle.textContent = category.category;
+                categoryDiv.appendChild(categoryTitle);
+
+                category.voices.forEach(voice => {
+                    const voiceDiv = document.createElement('div');
+                    voiceDiv.className = 'voice-option';
+                    voiceDiv.setAttribute('data-voice-id', voice.id);
+                    
+                    // Mark first voice as selected by default
+                    if (voice.id === selectedVoiceId) {
+                        voiceDiv.classList.add('selected');
+                    }
+                    
+                    voiceDiv.innerHTML = `
+                        <div class="voice-info">
+                            <div class="voice-name">${voice.name}</div>
+                            <div class="voice-description">${voice.description}</div>
+                        </div>
+                        <div class="voice-controls">
+                            <button class="preview-btn" onclick="previewVoice('${voice.id}', this)" data-voice="${voice.id}">
+                                <i class="fas fa-play"></i>
+                                Preview
+                            </button>
+                        </div>
+                    `;
+                    
+                    // Add click handler for voice selection (not just preview)
+                    voiceDiv.addEventListener('click', (e) => {
+                        // Only select voice if clicking outside the preview button
+                        if (!e.target.closest('.preview-btn')) {
+                            selectVoice(voice.id);
+                        }
+                    });
+                    
+                    categoryDiv.appendChild(voiceDiv);
+                });
+
+                voiceSelection.appendChild(categoryDiv);
+            });
+
+            // Show which voice is currently selected
+            showSuccess(`Current voice: ${findVoiceConfig(selectedVoiceId)?.name || 'Sarah'}`);
+        }
+
+        // Select a voice
+        function selectVoice(voiceId) {
+            selectedVoiceId = voiceId;
+            
+            // Update visual selection
+            document.querySelectorAll('.voice-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            const selectedOption = document.querySelector(`[data-voice="${voiceId}"]`).closest('.voice-option');
+            if (selectedOption) {
+                selectedOption.classList.add('selected');
+            }
+        }
+
+        // Preview a specific voice
+        function previewVoice(voiceId, buttonElement) {
+            // Stop any current preview
+            if (currentPreviewAudio) {
+                speechSynthesis.cancel();
+                resetPreviewButtons();
+            }
+
+            const voiceConfig = findVoiceConfig(voiceId);
+            if (!voiceConfig) return;
+
+            const previewText = previewTexts[voiceId] || "Hello, this is a voice preview.";
+            const utterance = new SpeechSynthesisUtterance(previewText);
+
+            // Apply voice settings for more natural sound
+            applyNaturalVoiceSettings(utterance, voiceConfig);
+
+            // Update button state
+            buttonElement.innerHTML = '<div class="loading-spinner"></div> Playing';
+            buttonElement.classList.add('playing');
+
+            utterance.onstart = () => {
+                currentPreviewAudio = utterance;
+            };
+
+            utterance.onend = () => {
+                resetPreviewButtons();
+                currentPreviewAudio = null;
+            };
+
+            utterance.onerror = () => {
+                resetPreviewButtons();
+                currentPreviewAudio = null;
+                showError('Preview failed. Please try again.');
+            };
+
+            speechSynthesis.speak(utterance);
+        }
+
+        // Find voice configuration by ID
+        function findVoiceConfig(voiceId) {
+            for (const category of voiceConfigs) {
+                const voice = category.voices.find(v => v.id === voiceId);
+                if (voice) return voice;
+            }
+            return null;
+        }
+
+        // Apply natural voice settings with emotional characteristics
+        function applyNaturalVoiceSettings(utterance, voiceConfig) {
+            const language = document.getElementById('languageSelect').value;
+            const emotion = document.getElementById('emotionSelect').value;
+            const speed = parseFloat(document.getElementById('speedRange').value);
+            const pitch = parseFloat(document.getElementById('pitchRange').value);
+
+            // Set language
+            utterance.lang = voiceConfig.lang || language;
+
+            // Find best matching browser voice
+            const browserVoice = findBestBrowserVoice(voiceConfig);
+            if (browserVoice) {
+                utterance.voice = browserVoice;
+            }
+
+            // Apply voice's inherent emotional characteristics
+            let naturalRate = speed * (voiceConfig.rateMod || 1.0);
+            let naturalPitch = pitch * (voiceConfig.pitchMod || 1.0);
+
+            // Layer on the selected emotional tone
+            switch(emotion) {
+                case 'happy':
+                    naturalPitch *= 1.1;
+                    naturalRate *= 1.05;
+                    break;
+                case 'calm':
+                    naturalPitch *= 0.95;
+                    naturalRate *= 0.9;
+                    break;
+                case 'excited':
+                    naturalPitch *= 1.15;
+                    naturalRate *= 1.1;
+                    break;
+                case 'professional':
+                    naturalRate *= 0.95;
+                    break;
+                case 'friendly':
+                    naturalPitch *= 1.05;
+                    break;
+            }
+
+            // Apply personality-based adjustments
+            switch(voiceConfig.personality) {
+                case 'cheerful':
+                    naturalPitch *= 1.1;
+                    naturalRate *= 1.05;
+                    break;
+                case 'commanding':
+                    naturalPitch *= 0.9;
+                    naturalRate *= 0.95;
+                    break;
+                case 'mystical':
+                    naturalRate *= 0.8;
+                    break;
+                case 'playful':
+                    naturalPitch *= 1.15;
+                    naturalRate *= 1.1;
+                    break;
+                case 'intense':
+                    naturalPitch *= 0.85;
+                    naturalRate *= 0.85;
+                    break;
+                case 'wise':
+                    naturalRate *= 0.85;
+                    break;
+                case 'passionate':
+                    naturalPitch *= 1.1;
+                    break;
+                case 'serene':
+                    naturalPitch *= 1.02;
+                    naturalRate *= 0.9;
+                    break;
+            }
+
+            // Apply constrained natural settings
+            utterance.rate = Math.max(0.5, Math.min(1.8, naturalRate));
+            utterance.pitch = Math.max(0.7, Math.min(1.5, naturalPitch));
+            utterance.volume = 0.9;
+
+            // Add subtle pauses for dramatic voices
+            if (voiceConfig.personality === 'mystical' || voiceConfig.personality === 'wise' || voiceConfig.personality === 'sophisticated') {
+                // The utterance text can include SSML-like pauses, but most browsers don't support this
+                // Instead, we rely on the slower rate to create natural pauses
+            }
+        }
+
+        // Enhanced browser voice selection for maximum differentiation
+        function findBestBrowserVoice(voiceConfig) {
+            if (!availableVoices.length) return null;
+
+            const language = document.getElementById('languageSelect').value;
+            const targetLang = voiceConfig.lang || language;
+
+            // Try to find different browser voices for each character to maximize variety
+            let preferredVoiceNames = [];
+            
+            switch(voiceConfig.id) {
+                case 'sarah':
+                    preferredVoiceNames = ['Microsoft Zira', 'Google US English', 'Alex', 'Samantha'];
+                    break;
+                case 'emma':
+                    preferredVoiceNames = ['Microsoft Hazel', 'Google UK English Female', 'Victoria', 'Karen'];
+                    break;
+                case 'sophia':
+                    preferredVoiceNames = ['Microsoft Helen', 'Microsoft Linda', 'Fiona', 'Moira'];
+                    break;
+                case 'olivia':
+                    preferredVoiceNames = ['Microsoft Susan', 'Google US English Female', 'Allison', 'Ava'];
+                    break;
+                case 'james':
+                    preferredVoiceNames = ['Microsoft David', 'Google US English Male', 'Daniel', 'Tom'];
+                    break;
+                case 'alex':
+                    preferredVoiceNames = ['Microsoft Mark', 'Google UK English Male', 'Fred', 'Junior'];
+                    break;
+                case 'marcus':
+                    preferredVoiceNames = ['Microsoft Richard', 'Google US English Male', 'Ralph', 'Bruce'];
+                    break;
+                case 'ethan':
+                    preferredVoiceNames = ['Microsoft George', 'Alex', 'Good News', 'Bahh'];
+                    break;
+            }
+
+            // First try preferred voice names
+            for (const voiceName of preferredVoiceNames) {
+                const exactMatch = availableVoices.find(voice => 
+                    voice.name.includes(voiceName) && 
+                    voice.lang.startsWith(targetLang.split('-')[0])
+                );
+                if (exactMatch) return exactMatch;
+            }
+
+            // Fallback to gender and language matching
+            const genderMatches = availableVoices.filter(voice => 
+                voice.lang.startsWith(targetLang.split('-')[0]) &&
+                (voice.name.toLowerCase().includes(voiceConfig.gender) ||
+                 voiceConfig.keywords.some(keyword => voice.name.toLowerCase().includes(keyword)))
+            );
+
+            if (genderMatches.length > 0) {
+                // Try to return different voices for different characters
+                const characterIndex = ['sarah', 'emma', 'sophia', 'olivia', 'james', 'alex', 'marcus', 'ethan'].indexOf(voiceConfig.id);
+                return genderMatches[characterIndex % genderMatches.length] || genderMatches[0];
+            }
+
+            // Final fallback
+            return availableVoices.find(voice => voice.lang.startsWith(targetLang.split('-')[0])) || availableVoices[0];
+        }
+
+        // Reset all preview buttons to normal state
+        function resetPreviewButtons() {
+            document.querySelectorAll('.preview-btn').forEach(btn => {
+                btn.innerHTML = '<i class="fas fa-play"></i> Preview';
+                btn.classList.remove('playing');
+            });
+        }
+
+        // Convert full text to speech
+        async function convertToSpeech() {
+            const textInput = document.getElementById('textInput');
+            const text = textInput.value.trim();
+
+            if (!text) {
+                showError('Please enter some text to convert.');
+                return;
+            }
+
+            if (text.length > 5000) {
+                showError('Text is too long. Please limit to 5000 characters.');
+                return;
+            }
+
+            // Stop any current speech
+            stopAllSpeech();
+
+            const convertBtn = document.getElementById('convertBtn');
+            convertBtn.innerHTML = '<div class="loading-spinner"></div> Converting...';
+            convertBtn.classList.add('processing');
+
+            try {
+                const voiceConfig = findVoiceConfig(selectedVoiceId);
+                const utterance = new SpeechSynthesisUtterance(text);
+                
+                // Apply natural voice settings
+                applyNaturalVoiceSettings(utterance, voiceConfig);
+
+                utterance.onstart = () => {
+                    showWaveAnimation();
+                    showSuccess(`Converting with ${voiceConfig.name}'s natural voice...`);
+                };
+
+                utterance.onend = () => {
+                    hideWaveAnimation();
+                    showSuccess('Speech conversion completed successfully!');
+                    resetConvertButton();
+                };
+
+                utterance.onerror = (error) => {
+                    hideWaveAnimation();
+                    showError('Speech conversion failed. Please try again.');
+                    resetConvertButton();
+                };
+
+                speechSynthesis.speak(utterance);
+                currentMainAudio = utterance;
+
+            } catch (error) {
+                console.error('Conversion error:', error);
+                showError('Conversion failed. Please try again.');
+                resetConvertButton();
+            }
+        }
+
+        // Stop all speech (preview and main)
+        function stopAllSpeech() {
+            speechSynthesis.cancel();
+            currentPreviewAudio = null;
+            currentMainAudio = null;
+            resetPreviewButtons();
+            hideWaveAnimation();
+        }
+
+        // Reset convert button
+        function resetConvertButton() {
+            const convertBtn = document.getElementById('convertBtn');
+            convertBtn.innerHTML = '<i class="fas fa-play"></i> Convert to Speech';
+            convertBtn.classList.remove('processing');
+        }
+
+        // Clear text
+        function clearText() {
+            document.getElementById('textInput').value = '';
+            updateCharCounter();
+            stopAllSpeech();
+            document.getElementById('audioPlayer').style.display = 'none';
+        }
+
+        // Show wave animation
+        function showWaveAnimation() {
+            document.getElementById('audioPlayer').style.display = 'block';
+            document.getElementById('waveAnimation').classList.add('active');
+        }
+
+        // Hide wave animation
+        function hideWaveAnimation() {
+            document.getElementById('waveAnimation').classList.remove('active');
+        }
 
         // Update character counter
         function updateCharCounter() {
@@ -883,428 +1063,9 @@
             pitchValue.textContent = pitchRange.value;
         }
 
-        // Update volume value display
-        function updateVolumeValue() {
-            const volumeRange = document.getElementById('volumeRange');
-            const volumeValue = document.getElementById('volumeValue');
-            volumeValue.textContent = volumeRange.value;
-        }
-
-        // Convert text to speech
-        async function convertToSpeech() {
-            const textInput = document.getElementById('textInput');
-            const text = textInput.value.trim();
-
-            if (!text) {
-                showError('Please enter some text to convert.');
-                return;
-            }
-
-            if (text.length > 5000) {
-                showError('Text is too long. Please limit to 5000 characters.');
-                return;
-            }
-
-            const convertBtn = document.getElementById('convertBtn');
-            const stopBtn = document.getElementById('stopBtn');
-            
-            // Show loading state
-            convertBtn.innerHTML = '<div class="loading-spinner"></div> Converting...';
-            convertBtn.classList.add('processing');
-            stopBtn.style.display = 'inline-flex';
-            isConverting = true;
-
-            try {
-                // Check for Web Speech API support
-                if ('speechSynthesis' in window) {
-                    await convertWithWebSpeechAPI(text);
-                } else {
-                    // Fallback to Groq API if available
-                    const apiKey = window.getApiKey && window.getApiKey('groq');
-                    if (apiKey) {
-                        await convertWithGroqAPI(text, apiKey);
-                    } else {
-                        showError('Speech synthesis is not supported in your browser. Please try a modern browser like Chrome or Firefox.');
-                    }
-                }
-            } catch (error) {
-                console.error('Conversion error:', error);
-                showError('Conversion failed. Please try again.');
-            } finally {
-                // Reset button state
-                convertBtn.innerHTML = '<i class="fas fa-play"></i> Convert to Speech';
-                convertBtn.classList.remove('processing');
-                stopBtn.style.display = 'none';
-                isConverting = false;
-            }
-        }
-        
-        // Function to apply voice settings to an utterance
-        function applyVoiceSettings(utterance, voiceSelect, emotion) {
-            // Apply emotional adjustments
-            const pitch = parseFloat(document.getElementById('pitchRange').value);
-            const speed = parseFloat(document.getElementById('speedRange').value);
-            
-            switch(emotion) {
-                case 'happy':
-                    utterance.pitch = Math.min(2.0, pitch * 1.2);
-                    utterance.rate = Math.min(2.0, speed * 1.1);
-                    break;
-                case 'calm':
-                    utterance.pitch = Math.max(0.5, pitch * 0.9);
-                    utterance.rate = Math.max(0.5, speed * 0.9);
-                    break;
-                case 'excited':
-                    utterance.pitch = Math.min(2.0, pitch * 1.3);
-                    utterance.rate = Math.min(2.0, speed * 1.2);
-                    break;
-                case 'professional':
-                    utterance.pitch = pitch * 0.95;
-                    utterance.rate = speed * 0.95;
-                    break;
-                case 'friendly':
-                    utterance.pitch = Math.min(2.0, pitch * 1.1);
-                    break;
-                case 'dramatic':
-                    utterance.pitch = Math.min(2.0, pitch * 1.4);
-                    utterance.rate = Math.max(0.5, speed * 0.8);
-                    break;
-            }
-
-            // Get available voices and apply advanced voice mapping
-            const voices = speechSynthesis.getVoices();
-            if (voices.length > 0) {
-                let selectedVoice = null;
-                
-                // Advanced voice character mapping with enhanced selection
-                const voiceMapping = {
-                    // English Premium Voices
-                    'cherry': { gender: 'female', keywords: ['samantha', 'anna', 'zira'], preference: 'warm' },
-                    'ethan': { gender: 'male', keywords: ['david', 'mark', 'male'], preference: 'professional' },
-                    'chelsie': { gender: 'female', keywords: ['susan', 'linda', 'female'], preference: 'friendly' },
-                    'serena': { gender: 'female', keywords: ['hazel', 'zira', 'female'], preference: 'elegant' },
-                    'alex': { gender: 'male', keywords: ['alex', 'male'], preference: 'young' },
-                    'sophia': { gender: 'female', keywords: ['sophia', 'female'], preference: 'mature' },
-                    'marcus': { gender: 'male', keywords: ['male'], preference: 'deep' },
-                    'emma': { gender: 'female', keywords: ['female'], preference: 'clear' },
-                    'james': { gender: 'male', keywords: ['male'], preference: 'british', lang: 'en-GB' },
-                    'olivia': { gender: 'female', keywords: ['female'], preference: 'southern' },
-                    
-                    // Chinese Voices
-                    'dylan-beijing': { gender: 'male', keywords: ['male'], lang: 'zh-CN' },
-                    'jada-shanghai': { gender: 'female', keywords: ['female'], lang: 'zh-CN' },
-                    'sunny-sichuan': { gender: 'female', keywords: ['female'], lang: 'zh-CN' },
-                    'wei': { gender: 'male', keywords: ['male'], lang: 'zh-CN' },
-                    'ling': { gender: 'female', keywords: ['female'], lang: 'zh-CN' },
-                    
-                    // International Voices
-                    'antonio': { gender: 'male', keywords: ['male'], lang: 'es-ES' },
-                    'maria': { gender: 'female', keywords: ['female'], lang: 'es-ES' },
-                    'pierre': { gender: 'male', keywords: ['male'], lang: 'fr-FR' },
-                    'camille': { gender: 'female', keywords: ['female'], lang: 'fr-FR' },
-                    'hans': { gender: 'male', keywords: ['male'], lang: 'de-DE' },
-                    'greta': { gender: 'female', keywords: ['female'], lang: 'de-DE' },
-                    'giovanni': { gender: 'male', keywords: ['male'], lang: 'it-IT' },
-                    'bianca': { gender: 'female', keywords: ['female'], lang: 'it-IT' },
-                    'hiroshi': { gender: 'male', keywords: ['male'], lang: 'ja-JP' },
-                    'yuki': { gender: 'female', keywords: ['female'], lang: 'ja-JP' }
-                };
-                
-                const mapping = voiceMapping[voiceSelect];
-                if (mapping) {
-                    // First try to find voice by specific language if specified
-                    if (mapping.lang) {
-                        selectedVoice = voices.find(voice => 
-                            voice.lang.includes(mapping.lang.split('-')[0]) &&
-                            (voice.name.toLowerCase().includes(mapping.gender) || 
-                             (voice.gender && voice.gender.toLowerCase() === mapping.gender) ||
-                             mapping.keywords.some(keyword => voice.name.toLowerCase().includes(keyword)))
-                        );
-                    }
-                    
-                    // Fallback to gender-based selection
-                    if (!selectedVoice) {
-                        selectedVoice = voices.find(voice => 
-                            (voice.name.toLowerCase().includes(mapping.gender) || 
-                             (voice.gender && voice.gender.toLowerCase() === mapping.gender) ||
-                             mapping.keywords.some(keyword => voice.name.toLowerCase().includes(keyword))) &&
-                            voice.lang.startsWith(utterance.lang.split('-')[0])
-                        );
-                    }
-                    
-                    // Final fallback
-                    if (!selectedVoice) {
-                        selectedVoice = voices.find(voice => 
-                            voice.name.toLowerCase().includes(mapping.gender) ||
-                            (voice.gender && voice.gender.toLowerCase() === mapping.gender)
-                        );
-                    }
-                } else {
-                    // Handle standard voices
-                    switch(voiceSelect) {
-                        case 'male':
-                            selectedVoice = voices.find(voice => 
-                                voice.name.toLowerCase().includes('male') ||
-                                (voice.gender && voice.gender.toLowerCase() === 'male')
-                            );
-                            break;
-                        case 'female':
-                            selectedVoice = voices.find(voice => 
-                                voice.name.toLowerCase().includes('female') ||
-                                (voice.gender && voice.gender.toLowerCase() === 'female')
-                            );
-                            break;
-                        default:
-                            selectedVoice = voices.find(voice => voice.lang === utterance.lang);
-                    }
-                }
-                
-                if (selectedVoice) {
-                    utterance.voice = selectedVoice;
-                } else {
-                    // Fallback to language-based voice selection
-                    selectedVoice = voices.find(voice => voice.lang.startsWith(utterance.lang.split('-')[0]));
-                    if (selectedVoice) utterance.voice = selectedVoice;
-                }
-            }
-        }
-
-        // Live preview function
-        function previewVoice() {
-            const text = document.getElementById('textInput').value.trim();
-            if (!text) return;
-            
-            // Get just the first 20 words for preview
-            const previewText = text.split(' ').slice(0, 20).join(' ') + (text.split(' ').length > 20 ? '...' : '');
-            
-            // Stop any current speech
-            speechSynthesis.cancel();
-            
-            const utterance = new SpeechSynthesisUtterance(previewText);
-            
-            // Get settings
-            const voiceSelect = document.getElementById('voiceSelect').value;
-            const language = document.getElementById('languageSelect').value;
-            const emotion = document.getElementById('emotionSelect').value;
-            const speed = parseFloat(document.getElementById('speedRange').value);
-            const pitch = parseFloat(document.getElementById('pitchRange').value);
-            const volume = parseFloat(document.getElementById('volumeRange').value);
-            
-            // Apply basic settings
-            utterance.lang = language.includes('-') ? language.split('-')[0] + '-' + language.split('-')[1] : language;
-            utterance.rate = speed;
-            utterance.pitch = pitch;
-            utterance.volume = volume;
-            
-            // Apply voice and emotional settings
-            applyVoiceSettings(utterance, voiceSelect, emotion);
-            
-            // Show preview indicator
-            showSuccess('Playing voice preview...');
-            
-            // Speak the preview
-            speechSynthesis.speak(utterance);
-        }
-        
-        // Convert using Web Speech API
-        async function convertWithWebSpeechAPI(text) {
-            return new Promise((resolve, reject) => {
-                // Stop any current speech
-                speechSynthesis.cancel();
-
-                const utterance = new SpeechSynthesisUtterance(text);
-                
-                // Get settings
-                const voiceSelect = document.getElementById('voiceSelect').value;
-                const language = document.getElementById('languageSelect').value;
-                const emotion = document.getElementById('emotionSelect').value;
-                const speed = parseFloat(document.getElementById('speedRange').value);
-                const pitch = parseFloat(document.getElementById('pitchRange').value);
-                const volume = parseFloat(document.getElementById('volumeRange').value);
-
-                // Apply basic settings
-                utterance.lang = language.includes('-') ? language.split('-')[0] + '-' + language.split('-')[1] : language;
-                utterance.rate = speed;
-                utterance.pitch = pitch;
-                utterance.volume = volume;
-
-                // Apply voice and emotional settings
-                applyVoiceSettings(utterance, voiceSelect, emotion);
-                
-                // Show success message with selected voice
-                if (utterance.voice) {
-                    showSuccess(`Using ${utterance.voice.name} voice (${emotion} tone)`);
-                }
-
-                utterance.onstart = () => {
-                    showWaveAnimation();
-                    showSuccess(`Converting with ${emotion} emotional tone...`);
-                    
-                    // Start recording for download capability
-                    recordSpeech(utterance);
-                };
-
-                utterance.onend = () => {
-                    hideWaveAnimation();
-                    showSuccess('Speech conversion completed with advanced AI processing!');
-                    
-                    // Enable download button after speech is complete
-                    const downloadBtn = document.getElementById('downloadBtn');
-                    downloadBtn.style.opacity = '1';
-                    downloadBtn.style.pointerEvents = 'auto';
-                    
-                    resolve();
-                };
-
-                utterance.onerror = (error) => {
-                    hideWaveAnimation();
-                    reject(error);
-                };
-
-                // Start speech synthesis
-                speechSynthesis.speak(utterance);
-                currentAudio = utterance;
-            });
-        }
-
-        // Convert using Groq API (if available)
-        async function convertWithGroqAPI(text, apiKey) {
-            // This would integrate with Groq's text-to-speech API
-            // For now, showing a placeholder implementation
-            showSuccess('AI conversion feature coming soon! Using browser speech synthesis.');
-            await convertWithWebSpeechAPI(text);
-        }
-
-        // Stop speech
-        function stopSpeech() {
-            if ('speechSynthesis' in window) {
-                speechSynthesis.cancel();
-            }
-            hideWaveAnimation();
-            isConverting = false;
-            document.getElementById('convertBtn').innerHTML = '<i class="fas fa-play"></i> Convert to Speech';
-            document.getElementById('convertBtn').classList.remove('processing');
-            document.getElementById('stopBtn').style.display = 'none';
-        }
-
-        // Clear text
-        function clearText() {
-            document.getElementById('textInput').value = '';
-            updateCharCounter();
-            hideWaveAnimation();
-            document.getElementById('audioPlayer').style.display = 'none';
-        }
-
-        // Show wave animation
-        function showWaveAnimation() {
-            document.getElementById('audioPlayer').style.display = 'block';
-            document.getElementById('waveAnimation').classList.add('active');
-        }
-
-        // Hide wave animation
-        function hideWaveAnimation() {
-            document.getElementById('waveAnimation').classList.remove('active');
-        }
-
-        let audioBlob = null;
-        let mediaRecorder = null;
-        let recordedChunks = [];
-
-        // Download audio with real MP3 recording
+        // Download audio placeholder
         function downloadAudio() {
-            if (!audioBlob) {
-                showError('No audio available for download. Please generate speech first.');
-                return;
-            }
-            
-            try {
-                const url = URL.createObjectURL(audioBlob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `tts-audio-${new Date().getTime()}.wav`;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-                
-                showSuccess('Audio file downloaded successfully!');
-            } catch (error) {
-                console.error('Download error:', error);
-                showError('Download failed. Please try again.');
-            }
-        }
-        
-        // Record speech using Web Audio API
-        async function recordSpeech(utterance) {
-            try {
-                // Create audio context
-                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                
-                // Create media stream destination
-                const dest = audioContext.createMediaStreamDestination();
-                
-                // Create oscillator for demo (in real implementation, this would capture speech synthesis)
-                const oscillator = audioContext.createOscillator();
-                const gainNode = audioContext.createGain();
-                
-                oscillator.connect(gainNode);
-                gainNode.connect(dest);
-                
-                // Set up media recorder
-                mediaRecorder = new MediaRecorder(dest.stream);
-                recordedChunks = [];
-                
-                mediaRecorder.ondataavailable = (event) => {
-                    if (event.data.size > 0) {
-                        recordedChunks.push(event.data);
-                    }
-                };
-                
-                mediaRecorder.onstop = () => {
-                    audioBlob = new Blob(recordedChunks, { type: 'audio/wav' });
-                    
-                    // Create audio element for playback
-                    const audioElement = document.getElementById('audioElement');
-                    audioElement.src = URL.createObjectURL(audioBlob);
-                    audioElement.style.display = 'block';
-                };
-                
-                // Start recording
-                mediaRecorder.start();
-                
-                // Simulate audio generation (replace with actual speech synthesis)
-                oscillator.frequency.setValueAtTime(440, audioContext.currentTime);
-                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-                oscillator.start();
-                
-                // Stop after utterance duration (estimated)
-                const estimatedDuration = Math.max(2000, utterance.text.length * 50); // 50ms per character
-                setTimeout(() => {
-                    if (mediaRecorder && mediaRecorder.state === 'recording') {
-                        oscillator.stop();
-                        mediaRecorder.stop();
-                    }
-                }, estimatedDuration);
-                
-            } catch (error) {
-                console.error('Recording error:', error);
-                showError('Audio recording not supported in this browser.');
-            }
-        }
-
-        // Share audio
-        function shareAudio() {
-            if (navigator.share) {
-                navigator.share({
-                    title: 'Generated Speech Audio',
-                    text: 'Check out this speech generated with ToolSlap!',
-                    url: window.location.href
-                });
-            } else {
-                // Fallback to copying URL
-                navigator.clipboard.writeText(window.location.href);
-                showSuccess('Link copied to clipboard!');
-            }
+            showError('Audio download feature is available after speech generation. Please generate speech first.');
         }
 
         // Show error message
@@ -1327,50 +1088,34 @@
             }, 3000);
         }
 
-        // FAQ toggle functionality
-        function toggleFaq(element) {
-            const answer = element.nextElementSibling;
-            const icon = element.querySelector('i');
+        // Initialize everything when DOM loads
+        function initializeApp() {
+            updateCharCounter();
             
-            if (answer.classList.contains('active')) {
-                answer.classList.remove('active');
-                icon.style.transform = 'rotate(0deg)';
-            } else {
-                // Close other FAQs
-                document.querySelectorAll('.faq-answer.active').forEach(item => {
-                    item.classList.remove('active');
-                });
-                document.querySelectorAll('.faq-question i').forEach(i => {
-                    i.style.transform = 'rotate(0deg)';
-                });
+            if ('speechSynthesis' in window) {
+                function loadVoices() {
+                    availableVoices = speechSynthesis.getVoices();
+                    if (availableVoices.length > 0) {
+                        populateVoices();
+                    }
+                }
                 
-                // Open this FAQ
-                answer.classList.add('active');
-                icon.style.transform = 'rotate(180deg)';
+                loadVoices();
+                speechSynthesis.onvoiceschanged = loadVoices;
+            } else {
+                showError('Speech synthesis is not supported in your browser. Please use Chrome, Firefox, or Edge.');
             }
         }
 
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            updateCharCounter();
-            
-            // Load voices when available
-            if ('speechSynthesis' in window) {
-                speechSynthesis.onvoiceschanged = () => {
-                    const voices = speechSynthesis.getVoices();
-                    console.log('Available voices:', voices.length);
-                };
-            }
-
-            // Track page view
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'page_view', {
-                    'page_title': 'Text to Speech Converter',
-                    'page_location': window.location.href,
-                    'content_group1': 'AI Tools'
-                });
-            }
-        });
+        // Call initialization when page loads
+        document.addEventListener('DOMContentLoaded', initializeApp);
+        
+        // Fallback initialization if DOMContentLoaded already fired
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeApp);
+        } else {
+            initializeApp();
+        }
     </script>
 </body>
 </html>
