@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Toolslap - Professional online toolkit for image editing, text processing, GIF manipulation, and more. Advanced tools with dark mode support.">
+    <meta name="keywords" content="toolslap, online tools, image editor, text tools, GIF tools, PNG tools, JPG tools, professional toolkit">
+    <meta name="author" content="Toolslap">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Toolslap - Professional Online Toolkit">
+    <meta property="og:description" content="Advanced collection of professional online tools for image editing, text processing, and more.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolslap.online">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Toolslap - Professional Online Toolkit">
+    <meta name="twitter:description" content="Advanced collection of professional online tools for image editing, text processing, and more.">
+    
+    <title>Toolslap - Professional Online Toolkit</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #7c3aed;
+            --accent-color: #f59e0b;
+            --success-color: #10b981;
+            --bg-color: #ffffff;
+            --surface-color: #f8fafc;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-tertiary: #94a3b8;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary-color: #8b5cf6;
+            --accent-color: #fbbf24;
+            --success-color: #34d399;
+            --bg-color: #0f172a;
+            --surface-color: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-tertiary: #94a3b8;
+            --border-color: #334155;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: var(--transition);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--surface-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            background: rgba(var(--surface-color), 0.8);
+            box-shadow: var(--shadow-sm);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .logo::before {
+            content: "⚡";
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.625rem 1.25rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.875rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .theme-toggle:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 6rem 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            text-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero p {
+            font-size: 1.375rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            font-weight: 300;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-container {
+            max-width: 640px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1.25rem 4rem 1.25rem 1.5rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .search-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .search-btn:hover {
+            background: #dc2626;
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        /* Category Section */
+        .categories {
+            padding: 4rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .category-card {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .category-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .category-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .tool-list {
+            list-style: none;
+        }
+
+        .tool-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .tool-item:last-child {
+            border-bottom: none;
+        }
+
+        .tool-item:hover {
+            padding-left: 0.5rem;
+        }
+
+        .tool-info {
+            flex: 1;
+        }
+
+        .tool-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .tool-description {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .tool-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.625rem 1.25rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            white-space: nowrap;
+        }
+
+        .tool-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--surface-color);
+            border-top: 1px solid var(--border-color);
+            padding: 4rem 0 2rem;
+            margin-top: 6rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+
+        .footer-section p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-color);
+            transform: translateX(4px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-tertiary);
+            font-size: 0.875rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.125rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .category-card {
+                padding: 1.5rem;
+            }
+
+            .tool-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .tool-btn {
+                width: 100%;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Tool Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: var(--surface-color);
+            margin: 5% auto;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            width: 90%;
+            max-width: 640px;
+            position: relative;
+            box-shadow: var(--shadow-xl);
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close {
+            position: absolute;
+            right: 1.5rem;
+            top: 1.5rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .close:hover {
+            color: var(--text-primary);
+            background: var(--border-color);
+        }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+            z-index: 999;
+        }
+
+        .scroll-top:hover {
+            background: var(--primary-dark);
+            transform: translateY(-4px);
+        }
+
+        .scroll-top.show {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">Toolslap</a>
+            <ul class="nav-links">
+                <li><a href="#image-tools">Image Tools</a></li>
+                <li><a href="#gif-tools">GIF Tools</a></li>
+                <li><a href="#text-tools">Text Tools</a></li>
+                <li><a href="#math-tools">Math Tools</a></li>
+                <li>
+                    <button class="theme-toggle" onclick="toggleTheme()">
+                        <span id="theme-icon">🌙</span>
+                        <span id="theme-text">Dark</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Toolslap</h1>
+                <p>Professional toolkit for developers, designers, and creators</p>
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Search 100+ professional tools..." id="searchInput">
+                    <button class="search-btn" onclick="searchTools()">Search</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        <section class="categories">
+            <div class="section-header">
+                <h2>Professional Tool Categories</h2>
+                <p>Explore our comprehensive collection of professional tools designed to streamline your workflow</p>
+            </div>
+            
+            <div class="categories-grid">
+                <!-- Image Tools Category -->
+                <div class="category-card" id="image-tools">
+                    <div class="category-header">
+                        <div class="category-icon">🖼️</div>
+                        <h2 class="category-title">Image Tools</h2>
+                    </div>
+                    <ul class="tool-list">
+                        <li class="tool-item">
+                            <div class="tool-info">
+                                <div class="tool-name">Transparent PNG Maker</div>
+                                <div class="tool-description">Remove background from PNG images with precision</div>
+                            </div>
+                            <button class="tool-btn" onclick="openTool('Transparent PNG Maker')">Launch</button>
+                        </li>
+                        <li class="tool-item">
+                            <div class="tool-info">
+                                <div class="tool-name">Change PNG Colors</div>
+                                <div class="tool-description">Replace colors in PNG images with advanced controls</div>
+                            </div>
+                            <button class="tool-btn" onclick="openTool('Change PNG Colors')">Launch</button>
+                        </li>
+                        <li class="tool-item">
+                            <div class="tool-info">
+                                <div class="tool-name">Rotate PNG</div>
+                                <div class="tool-description">Precise rotation with angle controls</div>
+                            </div>
+                            <button class="tool-btn" onclick="openTool('Rotate PNG')">Launch</button>
+                        </li>
+                        <li class="tool-item">
+                            <div class="tool-info">
+                                <div class="tool-name">Change JPG Quality</div>
+                                <div class="tool-description">Optimize JPG quality with live preview</div>
+                            </div>
+                            <button class="tool-btn" onclick="openTool('Change JPG Quality')">Launch</button>
+                        </li>
+                        <li class="tool-item">
+                            <div class="tool-info">
+                                <div class="tool-name">Pixelate JPG</div>
+                                <div class="tool-description">Apply pixelation effect with adjustable intensity</div>
+                            </div>
+                            <button class="tool-btn" onclick="openTool('Pixelate JPG')">Launch</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- GIF Tools Category -->
+                <div class="category-card" id="gif-tools">
+                    <div class="category-header">
+                        <div class="category-icon">🎬</div>
+                        <h2 class="category-title">GIF Tools</h2>
+                    </div>
+                    <ul class="tool-list">
+                        <li class="tool-item">
+                            <div class="tool-info">
+                                <div class="tool-name">Change GIF Speed</div>
+                                <div class="tool-description">Adjust animation speed with frame-level control</div>
+                            </div>
+                            <button class="tool-btn" onclick="openTool('Change GIF Speed')">Launch</button>
+                        </li>
+                        <li class="tool-item">
+                            <div class="tool-info">
+                                <div class="tool-name">Extract GIF Frames</div>
+                                <div class="tool-description">Extract individual frames with batch processing</div>
+                            </div>
+                            <button class="tool-btn" onclick="openTool('Extract GIF Frames')">Launch</button>
+                        </li>
+                        <li class="tool-item">
+                            <div class="tool-info">
+                                <div class="tool-name">Remove GIF Background</div>
+                                <div class="tool-description">Advanced background removal for animations</div>
+                            </div>
+                            <button class="tool-btn" onclick="openTool('Remove GIF Background')">Launch</button>
+                        </li>
+                        <li class="tool-item">
+                            <div class="tool-info">
+                                <div class="tool-name">Add Text to GIF</div>
+                                <div class="tool-description">Add animated text with custom fonts</div>
+                            </div>
+                            <button class="tool-btn" onclick="openTool('Add Text to GIF')">Launch</button>
+                        </li>
+                        <li class="tool-item">
+                            <div class="tool-info">
+                                <div class="tool-name">Reverse GIF</div>
+                                <div class="tool-description">Reverse animation with frame interpolation</div>
+                            </div>
+                            <button class="tool-btn" onclick="openTool('Reverse GIF')">Launch</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Text Tools Category -->
+                <div class="category-card" id="text-tools">
+                    <div class="category-header">
+                        <div class="category-icon">📝</div>
+                        <h2 class="category-title">Text Tools</h2>
+                    </div>
+                    <ul class="tool-list">
+                        <li class="tool-item">
+                            <div class="tool-info">
+                                <div class="tool-name">Convert Text to Image</div>
+                                <div class="tool-description">Create professional images from text with styling</div>
+                            </div>
+                            <button class="tool-btn" onclick="openTool('Convert Text to Image')">Launch</button>
+                        </li>
+                        <li class="tool-item">
+                            <div class="tool-info">
+                                <div class="tool-name">Find and Replace Text</div>
+                                <div class="tool-description">Advanced search with regex support</div>
+                            </div>
+                            <button class="tool-btn" onclick="openTool('Find and Replace Text')">Launch</button>
+                        </li>
+                        <li class="tool-item">
+                            <div class="tool-info">
+                                <div class="tool-name">Reverse Text</div>
+                                <div class="tool-description">Reverse text with character-level options</div>
+                            </div>
+                            <button class="tool-btn" onclick="openTool('Reverse Text')">Launch</button>
+                        </li>
+                        <li class="tool-item">
+                            <div class="tool-info">
+                                <div class="tool-name">Split String</div>
+                                <div class="tool-description">Split text with custom delimiters</div>
+                            </div>
+                            <button class="tool-btn" onclick="openTool('Split String')">Launch</button>
+                        </li>
+                        <li class="tool-item">
+                            <div class="tool-info">
+                                <div class="tool-name">Base64 Encode/Decode</div>
+                                <div class="tool-description">Secure encoding with multiple formats</div>
+                            </div>
+                            <button class="tool-btn" onclick="openTool('Base64 Encode/Decode')">Launch</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Math Tools Category -->
+                <div class="category-card" id="math-tools">
+                    <div class="category-header">
+                        <div class="category-icon">🔢</div>
+                        <h2 class="category-title">Math Tools</h2>
+                    </div>
+                    <ul class="tool-list">
+                        <li class="tool-item">
+                            <div class="tool-info">
+                                <div class="tool-name">Generate Random Number</div>
+                                <div class="tool-description">Cryptographically secure random generation</div>
+                            </div>
+                            <button class="tool-btn" onclick="openTool('Generate Random Number')">Launch</button>
+                        </li>
+                        <li class="tool-item">
+                            <div class="tool-info">
+                                <div class="tool-name">Pick Random Item</div>
+                                <div class="tool-description">Fair selection with weighted options</div>
+                            </div>
+                            <button class="tool-btn" onclick="openTool('Pick Random Item')">Launch</button>
+                        </li>
+                        <li class="tool-item">
+                            <div class="tool-info">
+                                <div class="tool-name">Convert Words to Numbers</div>
+                                <div class="tool-description">Support for multiple languages</div>
+                            </div>
+                            <button class="tool-btn" onclick="openTool('Convert Words to Numbers')">Launch</button>
+                        </li>
+                        <li class="tool-item">
+                            <div class="tool-info">
+                                <div class="tool-name">Calculate Number Sum</div>
+                                <div class="tool-description">Advanced calculations with formulas</div>
+                            </div>
+                            <button class="tool-btn" onclick="openTool('Calculate Number Sum')">Launch</button>
+                        </li>
+                        <li class="tool-item">
+                            <div class="tool-info">
+                                <div class="tool-name">Sort Numbers</div>
+                                <div class="tool-description">Multiple sorting algorithms</div>
+                            </div>
+                            <button class="tool-btn" onclick="openTool('Sort Numbers')">Launch</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About Toolslap</h3>
+                    <p>Professional toolkit designed for developers, designers, and creators. Access 100+ advanced tools with enterprise-grade performance and security.</p>
+                    <p>Built with modern technologies and optimized for speed and reliability.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="#image-tools">Image Tools</a></li>
+                        <li><a href="#gif-tools">GIF Tools</a></li>
+                        <li><a href="#text-tools">Text Tools</a></li>
+                        <li><a href="#math-tools">Math Tools</a></li>
+                        <li><a href="#">All Tools</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Features</h3>
+                    <ul>
+                        <li><a href="#">Dark Mode</a></li>
+                        <li><a href="#">Mobile Responsive</a></li>
+                        <li><a href="#">API Access</a></li>
+                        <li><a href="#">Batch Processing</a></li>
+                        <li><a href="#">No Registration</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">API Reference</a></li>
+                        <li><a href="#">Contact Support</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Toolslap. All rights reserved. | Professional online toolkit | Built with ❤️ for creators</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal for Tool Demo -->
+    <div id="toolModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Tool Name</h2>
+            <p id="modalDescription">Professional tool interface</p>
+            <div id="modalContent">
+                <p>This is a professional demo interface. In production, this would contain the actual tool functionality with advanced features and real-time processing.</p>
+                <div style="margin-top: 2rem;">
+                    <button class="tool-btn" onclick="closeModal()">Close</button>
+                    <button class="tool-btn" style="background: var(--success-color); margin-left: 1rem;">Get Started</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll to top button -->
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+        ↑
+    </button>
+
+    <script>
+        // Theme Toggle Functionality
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            const themeText = document.getElementById('theme-text');
+            
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Dark';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Light';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Load saved theme
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const themeIcon = document.getElementById('theme-icon');
+            const themeText = document.getElementById('theme-text');
+            
+            if (savedTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Light';
+            }
+        }
+
+        // Search functionality
+        function searchTools() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const toolItems = document.querySelectorAll('.tool-item');
+            const categoryCards = document.querySelectorAll('.category-card');
+            
+            let hasResults = false;
+            
+            toolItems.forEach(item => {
+                const toolName = item.querySelector('.tool-name').textContent.toLowerCase();
+                const toolDescription = item.querySelector('.tool-description').textContent.toLowerCase();
+                
+                if (toolName.includes(searchTerm) || toolDescription.includes(searchTerm)) {
+                    item.style.display = 'flex';
+                    hasResults = true;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            // Show/hide category cards based on results
+            categoryCards.forEach(card => {
+                const visibleTools = card.querySelectorAll('.tool-item[style="display: flex;"], .tool-item:not([style])');
+                if (visibleTools.length === 0) {
+                    card.style.display = 'none';
+                } else {
+                    card.style.display = 'block';
+                }
+            });
+            
+            // Show message if no results
+            if (!hasResults && searchTerm) {
+                // You could add a "no results" message here
+            }
+        }
+
+        // Real-time search with debounce
+        let searchTimeout;
+        document.getElementById('searchInput').addEventListener('input', function() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(searchTools, 300);
+        });
+
+        // Modal functionality
+        function openTool(toolName) {
+            const modal = document.getElementById('toolModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDescription = document.getElementById('modalDescription');
+            
+            modalTitle.textContent = toolName;
+            modalDescription.textContent = `Professional ${toolName} - Advanced features and real-time processing`;
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('toolModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('toolModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll to top functionality
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Show/hide scroll to top button
+        window.addEventListener('scroll', function() {
+            const scrollTop = document.getElementById('scrollTop');
+            if (window.pageYOffset > 300) {
+                scrollTop.classList.add('show');
+            } else {
+                scrollTop.classList.remove('show');
+            }
+        });
+
+        // Initialize theme on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTheme();
+            
+            // Add loading animation to buttons
+            const buttons = document.querySelectorAll('.tool-btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const originalText = this.textContent;
+                    this.innerHTML = '<span class="loading"></span>';
+                    
+                    setTimeout(() => {
+                        this.textContent = originalText;
+                    }, 1000);
+                });
+            });
+        });
+
+        // Add intersection observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe category cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryCards = document.querySelectorAll('.category-card');
+            categoryCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+                observer.observe(card);
+            });
+        });
+
+        // Add keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+            
+            if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
+                e.preventDefault();
+                document.getElementById('searchInput').focus();
+            }
+        });
+
+        // Add tool usage statistics (simulated)
+        function updateToolStats() {
+            const tools = document.querySelectorAll('.tool-item');
+            tools.forEach(tool => {
+                const usageCount = Math.floor(Math.random() * 9000) + 1000;
+                const statsElement = document.createElement('span');
+                statsElement.textContent = `${usageCount.toLocaleString()} uses`;
+                statsElement.style.fontSize = '0.75rem';
+                statsElement.style.color = 'var(--primary-color)';
+                statsElement.style.marginLeft = '0.5rem';
+                statsElement.style.fontWeight = '600';
+                
+                const toolName = tool.querySelector('.tool-name');
+                toolName.appendChild(statsElement);
+            });
+        }
+
+        // Initialize stats on page load
+        document.addEventListener('DOMContentLoaded', updateToolStats);
+    </script>
+</body>
+</html>
