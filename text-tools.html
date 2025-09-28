@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional text processing tools at Toolslap.online - text to image, find/replace, encoding tools">
+    <meta name="keywords" content="text tools, text processing, string manipulation, encoding tools, toolslap.online">
+    <meta name="author" content="Toolslap">
+    <title>Text Tools - Toolslap.online</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #7c3aed;
+            --accent-color: #f59e0b;
+            --bg-color: #ffffff;
+            --surface-color: #f8fafc;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0f172a;
+            --surface-color: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --border-color: #334155;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: var(--surface-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 0;
+        }
+
+        .tool-card {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tool-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .tool-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .tool-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .tool-btn {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        .tool-btn:hover {
+            background: var(--primary-color);
+        }
+
+        footer {
+            background: var(--surface-color);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="https://toolslap.online" class="logo">⚡ Toolslap.online</a>
+            <div class="nav-links">
+                <a href="https://toolslap.online/image-tools.html">Image Tools</a>
+                <a href="https://toolslap.online/gif-tools.html">GIF Tools</a>
+                <a href="https://toolslap.online/math-tools.html">Math Tools</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Text Tools</h1>
+            <p>Professional text processing tools for encoding, formatting, and manipulation</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <a href="https://toolslap.online" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+
+        <div class="tools-grid">
+            <div class="tool-card">
+                <div class="tool-icon">🖼️</div>
+                <h3>Convert Text to Image</h3>
+                <p>Create professional images from text with styling options and multiple formats.</p>
+                <button class="tool-btn" onclick="openTool('Convert Text to Image')">Launch Tool</button>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">🔍</div>
+                <h3>Find and Replace Text</h3>
+                <p>Advanced search with regex support and batch replacement capabilities.</p>
+                <button class="tool-btn" onclick="openTool('Find and Replace Text')">Launch Tool</button>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">🔄</div>
+                <h3>Reverse Text</h3>
+                <p>Reverse text with character-level options and multiple reversal modes.</p>
+                <button class="tool-btn" onclick="openTool('Reverse Text')">Launch Tool</button>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">✂️</div>
+                <h3>Split String</h3>
+                <p>Split text with custom delimiters and advanced splitting options.</p>
+                <button class="tool-btn" onclick="openTool('Split String')">Launch Tool</button>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">🔐</div>
+                <h3>Base64 Encode/Decode</h3>
+                <p>Secure encoding with multiple formats and real-time conversion.</p>
+                <button class="tool-btn" onclick="openTool('Base64 Encode/Decode')">Launch Tool</button>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">📊</div>
+                <h3>Text Statistics</h3>
+                <p>Analyze text with character count, word count, and readability metrics.</p>
+                <button class="tool-btn" onclick="openTool('Text Statistics')">Launch Tool</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Toolslap.online - Professional Text Tools</p>
+        </div>
+    </footer>
+
+    <script>
+        function openTool(toolName) {
+            alert(`Opening ${toolName} at Toolslap.online\n\nThis would redirect to the actual tool interface.`);
+        }
+    </script>
+</body>
+</html>
