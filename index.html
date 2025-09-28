@@ -3,28 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Toolslap - Professional online toolkit for image editing, text processing, GIF manipulation, and more. Advanced tools with dark mode support.">
-    <meta name="keywords" content="toolslap, online tools, image editor, text tools, GIF tools, PNG tools, JPG tools, professional toolkit">
+    <meta name="description" content="Toolslap.online - Professional online toolkit for image editing, text processing, GIF manipulation, and more. Advanced tools with dark mode support.">
+    <meta name="keywords" content="toolslap.online, online tools, image editor, text tools, GIF tools, PNG tools, JPG tools, professional toolkit">
     <meta name="author" content="Toolslap">
     <meta name="robots" content="index, follow">
     
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Toolslap - Professional Online Toolkit">
+    <meta property="og:title" content="Toolslap.online - Professional Online Toolkit">
     <meta property="og:description" content="Advanced collection of professional online tools for image editing, text processing, and more.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://toolslap.online">
     
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Toolslap - Professional Online Toolkit">
+    <meta name="twitter:title" content="Toolslap.online - Professional Online Toolkit">
     <meta name="twitter:description" content="Advanced collection of professional online tools for image editing, text processing, and more.">
     
-    <title>Toolslap - Professional Online Toolkit</title>
+    <title>Toolslap.online - Professional Online Toolkit</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         * {
@@ -320,6 +322,9 @@
             transition: var(--transition);
             position: relative;
             overflow: hidden;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
         }
 
         .category-card::before {
@@ -337,6 +342,8 @@
         .category-card:hover {
             transform: translateY(-8px);
             box-shadow: var(--shadow-xl);
+            text-decoration: none;
+            color: inherit;
         }
 
         .category-card:hover::before {
@@ -368,62 +375,22 @@
             color: var(--text-primary);
         }
 
-        .tool-list {
-            list-style: none;
-        }
-
-        .tool-item {
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: var(--transition);
-        }
-
-        .tool-item:last-child {
-            border-bottom: none;
-        }
-
-        .tool-item:hover {
-            padding-left: 0.5rem;
-        }
-
-        .tool-info {
-            flex: 1;
-        }
-
-        .tool-name {
-            font-weight: 600;
-            color: var(--text-primary);
-            font-size: 1rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .tool-description {
-            font-size: 0.875rem;
+        .category-description {
             color: var(--text-secondary);
-            line-height: 1.4;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
         }
 
-        .tool-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 0.625rem 1.25rem;
-            border-radius: 0.5rem;
-            cursor: pointer;
+        .category-tools {
             font-size: 0.875rem;
-            font-weight: 500;
-            transition: var(--transition);
-            box-shadow: var(--shadow-sm);
-            white-space: nowrap;
+            color: var(--text-tertiary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .tool-btn:hover {
-            background: var(--primary-dark);
-            transform: scale(1.05);
-            box-shadow: var(--shadow-md);
+        .category-tools i {
+            color: var(--primary-color);
         }
 
         /* Footer */
@@ -499,20 +466,6 @@
             .categories-grid {
                 grid-template-columns: 1fr;
             }
-
-            .category-card {
-                padding: 1.5rem;
-            }
-
-            .tool-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
-            }
-
-            .tool-btn {
-                width: 100%;
-            }
         }
 
         /* Loading Animation */
@@ -528,63 +481,6 @@
 
         @keyframes spin {
             to { transform: rotate(360deg); }
-        }
-
-        /* Tool Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .modal-content {
-            background-color: var(--surface-color);
-            margin: 5% auto;
-            padding: 2.5rem;
-            border-radius: 1rem;
-            width: 90%;
-            max-width: 640px;
-            position: relative;
-            box-shadow: var(--shadow-xl);
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .close {
-            position: absolute;
-            right: 1.5rem;
-            top: 1.5rem;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-secondary);
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 0.5rem;
-            transition: var(--transition);
-        }
-
-        .close:hover {
-            color: var(--text-primary);
-            background: var(--border-color);
         }
 
         /* Scroll to top button */
@@ -621,12 +517,12 @@
 <body>
     <header>
         <nav class="container">
-            <a href="#" class="logo">Toolslap</a>
+            <a href="https://toolslap.online" class="logo">Toolslap.online</a>
             <ul class="nav-links">
-                <li><a href="#image-tools">Image Tools</a></li>
-                <li><a href="#gif-tools">GIF Tools</a></li>
-                <li><a href="#text-tools">Text Tools</a></li>
-                <li><a href="#math-tools">Math Tools</a></li>
+                <li><a href="image-tools.html">Image Tools</a></li>
+                <li><a href="gif-tools.html">GIF Tools</a></li>
+                <li><a href="text-tools.html">Text Tools</a></li>
+                <li><a href="math-tools.html">Math Tools</a></li>
                 <li>
                     <button class="theme-toggle" onclick="toggleTheme()">
                         <span id="theme-icon">🌙</span>
@@ -640,7 +536,7 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Toolslap</h1>
+                <h1>Toolslap.online</h1>
                 <p>Professional toolkit for developers, designers, and creators</p>
                 <div class="search-container">
                     <input type="text" class="search-input" placeholder="Search 100+ professional tools..." id="searchInput">
@@ -659,184 +555,56 @@
             
             <div class="categories-grid">
                 <!-- Image Tools Category -->
-                <div class="category-card" id="image-tools">
+                <a href="image-tools.html" class="category-card">
                     <div class="category-header">
                         <div class="category-icon">🖼️</div>
                         <h2 class="category-title">Image Tools</h2>
                     </div>
-                    <ul class="tool-list">
-                        <li class="tool-item">
-                            <div class="tool-info">
-                                <div class="tool-name">Transparent PNG Maker</div>
-                                <div class="tool-description">Remove background from PNG images with precision</div>
-                            </div>
-                            <button class="tool-btn" onclick="openTool('Transparent PNG Maker')">Launch</button>
-                        </li>
-                        <li class="tool-item">
-                            <div class="tool-info">
-                                <div class="tool-name">Change PNG Colors</div>
-                                <div class="tool-description">Replace colors in PNG images with advanced controls</div>
-                            </div>
-                            <button class="tool-btn" onclick="openTool('Change PNG Colors')">Launch</button>
-                        </li>
-                        <li class="tool-item">
-                            <div class="tool-info">
-                                <div class="tool-name">Rotate PNG</div>
-                                <div class="tool-description">Precise rotation with angle controls</div>
-                            </div>
-                            <button class="tool-btn" onclick="openTool('Rotate PNG')">Launch</button>
-                        </li>
-                        <li class="tool-item">
-                            <div class="tool-info">
-                                <div class="tool-name">Change JPG Quality</div>
-                                <div class="tool-description">Optimize JPG quality with live preview</div>
-                            </div>
-                            <button class="tool-btn" onclick="openTool('Change JPG Quality')">Launch</button>
-                        </li>
-                        <li class="tool-item">
-                            <div class="tool-info">
-                                <div class="tool-name">Pixelate JPG</div>
-                                <div class="tool-description">Apply pixelation effect with adjustable intensity</div>
-                            </div>
-                            <button class="tool-btn" onclick="openTool('Pixelate JPG')">Launch</button>
-                        </li>
-                    </ul>
-                </div>
+                    <p class="category-description">Professional image editing tools for PNG, JPG, and other formats. Remove backgrounds, change colors, optimize quality, and apply effects with precision.</p>
+                    <div class="category-tools">
+                        <i class="fas fa-tools"></i>
+                        <span>6 Professional Tools</span>
+                    </div>
+                </a>
 
                 <!-- GIF Tools Category -->
-                <div class="category-card" id="gif-tools">
+                <a href="gif-tools.html" class="category-card">
                     <div class="category-header">
                         <div class="category-icon">🎬</div>
                         <h2 class="category-title">GIF Tools</h2>
                     </div>
-                    <ul class="tool-list">
-                        <li class="tool-item">
-                            <div class="tool-info">
-                                <div class="tool-name">Change GIF Speed</div>
-                                <div class="tool-description">Adjust animation speed with frame-level control</div>
-                            </div>
-                            <button class="tool-btn" onclick="openTool('Change GIF Speed')">Launch</button>
-                        </li>
-                        <li class="tool-item">
-                            <div class="tool-info">
-                                <div class="tool-name">Extract GIF Frames</div>
-                                <div class="tool-description">Extract individual frames with batch processing</div>
-                            </div>
-                            <button class="tool-btn" onclick="openTool('Extract GIF Frames')">Launch</button>
-                        </li>
-                        <li class="tool-item">
-                            <div class="tool-info">
-                                <div class="tool-name">Remove GIF Background</div>
-                                <div class="tool-description">Advanced background removal for animations</div>
-                            </div>
-                            <button class="tool-btn" onclick="openTool('Remove GIF Background')">Launch</button>
-                        </li>
-                        <li class="tool-item">
-                            <div class="tool-info">
-                                <div class="tool-name">Add Text to GIF</div>
-                                <div class="tool-description">Add animated text with custom fonts</div>
-                            </div>
-                            <button class="tool-btn" onclick="openTool('Add Text to GIF')">Launch</button>
-                        </li>
-                        <li class="tool-item">
-                            <div class="tool-info">
-                                <div class="tool-name">Reverse GIF</div>
-                                <div class="tool-description">Reverse animation with frame interpolation</div>
-                            </div>
-                            <button class="tool-btn" onclick="openTool('Reverse GIF')">Launch</button>
-                        </li>
-                    </ul>
-                </div>
+                    <p class="category-description">Advanced GIF animation tools for speed control, frame extraction, background removal, and text overlay with professional results.</p>
+                    <div class="category-tools">
+                        <i class="fas fa-tools"></i>
+                        <span>6 Professional Tools</span>
+                    </div>
+                </a>
 
                 <!-- Text Tools Category -->
-                <div class="category-card" id="text-tools">
+                <a href="text-tools.html" class="category-card">
                     <div class="category-header">
                         <div class="category-icon">📝</div>
                         <h2 class="category-title">Text Tools</h2>
                     </div>
-                    <ul class="tool-list">
-                        <li class="tool-item">
-                            <div class="tool-info">
-                                <div class="tool-name">Convert Text to Image</div>
-                                <div class="tool-description">Create professional images from text with styling</div>
-                            </div>
-                            <button class="tool-btn" onclick="openTool('Convert Text to Image')">Launch</button>
-                        </li>
-                        <li class="tool-item">
-                            <div class="tool-info">
-                                <div class="tool-name">Find and Replace Text</div>
-                                <div class="tool-description">Advanced search with regex support</div>
-                            </div>
-                            <button class="tool-btn" onclick="openTool('Find and Replace Text')">Launch</button>
-                        </li>
-                        <li class="tool-item">
-                            <div class="tool-info">
-                                <div class="tool-name">Reverse Text</div>
-                                <div class="tool-description">Reverse text with character-level options</div>
-                            </div>
-                            <button class="tool-btn" onclick="openTool('Reverse Text')">Launch</button>
-                        </li>
-                        <li class="tool-item">
-                            <div class="tool-info">
-                                <div class="tool-name">Split String</div>
-                                <div class="tool-description">Split text with custom delimiters</div>
-                            </div>
-                            <button class="tool-btn" onclick="openTool('Split String')">Launch</button>
-                        </li>
-                        <li class="tool-item">
-                            <div class="tool-info">
-                                <div class="tool-name">Base64 Encode/Decode</div>
-                                <div class="tool-description">Secure encoding with multiple formats</div>
-                            </div>
-                            <button class="tool-btn" onclick="openTool('Base64 Encode/Decode')">Launch</button>
-                        </li>
-                    </ul>
-                </div>
+                    <p class="category-description">Comprehensive text processing tools for encoding, formatting, manipulation, and conversion with advanced features.</p>
+                    <div class="category-tools">
+                        <i class="fas fa-tools"></i>
+                        <span>6 Professional Tools</span>
+                    </div>
+                </a>
 
                 <!-- Math Tools Category -->
-                <div class="category-card" id="math-tools">
+                <a href="math-tools.html" class="category-card">
                     <div class="category-header">
                         <div class="category-icon">🔢</div>
                         <h2 class="category-title">Math Tools</h2>
                     </div>
-                    <ul class="tool-list">
-                        <li class="tool-item">
-                            <div class="tool-info">
-                                <div class="tool-name">Generate Random Number</div>
-                                <div class="tool-description">Cryptographically secure random generation</div>
-                            </div>
-                            <button class="tool-btn" onclick="openTool('Generate Random Number')">Launch</button>
-                        </li>
-                        <li class="tool-item">
-                            <div class="tool-info">
-                                <div class="tool-name">Pick Random Item</div>
-                                <div class="tool-description">Fair selection with weighted options</div>
-                            </div>
-                            <button class="tool-btn" onclick="openTool('Pick Random Item')">Launch</button>
-                        </li>
-                        <li class="tool-item">
-                            <div class="tool-info">
-                                <div class="tool-name">Convert Words to Numbers</div>
-                                <div class="tool-description">Support for multiple languages</div>
-                            </div>
-                            <button class="tool-btn" onclick="openTool('Convert Words to Numbers')">Launch</button>
-                        </li>
-                        <li class="tool-item">
-                            <div class="tool-info">
-                                <div class="tool-name">Calculate Number Sum</div>
-                                <div class="tool-description">Advanced calculations with formulas</div>
-                            </div>
-                            <button class="tool-btn" onclick="openTool('Calculate Number Sum')">Launch</button>
-                        </li>
-                        <li class="tool-item">
-                            <div class="tool-info">
-                                <div class="tool-name">Sort Numbers</div>
-                                <div class="tool-description">Multiple sorting algorithms</div>
-                            </div>
-                            <button class="tool-btn" onclick="openTool('Sort Numbers')">Launch</button>
-                        </li>
-                    </ul>
-                </div>
+                    <p class="category-description">Professional mathematical tools for calculations, random generation, number conversion, and statistical analysis.</p>
+                    <div class="category-tools">
+                        <i class="fas fa-tools"></i>
+                        <span>6 Professional Tools</span>
+                    </div>
+                </a>
             </div>
         </section>
     </main>
@@ -845,17 +613,17 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>About Toolslap</h3>
-                    <p>Professional toolkit designed for developers, designers, and creators. Access 100+ advanced tools with enterprise-grade performance and security.</p>
+                    <h3>About Toolslap.online</h3>
+                    <p>Professional toolkit designed for developers, designers, and creators. Access 24+ advanced tools with enterprise-grade performance and security.</p>
                     <p>Built with modern technologies and optimized for speed and reliability.</p>
                 </div>
                 <div class="footer-section">
                     <h3>Categories</h3>
                     <ul>
-                        <li><a href="#image-tools">Image Tools</a></li>
-                        <li><a href="#gif-tools">GIF Tools</a></li>
-                        <li><a href="#text-tools">Text Tools</a></li>
-                        <li><a href="#math-tools">Math Tools</a></li>
+                        <li><a href="image-tools.html">Image Tools</a></li>
+                        <li><a href="gif-tools.html">GIF Tools</a></li>
+                        <li><a href="text-tools.html">Text Tools</a></li>
+                        <li><a href="math-tools.html">Math Tools</a></li>
                         <li><a href="#">All Tools</a></li>
                     </ul>
                 </div>
@@ -881,26 +649,10 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Toolslap. All rights reserved. | Professional online toolkit | Built with ❤️ for creators</p>
+                <p>&copy; 2024 Toolslap.online. All rights reserved. | Professional online toolkit | Built with ❤️ for creators</p>
             </div>
         </div>
     </footer>
-
-    <!-- Modal for Tool Demo -->
-    <div id="toolModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2 id="modalTitle">Tool Name</h2>
-            <p id="modalDescription">Professional tool interface</p>
-            <div id="modalContent">
-                <p>This is a professional demo interface. In production, this would contain the actual tool functionality with advanced features and real-time processing.</p>
-                <div style="margin-top: 2rem;">
-                    <button class="tool-btn" onclick="closeModal()">Close</button>
-                    <button class="tool-btn" style="background: var(--success-color); margin-left: 1rem;">Get Started</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Scroll to top button -->
     <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">
@@ -943,36 +695,17 @@
         // Search functionality
         function searchTools() {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const toolItems = document.querySelectorAll('.tool-item');
-            const categoryCards = document.querySelectorAll('.category-card');
-            
-            let hasResults = false;
-            
-            toolItems.forEach(item => {
-                const toolName = item.querySelector('.tool-name').textContent.toLowerCase();
-                const toolDescription = item.querySelector('.tool-description').textContent.toLowerCase();
-                
-                if (toolName.includes(searchTerm) || toolDescription.includes(searchTerm)) {
-                    item.style.display = 'flex';
-                    hasResults = true;
-                } else {
-                    item.style.display = 'none';
+            if (searchTerm) {
+                // Redirect to appropriate category page based on search term
+                if (searchTerm.includes('image') || searchTerm.includes('png') || searchTerm.includes('jpg')) {
+                    window.location.href = 'image-tools.html';
+                } else if (searchTerm.includes('gif') || searchTerm.includes('animation')) {
+                    window.location.href = 'gif-tools.html';
+                } else if (searchTerm.includes('text') || searchTerm.includes('string') || searchTerm.includes('encode')) {
+                    window.location.href = 'text-tools.html';
+                } else if (searchTerm.includes('math') || searchTerm.includes('number') || searchTerm.includes('random')) {
+                    window.location.href = 'math-tools.html';
                 }
-            });
-            
-            // Show/hide category cards based on results
-            categoryCards.forEach(card => {
-                const visibleTools = card.querySelectorAll('.tool-item[style="display: flex;"], .tool-item:not([style])');
-                if (visibleTools.length === 0) {
-                    card.style.display = 'none';
-                } else {
-                    card.style.display = 'block';
-                }
-            });
-            
-            // Show message if no results
-            if (!hasResults && searchTerm) {
-                // You could add a "no results" message here
             }
         }
 
@@ -981,46 +714,6 @@
         document.getElementById('searchInput').addEventListener('input', function() {
             clearTimeout(searchTimeout);
             searchTimeout = setTimeout(searchTools, 300);
-        });
-
-        // Modal functionality
-        function openTool(toolName) {
-            const modal = document.getElementById('toolModal');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalDescription = document.getElementById('modalDescription');
-            
-            modalTitle.textContent = toolName;
-            modalDescription.textContent = `Professional ${toolName} - Advanced features and real-time processing`;
-            
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            document.getElementById('toolModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('toolModal');
-            if (event.target === modal) {
-                closeModal();
-            }
-        }
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
         });
 
         // Scroll to top functionality
@@ -1044,19 +737,6 @@
         // Initialize theme on page load
         document.addEventListener('DOMContentLoaded', function() {
             loadTheme();
-            
-            // Add loading animation to buttons
-            const buttons = document.querySelectorAll('.tool-btn');
-            buttons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const originalText = this.textContent;
-                    this.innerHTML = '<span class="loading"></span>';
-                    
-                    setTimeout(() => {
-                        this.textContent = originalText;
-                    }, 1000);
-                });
-            });
         });
 
         // Add intersection observer for animations
@@ -1087,35 +767,11 @@
 
         // Add keyboard navigation
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
-            
             if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
                 e.preventDefault();
                 document.getElementById('searchInput').focus();
             }
         });
-
-        // Add tool usage statistics (simulated)
-        function updateToolStats() {
-            const tools = document.querySelectorAll('.tool-item');
-            tools.forEach(tool => {
-                const usageCount = Math.floor(Math.random() * 9000) + 1000;
-                const statsElement = document.createElement('span');
-                statsElement.textContent = `${usageCount.toLocaleString()} uses`;
-                statsElement.style.fontSize = '0.75rem';
-                statsElement.style.color = 'var(--primary-color)';
-                statsElement.style.marginLeft = '0.5rem';
-                statsElement.style.fontWeight = '600';
-                
-                const toolName = tool.querySelector('.tool-name');
-                toolName.appendChild(statsElement);
-            });
-        }
-
-        // Initialize stats on page load
-        document.addEventListener('DOMContentLoaded', updateToolStats);
     </script>
 </body>
 </html>
